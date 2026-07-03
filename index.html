@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RPG System — Início</title>
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="./css/base.css">
 <style>
 /* ── PAGE LAYOUT ──────────────────────────────────────────────────────────── */
 body{display:flex;flex-direction:column;min-height:100vh}
@@ -220,18 +220,18 @@ main{flex:1}
   </div>
   <div class="header-actions">
     <nav class="nav-links">
-      <a href="index.html" class="nav-link active"><i class="ti ti-home"></i> Início</a>
-      <a href="ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
-      <a href="tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="./index.html" class="nav-link active"><i class="ti ti-home"></i> Início</a>
+      <a href="./pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="./pages/tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
     </nav>
     <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
     <button class="mob-menu-btn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
   </div>
   <!-- mobile nav -->
   <nav class="mob-nav" id="mobNav">
-    <a href="index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
-    <a href="ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
-    <a href="tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Combat Tracker</a>
+    <a href="./index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+    <a href="./pages/ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
+    <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Combat Tracker</a>
   </nav>
 </header>
 
@@ -248,8 +248,8 @@ main{flex:1}
     </h1>
     <p class="hero-subtitle">Fichas completas, combate rastreado e dados na palma da mão. Tudo em um sistema integrado, sem instalação, sem cadastro.</p>
     <div class="hero-cta">
-      <a href="ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
-      <a href="tracker.html" class="btn" style="font-size:12px;padding:10px 24px"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
+      <a href="./pages/ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
+      <a href="./pages/tracker.html" class="btn" style="font-size:12px;padding:10px 24px"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
     </div>
   </div>
 </section>
@@ -266,7 +266,7 @@ main{flex:1}
     <div class="cards-grid">
 
       <!-- CARD: FICHAS -->
-      <a href="ficha.html" class="app-card">
+      <a href="./pages/ficha.html" class="app-card">
         <div class="app-card-img-placeholder">
           <!-- substitua por: <img src="sua-imagem.jpg" alt="Fichas" class="app-card-img"> -->
           <i class="ti ti-scroll" style="font-size:64px"></i>
@@ -288,7 +288,7 @@ main{flex:1}
       </a>
 
       <!-- CARD: TRACKER -->
-      <a href="tracker.html" class="app-card">
+      <a href="./pages/tracker.html" class="app-card">
         <div class="app-card-img-placeholder">
           <i class="ti ti-sword" style="font-size:64px"></i>
         </div>
@@ -332,8 +332,8 @@ main{flex:1}
         <p>Tudo roda <strong>diretamente no seu navegador</strong>, os dados ficam salvos localmente e qualquer dispositivo — computador, tablet ou celular — serve como tela de controle.</p>
         <p>O sistema foi construído seguindo as regras do <strong>D&D 5ª Edição</strong>, mas com campos totalmente customizáveis para suportar qualquer sistema que você queira jogar.</p>
         <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-          <a href="ficha.html" class="btn primary"><i class="ti ti-scroll"></i> Criar primeira ficha</a>
-          <a href="tracker.html" class="btn"><i class="ti ti-sword"></i> Ver o tracker</a>
+          <a href="./pages/ficha.html" class="btn primary"><i class="ti ti-scroll"></i> Criar primeira ficha</a>
+          <a href="./pages/tracker.html" class="btn"><i class="ti ti-sword"></i> Ver o tracker</a>
         </div>
       </div>
     </div>
@@ -458,9 +458,9 @@ main{flex:1}
       </div>
       <div class="footer-col">
         <h4>Páginas</h4>
-        <a href="index.html">Início</a>
-        <a href="ficha.html">Criador de Fichas</a>
-        <a href="tracker.html">Combat Tracker</a>
+        <a href="./index.html">Início</a>
+        <a href="./pages/ficha.html">Criador de Fichas</a>
+        <a href="./pages/tracker.html">Combat Tracker</a>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
@@ -473,9 +473,9 @@ main{flex:1}
     <div class="footer-bottom">
       <span class="footer-copy">© 2025 RPG System — Feito com ⚔ para a mesa</span>
       <div class="footer-socials">
-        <a href="#" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
-        <a href="#" class="social-btn" title="Discord"><i class="ti ti-brand-discord"></i></a>
-        <a href="#" class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        <a href="https://github.com/J-Tabosa" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
+        <a href="https://www.instagram.com/el_tabosa/" class="social-btn" title="Itch.io"><i class="ti ti-brand-discord"></i></a>
+        <a href="https://kamishh.itch.io/" class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
       </div>
     </div>
   </div>
