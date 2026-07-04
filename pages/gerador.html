@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gerador de Personagens — RPG System</title>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+body{display:flex;flex-direction:column;min-height:100vh}
+#app{display:flex;flex-direction:column;flex:1}
+
+/* ── LAYOUT ─────────────────────────────────────────────────────────────── */
+.gen-workspace{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+.gen-panel{width:300px;flex-shrink:0;border-right:1px solid var(--border);background:#120f0a;overflow-y:auto;padding:16px}
+body.light .gen-panel{background:#e0d8c4}
+.gen-main{flex:1;overflow-y:auto;padding:24px 28px}
+
+/* ── FILTER PANEL ────────────────────────────────────────────────────────── */
+.filter-group{margin-bottom:14px}
+.filter-group label{display:block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.filter-group select,.filter-group input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 8px;border-radius:4px;font-family:'Crimson Text',serif;font-size:13px}
+.filter-group select:focus,.filter-group input:focus{outline:none;border-color:var(--gold)}
+.filter-group select option{background:var(--card)}
+.gen-btn{width:100%;margin-top:4px;font-size:13px;padding:10px;letter-spacing:2px}
+.gen-btn i{font-size:16px;margin-right:6px}
+
+/* ── RESULT CARD ─────────────────────────────────────────────────────────── */
+.result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-style:italic;gap:12px}
+.result-empty .big{font-size:48px;opacity:0.25}
+.result-empty p{font-size:14px;text-align:center;max-width:280px;line-height:1.6}
+
+.npc-sheet{max-width:800px;margin:0 auto}
+.npc-header{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:16px;display:flex;align-items:center;gap:20px}
+.npc-avatar{width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gold);background:rgba(200,168,107,0.08);flex-shrink:0}
+.npc-identity{flex:1}
+.npc-name{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:4px}
+.npc-sub{font-size:14px;color:var(--muted);margin-bottom:6px}
+.npc-tags{display:flex;gap:6px;flex-wrap:wrap}
+.npc-tag{font-family:'Cinzel',serif;font-size:9px;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:0.5px;text-transform:uppercase}
+.npc-tag.raca{border-color:var(--blue2);color:var(--blue2)}
+.npc-tag.classe{border-color:var(--gold);color:var(--gold)}
+.npc-tag.prof{border-color:var(--green2);color:var(--green2)}
+.npc-tag.nivel{border-color:var(--muted);color:var(--muted)}
+
+.npc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.npc-sec{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.npc-sec-full{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:14px}
+.npc-sec h3{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.npc-sec h3 i{font-size:14px}
+
+/* ATTR ROW */
+.attr-row{display:flex;gap:8px;flex-wrap:wrap}
+.attr-mini{background:var(--card2);border:1px solid var(--border);border-radius:5px;padding:6px 10px;text-align:center;flex:1;min-width:60px}
+.attr-mini-lbl{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.attr-mini-val{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--text)}
+.attr-mini-mod{font-size:11px;color:var(--muted);font-family:'Cinzel',serif}
+
+/* TRAIT LIST */
+.trait-list{list-style:none;padding:0}
+.trait-list li{font-size:13px;color:var(--muted);padding:4px 0 4px 16px;position:relative;line-height:1.5;border-bottom:1px solid rgba(61,51,32,0.3)}
+.trait-list li:last-child{border-bottom:none}
+.trait-list li::before{content:'◆';position:absolute;left:0;color:var(--border);font-size:8px;top:7px}
+.trait-list li strong{color:var(--text)}
+
+/* COMBAT STATS ROW */
+.combat-row{display:flex;gap:10px;flex-wrap:wrap}
+.cs-box{background:var(--card2);border:1px solid var(--border);border-radius:5px;padding:8px 12px;text-align:center;flex:1;min-width:64px}
+.cs-val{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.cs-lbl{font-size:10px;color:var(--muted);font-family:'Cinzel',serif;letter-spacing:0.5px}
+
+/* ACTIONS BAR */
+.actions-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;align-items:center}
+.actions-bar .btn{flex:1;min-width:120px;text-align:center;justify-content:center}
+
+/* SAVE MODAL extras */
+.folder-pick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px}
+.folder-opt{padding:10px 6px;border-radius:5px;border:1px solid var(--border);background:var(--card2);cursor:pointer;text-align:center;transition:all 0.15s;font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.5px;color:var(--muted);text-transform:uppercase}
+.folder-opt:hover{border-color:var(--gold);color:var(--gold)}
+.folder-opt.sel{border-color:var(--gold);color:var(--gold);background:rgba(200,168,107,0.1)}
+.folder-opt i{display:block;font-size:20px;margin-bottom:4px}
+
+/* PDF PRINT */
+@media print{
+  .header,.gen-panel,.actions-bar,.no-print{display:none!important}
+  .gen-workspace{height:auto;display:block}
+  .gen-main{padding:0}
+  .npc-sheet{max-width:100%}
+  body{background:#fff;color:#000}
+  .npc-header,.npc-sec,.npc-sec-full,.npc-grid{break-inside:avoid}
+  :root{--bg:#fff;--card:#f5f5f5;--card2:#ececec;--border:#ccc;--text:#111;--muted:#555;--gold:#6a4e10;--gold2:#4a3000}
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .gen-workspace{flex-direction:column;height:auto}
+  .gen-panel{width:100%;border-right:none;border-bottom:1px solid var(--border)}
+  .gen-main{padding:14px 16px}
+  .npc-grid{grid-template-columns:1fr}
+  .npc-header{flex-direction:column;text-align:center}
+  .npc-tags{justify-content:center}
+  .actions-bar{flex-direction:column}
+  .actions-bar .btn{min-width:0}
+  .folder-pick{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="header">
+    <div class="header-brand">
+      <i class="ti ti-sparkles header-icon"></i>
+      <div><h1>Gerador de Personagens</h1><div class="subtitle">NPCs e Jogadores Aleatórios</div></div>
+    </div>
+    <div class="header-actions">
+      <a href="../index.html"  class="nav-link"><i class="ti ti-home"></i> Início</a>
+      <a href="./ficha.html"  class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="./tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
+    </div>
+  </div>
+
+  <div class="gen-workspace">
+
+    <!-- PAINEL DE FILTROS -->
+    <div class="gen-panel">
+      <div class="panel-title">Filtros</div>
+
+      <div class="filter-group">
+        <label>Raça</label>
+        <select id="fRaca"><option value="">Aleatória</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Classe</label>
+        <select id="fClasse"><option value="">Aleatória</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Profissão / Papel</label>
+        <select id="fProf"><option value="">Aleatória</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Estilo de Jogo</label>
+        <select id="fEstilo"><option value="">Aleatório</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Nível (1–20)</label>
+        <select id="fNivel">
+          <option value="">Aleatório</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+          <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Alinhamento</label>
+        <select id="fAlign">
+          <option value="">Aleatório</option>
+          <option>Leal e Bom</option><option>Neutro e Bom</option><option>Caótico e Bom</option>
+          <option>Leal e Neutro</option><option>Neutro</option><option>Caótico e Neutro</option>
+          <option>Leal e Mau</option><option>Neutro e Mau</option><option>Caótico e Mau</option>
+        </select>
+      </div>
+
+      <div class="divider"></div>
+
+      <button class="btn primary gen-btn" onclick="gerar()">
+        <i class="ti ti-dice-5"></i> Gerar Personagem
+      </button>
+      <button class="btn gen-btn" style="margin-top:8px" onclick="gerarNovamente()">
+        <i class="ti ti-refresh"></i> Novo Aleatório
+      </button>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="gen-main" id="genMain">
+      <div class="result-empty">
+        <div class="big">🎲</div>
+        <p>Configure os filtros ao lado e clique em <strong>Gerar Personagem</strong> para criar um NPC ou personagem aleatório.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: salvar ficha -->
+<div class="modal-overlay" id="mSave" style="display:none">
+  <div class="modal" style="max-width:400px">
+    <h3><i class="ti ti-device-floppy" style="margin-right:6px"></i>Salvar Personagem</h3>
+    <div class="form-field">
+      <label>Nome (editar se quiser)</label>
+      <input type="text" id="saveName">
+    </div>
+    <div class="form-field">
+      <label>Salvar na Pasta</label>
+      <div class="folder-pick">
+        <div class="folder-opt sel" id="fopt_player" onclick="selFolder('player')">
+          <i class="ti ti-user"></i>Jogador
+        </div>
+        <div class="folder-opt" id="fopt_npc" onclick="selFolder('npc')">
+          <i class="ti ti-masks-theater"></i>NPC
+        </div>
+        <div class="folder-opt" id="fopt_monster" onclick="selFolder('monster')">
+          <i class="ti ti-skull"></i>Monstro
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeM('mSave')">Cancelar</button>
+      <button class="btn primary" onclick="confirmarSalvar()"><i class="ti ti-check"></i> Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── THEME ─────────────────────────────────────────────────────────────────────
+let dark = localStorage.getItem('rpg_theme') !== 'light';
+function applyTheme(){ document.body.classList.toggle('light',!dark); document.getElementById('themeBtn').textContent=dark?'☀':'🌙'; }
+function toggleTheme(){ dark=!dark; localStorage.setItem('rpg_theme',dark?'dark':'light'); applyTheme(); }
+applyTheme();
+
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+const SK = 'rpg_fichas_v1';
+function loadFichas(){ try{return JSON.parse(localStorage.getItem(SK))||[];}catch(e){return[];} }
+function saveFichas(arr){ localStorage.setItem(SK, JSON.stringify(arr)); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2); }
+function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2400); }
+function closeM(id){ document.getElementById(id).style.display='none'; }
+
+// ── DATABASE ──────────────────────────────────────────────────────────────────
+const DB = {
+  racas: [
+    { id:'humano', nome:'Humano', desc:'Versáteis e ambiciosos, os humanos se adaptam a qualquer papel com facilidade.', bônus:{FOR:1,DES:1,CON:1,INT:1,SAB:1,CAR:1}, tracoRacial:'Versatilidade Humana: ganhe proficiência em uma habilidade à sua escolha.', velocidade:9, visaoNoturna:false },
+    { id:'elfo', nome:'Elfo (Alto)', desc:'Graciosos e longevos, os elfos possuem afinidade natural com a magia arcana.', bônus:{DES:2,INT:1}, tracoRacial:'Ancestralidade Feérica: vantagem em salvaguardas contra encantamentos. Transe ao invés de sono.', velocidade:9, visaoNoturna:true },
+    { id:'anao', nome:'Anão (da Montanha)', desc:'Robustos e determinados, os anões são guerreiros e artesãos incomparáveis.', bônus:{FOR:2,CON:2}, tracoRacial:'Resiliência Anã: vantagem em salvaguardas contra veneno. Resistência a dano de veneno.', velocidade:7.5, visaoNoturna:true },
+    { id:'halfling', nome:'Halfling (Pés-Leves)', desc:'Ágeis e sortudos, os halflings têm um dom especial para se meter em situações e sair delas.', bônus:{DES:2,CAR:1}, tracoRacial:'Sortudo: quando tirar 1 em um d20, pode rolar novamente. Bravura: vantagem contra efeito de medo.', velocidade:7.5, visaoNoturna:false },
+    { id:'tiefling', nome:'Tiefling', desc:'Descendentes de pactos infernais, os tieflings carregam o estigma e o poder do Averno.', bônus:{INT:1,CAR:2}, tracoRacial:'Resistência Infernal: resistência a dano de fogo. Herança das Chamas: conjura Taumaturgia à vontade.', velocidade:9, visaoNoturna:true },
+    { id:'draconato', nome:'Draconato', desc:'Orgulhosos herdeiros do sangue dracônico, os draconatos honram sua linhagem em cada batalha.', bônus:{FOR:2,CAR:1}, tracoRacial:'Sopro Dracônico: arma de sopro de dano baseada na linhagem. Resistência ao tipo de dano da linhagem.', velocidade:9, visaoNoturna:false },
+    { id:'gnomo', nome:'Gnomo (da Floresta)', desc:'Curiosos e inventivos, os gnomos veem o mundo como um grande enigma a ser resolvido.', bônus:{INT:2,DES:1}, tracoRacial:'Astúcia Gnômica: vantagem em salvaguardas de INT, SAB e CAR contra magia. Falar com Animais Pequenos.', velocidade:7.5, visaoNoturna:true },
+    { id:'meio-elfo', nome:'Meio-Elfo', desc:'Entre dois mundos, os meio-elfos combinam o charme élfico com a determinação humana.', bônus:{CAR:2,DES:1,SAB:1}, tracoRacial:'Ascendência Feérica: vantagem contra encantamentos. Versatilidade: proficiência em duas habilidades à escolha.', velocidade:9, visaoNoturna:true },
+  ],
+
+  classes: [
+    { id:'guerreiro', nome:'Guerreiro', desc:'Mestre de armas e armaduras, o guerreiro é o combatente mais versátil do grupo.', dadoVida:10, atribPrincipal:'FOR', profArmadura:'Todas as armaduras e escudos', salvaguardas:'FOR e CON', habilidades:['Atletismo','Percepção','Intimidação'], recurso:'Ação Surpreendente (2/descanso curto)', estilos:['Combate com Duas Armas','Defesa','Duelo','Grande Arma','Proteção','Tiro'] },
+    { id:'mago', nome:'Mago', desc:'Estudiosos da magia arcana, os magos dobram a realidade com o poder da mente.', dadoVida:6, atribPrincipal:'INT', profArmadura:'Nenhuma', salvaguardas:'INT e SAB', habilidades:['Arcanismo','Investigação','História'], recurso:'Recuperação Arcana (1/descanso longo)', estilos:['Abjuração','Conjuração','Adivinhação','Encantamento','Evocação','Ilusão','Necromancia','Transmutação'] },
+    { id:'ladino', nome:'Ladino', desc:'Habilidosos e sorrateiros, os ladinos resolvem problemas com astúcia e precisão.', dadoVida:8, atribPrincipal:'DES', profArmadura:'Armaduras leves', salvaguardas:'DES e INT', habilidades:['Furtividade','Prestidigitação','Enganação','Percepção'], recurso:'Ataque Furtivo (dado de dano extra)', estilos:['Assassino','Arcano','Ladrão','Proscrito'] },
+    { id:'clerigo', nome:'Clérigo', desc:'Canalizadores do poder divino, os clérigos curam aliados e castigam inimigos em nome dos deuses.', dadoVida:8, atribPrincipal:'SAB', profArmadura:'Armaduras médias e escudos', salvaguardas:'SAB e CAR', habilidades:['Medicina','Persuasão','Religião'], recurso:'Canalizar Divindade (1–3/descanso curto)', estilos:['Vida','Luz','Tempestade','Guerra','Enganação','Natureza','Conhecimento'] },
+    { id:'bardo', nome:'Bardo', desc:'Contadores de histórias e artistas mágicos, os bardos inspiram aliados com palavras e música.', dadoVida:8, atribPrincipal:'CAR', profArmadura:'Armaduras leves', salvaguardas:'DES e CAR', habilidades:['Persuasão','Performance','Intuição','Enganação'], recurso:'Inspiração de Bardo (d6→d12 por nível)', estilos:['Valentia','Glamour','Sussurros','Criação'] },
+    { id:'paladino', nome:'Paladino', desc:'Guerreiros sagrados que combinam combate físico com poder divino e uma causa justa.', dadoVida:10, atribPrincipal:'FOR', profArmadura:'Todas as armaduras e escudos', salvaguardas:'SAB e CAR', habilidades:['Atletismo','Persuasão','Religião','Medicina'], recurso:'Imposição de Mãos (PV = Nível×5)', estilos:['Devoção','Ancestrais','Vingança','Conquista'] },
+    { id:'ranger', nome:'Patrulheiro', desc:'Caçadores e rastreadores que dominam os ambientes selvagens e protegem as fronteiras civilizadas.', dadoVida:10, atribPrincipal:'DES', profArmadura:'Armaduras leves e médias', salvaguardas:'FOR e DES', habilidades:['Sobrevivência','Percepção','Furtividade','Atletismo'], recurso:'Inimigo Favorito e Terreno Favorito', estilos:['Caçador','Mestre das Feras','Errante Fey'] },
+    { id:'barbaro', nome:'Bárbaro', desc:'Guerreiros furiosos que canalizam sua raiva em poder físico sobre-humano.', dadoVida:12, atribPrincipal:'FOR', profArmadura:'Armaduras leves e médias', salvaguardas:'FOR e CON', habilidades:['Atletismo','Intimidação','Sobrevivência','Percepção'], recurso:'Fúria (2–6/descanso longo dependendo do nível)', estilos:['Berserker','Totem','Alma Selvagem','Tempestade'] },
+  ],
+
+  profissoes: [
+    { id:'mercador', nome:'Mercador', desc:'Compra, vende e negocia em mercados e feiras por todo o reino. Conhece preços, rotas e pessoas influentes.', pericias:['Persuasão','História'], equipamento:'Balança de mercador, 5 moedas de ouro, carta de crédito', contatos:'Guildas comerciais e outros mercadores' },
+    { id:'soldado', nome:'Soldado', desc:'Veterano de conflitos armados, conhece táticas militares, disciplina e a brutalidade da guerra.', pericias:['Atletismo','Intimidação'], equipamento:'Insígnia de patente, tabuleiro de jogo de dados, kit de primeiros socorros', contatos:'Companheiros de arma e ex-comandantes' },
+    { id:'erudito', nome:'Erudito', desc:'Dedicou anos ao estudo em bibliotecas e academias, acumulando conhecimento enciclopédico.', pericias:['Arcanismo','História'], equipamento:'Garrafa de tinta, pena, pequena faca, carta de um colega erudito', contatos:'Outros acadêmicos e instituições de ensino' },
+    { id:'criminoso', nome:'Criminoso', desc:'Operou nas sombras da sociedade, seja roubando, contrabandeando ou prestando serviços duvidosos.', pericias:['Furtividade','Enganação'], equipamento:'Ferramentas de ladrão, dados viciados, capuz escuro', contatos:'Rede de contatos criminosos e receptadores' },
+    { id:'herborista', nome:'Herborista', desc:'Conhece plantas medicinais e venenosas, prepara poções e remédios para a comunidade local.', pericias:['Medicina','Natureza'], equipamento:'Kit de herborismo, ervas raras, mortar e pilão', contatos:'Curandeiros, druidas e apotecários' },
+    { id:'ferreiro', nome:'Ferreiro', desc:'Forja armas, armaduras e ferramentas com habilidade. Valorizado em qualquer assentamento.', pericias:['Atletismo','Arcanismo'], equipamento:'Kit de ferreiro, amuleto do santo padroeiro, martelo de viagem', contatos:'Guildas de artesãos e mercadores de metal' },
+    { id:'guarda', nome:'Guarda da Cidade', desc:'Mantém a ordem nas ruas, conhece os moradores e os marginais de seu distrito.', pericias:['Percepção','Intimidação'], equipamento:'Uniforme desgastado, apito de prata, algemas', contatos:'Rede de informantes e outros guardas' },
+    { id:'bardo_errante', nome:'Bardo Errante', desc:'Viaja de cidade em cidade contando histórias, cantando baladas e colhendo fofocas valiosas.', pericias:['Performance','Persuasão'], equipamento:'Instrumento musical, fantasia de palco, livro de letras de músicas', contatos:'Estalajadeiros, nobres entediados e outros bardos' },
+  ],
+
+  personalidades: [
+    { id:'corajoso', nome:'Corajoso', tracos:['Nunca recuo diante de um desafio, não importa as chances.','Prefiro agir e errar a ficar parado calculando.'], ideais:['Liberdade — ninguém deveria viver sob o jugo do medo.'], vinculos:['Juro proteger os fracos que não podem se defender.'], defeitos:['Sou temerário e muitas vezes coloco meus aliados em perigo desnecessário.'] },
+    { id:'astuto', nome:'Astuto', tracos:['Raramente digo o que realmente penso.','Estudo as pessoas antes de confiar nelas.'], ideais:['Conhecimento — informação é a arma mais poderosa que existe.'], vinculos:['Há segredos sobre meu passado que protejo a qualquer custo.'], defeitos:['Desconfio até dos meus aliados mais próximos.'] },
+    { id:'leal', nome:'Leal', tracos:['Dou minha palavra apenas quando posso cumpri-la.','A honra é mais valiosa que ouro.'], ideais:['Honra — um homem sem palavra não é nada.'], vinculos:['Minha lealdade à minha ordem está acima de tudo.'], defeitos:['Sou inflexível com as regras mesmo quando elas causam sofrimento.'] },
+    { id:'curioso', nome:'Curioso', tracos:['Faço perguntas constantemente, às vezes inconvenientes.','Coleciono objetos e informações inusitados.'], ideais:['Conhecimento — o mundo é um livro e quero ler todas as páginas.'], vinculos:['Busco uma resposta para uma pergunta que assombra minha mente há anos.'], defeitos:['Minha curiosidade frequentemente me mete em encrencas.'] },
+    { id:'sombrio', nome:'Sombrio', tracos:['Raramente sorrio e vejo problemas em tudo.','Carrego um peso invisível que nunca parece diminuir.'], ideais:['Redenção — busco expiar os erros do meu passado.'], vinculos:['As memórias de quem perdi me assombram toda noite.'], defeitos:['Tenho dificuldade em aceitar ajuda ou mostrar vulnerabilidade.'] },
+    { id:'carismatico', nome:'Carismático', tracos:['Entro em qualquer sala e imediatamente começo a conhecer as pessoas.','Tenho um talento natural para contar histórias e prender atenção.'], ideais:['Beleza — a arte e as histórias elevam o espírito humano.'], vinculos:['Carrego as histórias de minha terra natal para onde quer que eu vá.'], defeitos:['Tenho dificuldade em ser sério quando a situação exige.'] },
+    { id:'protetor', nome:'Protetor', tracos:['Coloco-me entre os vulneráveis e o perigo sem hesitar.','Sinto a dor dos outros como se fosse minha.'], ideais:['Proteção — os fortes existem para proteger os fracos.'], vinculos:['Há alguém específico que juraria proteger com minha própria vida.'], defeitos:['Assumo responsabilidade por todos ao meu redor, o que me exaure.'] },
+    { id:'ambicioso', nome:'Ambicioso', tracos:['Sempre estou de olho em como uma situação pode me beneficiar.','Estabeleço metas elevadas e faço o que for preciso para alcançá-las.'], ideais:['Poder — o mundo pertence aos que têm coragem de tomá-lo.'], vinculos:['Preciso provar para minha família que não sou o fracasso que eles pensam.'], defeitos:['Piso em quem preciso pisar para chegar onde quero.'] },
+  ],
+
+  estilos: [
+    { id:'tank', nome:'Tanque / Protetor', desc:'Foca em absorver dano e proteger aliados. Prefere estar na linha de frente atraindo atenção dos inimigos.', pontosForts:['Alta resistência','Controle de área','Proteger aliados'], dicas:'Posicione-se sempre entre os inimigos e os aliados mais frágeis. Use ações de Proteger.' },
+    { id:'dps', nome:'Atacante / DPS', desc:'Maximiza dano por turno para eliminar ameaças rapidamente. Cada ação conta para derrubar alvos.', pontosForts:['Dano elevado','Eliminar alvos prioritários','Ritmo de combate'], dicas:'Identifique o inimigo mais perigoso e foque nele. Coordene com o tank.' },
+    { id:'suporte', nome:'Suporte / Cura', desc:'Mantém o grupo funcional com curas, bônus e remoção de condições negativas.', pontosForts:['Sustentabilidade','Bônus para aliados','Remoção de condições'], dicas:'Priorize manter aliados de pé em vez de curar após a batalha. Concentração em buffs.' },
+    { id:'controle', nome:'Controle / Utility', desc:'Restringe movimentos inimigos e manipula o campo de batalha com magia e habilidades especiais.', pontosForts:['Controle de combate','Versatilidade','Criatividade'], dicas:'Feitiços de área e restrição valem mais que dano direto. Pense estrategicamente.' },
+    { id:'furtivo', nome:'Furtivo / Assassino', desc:'Opera nas sombras, elimina alvos antes que percebam sua presença e desaparece.', pontosForts:['Dano de emboscada','Mobilidade','Exploração'], dicas:'Faça emboscadas, posicione-se com vantagem. Evite confronto direto prolongado.' },
+    { id:'diplomatico', nome:'Diplomático / Social', desc:'Resolve conflitos com palavras, informações e conexões, evitando combate quando possível.', pontosForts:['Negociação','Coleta de informação','Evitar conflitos'], dicas:'Sempre busque um ângulo de negociação. Invista em perícias sociais e contatos.' },
+    { id:'explorador', nome:'Explorador / Scout', desc:'Especialista em terreno desconhecido, rastreamento e descoberta de segredos do ambiente.', pontosForts:['Rastreamento','Armadilhas','Conhecimento de terreno'], dicas:'Vá à frente do grupo, mas mantenha distância segura. Relatório antes de agir.' },
+    { id:'arcano', nome:'Arcano / Lançador', desc:'Domina magias poderosas que mudam o rumo de batalhas inteiras com um único feitiço.', pontosForts:['Magias de alto impacto','Flexibilidade','Dano à distância'], dicas:'Gerencie seus espaços de magia com cuidado. Reserve o melhor para o momento certo.' },
+  ],
+
+  nomes: {
+    masculinos:['Aldric','Brennan','Caius','Doran','Elric','Fabian','Gavril','Hadrian','Ilvar','Jorin','Keldorn','Lorcan','Maeris','Navar','Osric','Peryn','Qarim','Rhaen','Sevar','Torin','Ulvic','Varyn','Waldric','Xareth','Yorin','Zephyn'],
+    femininos:['Aelith','Brynn','Caera','Dwyn','Elowen','Fayra','Gaelindra','Halia','Ilenne','Jorvyn','Kira','Lyriel','Myra','Naela','Oryn','Petra','Quen','Rhaella','Seren','Thyra','Ulysse','Vanya','Wylla','Xyla','Ysolde','Zara'],
+    sobrenomes:['Pedraforte','Velasombra','Chamamanchas','Luaprateada','Fervormontanha','Coraçãoselvagem','Espinheiro','Cinzanegra','Olhosde Aguia','Ferrocalor','Ventorijo','Tormentanegra','Almadobosque','Guardião','Lareiraacinzentada']
+  },
+
+  fisicos:[
+    'Estatura imponente e ombros largos','Baixo/a mas de presença marcante','Cicatriz diagonal atravessando o rosto','Olhos de cores diferentes (heterocromia)','Cabelos completamente brancos apesar da idade','Tatuagens rituais nos braços','Mãos calejadas de trabalho duro','Voz grave e pausada que exige atenção','Andar ligeiro e quase sem ruído','Sempre com capuz ou manto cobrindo o rosto','Risada estrondosa que ilumina o ambiente','Expressão séria que raramente muda'
+  ],
+
+  maneirismos:[
+    'Sempre esfrega o amuleto ao pescoço quando nervoso','Fala de si mesmo na terceira pessoa em momentos intensos','Cita provérbios obscuros de sua terra natal','Sempre verifica duas vezes se as saídas estão livres','Faz pequenos desenhos quando está pensando','Assobia melodias antigas inconscientemente','Exige sempre saber o nome completo das pessoas','Repete a última palavra de cada frase que ouve'
+  ]
+};
+
+// ── POPULAR SELECTS ────────────────────────────────────────────────────────────
+function popularSelects(){
+  const fill=(id,arr,labelKey)=>{
+    const el=document.getElementById(id);
+    arr.forEach(item=>{ const o=document.createElement('option'); o.value=item.id; o.textContent=item[labelKey]; el.appendChild(o); });
+  };
+  fill('fRaca', DB.racas, 'nome');
+  fill('fClasse', DB.classes, 'nome');
+  fill('fProf', DB.profissoes, 'nome');
+  fill('fEstilo', DB.estilos, 'nome');
+}
+popularSelects();
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function rollAttr(){ let rolls=Array.from({length:4},()=>Math.floor(Math.random()*6)+1); rolls.sort((a,b)=>a-b); return rolls.slice(1).reduce((a,b)=>a+b,0); }
+function mod(v){ return Math.floor((v-10)/2); }
+function fmod(v){ const m=mod(v); return (m>=0?'+':'')+m; }
+function pick(id,arr,labelKey){ const v=document.getElementById(id).value; return v?arr.find(x=>x.id===v)||rand(arr):rand(arr); }
+
+// ── CURRENT NPC ───────────────────────────────────────────────────────────────
+let currentNPC = null;
+
+function gerar(){
+  const raca   = pick('fRaca',   DB.racas,     'nome');
+  const classe = pick('fClasse', DB.classes,   'nome');
+  const prof   = pick('fProf',   DB.profissoes,'nome');
+  const estilo = pick('fEstilo', DB.estilos,   'nome');
+  const pers   = rand(DB.personalidades);
+  const nivel  = parseInt(document.getElementById('fNivel').value)||Math.floor(Math.random()*10)+1;
+  const align  = document.getElementById('fAlign').value || rand(['Leal e Bom','Neutro e Bom','Caótico e Bom','Leal e Neutro','Neutro','Caótico e Neutro','Caótico e Mau','Neutro e Mau']);
+
+  const genero = Math.random()>.5?'m':'f';
+  const nome   = `${rand(genero==='m'?DB.nomes.masculinos:DB.nomes.femininos)} ${rand(DB.nomes.sobrenomes)}`;
+  const fisico = rand(DB.fisicos);
+  const maneirismo = rand(DB.maneirismos);
+
+  // roll atributos + bônus racial
+  const base={ FOR:rollAttr(),DES:rollAttr(),CON:rollAttr(),INT:rollAttr(),SAB:rollAttr(),CAR:rollAttr() };
+  const attrs={};
+  ['FOR','DES','CON','INT','SAB','CAR'].forEach(k=>{ attrs[k]=Math.min(20,base[k]+(raca.bônus[k]||0)); });
+
+  const pb = nivel<=4?2:nivel<=8?3:nivel<=12?4:nivel<=16?5:6;
+  const hp = (classe.dadoVida + mod(attrs.CON)) * nivel;
+  const ca = 10 + mod(attrs.DES);
+  const init = mod(attrs.DES);
+
+  currentNPC = { nome, raca, classe, prof, estilo, pers, nivel, align, fisico, maneirismo, attrs, pb, hp, ca, init };
+  renderNPC(currentNPC);
+}
+
+function gerarNovamente(){
+  // ignora filtros, tudo aleatório
+  document.getElementById('fRaca').value='';
+  document.getElementById('fClasse').value='';
+  document.getElementById('fProf').value='';
+  document.getElementById('fEstilo').value='';
+  document.getElementById('fNivel').value='';
+  document.getElementById('fAlign').value='';
+  gerar();
+}
+
+// ── RENDER NPC ────────────────────────────────────────────────────────────────
+function renderNPC(n){
+  const {nome,raca,classe,prof,estilo,pers,nivel,align,fisico,maneirismo,attrs,pb,hp,ca,init}=n;
+
+  const attrHtml=['FOR','DES','CON','INT','SAB','CAR'].map(k=>`
+    <div class="attr-mini">
+      <div class="attr-mini-lbl">${k}</div>
+      <div class="attr-mini-val">${attrs[k]}</div>
+      <div class="attr-mini-mod">${fmod(attrs[k])}</div>
+    </div>`).join('');
+
+  document.getElementById('genMain').innerHTML=`
+    <div class="npc-sheet" id="npcSheet">
+
+      <div class="actions-bar no-print">
+        <button class="btn primary" onclick="abrirSalvar()"><i class="ti ti-device-floppy"></i> Salvar Ficha</button>
+        <button class="btn" onclick="imprimirPDF()"><i class="ti ti-printer"></i> Salvar como PDF</button>
+        <button class="btn" onclick="gerar()"><i class="ti ti-refresh"></i> Regerar</button>
+      </div>
+
+      <div class="npc-header">
+        <div class="npc-avatar">${nome[0]}</div>
+        <div class="npc-identity">
+          <div class="npc-name">${nome}</div>
+          <div class="npc-sub">${align} · Nível ${nivel} · ${fisico}</div>
+          <div class="npc-tags">
+            <span class="npc-tag raca"><i class="ti ti-user"></i> ${raca.nome}</span>
+            <span class="npc-tag classe"><i class="ti ti-sword"></i> ${classe.nome}</span>
+            <span class="npc-tag prof"><i class="ti ti-briefcase"></i> ${prof.nome}</span>
+            <span class="npc-tag nivel">Nv ${nivel} · PB +${pb}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ATRIBUTOS -->
+      <div class="npc-sec-full">
+        <h3><i class="ti ti-shield"></i>Atributos</h3>
+        <div class="attr-row">${attrHtml}</div>
+      </div>
+
+      <!-- COMBATE -->
+      <div class="npc-sec-full">
+        <h3><i class="ti ti-sword"></i>Estatísticas de Combate</h3>
+        <div class="combat-row">
+          <div class="cs-box"><div class="cs-val">${Math.max(1,hp)}</div><div class="cs-lbl">HP</div></div>
+          <div class="cs-box"><div class="cs-val">${ca}</div><div class="cs-lbl">CA</div></div>
+          <div class="cs-box"><div class="cs-val">${init>=0?'+':''}${init}</div><div class="cs-lbl">Iniciativa</div></div>
+          <div class="cs-box"><div class="cs-val">${raca.velocidade}m</div><div class="cs-lbl">Velocidade</div></div>
+          <div class="cs-box"><div class="cs-val">d${classe.dadoVida}</div><div class="cs-lbl">Dado de Vida</div></div>
+          <div class="cs-box"><div class="cs-val">+${pb}</div><div class="cs-lbl">Prof. Bônus</div></div>
+        </div>
+      </div>
+
+      <div class="npc-grid">
+
+        <!-- RAÇA -->
+        <div class="npc-sec">
+          <h3><i class="ti ti-dna"></i>Raça — ${raca.nome}</h3>
+          <ul class="trait-list">
+            <li>${raca.desc}</li>
+            <li><strong>Traço Racial:</strong> ${raca.tracoRacial}</li>
+            <li><strong>Visão Noturna:</strong> ${raca.visaoNoturna?'Sim (18m)':'Não'}</li>
+          </ul>
+        </div>
+
+        <!-- CLASSE -->
+        <div class="npc-sec">
+          <h3><i class="ti ti-sword"></i>Classe — ${classe.nome}</h3>
+          <ul class="trait-list">
+            <li>${classe.desc}</li>
+            <li><strong>Recurso:</strong> ${classe.recurso}</li>
+            <li><strong>Salvaguardas:</strong> ${classe.salvaguardas}</li>
+            <li><strong>Proficiência em armaduras:</strong> ${classe.profArmadura}</li>
+          </ul>
+        </div>
+
+        <!-- PROFISSÃO -->
+        <div class="npc-sec">
+          <h3><i class="ti ti-briefcase"></i>Profissão — ${prof.nome}</h3>
+          <ul class="trait-list">
+            <li>${prof.desc}</li>
+            <li><strong>Perícias:</strong> ${prof.pericias.join(', ')}</li>
+            <li><strong>Equipamento:</strong> ${prof.equipamento}</li>
+            <li><strong>Contatos:</strong> ${prof.contatos}</li>
+          </ul>
+        </div>
+
+        <!-- ESTILO DE JOGO -->
+        <div class="npc-sec">
+          <h3><i class="ti ti-target"></i>Estilo — ${estilo.nome}</h3>
+          <ul class="trait-list">
+            <li>${estilo.desc}</li>
+            <li><strong>Pontos Fortes:</strong> ${estilo.pontosForts.join(', ')}</li>
+            <li><strong>Dica:</strong> ${estilo.dicas}</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- PERSONALIDADE -->
+      <div class="npc-sec-full">
+        <h3><i class="ti ti-brain"></i>Personalidade — ${pers.nome}</h3>
+        <div class="npc-grid" style="margin-bottom:0">
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Traços</div>
+            <ul class="trait-list">${pers.tracos.map(t=>`<li>${t}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Ideais</div>
+            <ul class="trait-list">${pers.ideais.map(t=>`<li>${t}</li>`).join('')}</ul>
+            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin:8px 0 6px">Vínculos</div>
+            <ul class="trait-list">${pers.vinculos.map(t=>`<li>${t}</li>`).join('')}</ul>
+            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin:8px 0 6px">Defeitos</div>
+            <ul class="trait-list">${pers.defeitos.map(t=>`<li>${t}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- APARÊNCIA E MANEIRISMOS -->
+      <div class="npc-sec-full">
+        <h3><i class="ti ti-eye"></i>Aparência &amp; Comportamento</h3>
+        <ul class="trait-list">
+          <li><strong>Aparência física:</strong> ${fisico}</li>
+          <li><strong>Maneirismo marcante:</strong> ${maneirismo}</li>
+        </ul>
+      </div>
+
+    </div>`;
+}
+
+// ── SALVAR ────────────────────────────────────────────────────────────────────
+let saveFolder = 'npc';
+function selFolder(f){
+  saveFolder=f;
+  ['player','npc','monster'].forEach(x=>{
+    document.getElementById('fopt_'+x).classList.toggle('sel',x===f);
+  });
+}
+function abrirSalvar(){
+  if(!currentNPC){ toast('Gere um personagem primeiro!'); return; }
+  document.getElementById('saveName').value=currentNPC.nome;
+  selFolder('npc');
+  document.getElementById('mSave').style.display='flex';
+  setTimeout(()=>document.getElementById('saveName').focus(),50);
+}
+
+function confirmarSalvar(){
+  if(!currentNPC) return;
+  const n=currentNPC;
+  const nome=document.getElementById('saveName').value.trim()||n.nome;
+  const fichas=loadFichas();
+
+  // montar objeto compatível com ficha.html
+  const ficha={
+    id:uid(), name:nome,
+    class:n.classe.nome, race:n.raca.nome, level:n.nivel,
+    background:n.prof.nome, alignment:n.align,
+    type: saveFolder==='player'?'player':saveFolder==='monster'?'monster':'neutral',
+    folder: saveFolder,
+    profBonus:n.pb, xp:0, colors:{},
+    attrs:[
+      {id:'for',label:'Força',abr:'FOR',val:n.attrs.FOR},
+      {id:'des',label:'Destreza',abr:'DES',val:n.attrs.DES},
+      {id:'con',label:'Constituição',abr:'CON',val:n.attrs.CON},
+      {id:'int',label:'Inteligência',abr:'INT',val:n.attrs.INT},
+      {id:'sab',label:'Sabedoria',abr:'SAB',val:n.attrs.SAB},
+      {id:'car',label:'Carisma',abr:'CAR',val:n.attrs.CAR},
+    ],
+    skills:[
+      {id:'acr',name:'Acrobacia',attr:'des',prof:0},{id:'arc',name:'Arcanismo',attr:'int',prof:0},
+      {id:'ate',name:'Atletismo',attr:'for',prof:0},{id:'eng',name:'Enganação',attr:'car',prof:0},
+      {id:'frt',name:'Furtividade',attr:'des',prof:0},{id:'his',name:'História',attr:'int',prof:0},
+      {id:'intu',name:'Intuição',attr:'sab',prof:0},{id:'inv',name:'Investigação',attr:'int',prof:0},
+      {id:'med',name:'Medicina',attr:'sab',prof:0},{id:'nat',name:'Natureza',attr:'int',prof:0},
+      {id:'per',name:'Percepção',attr:'sab',prof:0},{id:'perf',name:'Performance',attr:'car',prof:0},
+      {id:'pers',name:'Persuasão',attr:'car',prof:0},{id:'pre',name:'Prestidigitação',attr:'des',prof:0},
+      {id:'rel',name:'Religião',attr:'int',prof:0},{id:'sob',name:'Sobrevivência',attr:'sab',prof:0},
+    ],
+    combat:[
+      {id:'ca',label:'CA',val:n.ca},{id:'init',label:'Iniciativa',val:n.init},
+      {id:'vel',label:'Velocidade',val:n.raca.velocidade},
+      {id:'hpmax',label:'HP Máx',val:Math.max(1,n.hp)},{id:'hpcur',label:'HP Atual',val:Math.max(1,n.hp)},
+      {id:'hdice',label:'Dado de Vida',val:n.classe.dadoVida},
+    ],
+    spellSlots:Array.from({length:9},(_,i)=>({level:i+1,total:0,used:0})),
+    spells:[], habilidades:[
+      {id:uid(),name:n.raca.tracoRacial.split(':')[0],uses:0,level:1,desc:n.raca.tracoRacial,usesSpent:0},
+      {id:uid(),name:n.classe.recurso.split('(')[0].trim(),uses:0,level:1,desc:n.classe.recurso,usesSpent:0},
+    ],
+    equipment:[
+      {name:n.prof.equipamento,cat:'item',weight:1,qty:1,desc:'Equipamento de antecedente.'}
+    ],
+    traits:n.pers.tracos.join(' '),
+    ideals:n.pers.ideais.join(' '),
+    bonds:n.pers.vinculos.join(' '),
+    flaws:n.pers.defeitos.join(' '),
+    backstory:`${n.fisico}. ${n.maneirismo}. Trabalha como ${n.prof.nome.toLowerCase()} e segue o estilo de ${n.estilo.nome.toLowerCase()}.`,
+    notes:`Estilo de jogo: ${n.estilo.nome}. ${n.estilo.dicas}`
+  };
+
+  fichas.push(ficha);
+  saveFichas(fichas);
+  closeM('mSave');
+  toast(`"${nome}" salvo na pasta ${saveFolder==='player'?'Jogadores':saveFolder==='npc'?'NPCs':'Monstros'}!`);
+}
+
+function imprimirPDF(){
+  if(!currentNPC){ toast('Gere um personagem primeiro!'); return; }
+  window.print();
+}
+
+// ── MODAL CLOSE ───────────────────────────────────────────────────────────────
+document.getElementById('mSave').addEventListener('click',function(e){ if(e.target===this)closeM('mSave'); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeM('mSave'); });
+</script>
+</body>
+</html>

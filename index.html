@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RPG System — Início</title>
-<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="/css/base.css">
 <style>
 /* ── PAGE LAYOUT ──────────────────────────────────────────────────────────── */
 body{display:flex;flex-direction:column;min-height:100vh}
@@ -220,8 +220,9 @@ main{flex:1}
   </div>
   <div class="header-actions">
     <nav class="nav-links">
-      <a href="./index.html" class="nav-link active"><i class="ti ti-home"></i> Início</a>
+      <a href="index.html" class="nav-link active"><i class="ti ti-home"></i> Início</a>
       <a href="./pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="./pages/gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
       <a href="./pages/tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
     </nav>
     <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
@@ -229,8 +230,9 @@ main{flex:1}
   </div>
   <!-- mobile nav -->
   <nav class="mob-nav" id="mobNav">
-    <a href="./index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+    <a href="index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
     <a href="./pages/ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
+    <a href="./pages/gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
     <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Combat Tracker</a>
   </nav>
 </header>
@@ -250,6 +252,8 @@ main{flex:1}
     <div class="hero-cta">
       <a href="./pages/ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
       <a href="./pages/tracker.html" class="btn" style="font-size:12px;padding:10px 24px"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
+      <a href="./pages/gerador.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-sparkles"></i> &nbsp;Gerar Personagem</a>
+
     </div>
   </div>
 </section>
@@ -308,6 +312,27 @@ main{flex:1}
         </div>
       </a>
 
+      <!-- CARD: GERADOR -->
+      <a href="./pages/gerador.html" class="app-card">
+        <div class="app-card-img-placeholder">
+          <i class="ti ti-sparkles" style="font-size:64px"></i>
+        </div>
+        <div class="app-card-body">
+          <div class="app-card-tag">Módulo 03</div>
+          <div class="app-card-title">Gerador de Personagens</div>
+          <div class="app-card-desc">Gere NPCs e personagens completos com um clique. Raça, classe, profissão, personalidade, atributos e história — tudo aleatório ou filtrado. Salve direto nas fichas ou exporte como PDF.</div>
+          <div class="app-card-footer">
+            <div class="app-card-features">
+              <span class="feat-pill">Aleatório</span>
+              <span class="feat-pill">Filtros</span>
+              <span class="feat-pill">PDF</span>
+              <span class="feat-pill">Integrado</span>
+            </div>
+            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -319,7 +344,7 @@ main{flex:1}
       <div class="about-visual">
         <div class="about-icon-ring"><i class="ti ti-dragon"></i></div>
         <div class="about-stats">
-          <div class="stat-box"><div class="stat-num">2</div><div class="stat-lbl">Módulos</div></div>
+          <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Módulos</div></div>
           <div class="stat-box"><div class="stat-num">5e</div><div class="stat-lbl">Compatível</div></div>
           <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Fichas</div></div>
           <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Instalação</div></div>
@@ -366,6 +391,28 @@ main{flex:1}
       <div class="changelog" id="changelog">
 
         <div class="changelog-item open" data-type="new">
+          <div class="changelog-header" onclick="toggleLog(this)">
+            <span class="changelog-version">v1.4</span>
+            <span class="changelog-date">Jul 2025</span>
+            <span class="changelog-title">Gerador de Personagens</span>
+            <span class="changelog-badge badge-new">Nova</span>
+            <i class="ti ti-chevron-down changelog-chevron"></i>
+          </div>
+          <div class="changelog-body">
+            <ul class="change-list">
+              <li><strong>Gerador de Personagens</strong> — novo módulo com JSON de raças, classes, profissões, personalidades e estilos de jogo</li>
+              <li>Filtros opcionais por raça, classe, profissão, estilo, nível e alinhamento</li>
+              <li>Geração completa: atributos rolados (4d6 drop lowest), HP, CA, iniciativa e velocidade</li>
+              <li>Salvar personagem direto nas fichas, escolhendo pasta (Jogador / NPC / Monstro)</li>
+              <li>Exportar como PDF via impressão do navegador</li>
+              <li><strong>Pastas na ficha</strong> — sidebar com abas Todas / Jogadores / NPCs / Monstros com contador</li>
+              <li>Botão <strong>Salvar como PDF</strong> adicionado também na ficha do jogador</li>
+              <li>Menu hamburguer mobile em Fichas e Tracker com todos os links de navegação</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="changelog-item" data-type="new">
           <div class="changelog-header" onclick="toggleLog(this)">
             <span class="changelog-version">v1.3</span>
             <span class="changelog-date">Jul 2025</span>
@@ -460,12 +507,13 @@ main{flex:1}
         <h4>Páginas</h4>
         <a href="./index.html">Início</a>
         <a href="./pages/ficha.html">Criador de Fichas</a>
+        <a href="./pages/gerador.html">Gerador de Personagens</a>
         <a href="./pages/tracker.html">Combat Tracker</a>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
-        <span>📧 jtabosa028@gmail.com</span>
-        <span>💬 Discord: Kammish_1</span>
+        <span>📧 seuemail@email.com</span>
+        <span>💬 Discord: seuuser</span>
         <span style="margin-top:8px;font-size:11px;color:var(--border)">Sugestões e bugs são bem-vindos!</span>
       </div>
     </div>
@@ -473,9 +521,9 @@ main{flex:1}
     <div class="footer-bottom">
       <span class="footer-copy">© 2025 RPG System — Feito com ⚔ para a mesa</span>
       <div class="footer-socials">
-        <a href="https://github.com/J-Tabosa" class="social-btn" title="GitHub" target="_blank"><i class="ti ti-brand-github"></i></a>
-        <a href="https://kamishh.itch.io/" class="social-btn" title="Itch.io" target="_blank"><i class="ti ti-brand-discord"></i></a>
-        <a href="https://www.instagram.com/el_tabosa/" class="social-btn" title="Instagram" target="_blank"><i class="ti ti-brand-instagram"></i></a>
+        <a href="#" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
+        <a href="#" class="social-btn" title="Discord"><i class="ti ti-brand-discord"></i></a>
+        <a href="#" class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
       </div>
     </div>
   </div>

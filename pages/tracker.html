@@ -141,11 +141,19 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
     <div><h1>Combat Tracker</h1><div class="subtitle">D&amp;D 5e — Controle de Batalha</div></div>
     <div class="header-actions">
       <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
-      <a href="ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="../pages/gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="../pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
       <button class="btn sm" onclick="sortByInitiative()"><i class="ti ti-arrows-sort"></i> Ordenar</button>
       <button class="btn sm danger" onclick="resetCombat()"><i class="ti ti-refresh"></i> Resetar</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
     </div>
+    <!-- mobile nav -->
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="../pages/ficha.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
+      <a href="../pages/gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
+    </nav>
   </div>
 
   <div class="initiative-section">
@@ -492,6 +500,14 @@ function closeModal(id){document.getElementById(id).style.display='none';}
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeModal('editModal');closeModal('importModal');}
   if(e.key==='n'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='SELECT') nextTurn();
+});
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+function toggleMobMenu(){ document.getElementById('mobNav').classList.toggle('open'); }
+function closeMobMenu(){ document.getElementById('mobNav').classList.remove('open'); }
+document.addEventListener('click',e=>{
+  const nav=document.getElementById('mobNav');
+  if(nav&&nav.classList.contains('open')&&!nav.contains(e.target)&&!e.target.closest('#mobMenuBtn')) closeMobMenu();
 });
 
 // ── RENDER ────────────────────────────────────────────────────────────────────

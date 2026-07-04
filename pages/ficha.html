@@ -10,6 +10,16 @@ body{display:flex;flex-direction:column;min-height:100vh}
 #app{display:flex;flex-direction:column;flex:1}
 /* injected per-ficha accent vars */
 #fichaStyle{}
+
+/* PRINT */
+@media print{
+  .header,.sidebar,.theme-dropdown,.mob-nav,.mob-menu-btn{display:none!important}
+  .workspace{height:auto;display:block}
+  .editor{padding:0;overflow:visible}
+  body{background:#fff;color:#000}
+  :root{--bg:#fff;--card:#f5f5f5;--card2:#eee;--border:#ccc;--text:#111;--muted:#555;--gold:#6a4e10;--gold2:#4a3000}
+  .sec,.attr-card,.combat-card{break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -23,7 +33,8 @@ body{display:flex;flex-direction:column;min-height:100vh}
     </div>
     <div class="header-actions">
       <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
-      <a href="tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="./gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="./tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
 
       <!-- MENU RETRÁTIL DE TEMA -->
       <div class="theme-menu-wrap" id="themeMenuWrap">
@@ -65,7 +76,14 @@ body{display:flex;flex-direction:column;min-height:100vh}
       </div>
 
       <button class="btn primary" onclick="newFicha()"><i class="ti ti-plus"></i> Nova Ficha</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
     </div>
+    <!-- mobile nav -->
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="./gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
+      <a href="./tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Combat Tracker</a>
+    </nav>
   </div>
 
   <div class="workspace">
@@ -374,11 +392,33 @@ function newFichaObj(name='Novo Personagem'){
 }
 
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
+const FOLDERS=[
+  {id:'all',label:'Todas',icon:'ti-layout-list',color:'var(--muted)'},
+  {id:'player',label:'Jogadores',icon:'ti-user',color:'#4a9c2e'},
+  {id:'npc',label:'NPCs',icon:'ti-masks-theater',color:'#5080b0'},
+  {id:'monster',label:'Monstros',icon:'ti-skull',color:'#c05050'},
+];
+let activeFolder='all';
+
+function folderFromType(t){return t==='player'?'player':t==='monster'?'monster':'npc';}
+function countFolder(fid){if(fid==='all')return fichas.length;return fichas.filter(f=>(f.folder||folderFromType(f.type))===fid).length;}
+function setFolder(f){activeFolder=f;renderSidebar();}
+
 function renderSidebar(){
   const el=document.getElementById('fichaList');
-  if(!fichas.length){ el.innerHTML='<div class="empty-state" style="padding:20px 0"><div class="big">📜</div>Nenhuma ficha.</div>'; return; }
-  el.innerHTML=fichas.map(f=>{
-    const c=typeColor(f.type), sel=f.id===activeId;
+  const tabsHtml=`<div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px">
+    ${FOLDERS.map(fo=>`<div onclick="setFolder('${fo.id}')" style="display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:5px;border:1px solid ${activeFolder===fo.id?'var(--gold)':'transparent'};background:${activeFolder===fo.id?'rgba(200,168,107,0.1)':'transparent'};cursor:pointer;color:${activeFolder===fo.id?'var(--gold)':fo.color};transition:all 0.15s">
+      <i class="ti ${fo.icon}" style="font-size:13px"></i>
+      <span style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;flex:1">${fo.label}</span>
+      <span style="font-family:'Cinzel',serif;font-size:10px;color:var(--border)">${countFolder(fo.id)}</span>
+    </div>`).join('')}
+  </div><div class="divider" style="margin:0 0 10px"></div>`;
+
+  const filtered=activeFolder==='all'?fichas:fichas.filter(f=>(f.folder||folderFromType(f.type))===activeFolder);
+  if(!fichas.length){el.innerHTML=tabsHtml+'<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha.</div>';return;}
+  if(!filtered.length){el.innerHTML=tabsHtml+'<div style="color:var(--muted);font-size:13px;font-style:italic;text-align:center;padding:16px 0">Nenhuma ficha nesta pasta.</div>';return;}
+  el.innerHTML=tabsHtml+filtered.map(f=>{
+    const c=typeColor(f.type),sel=f.id===activeId;
     return`<div class="fi${sel?' sel':''}" onclick="selFicha('${f.id}')">
       <div class="fi-av" style="background:${c}22;border-color:${c};color:${c}">${f.name[0].toUpperCase()}</div>
       <div class="fi-info">
@@ -390,17 +430,20 @@ function renderSidebar(){
   }).join('');
 }
 
-function selFicha(id){ activeId=id; renderSidebar(); renderEditor(); applyFichaColors(); }
+function selFicha(id){activeId=id;renderSidebar();renderEditor();applyFichaColors();}
 function newFicha(){
-  const f=newFichaObj(); fichas.push(f); save(fichas); activeId=f.id;
-  renderSidebar(); renderEditor(); applyFichaColors(); toast('Nova ficha criada!');
+  const f=newFichaObj();
+  f.folder=activeFolder==='all'?'player':activeFolder;
+  f.type=f.folder==='player'?'player':f.folder==='monster'?'monster':'neutral';
+  fichas.push(f);save(fichas);activeId=f.id;
+  renderSidebar();renderEditor();applyFichaColors();toast('Nova ficha criada!');
 }
 function delFicha(id){
   const f=fichas.find(x=>x.id===id);
   if(!f||!confirm(`Excluir "${f.name}"?`))return;
-  fichas=fichas.filter(x=>x.id!==id); save(fichas);
-  if(activeId===id){ activeId=fichas.length?fichas[0].id:null; }
-  renderSidebar(); renderEditor(); applyFichaColors(); toast('Ficha excluída.');
+  fichas=fichas.filter(x=>x.id!==id);save(fichas);
+  if(activeId===id){activeId=fichas.length?fichas[0].id:null;}
+  renderSidebar();renderEditor();applyFichaColors();toast('Ficha excluída.');
 }
 
 function xpNext(lv){ const t=[0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000]; return t[Math.min(lv,19)]||'—'; }
@@ -606,6 +649,11 @@ function renderEditor(){
       </div>
     </div>
 
+    <!-- PDF -->
+    <div style="text-align:right;margin-bottom:14px">
+      <button class="btn" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
+    </div>
+
     <!-- XP -->
     <div class="sec" style="margin-bottom:0">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-trophy sec-icon"></i><h2>Experiência</h2></div></div>
@@ -792,6 +840,14 @@ function autoProf(){
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')['mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(closeM);
   if((e.ctrlKey||e.metaKey)&&e.key==='n'){e.preventDefault();newFicha();}
+});
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+function toggleMobMenu(){ document.getElementById('mobNav').classList.toggle('open'); }
+function closeMobMenu(){ document.getElementById('mobNav').classList.remove('open'); }
+document.addEventListener('click',e=>{
+  const nav=document.getElementById('mobNav');
+  if(nav&&nav.classList.contains('open')&&!nav.contains(e.target)&&!e.target.closest('#mobMenuBtn')) closeMobMenu();
 });
 
 // ── INIT ──────────────────────────────────────────────────────────────────────

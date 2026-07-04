@@ -394,3 +394,20 @@ body.light .log-section{background:#e0d8c4}
   .round-badge{min-width:80px;font-size:11px}
   .c-init-badge{font-size:13px;min-width:24px}
 }
+
+/* ── MOBILE MENU (hamburguer — compartilhado) ────────────────────────────────── */
+.mob-menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--muted);border-radius:4px;padding:5px 9px;cursor:pointer;font-size:18px;line-height:1;transition:all 0.15s;align-items:center}
+.mob-menu-btn:hover{border-color:var(--gold);color:var(--gold)}
+.mob-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:2px solid var(--gold);padding:10px 16px;flex-direction:column;gap:4px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.mob-nav.open{display:flex}
+.mob-nav .nav-link{display:flex;border-bottom:1px solid var(--border);padding:10px 4px;border-radius:0;border-left:none;border-right:none;border-top:none;font-size:12px;letter-spacing:1px}
+.mob-nav .nav-link:last-child{border-bottom:none}
+/* theme-icon-btn used in gerador + index */
+.theme-icon-btn{background:none;border:1px solid var(--border);color:var(--muted);border-radius:4px;padding:4px 9px;cursor:pointer;font-size:15px;line-height:1;transition:all 0.15s}
+.theme-icon-btn:hover{border-color:var(--gold)}
+/* show hamburger on mobile, hide desktop nav links */
+@media(max-width:640px){
+  .mob-menu-btn{display:flex}
+  .header-actions .nav-link{display:none}
+  .header{position:relative}
+}
