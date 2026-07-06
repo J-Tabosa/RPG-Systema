@@ -1,0 +1,535 @@
+{
+  "_meta": {
+    "versao": "1.0",
+    "descricao": "Banco de dados do Gerador de Personagens — RPG System",
+    "instrucoes": {
+      "adicionar_manualmente": "Adicione um novo objeto no array correspondente seguindo o mesmo formato dos existentes. O campo 'id' deve ser único dentro do array.",
+      "campos_obrigatorios": {
+        "racas": ["id", "nome", "desc", "tracoRacial", "velocidade", "visaoNoturna"],
+        "classes": ["id", "nome", "desc", "dadoVida", "atribPrincipal", "profArmadura", "salvaguardas", "recurso"],
+        "profissoes": ["id", "nome", "desc", "pericias", "equipamento", "contatos"],
+        "personalidades": ["id", "nome", "tracos", "ideais", "vinculos", "defeitos"],
+        "estilos": ["id", "nome", "desc", "pontosForts", "dicas"],
+        "nomes": "objeto com arrays: masculinos[], femininos[], sobrenomes[]",
+        "fisicos": "array de strings descrevendo aparência",
+        "maneirismos": "array de strings descrevendo comportamentos"
+      }
+    }
+  },
+
+  "racas": [
+    {
+      "id": "humano",
+      "nome": "Humano",
+      "desc": "Versáteis e ambiciosos, os humanos se adaptam a qualquer papel com facilidade. Sua determinação e criatividade os tornam imprevisíveis.",
+      "tracoRacial": "Versatilidade: ganhe proficiência em uma habilidade à sua escolha. Humanos aprendem rápido e se adaptam a qualquer situação.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "elfo",
+      "nome": "Elfo (Alto)",
+      "desc": "Graciosos e longevos, os elfos possuem afinidade natural com a magia e uma percepção aguçada que raramente os pega de surpresa.",
+      "tracoRacial": "Ancestralidade Feérica: vantagem em salvaguardas contra encantamentos. Não dormem — entram em transe meditativo por 4 horas.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "anao",
+      "nome": "Anão (da Montanha)",
+      "desc": "Robustos e determinados, os anões são guerreiros e artesãos incomparáveis, forjados pelas profundezas da pedra e pelo calor das forjas.",
+      "tracoRacial": "Resiliência Anã: vantagem em salvaguardas contra veneno. Resistência a dano de veneno. Proficiência com machados e martelos de guerra.",
+      "velocidade": 7.5,
+      "visaoNoturna": true
+    },
+    {
+      "id": "halfling",
+      "nome": "Halfling (Pés-Leves)",
+      "desc": "Ágeis e sortudos, os halflings têm um dom especial para se meter em situações e sair delas com um sorriso no rosto.",
+      "tracoRacial": "Sortudo: quando tirar 1 em um d20, pode rolar novamente e usar o segundo resultado. Bravura: vantagem contra efeito de medo.",
+      "velocidade": 7.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "tiefling",
+      "nome": "Tiefling",
+      "desc": "Descendentes de pactos infernais, os tieflings carregam o estigma e o poder do Averno. Marginalizados, aprendem a confiar em si mesmos.",
+      "tracoRacial": "Resistência Infernal: resistência a dano de fogo. Herança das Chamas: conjura Taumaturgia à vontade, Chamas Infernais no nível 3.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "draconato",
+      "nome": "Draconato",
+      "desc": "Orgulhosos herdeiros do sangue dracônico, os draconatos honram sua linhagem em cada batalha com presença imponente e poder devastador.",
+      "tracoRacial": "Sopro Dracônico: arma de sopro baseada na linhagem (escolha na criação). Resistência ao tipo de dano da linhagem escolhida.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "gnomo",
+      "nome": "Gnomo (da Floresta)",
+      "desc": "Curiosos e inventivos, os gnomos veem o mundo como um grande enigma a ser resolvido, sempre com uma ideia peculiar na cabeça.",
+      "tracoRacial": "Astúcia Gnômica: vantagem em salvaguardas de INT, SAB e CAR contra magia. Habilidade natural de falar com animais pequenos.",
+      "velocidade": 7.5,
+      "visaoNoturna": true
+    },
+    {
+      "id": "meio-elfo",
+      "nome": "Meio-Elfo",
+      "desc": "Entre dois mundos, os meio-elfos combinam o charme élfico com a determinação humana, nunca pertencendo completamente a nenhum dos dois.",
+      "tracoRacial": "Ascendência Feérica: vantagem contra encantamentos. Versatilidade de Habilidade: proficiência em duas habilidades à sua escolha.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "orc",
+      "nome": "Orc",
+      "desc": "Guerreiros brutais com espírito indomável, os orcs sobrevivem onde outros fracassam, movidos por uma força vital extraordinária.",
+      "tracoRacial": "Implacável: quando reduzido a 0 HP, cai para 1 HP em vez disso (1x/descanso longo). Ferocidade: proficiência em Intimidação.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "genasi-fogo",
+      "nome": "Genasi do Fogo",
+      "desc": "Filhos do Plano Elemental do Fogo, os genasi carregam chamas nas veias. Apaixonados, impulsivos e brilhantes como a chama que os define.",
+      "tracoRacial": "Resistência ao Fogo: resistência a dano de fogo. Chama Interna: conjura Produzir Chama à vontade. Não precisa respirar em fumaça.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    }
+  ],
+
+  "classes": [
+    {
+      "id": "guerreiro",
+      "nome": "Guerreiro",
+      "desc": "Mestre de armas e armaduras, o guerreiro é o combatente mais versátil do grupo, capaz de adaptar seu estilo a qualquer situação.",
+      "dadoVida": 10,
+      "atribPrincipal": "FOR ou DES",
+      "profArmadura": "Todas as armaduras e escudos",
+      "salvaguardas": "FOR e CON",
+      "recurso": "Ação Surpreendente — ataque extra como ação bônus (2 usos/descanso curto)",
+      "habilidades": ["Atletismo", "Percepção", "Intimidação", "Sobrevivência"]
+    },
+    {
+      "id": "mago",
+      "nome": "Mago",
+      "desc": "Estudiosos da magia arcana, os magos dobram a realidade com o poder da mente. Frágeis no corpo, imbatíveis no intelecto.",
+      "dadoVida": 6,
+      "atribPrincipal": "INT",
+      "profArmadura": "Nenhuma",
+      "salvaguardas": "INT e SAB",
+      "recurso": "Recuperação Arcana — recupera espaços de magia gastos (1x/descanso longo)",
+      "habilidades": ["Arcanismo", "Investigação", "História", "Medicina"]
+    },
+    {
+      "id": "ladino",
+      "nome": "Ladino",
+      "desc": "Habilidosos e sorrateiros, os ladinos resolvem problemas com astúcia e precisão cirúrgica, desaparecendo antes de qualquer resposta.",
+      "dadoVida": 8,
+      "atribPrincipal": "DES",
+      "profArmadura": "Armaduras leves",
+      "salvaguardas": "DES e INT",
+      "recurso": "Ataque Furtivo — dano extra quando tem vantagem ou aliado adjacente ao alvo",
+      "habilidades": ["Furtividade", "Prestidigitação", "Enganação", "Percepção"]
+    },
+    {
+      "id": "clerigo",
+      "nome": "Clérigo",
+      "desc": "Canalizadores do poder divino, os clérigos curam aliados e castigam inimigos em nome dos deuses que servem com devoção inabalável.",
+      "dadoVida": 8,
+      "atribPrincipal": "SAB",
+      "profArmadura": "Armaduras médias e escudos",
+      "salvaguardas": "SAB e CAR",
+      "recurso": "Canalizar Divindade — efeito poderoso baseado no domínio escolhido (1–3x/descanso curto)",
+      "habilidades": ["Medicina", "Persuasão", "Religião", "Intuição"]
+    },
+    {
+      "id": "bardo",
+      "nome": "Bardo",
+      "desc": "Contadores de histórias e artistas mágicos, os bardos inspiram aliados com palavras e música enquanto tecem magia entre as notas.",
+      "dadoVida": 8,
+      "atribPrincipal": "CAR",
+      "profArmadura": "Armaduras leves",
+      "salvaguardas": "DES e CAR",
+      "recurso": "Inspiração de Bardo — dado de bônus (d6→d12) que aliados usam em testes (CAR/descanso longo)",
+      "habilidades": ["Persuasão", "Performance", "Intuição", "Enganação"]
+    },
+    {
+      "id": "paladino",
+      "nome": "Paladino",
+      "desc": "Guerreiros sagrados que combinam combate físico com poder divino e um juramento que define sua existência inteira.",
+      "dadoVida": 10,
+      "atribPrincipal": "FOR e CAR",
+      "profArmadura": "Todas as armaduras e escudos",
+      "salvaguardas": "SAB e CAR",
+      "recurso": "Imposição de Mãos — pool de cura (Nível×5 PV) para curar ou curar doenças/venenos",
+      "habilidades": ["Atletismo", "Persuasão", "Religião", "Medicina"]
+    },
+    {
+      "id": "ranger",
+      "nome": "Patrulheiro",
+      "desc": "Caçadores e rastreadores que dominam os ambientes selvagens e protegem as fronteiras entre a civilização e o desconhecido.",
+      "dadoVida": 10,
+      "atribPrincipal": "DES e SAB",
+      "profArmadura": "Armaduras leves e médias",
+      "salvaguardas": "FOR e DES",
+      "recurso": "Inimigo Favorito e Terreno Favorito — bônus em rastreamento, sobrevivência e percepção no terreno",
+      "habilidades": ["Sobrevivência", "Percepção", "Furtividade", "Atletismo"]
+    },
+    {
+      "id": "barbaro",
+      "nome": "Bárbaro",
+      "desc": "Guerreiros furiosos que canalizam sua raiva em poder físico sobre-humano, tornando-se máquinas de guerra praticamente imparáveis.",
+      "dadoVida": 12,
+      "atribPrincipal": "FOR",
+      "profArmadura": "Armaduras leves e médias (não usa escudo facilmente)",
+      "salvaguardas": "FOR e CON",
+      "recurso": "Fúria — bônus de dano, resistência a dano físico, vantagem em testes de FOR (2–6 usos/descanso longo)",
+      "habilidades": ["Atletismo", "Intimidação", "Sobrevivência", "Percepção"]
+    },
+    {
+      "id": "druida",
+      "nome": "Druida",
+      "desc": "Guardiões da natureza que canalizam sua magia das forças primais do mundo, assumindo formas animais e conjurando tempestades.",
+      "dadoVida": 8,
+      "atribPrincipal": "SAB",
+      "profArmadura": "Armaduras leves e médias (não metálicas)",
+      "salvaguardas": "INT e SAB",
+      "recurso": "Forma Selvagem — transforma-se em animal (CR limitado pelo nível) por horas/descanso curto",
+      "habilidades": ["Natureza", "Medicina", "Percepção", "Sobrevivência"]
+    },
+    {
+      "id": "feiticeiro",
+      "nome": "Feiticeiro",
+      "desc": "Conjuradores inatos cujo poder emana de dentro, não de livros. Sua magia é visceral, pessoal e muitas vezes imprevisível.",
+      "dadoVida": 6,
+      "atribPrincipal": "CAR",
+      "profArmadura": "Nenhuma",
+      "salvaguardas": "CON e CAR",
+      "recurso": "Pontos de Feitiçaria — pool para criar espaços de magia extras ou aplicar metamagia",
+      "habilidades": ["Arcanismo", "Persuasão", "Intuição", "Enganação"]
+    }
+  ],
+
+  "profissoes": [
+    {
+      "id": "mercador",
+      "nome": "Mercador",
+      "desc": "Compra, vende e negocia em mercados e feiras por todo o reino. Conhece preços, rotas comerciais e pessoas influentes.",
+      "pericias": ["Persuasão", "História"],
+      "equipamento": "Balança de mercador, 5 moedas de ouro, carta de crédito de uma guilda",
+      "contatos": "Guildas comerciais, outros mercadores e funcionários alfandegários"
+    },
+    {
+      "id": "soldado",
+      "nome": "Soldado",
+      "desc": "Veterano de conflitos armados, conhece táticas militares, disciplina de campo e a brutalidade sem romantismo da guerra.",
+      "pericias": ["Atletismo", "Intimidação"],
+      "equipamento": "Insígnia de patente, tabuleiro de jogo com dados, kit básico de primeiros socorros",
+      "contatos": "Companheiros de arma, ex-comandantes e veteranos espalhados pelo reino"
+    },
+    {
+      "id": "erudito",
+      "nome": "Erudito",
+      "desc": "Dedicou anos ao estudo em bibliotecas e academias, acumulando conhecimento enciclopédico sobre história, ciências e artes.",
+      "pericias": ["Arcanismo", "História"],
+      "equipamento": "Garrafa de tinta, pena de qualidade, pequena faca para apontar, carta de um colega erudito",
+      "contatos": "Outros acadêmicos, bibliotecários e instituições de ensino arcano"
+    },
+    {
+      "id": "criminoso",
+      "nome": "Criminoso",
+      "desc": "Operou nas sombras da sociedade — seja roubando, contrabandeando ou prestando serviços que poucos ousam questionar.",
+      "pericias": ["Furtividade", "Enganação"],
+      "equipamento": "Ferramentas de ladrão, dados viciados, capuz escuro e capa sem insígnias",
+      "contatos": "Rede subterrânea de criminosos, receptadores e intermediários anônimos"
+    },
+    {
+      "id": "herborista",
+      "nome": "Herborista",
+      "desc": "Conhece plantas medicinais e venenosas, prepara poções e remédios. Procurado tanto por curandeiros quanto por envenenadores.",
+      "pericias": ["Medicina", "Natureza"],
+      "equipamento": "Kit de herborismo completo, ervas raras embrulhadas em pano, mortar e pilão portátil",
+      "contatos": "Curandeiros locais, druidas e apotecários de cidades grandes"
+    },
+    {
+      "id": "ferreiro",
+      "nome": "Ferreiro",
+      "desc": "Forja armas, armaduras e ferramentas com habilidade. Seu ofício é valorizado em qualquer assentamento, do vilarejo à capital.",
+      "pericias": ["Atletismo", "Percepção"],
+      "equipamento": "Kit de ferreiro portátil, amuleto do santo padroeiro dos artesãos, martelo de viagem",
+      "contatos": "Guildas de artesãos, mercadores de metal e nobres que encomendam armaduras"
+    },
+    {
+      "id": "guarda",
+      "nome": "Guarda da Cidade",
+      "desc": "Mantém a ordem nas ruas, conhece os moradores honestos e os marginais do seu distrito melhor do que qualquer outro.",
+      "pericias": ["Percepção", "Intimidação"],
+      "equipamento": "Uniforme desgastado da guarda, apito de prata, algemas e um apelido entre os colegas",
+      "contatos": "Rede de informantes locais, outros guardas e o comandante da guarda regional"
+    },
+    {
+      "id": "bardo_errante",
+      "nome": "Bardo Errante",
+      "desc": "Viaja de cidade em cidade contando histórias, cantando baladas e colhendo fofocas valiosas em cada estalagem que frequenta.",
+      "pericias": ["Performance", "Persuasão"],
+      "equipamento": "Instrumento musical de viagem, fantasia de palco simples, livro de letras manuscritas",
+      "contatos": "Estalajadeiros, nobres entediados, outros bardos e a Guilda dos Contadores de Histórias"
+    },
+    {
+      "id": "marinheiro",
+      "nome": "Marinheiro",
+      "desc": "Passou anos em alto mar, enfrentando tempestades, piratas e criaturas das profundezas. Conhece rotas e portos secretos.",
+      "pericias": ["Atletismo", "Percepção"],
+      "equipamento": "Amuleto de boa viagem, carta náutica desgastada, faca de marinheiro e corda de 15m",
+      "contatos": "Capitães de navios mercantes, contrabandistas portuários e tavernas costeiras"
+    },
+    {
+      "id": "monge_errante",
+      "nome": "Monge Errante",
+      "desc": "Deixou seu mosteiro em busca de iluminação ou cumprindo uma missão sagrada. Disciplina de ferro, poucas palavras, muita ação.",
+      "pericias": ["Religião", "Intuição"],
+      "equipamento": "Manto simples de viagem, diário de meditações, contas de oração desgastadas",
+      "contatos": "Rede de mosteiros e templos, outros monges e sacerdotes de divindades variadas"
+    }
+  ],
+
+  "personalidades": [
+    {
+      "id": "corajoso",
+      "nome": "Corajoso",
+      "tracos": [
+        "Nunca recuo diante de um desafio, não importa as chances.",
+        "Prefiro agir e errar a ficar parado calculando infinitamente."
+      ],
+      "ideais": ["Liberdade — ninguém deveria viver sob o jugo do medo ou da opressão."],
+      "vinculos": ["Juro proteger os fracos que não podem se defender sozinhos."],
+      "defeitos": ["Sou temerário e frequentemente coloco meus aliados em perigo desnecessário."]
+    },
+    {
+      "id": "astuto",
+      "nome": "Astuto",
+      "tracos": [
+        "Raramente digo o que realmente penso — informação é poder.",
+        "Estudo as pessoas durante dias antes de decidir confiar nelas."
+      ],
+      "ideais": ["Conhecimento — a informação certa no momento certo vale mais que qualquer espada."],
+      "vinculos": ["Há segredos sobre meu passado que protegeria com minha própria vida."],
+      "defeitos": ["Desconfio até dos meus aliados mais próximos em momentos críticos."]
+    },
+    {
+      "id": "leal",
+      "nome": "Leal",
+      "tracos": [
+        "Dou minha palavra apenas quando posso cumpri-la integralmente.",
+        "A honra não é apenas um conceito — é a base de toda interação civilizada."
+      ],
+      "ideais": ["Honra — um ser sem palavra não é nada, independente de seu poder."],
+      "vinculos": ["Minha lealdade à minha ordem ou causa está acima de qualquer interesse pessoal."],
+      "defeitos": ["Sou inflexível com as regras mesmo quando elas causam sofrimento evitável."]
+    },
+    {
+      "id": "curioso",
+      "nome": "Curioso",
+      "tracos": [
+        "Faço perguntas constantemente, mesmo quando são inconvenientes ou perigosas.",
+        "Coleciono objetos e informações inusitados onde quer que vá."
+      ],
+      "ideais": ["Conhecimento — o mundo é um livro e quero ler absolutamente todas as páginas."],
+      "vinculos": ["Busco uma resposta para uma pergunta específica que assombra minha mente há anos."],
+      "defeitos": ["Minha curiosidade frequentemente me arrasta para encrencas que não precisava buscar."]
+    },
+    {
+      "id": "sombrio",
+      "nome": "Sombrio",
+      "tracos": [
+        "Raramente sorrio e enxergo problemas potenciais em tudo ao redor.",
+        "Carrego um peso invisível que nunca parece diminuir, não importa o que aconteça."
+      ],
+      "ideais": ["Redenção — busco expiar erros do passado que nunca me abandonam."],
+      "vinculos": ["As memórias de quem perdi me assombram toda noite sem exceção."],
+      "defeitos": ["Tenho enorme dificuldade em aceitar ajuda ou mostrar qualquer vulnerabilidade."]
+    },
+    {
+      "id": "carismatico",
+      "nome": "Carismático",
+      "tracos": [
+        "Entro em qualquer sala e imediatamente começo a conhecer absolutamente todos.",
+        "Tenho um talento natural para contar histórias que prendem a atenção de qualquer plateia."
+      ],
+      "ideais": ["Beleza — a arte, as histórias e a conexão elevam o espírito de toda criatura."],
+      "vinculos": ["Carrego as histórias e tradições da minha terra natal para onde quer que eu vá."],
+      "defeitos": ["Tenho dificuldade séria em ser sério quando a situação exige gravidade."]
+    },
+    {
+      "id": "protetor",
+      "nome": "Protetor",
+      "tracos": [
+        "Me coloco entre os vulneráveis e o perigo sem sequer hesitar por um segundo.",
+        "Sinto a dor dos outros quase como se fosse a minha própria."
+      ],
+      "ideais": ["Proteção — os fortes existem para um único propósito: proteger os que não podem."],
+      "vinculos": ["Há alguém específico no mundo que protegeria com minha própria vida sem questionar."],
+      "defeitos": ["Assumo responsabilidade por todos ao meu redor, o que me exaure completamente."]
+    },
+    {
+      "id": "ambicioso",
+      "nome": "Ambicioso",
+      "tracos": [
+        "Sempre estou de olho em como qualquer situação pode me beneficiar a longo prazo.",
+        "Estabeleço metas elevadas e faço o que for necessário para alcançá-las."
+      ],
+      "ideais": ["Poder — o mundo pertence aos que têm coragem de trabalhar para tomá-lo."],
+      "vinculos": ["Preciso provar para minha família que não sou o fracasso que eles sempre acreditaram."],
+      "defeitos": ["Piso em quem preciso pisar para chegar onde preciso chegar, sem remorso excessivo."]
+    },
+    {
+      "id": "filosofo",
+      "nome": "Filósofo",
+      "tracos": [
+        "Questiono tudo — especialmente as coisas que as pessoas aceitam como óbvias.",
+        "Antes de agir, preciso entender o porquê profundo da situação."
+      ],
+      "ideais": ["Verdade — prefiro uma verdade amarga a uma mentira confortável qualquer dia."],
+      "vinculos": ["Sigo o ensinamento de um mentor que moldou tudo o que sou e penso."],
+      "defeitos": ["Me perco em contemplação quando a ação imediata seria a resposta correta."]
+    },
+    {
+      "id": "pragmatico",
+      "nome": "Pragmático",
+      "tracos": [
+        "O que funciona é o que importa — teoria sem aplicação é apenas vaidade intelectual.",
+        "Resolvo problemas com o que tenho disponível, não com o que gostaria de ter."
+      ],
+      "ideais": ["Eficiência — o melhor caminho é sempre o que chega ao resultado com menos desperdício."],
+      "vinculos": ["Meu grupo é minha única família real — faria qualquer coisa por eles."],
+      "defeitos": ["Descarto aspectos emocionais de situações que muitas vezes são completamente relevantes."]
+    }
+  ],
+
+  "estilos": [
+    {
+      "id": "tank",
+      "nome": "Tanque / Protetor",
+      "desc": "Foca em absorver dano e proteger aliados, posicionando-se sempre na linha de frente para atrair atenção dos inimigos mais perigosos.",
+      "pontosForts": ["Alta resistência e HP elevado", "Controle de posicionamento", "Proteger aliados vulneráveis"],
+      "dicas": "Posicione-se sempre entre os inimigos e os aliados mais frágeis. Use ações de Proteger e interposição. Sua morte é a derrota do grupo."
+    },
+    {
+      "id": "dps",
+      "nome": "Atacante / DPS",
+      "desc": "Maximiza dano por turno para eliminar ameaças rapidamente. Cada ação é calculada para derrubar alvos antes que respondam.",
+      "pontosForts": ["Dano por turno elevado", "Eliminar alvos prioritários", "Ritmo e pressão de combate"],
+      "dicas": "Identifique o inimigo mais perigoso e concentre-se nele até cair. Coordene com o tank para não ser focado."
+    },
+    {
+      "id": "suporte",
+      "nome": "Suporte / Cura",
+      "desc": "Mantém o grupo funcional com curas estratégicas, bônus táticos e remoção de condições negativas no momento certo.",
+      "pontosForts": ["Sustentabilidade do grupo", "Bônus para aliados", "Remoção de condições debilitantes"],
+      "dicas": "Priorize manter aliados de pé em vez de curar depois. Concentração em buffs vale mais que cura reativa na maioria dos casos."
+    },
+    {
+      "id": "controle",
+      "nome": "Controle / Utility",
+      "desc": "Restringe movimentos inimigos e manipula o campo de batalha com habilidades e magia, mudando as regras do confronto.",
+      "pontosForts": ["Controle de posicionamento inimigo", "Versatilidade situacional", "Pensamento estratégico de longo prazo"],
+      "dicas": "Feitiços de área e restrição valem mais que dano direto. Pense dois turnos à frente e nunca desperdice concentração."
+    },
+    {
+      "id": "furtivo",
+      "nome": "Furtivo / Assassino",
+      "desc": "Opera nas sombras, elimina alvos antes que percebam sua presença e desaparece antes que qualquer resposta seja possível.",
+      "pontosForts": ["Dano massivo em emboscadas", "Mobilidade e reposicionamento", "Exploração e coleta de informação"],
+      "dicas": "Faça emboscadas, posicione-se com vantagem antes do combate. Evite confronto direto prolongado — não foi feito para isso."
+    },
+    {
+      "id": "diplomatico",
+      "nome": "Diplomático / Social",
+      "desc": "Resolve conflitos com palavras, informações estratégicas e conexões, evitando combate sempre que uma alternativa inteligente existe.",
+      "pontosForts": ["Negociação e persuasão", "Coleta estratégica de informação", "Evitar conflitos desnecessários"],
+      "dicas": "Sempre busque um ângulo de negociação antes do combate. Informação sobre o inimigo elimina mais problemas que qualquer espada."
+    },
+    {
+      "id": "explorador",
+      "nome": "Explorador / Scout",
+      "desc": "Especialista em terreno desconhecido, rastreamento e descoberta de segredos do ambiente antes que o grupo entre em perigo.",
+      "pontosForts": ["Rastreamento e exploração", "Detecção de armadilhas e emboscadas", "Conhecimento de terreno e rotas"],
+      "dicas": "Vá à frente do grupo, mas mantenha distância segura de retorno. Relate antes de agir — sua função é informação, não combate solo."
+    },
+    {
+      "id": "arcano",
+      "nome": "Arcano / Lançador",
+      "desc": "Domina magias poderosas que mudam o rumo de batalhas inteiras com um único feitiço bem posicionado no momento certo.",
+      "pontosForts": ["Magias de alto impacto", "Flexibilidade de resposta", "Dano e controle à distância segura"],
+      "dicas": "Gerencie seus espaços de magia com disciplina. Reserve o melhor para o momento decisivo — uma magia de alto nível vale mais que três medianas."
+    }
+  ],
+
+  "nomes": {
+    "masculinos": [
+      "Aldric", "Brennan", "Caius", "Doran", "Elric", "Fabian", "Gavril", "Hadrian",
+      "Ilvar", "Jorin", "Keldorn", "Lorcan", "Maeris", "Navar", "Osric", "Peryn",
+      "Qarim", "Rhaen", "Sevar", "Torin", "Ulvic", "Varyn", "Waldric", "Xareth",
+      "Yorin", "Zephyn", "Aldus", "Beren", "Corvyn", "Daven", "Edran", "Fenrir",
+      "Goram", "Hector", "Ivor", "Jaran", "Kylan", "Leoric", "Miran", "Nolan"
+    ],
+    "femininos": [
+      "Aelith", "Brynn", "Caera", "Dwyn", "Elowen", "Fayra", "Gaelindra", "Halia",
+      "Ilenne", "Jorvyn", "Kira", "Lyriel", "Myra", "Naela", "Oryn", "Petra",
+      "Quen", "Rhaella", "Seren", "Thyra", "Ulysse", "Vanya", "Wylla", "Xyla",
+      "Ysolde", "Zara", "Aria", "Brielle", "Cyndra", "Daena", "Eryn", "Fiora",
+      "Gwynn", "Hera", "Iriel", "Jessa", "Kyra", "Lena", "Mira", "Nessa"
+    ],
+    "sobrenomes": [
+      "Pedraforte", "Velasombra", "Marcaferro", "Luaprateada", "Fervormont",
+      "Coraçãoselvagem", "Espinheiro", "Cinzanegra", "Olhodeguia", "Ferrocalor",
+      "Ventoveloz", "Tormentanegra", "Almadobosque", "Guardião", "Lareira",
+      "Braçodaço", "Caminhosverde", "Espadatremula", "Fogoeterno", "Garracorvo",
+      "Hastasombria", "Ivornamorte", "Jornalonga", "Karvosteel", "Lâminafresca",
+      "Morteverde", "Névoanegra", "Olhosfrios", "Pedratroante", "Raizancestral"
+    ]
+  },
+
+  "fisicos": [
+    "Estatura imponente com ombros largos que preenchem qualquer entrada",
+    "Baixo mas de presença marcante que ninguém ousa ignorar",
+    "Cicatriz diagonal que atravessa o rosto do olho esquerdo ao queixo",
+    "Olhos de cores completamente diferentes — heterocromia marcante",
+    "Cabelos completamente brancos apesar de uma idade jovem",
+    "Tatuagens rituais que cobrem ambos os braços até o pescoço",
+    "Mãos extremamente calejadas revelando décadas de trabalho duro",
+    "Voz grave e pausada que exige atenção imediata de qualquer sala",
+    "Andar quase completamente silencioso — raramente faz barulho algum",
+    "Sempre encoberto por capuz ou manto mesmo em ambientes internos",
+    "Risada estrondosa completamente desproporcional ao tamanho do corpo",
+    "Expressão permanentemente séria que raramente muda de estado",
+    "Olhos que parecem enxergar além das pessoas, como se lessem intenções",
+    "Postura perfeitamente ereta que denuncia treinamento militar rigoroso",
+    "Dedos longos e ágeis que nunca ficam parados — sempre manipulando algo",
+    "Cabelos longos sempre trançados com objetos simbólicos entrelaçados",
+    "Uma marca de nascença incomum em formato de símbolo no pescoço",
+    "Porte atlético que contrasta com uma expressão perpetuamente entediada"
+  ],
+
+  "maneirismos": [
+    "Sempre esfrega o amuleto ao pescoço quando fica nervoso ou pensativo",
+    "Fala de si mesmo na terceira pessoa nos momentos de maior intensidade emocional",
+    "Cita provérbios obscuros da sua terra natal em situações completamente inadequadas",
+    "Verifica duas vezes se todas as saídas estão livres ao entrar em qualquer ambiente",
+    "Faz pequenos desenhos instintivamente em qualquer superfície quando está pensando",
+    "Assobia melodias antigas e melancólicas de maneira completamente inconsciente",
+    "Exige saber o nome completo de qualquer pessoa antes de tratar de qualquer assunto",
+    "Repete em voz baixa a última palavra de cada frase importante que ouve",
+    "Conta objetos ao redor em grupos de três quando está anxioso — sempre três",
+    "Olha fixamente para o teto quando está mentindo, completamente alheio ao hábito",
+    "Bate com os dedos em sequência específica em qualquer superfície disponível",
+    "Sempre se posiciona de costas para a parede e de frente para a porta principal",
+    "Faz perguntas retóricas e depois responde antes que qualquer pessoa possa reagir",
+    "Coleciona pedras pequenas de cada lugar que visita, carregando-as nos bolsos",
+    "Termina frases com 'entende?' mesmo quando é absolutamente óbvio que entendem",
+    "Inclina a cabeça levemente para o lado quando está genuinamente interessado"
+  ]
+}
