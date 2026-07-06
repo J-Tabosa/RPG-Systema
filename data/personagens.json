@@ -19,23 +19,7 @@
 
   "racas": [
     {
-      "id": "humano",
-      "nome": "Humano",
-      "desc": "Versáteis e ambiciosos, os humanos se adaptam a qualquer papel com facilidade. Sua determinação e criatividade os tornam imprevisíveis.",
-      "tracoRacial": "Versatilidade: ganhe proficiência em uma habilidade à sua escolha. Humanos aprendem rápido e se adaptam a qualquer situação.",
-      "velocidade": 9,
-      "visaoNoturna": false
-    },
-    {
-      "id": "elfo",
-      "nome": "Elfo (Alto)",
-      "desc": "Graciosos e longevos, os elfos possuem afinidade natural com a magia e uma percepção aguçada que raramente os pega de surpresa.",
-      "tracoRacial": "Ancestralidade Feérica: vantagem em salvaguardas contra encantamentos. Não dormem — entram em transe meditativo por 4 horas.",
-      "velocidade": 9,
-      "visaoNoturna": true
-    },
-    {
-      "id": "anao",
+      "id": "anao-da-montanha",
       "nome": "Anão (da Montanha)",
       "desc": "Robustos e determinados, os anões são guerreiros e artesãos incomparáveis, forjados pelas profundezas da pedra e pelo calor das forjas.",
       "tracoRacial": "Resiliência Anã: vantagem em salvaguardas contra veneno. Resistência a dano de veneno. Proficiência com machados e martelos de guerra.",
@@ -43,31 +27,191 @@
       "visaoNoturna": true
     },
     {
-      "id": "halfling",
-      "nome": "Halfling (Pés-Leves)",
-      "desc": "Ágeis e sortudos, os halflings têm um dom especial para se meter em situações e sair delas com um sorriso no rosto.",
-      "tracoRacial": "Sortudo: quando tirar 1 em um d20, pode rolar novamente e usar o segundo resultado. Bravura: vantagem contra efeito de medo.",
-      "velocidade": 7.5,
-      "visaoNoturna": false
-    },
-    {
-      "id": "tiefling",
-      "nome": "Tiefling",
-      "desc": "Descendentes de pactos infernais, os tieflings carregam o estigma e o poder do Averno. Marginalizados, aprendem a confiar em si mesmos.",
-      "tracoRacial": "Resistência Infernal: resistência a dano de fogo. Herança das Chamas: conjura Taumaturgia à vontade, Chamas Infernais no nível 3.",
+      "id": "aracnidiano",
+      "nome": "Aracnidiano",
+      "desc": "Híbridos humanoides com características de aranha, capazes de tecer fios e andar por superfícies impossíveis com paciência predatória.",
+      "tracoRacial": "Caminhar pelas Teias: ignora movimento difícil causado por teias e pode escalá-las sem testes. Pode produzir teia para prender alvos 1x por descanso.",
       "velocidade": 9,
       "visaoNoturna": true
     },
     {
-      "id": "draconato",
-      "nome": "Draconato",
-      "desc": "Orgulhosos herdeiros do sangue dracônico, os draconatos honram sua linhagem em cada batalha com presença imponente e poder devastador.",
-      "tracoRacial": "Sopro Dracônico: arma de sopro baseada na linhagem (escolha na criação). Resistência ao tipo de dano da linhagem escolhida.",
+      "id": "aquatico",
+      "nome": "Aquático",
+      "desc": "Povo que habita as profundezas dos oceanos, adaptado à imensa pressão e ao frio dos mares, com pele escamosa e brânquias discretas.",
+      "tracoRacial": "Anfíbio: pode respirar tanto no ar quanto na água. Possui velocidade de natação igual à sua velocidade de caminhada.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "aquilino",
+      "nome": "Aquilino",
+      "desc": "Humanoides com feições de águia e braços alados. São observadores natos que preferem a liberdade das grandes altitudes.",
+      "tracoRacial": "Olhos de Rapina: vantagem em testes de Percepção baseados na visão. Pode planar, reduzindo o dano de queda a zero se não estiver incapacitado.",
       "velocidade": 9,
       "visaoNoturna": false
     },
     {
-      "id": "gnomo",
+      "id": "ave-rapina",
+      "nome": "Estrigiforme (Coruja)",
+      "desc": "Povo-coruja que valoriza o conhecimento e o silêncio da noite, movendo-se pelas sombras com asas totalmente silenciosas.",
+      "tracoRacial": "Voo Silencioso: vantagem em testes de Furtividade enquanto estiver se movendo no ar ou à noite. Audição e visão aguçadas.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "bovino",
+      "nome": "Bovino (Minotauro)",
+      "desc": "Povo touro de grande porte e força física intimidadora, conhecidos por sua resiliência e senso implacável de direção.",
+      "tracoRacial": "Investida de Chifres: se mover-se pelo menos 6m em linha reta e atingir um alvo, causa dano extra de perfuração e pode derrubá-lo.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "canino",
+      "nome": "Canino (Chacal)",
+      "desc": "Humanoides com traços de cães e chacais, extremamente leais ao seu bando e dotados de sentidos incrivelmente aguçados.",
+      "tracoRacial": "Táticas de Bando: vantagem em jogadas de ataque contra uma criatura se pelo menos um dos aliados do canino estiver a até 1,5m da criatura.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "caprino",
+      "nome": "Caprino (Sátiro)",
+      "desc": "Humanoides com pernas de bode e chifres pequenos, amantes da música, das festas e da liberdade na natureza indomada.",
+      "tracoRacial": "Festa Perene: proficiência em Instrumentos Musicais e vantagem em testes contra o efeito de enfeitiçado ou venenos alcoólicos.",
+      "velocidade": 10.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "centauro",
+      "nome": "Centauro",
+      "desc": "Criaturas com o torso humano e o corpo inferior de um cavalo, nômades orgulhosos que correm pelas planícies com velocidade formidável.",
+      "tracoRacial": "Cascos: seus cascos são armas naturais que causam dano de impacto. Carga Pesada: sua capacidade de carga é dobrada.",
+      "velocidade": 12,
+      "visaoNoturna": false
+    },
+    {
+      "id": "cervideo",
+      "nome": "Cervídeo",
+      "desc": "Povo-veado elegante e tímido, profundamente conectado com o fluxo místico das florestas antigas e sempre alerta ao perigo.",
+      "tracoRacial": "Passo Ligeiro: sua velocidade aumenta e você ignora terreno difícil florestal. Sentidos Alertas: não pode ser surpreendido enquanto acordado.",
+      "velocidade": 10.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "constructo",
+      "nome": "Constructo Vivente",
+      "desc": "Seres artificiais criados de metal, pedra e magia que ganharam senciência, buscando um propósito próprio no mundo.",
+      "tracoRacial": "Natureza Artificial: não precisa comer, beber ou respirar, e é imune a doenças. Em vez de dormir, fica inerte por 6 horas.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "elfo-alto",
+      "nome": "Elfo (Alto)",
+      "desc": "Graciosos e longevos, os elfos possuem afinidade natural com a magia e uma percepção aguçada que raramente os pega de surpresa.",
+      "tracoRacial": "Ancestralidade Feérica: vantagem em salvaguardas contra encantamentos. Não dormem — entram em transe meditativo por 4 horas.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "elefantino",
+      "nome": "Elefantino",
+      "desc": "Gigantes pacíficos com cabeças e traços de elefante, possuidores de uma memória impecável e uma força física devastadora quando provocados.",
+      "tracoRacial": "Memória Labiríntica: nunca se esquece de um caminho percorrido e tem vantagem em testes de História. Tromba Usável: pode segurar objetos leves.",
+      "velocidade": 7.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "escorpionico",
+      "nome": "Escorpiônico",
+      "desc": "Guerreiros do deserto com carapaças rígidas e uma cauda segmentada mortífera, adaptados ao calor e à sobrevivência extrema.",
+      "tracoRacial": "Ferrão Venenoso: pode desferir um ataque de cauda que causa dano de perfuração e aplica a condição Envenenado (1x/descanso curto).",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "espectro",
+      "nome": "Espectro (Aparição)",
+      "desc": "Espíritos que ficaram presos no plano material devido a pendências ou maldições, flutuando entre a névoa e a realidade.",
+      "tracoRacial": "Natureza Incorpórea: pode atravessar objetos sólidos e criaturas como se fossem terreno difícil, sofrendo dano se terminar o turno dentro deles.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "esqueleto",
+      "nome": "Esqueleto",
+      "desc": "Restos mortais reanimados por necromancia ou pura força de vontade. Não possuem carne, mas guardam fragmentos de sua antiga inteligência.",
+      "tracoRacial": "Ossos Resistentes: vulnerabilidade a dano de impacto, mas resistência a dano de perfuração e corte. Imunidade a venenos.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "felino",
+      "nome": "Felino",
+      "desc": "Ágeis, curiosos e predatórios, os homens-gato possuem reflexos soberbos e uma graça inabalável que os torna excelentes ladinos.",
+      "tracoRacial": "Garras Retráteis: seus ataques desarmados causam dano de corte. Agilidade Felina: pode dobrar sua velocidade por um turno (1x/combate).",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "formigoid",
+      "nome": "Formigoide",
+      "desc": "Insetoides disciplinados que operam com uma mentalidade focada no trabalho em equipe, donos de uma força proporcional assustadora.",
+      "tracoRacial": "Força de Carga: pode carregar e empurrar o triplo do peso normal para seu tamanho. Mente de Colmeia: imune a efeitos de pânico isolados.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "gargula",
+      "nome": "Gárgula",
+      "desc": "Humanoides de pele cinzenta e rochosa, criados para proteger templos e castelos, capazes de se disfarçar perfeitamente em meio à arquitetura.",
+      "tracoRacial": "Forma Estática: se permanecer imóvel, torna-se indistinguível de uma estátua de pedra comum. Carapaça Rochosa: +1 na Classe de Armadura.",
+      "velocidade": 7.5,
+      "visaoNoturna": true
+    },
+    {
+      "id": "genasi-agua",
+      "nome": "Genasi da Água",
+      "desc": "Tocados pelo poder das marés e rios, os genasi da água são fluidos, adaptáveis e transmitem uma calma que esconde tempestades internas.",
+      "tracoRacial": "Chamado das Marés: pode respirar debaixo d'água e ganha o truque Moldar Água. Resistência a dano de ácido.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "genasi-ar",
+      "nome": "Genasi do Ar",
+      "desc": "Herdeiros dos ventos, estes humanoides têm passos leves, cabelos que flutuam constantemente e um espírito livre que odeia confinamento.",
+      "tracoRacial": "Prender o Fôlego: pode ficar sem respirar indefinidamente contanto que não esteja inconsciente. Ganha o truque Lufada.",
+      "velocidade": 10.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "genasi-fogo",
+      "nome": "Genasi do Fogo",
+      "desc": "Filhos do Plano Elemental do Fogo, os genasi carregam chamas nas veias. Apaixonados, impulsivos e brilhantes como a chama que os define.",
+      "tracoRacial": "Resistência ao Fogo: resistência a dano de fogo. Chama Interna: conjura Produzir Chama à vontade. Não precisa respirar em fumaça.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "genasi-terra",
+      "nome": "Genasi da Terra",
+      "desc": "Sólidos como montanhas, exibem detalhes minerais na pele e uma paciência inabalável, conectados com as fundações do mundo.",
+      "tracoRacial": "Caminhar Sólido: ignora terreno difícil feito de terra ou pedra. Pode conjura Passos Sem Pegadas 1x por descanso longo.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "ghoul",
+      "nome": "Carniçal (Ghoul)",
+      "desc": "Mortos-vivos atormentados por uma fome eterna de carne, retendo agilidade e garras paralisantes que assombram cemitérios.",
+      "tracoRacial": "Toque Paralisante: 1x por descanso curto, um ataque de garras pode paralisar um alvo humanoide que falhe num teste de Constituição.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "gnomo-floresta",
       "nome": "Gnomo (da Floresta)",
       "desc": "Curiosos e inventivos, os gnomos veem o mundo como um grande enigma a ser resolvido, sempre com uma ideia peculiar na cabeça.",
       "tracoRacial": "Astúcia Gnômica: vantagem em salvaguardas de INT, SAB e CAR contra magia. Habilidade natural de falar com animais pequenos.",
@@ -75,10 +219,130 @@
       "visaoNoturna": true
     },
     {
+      "id": "goblin",
+      "nome": "Goblin",
+      "desc": "Pequenos, astutos e frequentemente subestimados, os goblins sobrevivem na base da malandragem, emboscadas e agilidade impressionante.",
+      "tracoRacial": "Fuga Ágil: pode realizar as ações de Desengajar ou Esconder como uma ação bônus em cada um de seus turnos.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "halfling-pes-leves",
+      "nome": "Halfling (Pés-Leves)",
+      "desc": "Ágeis e sortudos, os halflings têm um dom especial para se meter em situações e sair delas com um sorriso no rosto.",
+      "tracoRacial": "Sortudo: quando tirar 1 em um d20, pode rolar novamente e usar o segundo resultado. Bravura: vantagem contra efeito de medo.",
+      "velocidade": 7.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "harpia",
+      "nome": "Meio-Harpia",
+      "desc": "Humanoides com braços que terminam em asas emplumadas e pernas de rapina, conhecidos por suas vozes melodiosas e hipnóticas.",
+      "tracoRacial": "Canto Sedutor: 1x por descanso longo, pode tentar fascinar uma criatura humanoides através do canto, atraindo-a em sua direção.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "hobgoblin",
+      "nome": "Hobgoblin",
+      "desc": "Pragmaticos e severos, os hobgoblins são primos maiores dos goblins que vivem sob uma rígida doutrina militar e forte senso de honra.",
+      "tracoRacial": "Treinamento Marcial: proficiência com duas armas marciais à escolha e com armaduras leves. Vantagem em testes de tática.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "humano",
+      "nome": "Humano",
+      "desc": "Versáteis e ambiciosos, os humanos se adaptam a qualquer papel com facilidad. Sua determinação e criatividade os tornam imprevisíveis.",
+      "tracoRacial": "Versatilidade: ganhe proficiência em uma habilidade à sua escolha. Humanos aprendem rápido e se adaptam a qualquer situação.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "lagarto",
+      "nome": "Povo-Lagarto",
+      "desc": "Sobreviventes frios e calculistas dos pântanos, focados na lógica prática e na autopreservação, protegidos por escamas duras.",
+      "tracoRacial": "Armadura Natural: sua pele rígida garante CA base de 13 + Modificador de Destreza se não estiver usando armadura. Ataque de Mordida.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "leporino",
+      "nome": "Leporino",
+      "desc": "Povo-coelho de reflexos elétricos e energia caótica, mestres em escapar de enrascadas pulando para longe do perigo.",
+      "tracoRacial": "Pulo do Coelho: pode adicionar um bônus de salto em distância ou altura e adicionar sua proficiência na iniciativa de combate.",
+      "velocidade": 10.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "lupino",
+      "nome": "Lupino",
+      "desc": "Guerreiros humanoides com traços de lobo, que prezam a caça, a honra da matilha e a coordenação impecável em combate.",
+      "tracoRacial": "Faro Aguçado: vantagem em testes de Percepção que envolvam o cheiro. Mordida feroz como ataque desarmado.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "meio-demonio",
+      "nome": "Meio-Demônio",
+      "desc": "Descendentes de pactos infernais, carregam o estigma e o poder do submundo. Marginalizados, aprendem a confiar apenas em si mesmos.",
+      "tracoRacial": "Resistência Infernal: resistência a dano de fogo. Herança das Chamas: conjura Taumaturgia à vontade e Chamas Ocultas no nível 3.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "meio-dragao",
+      "nome": "Meio-Dragão",
+      "desc": "Orgulhosos herdeiros do sangue dracônico, honram sua linhagem em cada batalha com presença imponente e poder elemental devastador.",
+      "tracoRacial": "Sopro Elemental: arma de sopro baseada na linhagem (fogo, gelo, raio ou ácido). Resistência ao tipo de dano da linhagem escolhida.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
       "id": "meio-elfo",
       "nome": "Meio-Elfo",
       "desc": "Entre dois mundos, os meio-elfos combinam o charme élfico com a determinação humana, nunca pertencendo completamente a nenhum dos dois.",
       "tracoRacial": "Ascendência Feérica: vantagem contra encantamentos. Versatilidade de Habilidade: proficiência em duas habilidades à sua escolha.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "meio-gigante",
+      "nome": "Meio-Gigante",
+      "desc": "Grandes e imponentes, carregam o sangue dos antigos titãs, ostentando musculatura maciça e uma tolerância assustadora à dor.",
+      "tracoRacial": "Compleição Poderosa: você conta como uma categoria de tamanho maior para carregar peso. Resistência Física: reduz danos físicos leves sofridos.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "meio-orc",
+      "nome": "Meio-Orc",
+      "desc": "Nascidos da união entre a fúria orc e o pragmatismo humano, são guerreiros que canalizam sua adrenalina para realizar feitos brutais.",
+      "tracoRacial": "Ataques Selvagens: quando atinge um acerto crítico, adiciona um dado extra de dano da arma à rolagem. Intimidador nato.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "morcego",
+      "nome": "Quiropterano",
+      "desc": "Povo-morcego de hábitos noturnos e constituição ágil, que usa ondas sonoras para navegar na escuridão total de cavernas.",
+      "tracoRacial": "Ecolocalização: ganha percepção sutil às cegas em um raio de 9 metros, contanto que consiga emitir e ouvir sons.",
+      "velocidade": 7.5,
+      "visaoNoturna": true
+    },
+    {
+      "id": "mumia",
+      "nome": "Múmia Preservada",
+      "desc": "Corpos embalsamados por rituais antigos que retiveram sua alma, envoltos em bandagens imbuídas com runas protetoras de preservação.",
+      "tracoRacial": "Resiliência Pútrida: imunidade a doenças e venenos. Vulnerável a fogo, mas seus ataques desarmados podem infligir a Podridão da Tumba.",
+      "velocidade": 7.5,
+      "visaoNoturna": true
+    },
+    {
+      "id": "ogro",
+      "nome": "Meio-Ogro",
+      "desc": "Criaturas corpulentas de intelecto simples, mas força bruta assustadora, frequentemente usadas como a vanguarda demolidora de exércitos.",
+      "tracoRacial": "Músculos de Cerco: causa o dobro de dano contra estruturas e objetos inanimados usando armas de impacto pesadas.",
       "velocidade": 9,
       "visaoNoturna": true
     },
@@ -91,12 +355,68 @@
       "visaoNoturna": true
     },
     {
-      "id": "genasi-fogo",
-      "nome": "Genasi do Fogo",
-      "desc": "Filhos do Plano Elemental do Fogo, os genasi carregam chamas nas veias. Apaixonados, impulsivos e brilhantes como a chama que os define.",
-      "tracoRacial": "Resistência ao Fogo: resistência a dano de fogo. Chama Interna: conjura Produzir Chama à vontade. Não precisa respirar em fumaça.",
+      "id": "pantaneiro",
+      "nome": "Anfíbio (Sapo)",
+      "desc": "Povo-sapo ágil que habita brejos e mangues, capazes de saltos acrobáticos e donos de uma pele viscosa difícil de agarrar.",
+      "tracoRacial": "Salto Ampliado: pode pular o triplo da distância normal. Pele Escorregadia: vantagem em testes para escapar de agarrões.",
       "velocidade": 9,
       "visaoNoturna": false
+    },
+    {
+      "id": "quimerico",
+      "nome": "Quimérico",
+      "desc": "Humanoides criados por alquimia com partes mistas de várias feras, possuindo uma fisiologia instável e imprevisível.",
+      "tracoRacial": "Adaptação Instável: a cada descanso longo, escolha entre ganhar +1 na CA, garras cortantes ou +3m de deslocamento até o próximo descanso.",
+      "velocidade": 9,
+      "visaoNoturna": false
+    },
+    {
+      "id": "rato",
+      "nome": "Roedor (Murino)",
+      "desc": "Pequenos e sorrateiros humanoides-rato que vivem em esgotos e favelas urbanas, sobrevivendo de furtos e segredos sussurrados.",
+      "tracoRacial": "Evasão Urbana: pode se espremer por espaços feitos para criaturas de tamanho menor sem sofrer penalidades de movimento.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "serpente",
+      "nome": "Ofidiano",
+      "desc": "Humanoides com cauda de cobra em vez de pernas, ou escamas e olhos serpentinos. São hipnotizantes, silenciosos e letais.",
+      "tracoRacial": "Bote Rápido: pode desferir um ataque surpresa com vantagem se agir antes do alvo no combate. Imunidade a venenos comuns.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "slime",
+      "nome": "Geleia Senciente (Slime)",
+      "desc": "Uma massa amorfa gelatinosa que desenvolveu senciência. Podem alterar sua consistência e esticar partes do corpo para interagir com o mundo.",
+      "tracoRacial": "Corpo Maleável: pode passar por frestas de até 2 centímetros de largura. Resistência a dano de ácido.",
+      "velocidade": 7.5,
+      "visaoNoturna": false
+    },
+    {
+      "id": "vampiro",
+      "nome": "Cria Vampírica",
+      "desc": "Amaldiçoados pela noite, são predadores aristocráticos que canalizam o charme, a regeneração e a sede de sangue de suas linhagens.",
+      "tracoRacial": "Dreno de Sangue: pode morder uma criatura imobilizada ou voluntária para causar dano e curar a si mesmo na mesma proporção (1x/descanso).",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "vulto-sombra",
+      "nome": "Vulto das Sombras",
+      "desc": "Seres originários de planos sombrios, cujos corpos parecem feitos de fumaça preta e escuridão densa, agindo como espiões perfeitos.",
+      "tracoRacial": "Misturar-se à Escuridão: pode tentar se esconder mesmo se estiver apenas levemente obscurecido pela penumbra ou sombras.",
+      "velocidade": 9,
+      "visaoNoturna": true
+    },
+    {
+      "id": "zumbi",
+      "nome": "Zumbi Livre",
+      "desc": "Mortos-vivos reanimados que de alguma forma quebraram o controle mental do necromante, lidando com um corpo em lenta decomposição.",
+      "tracoRacial": "Vigor Morto: se um dano reduzir seu HP a 0, faça um teste de Constituição para cair a 1 HP (exceto para dano sagrado ou crítico).",
+      "velocidade": 7.5,
+      "visaoNoturna": true
     }
   ],
 
