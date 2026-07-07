@@ -11,6 +11,28 @@ body{display:flex;flex-direction:column;min-height:100vh}
 /* injected per-ficha accent vars */
 #fichaStyle{}
 
+/* Ajuste fino para os selects na meta area */
+.meta-grid select, .meta-grid input[type="text"] {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-family: 'Crimson Text', serif;
+  font-size: 13px;
+}
+.meta-grid select { cursor: pointer; }
+.meta-grid select:focus, .meta-grid input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.fi-actions {
+  display: flex;
+  gap: 4px;
+}
+
 /* PRINT */
 @media print{
   .header,.sidebar,.theme-dropdown,.mob-nav,.mob-menu-btn{display:none!important}
@@ -25,7 +47,6 @@ body{display:flex;flex-direction:column;min-height:100vh}
 <body>
 <div id="app">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="header-brand">
       <i class="ti ti-scroll header-icon"></i>
@@ -36,14 +57,12 @@ body{display:flex;flex-direction:column;min-height:100vh}
       <a href="./gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
       <a href="./tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
 
-      <!-- MENU RETRÁTIL DE TEMA -->
       <div class="theme-menu-wrap" id="themeMenuWrap">
         <button class="theme-menu-btn" onclick="toggleThemeMenu()" id="themeMenuBtn">
           <i class="ti ti-palette"></i> Tema
         </button>
         <div class="theme-dropdown" id="themeDropdown">
 
-          <!-- Claro / Escuro -->
           <div class="theme-dropdown-section">
             <div class="theme-dropdown-label">Aparência</div>
             <div class="theme-toggle-row">
@@ -52,7 +71,6 @@ body{display:flex;flex-direction:column;min-height:100vh}
             </div>
           </div>
 
-          <!-- Cor de destaque (por ficha) -->
           <div class="theme-dropdown-section" id="accentSection" style="display:none">
             <div class="theme-dropdown-label">Cor de Destaque — <span id="fichaNameLabel" style="color:var(--gold)">Ficha Ativa</span></div>
             <div class="color-presets" id="accentPresets"></div>
@@ -61,7 +79,6 @@ body{display:flex;flex-direction:column;min-height:100vh}
               <input class="color-input" type="color" id="customAccent" onchange="setCustomAccent(this.value)" title="Cor personalizada">
             </div>
 
-            <!-- Cor de fundo (por ficha) -->
             <div class="theme-dropdown-label" style="margin-top:10px">Cor de Fundo</div>
             <div class="color-presets" id="bgPresets"></div>
             <div class="color-row" style="margin-top:8px">
@@ -75,10 +92,9 @@ body{display:flex;flex-direction:column;min-height:100vh}
         </div>
       </div>
 
-      <button class="btn primary" onclick="newFicha()"><i class="ti ti-plus"></i> Nova Ficha</button>
+      <button class="btn primary" onclick="openPresetModalForNew()"><i class="ti ti-plus"></i> Nova Ficha</button>
       <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
     </div>
-    <!-- mobile nav -->
     <nav class="mob-nav" id="mobNav">
       <a href="../index.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
       <a href="./gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
@@ -94,12 +110,23 @@ body{display:flex;flex-direction:column;min-height:100vh}
       </div>
     </div>
     <div class="editor" id="editor">
-      <div class="empty-state" style="padding:80px 0"><div class="big">⚔</div>Selecione ou crie uma ficha.</div>
+      <div class="empty-state" style="padding:80px 0"><div class="big">⚔</div>Carregando banco de dados do sistema...</div>
     </div>
   </div>
 </div>
 
-<!-- MODALs -->
+<div class="modal-overlay" id="mPreset" style="display:none"><div class="modal">
+  <h3 id="mPresetTitle">Configuração da Campanha</h3>
+  <div class="form-field">
+    <label>Selecione o Preset (Gestor de Conteúdo)</label>
+    <select id="presetModalSelector"></select>
+  </div>
+  <div class="modal-actions">
+    <button class="btn" onclick="closeM('mPreset')">Cancelar</button>
+    <button class="btn primary" onclick="confirmPresetModal()">Confirmar</button>
+  </div>
+</div></div>
+
 <div class="modal-overlay" id="mAttr" style="display:none"><div class="modal">
   <h3 id="mAttrTitle">Adicionar Atributo</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="aName" placeholder="Ex: Força, Poder..."></div>
@@ -168,6 +195,8 @@ body{display:flex;flex-direction:column;min-height:100vh}
 <script>
 // ── CONSTANTS ─────────────────────────────────────────────────────────────────
 const SK = 'rpg_fichas_v1';
+const SK_CUSTOM = 'rpg_gerador_custom_v1';
+const SK_PRESETS = 'rpg_conteudo_presets_v1';
 
 const ACCENT_PRESETS = [
   {name:'Dourado', gold:'#c8a86b', gold2:'#e8c98a', accent:'#d4a843'},
@@ -196,12 +225,16 @@ const BG_LIGHT_PRESETS = [
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 function load(){ try{return JSON.parse(localStorage.getItem(SK))||[];}catch(e){return[];} }
 function save(arr){ localStorage.setItem(SK,JSON.stringify(arr)); }
+function loadCustom(){ try{return JSON.parse(localStorage.getItem(SK_CUSTOM))||{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};}catch(e){return{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};} }
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let fichas = load();
 let activeId = fichas.length ? fichas[0].id : null;
 let editingAttr=null, editingHabil=null, editingSpell=null, editingEquip=null;
 let themeMenuOpen = false;
+let baseDB = null;
+let DB = null;
+let presetModalTargetFichaId = null; // null significa nova ficha
 
 // ── THEME (global claro/escuro) ───────────────────────────────────────────────
 let dark = localStorage.getItem('rpg_theme') !== 'light';
@@ -214,7 +247,7 @@ function setTheme(t){
   dark = t === 'dark';
   localStorage.setItem('rpg_theme', t);
   applyGlobalTheme();
-  applyFichaColors(); // reaplica pois bg presets mudam
+  applyFichaColors();
 }
 applyGlobalTheme();
 
@@ -230,22 +263,99 @@ document.addEventListener('click', e=>{
   }
 });
 
-// ── PER-FICHA COLOR INJECTION ──────────────────────────────────────────────────
-// cada ficha tem: { accentIdx, customAccent, bgIdx, customBg }
-// se nada definido → usa defaults do :root
-
-function getFichaColors(f){
-  return f.colors || {};
+// ── DATA INTEGRATION & FILTERS ────────────────────────────────────────────────
+async function carregarDB(){
+  try {
+    const res = await fetch('../data/personagens.json');
+    baseDB = await res.json();
+  } catch(e) {
+    baseDB = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] };
+    console.warn('personagens.json não encontrado.', e);
+  }
+  DB = JSON.parse(JSON.stringify(baseDB));
+  const custom = loadCustom();
+  Object.keys(custom).forEach(cat => { if(DB[cat]) DB[cat] = DB[cat].concat(custom[cat]); });
+  
+  renderSidebar();
+  renderEditor();
+  applyFichaColors();
 }
+
+function getFilteredCat(cat, presetId){
+  if(!DB || !DB[cat]) return [];
+  if(!presetId || presetId === 'default') return DB[cat];
+  
+  let presets = [];
+  try { presets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
+  
+  const currentPreset = presets.find(p => p.id === presetId);
+  if(currentPreset && currentPreset.blocked && currentPreset.blocked[cat]) {
+    return DB[cat].filter(item => !currentPreset.blocked[cat].includes(item.id));
+  }
+  return DB[cat];
+}
+
+// ── PRESET POPUP FUNCTIONS ────────────────────────────────────────────────────
+function openPresetModalForNew() {
+  presetModalTargetFichaId = null;
+  document.getElementById('mPresetTitle').textContent = 'Configurar Nova Campanha';
+  populatePresetSelect('default');
+  document.getElementById('mPreset').style.display = 'flex';
+}
+
+function openPresetModalForEdit(fichaId) {
+  presetModalTargetFichaId = fichaId;
+  document.getElementById('mPresetTitle').textContent = 'Mudar Preset da Ficha';
+  const targetFicha = fichas.find(f => f.id === fichaId);
+  populatePresetSelect(targetFicha ? targetFicha.presetId : 'default');
+  document.getElementById('mPreset').style.display = 'flex';
+}
+
+function populatePresetSelect(selectedId) {
+  let listaPresets = [];
+  try { listaPresets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
+  const html = `<option value="default">Padrão (Todo Conteúdo)</option>` + 
+    listaPresets.map(p => `<option value="${p.id}" ${selectedId===p.id?'selected':''}>${p.nome}</option>`).join('');
+  document.getElementById('presetModalSelector').innerHTML = html;
+}
+
+function confirmPresetModal() {
+  const chosenPresetId = document.getElementById('presetModalSelector').value;
+  closeM('mPreset');
+
+  if (presetModalTargetFichaId === null) {
+    // Nova ficha
+    newFicha(chosenPresetId);
+  } else {
+    // Editando ficha existente
+    activeId = presetModalTargetFichaId;
+    upd(f => {
+      f.presetId = chosenPresetId;
+      // Valida se conteúdos selecionados ainda existem no preset novo
+      const validRacas = getFilteredCat('racas', chosenPresetId).map(x => x.nome);
+      const validClasses = getFilteredCat('classes', chosenPresetId).map(x => x.nome);
+      const validProfs = getFilteredCat('profissoes', chosenPresetId).map(x => x.nome);
+      
+      if (f.race && !validRacas.includes(f.race)) f.race = '';
+      if (f.class && !validClasses.includes(f.class)) f.class = '';
+      if (f.background && !validProfs.includes(f.background)) f.background = '';
+    });
+    renderSidebar();
+    renderEditor();
+    toast('Preset de Campanha alterado e filtros reaplicados!');
+  }
+}
+
+// ── PER-FICHA COLOR INJECTION ──────────────────────────────────────────────────
+function getFichaColors(f){ return f.colors || {}; }
 
 function applyFichaColors(){
   const f = getFicha();
   const sec = document.getElementById('accentSection');
-  sec.style.display = f ? 'block' : 'none';
+  if(sec) sec.style.display = f ? 'block' : 'none';
   if(!f){ injectStyle(''); return; }
 
   const c = getFichaColors(f);
-  // resolve accent
   let gold, gold2, accent;
   if(c.customAccent){
     gold=c.customAccent; gold2=lighten(c.customAccent,30); accent=c.customAccent;
@@ -256,11 +366,9 @@ function applyFichaColors(){
     gold='#c8a86b'; gold2='#e8c98a'; accent='#d4a843';
   }
 
-  // resolve bg
-  let bg,surface,card,card2,border,text,muted;
+  let bg,surface,card,card2,border;
   const presets = dark ? BG_DARK_PRESETS : BG_LIGHT_PRESETS;
   if(c.customBg){
-    // user set a single custom bg — derive the rest
     const base = c.customBg;
     if(dark){
       bg=base; surface=blendHex(base,'#ffffff',0.06); card=blendHex(base,'#ffffff',0.12); card2=blendHex(base,'#ffffff',0.18); border=blendHex(base,'#ffffff',0.25);
@@ -271,18 +379,19 @@ function applyFichaColors(){
     const p=presets[c.bgIdx];
     bg=p.bg; surface=p.surface; card=p.card; card2=p.card2; border=p.border;
   } else {
-    bg=null; // use CSS default
+    bg=null;
   }
 
   const bgVars = bg ? `--bg:${bg};--surface:${surface};--card:${card};--card2:${card2};--border:${border};` : '';
   injectStyle(`:root{--gold:${gold};--gold2:${gold2};--accent:${accent};${bgVars}}`);
 
-  // sync UI controls
-  document.getElementById('customAccent').value = gold.slice(0,7);
-  if(c.customBg) document.getElementById('customBg').value = c.customBg.slice(0,7);
-  else document.getElementById('customBg').value = (bg||'#0f0d0a').slice(0,7);
+  if(document.getElementById('customAccent')) document.getElementById('customAccent').value = gold.slice(0,7);
+  if(document.getElementById('customBg')) {
+    if(c.customBg) document.getElementById('customBg').value = c.customBg.slice(0,7);
+    else document.getElementById('customBg').value = (bg||'#0f0d0a').slice(0,7);
+  }
 
-  document.getElementById('fichaNameLabel').textContent = f.name;
+  if(document.getElementById('fichaNameLabel')) document.getElementById('fichaNameLabel').textContent = f.name;
   renderAccentPresets(c.accentIdx);
   renderBgPresets(c.bgIdx);
 }
@@ -308,39 +417,25 @@ function blendHex(hex, with2, t){
 
 function renderAccentPresets(activeIdx){
   const el = document.getElementById('accentPresets');
+  if(!el) return;
   el.innerHTML = ACCENT_PRESETS.map((p,i)=>
     `<div class="color-preset${activeIdx===i?' active':''}" style="background:${p.gold}" onclick="setAccentPreset(${i})" title="${p.name}"></div>`
   ).join('');
 }
 function renderBgPresets(activeIdx){
   const el = document.getElementById('bgPresets');
+  if(!el) return;
   const presets = dark ? BG_DARK_PRESETS : BG_LIGHT_PRESETS;
   el.innerHTML = presets.map((p,i)=>
     `<div class="color-preset${activeIdx===i?' active':''}" style="background:${p.bg};border:2px solid ${p.border}" onclick="setBgPreset(${i})" title="${p.name}"></div>`
   ).join('');
 }
 
-function setAccentPreset(i){
-  upd(f=>{ if(!f.colors)f.colors={}; f.colors.accentIdx=i; delete f.colors.customAccent; });
-  applyFichaColors();
-}
-function setCustomAccent(val){
-  upd(f=>{ if(!f.colors)f.colors={}; f.colors.customAccent=val; delete f.colors.accentIdx; });
-  applyFichaColors();
-}
-function setBgPreset(i){
-  upd(f=>{ if(!f.colors)f.colors={}; f.colors.bgIdx=i; delete f.colors.customBg; });
-  applyFichaColors();
-}
-function setCustomBg(val){
-  upd(f=>{ if(!f.colors)f.colors={}; f.colors.customBg=val; delete f.colors.bgIdx; });
-  applyFichaColors();
-}
-function resetColors(){
-  upd(f=>{ f.colors={}; });
-  applyFichaColors();
-  toast('Cores restauradas ao padrão.');
-}
+function setAccentPreset(i){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.accentIdx=i; delete f.colors.customAccent; }); applyFichaColors(); }
+function setCustomAccent(val){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.customAccent=val; delete f.colors.accentIdx; }); applyFichaColors(); }
+function setBgPreset(i){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.bgIdx=i; delete f.colors.customBg; }); applyFichaColors(); }
+function setCustomBg(val){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.customBg = val; delete f.colors.bgIdx;}); applyFichaColors(); }
+function resetColors(){ upd(f=>{ f.colors={}; }); applyFichaColors(); toast('Cores restauradas ao padrão.'); }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2); }
@@ -380,8 +475,9 @@ const DEF_COMBAT=[
 ];
 const DEF_SLOTS=Array.from({length:9},(_,i)=>({level:i+1,total:0,used:0}));
 
-function newFichaObj(name='Novo Personagem'){
-  return {id:uid(),name,class:'',race:'',level:1,background:'',alignment:'',type:'player',
+function newFichaObj(name='Novo Personagem', presetId='default'){
+  return {id:uid(),name,class:'',subclass:'',race:'',level:1,background:'',alignment:'',type:'player',
+    presetId:presetId,
     profBonus:2,xp:0,colors:{},
     attrs:JSON.parse(JSON.stringify(DEF_ATTRS)),
     skills:JSON.parse(JSON.stringify(DEF_SKILLS)),
@@ -406,6 +502,7 @@ function setFolder(f){activeFolder=f;renderSidebar();}
 
 function renderSidebar(){
   const el=document.getElementById('fichaList');
+  if(!el) return;
   const tabsHtml=`<div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px">
     ${FOLDERS.map(fo=>`<div onclick="setFolder('${fo.id}')" style="display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:5px;border:1px solid ${activeFolder===fo.id?'var(--gold)':'transparent'};background:${activeFolder===fo.id?'rgba(200,168,107,0.1)':'transparent'};cursor:pointer;color:${activeFolder===fo.id?'var(--gold)':fo.color};transition:all 0.15s">
       <i class="ti ${fo.icon}" style="font-size:13px"></i>
@@ -425,14 +522,17 @@ function renderSidebar(){
         <div class="fi-name" style="color:${c}">${f.name}</div>
         <div class="fi-sub">${[f.race,f.class,f.level?'Nv '+f.level:''].filter(Boolean).join(' · ')}</div>
       </div>
-      <button class="btn xs danger fi-del" onclick="event.stopPropagation();delFicha('${f.id}')"><i class="ti ti-trash"></i></button>
+      <div class="fi-actions">
+        <button class="btn xs text" title="Alterar Preset de Campanha" onclick="event.stopPropagation();openPresetModalForEdit('${f.id}')"><i class="ti ti-edit"></i></button>
+        <button class="btn xs danger fi-del" onclick="event.stopPropagation();delFicha('${f.id}')"><i class="ti ti-trash"></i></button>
+      </div>
     </div>`;
   }).join('');
 }
 
 function selFicha(id){activeId=id;renderSidebar();renderEditor();applyFichaColors();}
-function newFicha(){
-  const f=newFichaObj();
+function newFicha(presetId){
+  const f=newFichaObj('Novo Personagem', presetId);
   f.folder=activeFolder==='all'?'player':activeFolder;
   f.type=f.folder==='player'?'player':f.folder==='monster'?'monster':'neutral';
   fichas.push(f);save(fichas);activeId=f.id;
@@ -451,9 +551,15 @@ function xpNext(lv){ const t=[0,300,900,2700,6500,14000,23000,34000,48000,64000,
 // ── EDITOR ────────────────────────────────────────────────────────────────────
 function renderEditor(){
   const editor=document.getElementById('editor');
+  if(!editor) return;
   const f=getFicha();
   if(!f){ editor.innerHTML='<div class="empty-state" style="padding:80px 0"><div class="big">⚔</div>Selecione ou crie uma ficha.</div>'; return; }
   const c=typeColor(f.type);
+
+  // Busca coleções de opções válidas pelo Preset da ficha ativa
+  const racasPermitidas = getFilteredCat('racas', f.presetId);
+  const classesPermitidas = getFilteredCat('classes', f.presetId);
+  const profsPermitidas = getFilteredCat('profissoes', f.presetId);
 
   const attrsHtml=f.attrs.map(a=>`
     <div class="attr-card">
@@ -547,20 +653,48 @@ function renderEditor(){
     </div>`).join('');
 
   editor.innerHTML=`
-    <!-- META -->
     <div class="sec">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
-        <div class="form-field" style="margin:0"><label>Nome</label><input type="text" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:14px;color:${c}"></div>
-        <div class="form-field" style="margin:0"><label>Classe</label><input type="text" value="${f.class}" onchange="setField('class',this.value)" placeholder="Guerreiro, Mago..."></div>
-        <div class="form-field" style="margin:0"><label>Raça</label><input type="text" value="${f.race}" onchange="setField('race',this.value)" placeholder="Humano, Elfo..."></div>
+      <div style="display:grid;grid-template-columns: 1fr; gap:12px; margin-bottom:14px;" class="meta-grid">
+        <div class="form-field" style="margin:0">
+          <label>Nome do Personagem</label>
+          <input type="text" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:14px;color:${c}">
+        </div>
       </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:12px;" class="meta-grid">
+        <div class="form-field" style="margin:0">
+          <label>Classe</label>
+          <select onchange="setField('class',this.value)">
+            <option value="">Selecione uma Classe...</option>
+            ${classesPermitidas.map(x => `<option value="${x.nome}" ${f.class===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-field" style="margin:0">
+          <label>Subclasse</label>
+          <input type="text" value="${f.subclass||''}" onchange="setField('subclass',this.value)" placeholder="Ex: Ladino Assassino...">
+        </div>
+        <div class="form-field" style="margin:0">
+          <label>Raça</label>
+          <select onchange="setField('race',this.value)">
+            <option value="">Selecione uma Raça...</option>
+            ${racasPermitidas.map(x => `<option value="${x.nome}" ${f.race===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-field" style="margin:0">
+          <label>Antecedente / Profissão</label>
+          <select onchange="setField('background',this.value)">
+            <option value="">Selecione um Antecedente...</option>
+            ${profsPermitidas.map(x => `<option value="${x.nome}" ${f.background===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
         <div class="form-field" style="margin:0"><label>Nível</label><input type="number" value="${f.level}" min="1" max="20" onchange="setField('level',parseInt(this.value));autoProf()"></div>
         <div class="form-field" style="margin:0"><label>Bônus Prof.</label><input type="number" value="${f.profBonus}" min="2" max="6" onchange="setField('profBonus',parseInt(this.value));renderEditor()"></div>
-        <div class="form-field" style="margin:0"><label>Antecedente</label><input type="text" value="${f.background}" onchange="setField('background',this.value)"></div>
-        <div class="form-field" style="margin:0"><label>Alinhamento</label><input type="text" value="${f.alignment}" onchange="setField('alignment',this.value)"></div>
+        <div class="form-field" style="margin:0"><label>Alinhamento</label><input type="text" value="${f.alignment||''}" onchange="setField('alignment',this.value)" placeholder="Leal e Bom..."></div>
         <div class="form-field" style="margin:0"><label>Tipo</label>
-          <select onchange="setField('type',this.value);renderSidebar();renderEditor()">
+          <select onchange="setField('type',this.value);renderSidebar();renderEditor()" style="padding:4px 6px;">
             <option value="player" ${f.type==='player'?'selected':''}>Jogador</option>
             <option value="monster" ${f.type==='monster'?'selected':''}>Monstro</option>
             <option value="neutral" ${f.type==='neutral'?'selected':''}>NPC</option>
@@ -569,13 +703,11 @@ function renderEditor(){
       </div>
     </div>
 
-    <!-- ATRIBUTOS -->
     <div class="sec">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-shield sec-icon"></i><h2>Atributos</h2></div></div>
       <div class="attr-grid">${attrsHtml}</div>
     </div>
 
-    <!-- SALVAGUARDAS + PERÍCIAS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
       <div class="sec" style="margin:0">
         <div class="sec-head"><div class="sec-title"><i class="ti ti-shield-check sec-icon"></i><h2>Salvaguardas</h2></div></div>
@@ -590,13 +722,11 @@ function renderEditor(){
       </div>
     </div>
 
-    <!-- COMBATE -->
     <div class="sec">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-sword sec-icon"></i><h2>Combate</h2></div></div>
       <div class="combat-grid">${combatHtml}</div>
     </div>
 
-    <!-- HABILIDADES -->
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title"><i class="ti ti-bolt sec-icon"></i><h2>Habilidades</h2></div>
@@ -605,14 +735,12 @@ function renderEditor(){
       ${habilHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma habilidade ainda.</div>'}
     </div>
 
-    <!-- ESPAÇOS DE MAGIA -->
     <div class="sec">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Espaços de Magia</h2></div></div>
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Clique nos círculos para marcar uso. Defina o total por nível.</div>
       ${slotsHtml}
     </div>
 
-    <!-- MAGIAS CONHECIDAS -->
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title"><i class="ti ti-sparkles sec-icon"></i><h2>Magias Conhecidas</h2></div>
@@ -621,7 +749,6 @@ function renderEditor(){
       ${spellsHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma magia ainda.</div>'}
     </div>
 
-    <!-- EQUIPAMENTOS -->
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title"><i class="ti ti-backpack sec-icon"></i><h2>Equipamentos &amp; Itens</h2></div>
@@ -633,32 +760,29 @@ function renderEditor(){
       ${equipHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum item ainda.</div>'}
     </div>
 
-    <!-- TRAÇOS + NOTAS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
       <div class="sec" style="margin:0">
         <div class="sec-head"><div class="sec-title"><i class="ti ti-user sec-icon"></i><h2>Personalidade</h2></div></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Traços</label><textarea onchange="setField('traits',this.value)">${f.traits}</textarea></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Ideais</label><textarea onchange="setField('ideals',this.value)">${f.ideals}</textarea></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Vínculos</label><textarea onchange="setField('bonds',this.value)">${f.bonds}</textarea></div>
-        <div class="form-field" style="margin:0"><label>Defeitos</label><textarea onchange="setField('flaws',this.value)">${f.flaws}</textarea></div>
+        <div class="form-field" style="margin-bottom:8px"><label>Traços</label><textarea onchange="setField('traits',this.value)">${f.traits||''}</textarea></div>
+        <div class="form-field" style="margin-bottom:8px"><label>Ideais</label><textarea onchange="setField('ideals',this.value)">${f.ideals||''}</textarea></div>
+        <div class="form-field" style="margin-bottom:8px"><label>Vínculos</label><textarea onchange="setField('bonds',this.value)">${f.bonds||''}</textarea></div>
+        <div class="form-field" style="margin:0"><label>Defeitos</label><textarea onchange="setField('flaws',this.value)">${f.flaws||''}</textarea></div>
       </div>
       <div class="sec" style="margin:0">
         <div class="sec-head"><div class="sec-title"><i class="ti ti-book sec-icon"></i><h2>História &amp; Notas</h2></div></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Backstory</label><textarea style="min-height:100px" onchange="setField('backstory',this.value)">${f.backstory}</textarea></div>
-        <div class="form-field" style="margin:0"><label>Notas Livres</label><textarea style="min-height:100px" onchange="setField('notes',this.value)">${f.notes}</textarea></div>
+        <div class="form-field" style="margin-bottom:8px"><label>Backstory</label><textarea style="min-height:100px" onchange="setField('backstory',this.value)">${f.backstory||''}</textarea></div>
+        <div class="form-field" style="margin:0"><label>Notas Livres</label><textarea style="min-height:100px" onchange="setField('notes',this.value)">${f.notes||''}</textarea></div>
       </div>
     </div>
 
-    <!-- PDF -->
     <div style="text-align:right;margin-bottom:14px">
       <button class="btn" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
     </div>
 
-    <!-- XP -->
     <div class="sec" style="margin-bottom:0">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-trophy sec-icon"></i><h2>Experiência</h2></div></div>
       <div style="display:flex;align-items:center;gap:12px">
-        <div class="form-field" style="margin:0;flex:1"><label>XP Atual</label><input type="number" value="${f.xp}" min="0" onchange="setField('xp',parseInt(this.value))"></div>
+        <div class="form-field" style="margin:0;flex:1"><label>XP Atual</label><input type="number" value="${f.xp||0}" min="0" onchange="setField('xp',parseInt(this.value))"></div>
         <div style="font-size:12px;color:var(--muted)">Próximo nível: ${xpNext(f.level)} xp</div>
       </div>
     </div>`;
@@ -834,12 +958,14 @@ function autoProf(){
 }
 
 // ── MODAL CLOSE ───────────────────────────────────────────────────────────────
-['mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeM(id);});
+['mPreset','mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(id=>{
+  if(document.getElementById(id)) {
+    document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeM(id);});
+  }
 });
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape')['mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(closeM);
-  if((e.ctrlKey||e.metaKey)&&e.key==='n'){e.preventDefault();newFicha();}
+  if(e.key==='Escape')['mPreset','mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(closeM);
+  if((e.ctrlKey||e.metaKey)&&e.key==='n'){e.preventDefault();openPresetModalForNew();}
 });
 
 // ── MOBILE MENU ───────────────────────────────────────────────────────────────
@@ -851,9 +977,7 @@ document.addEventListener('click',e=>{
 });
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-renderSidebar();
-renderEditor();
-applyFichaColors();
+carregarDB();
 </script>
 </body>
 </html>

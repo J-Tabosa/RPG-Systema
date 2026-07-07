@@ -23,29 +23,11 @@ body.light .gen-panel{background:#e0d8c4}
 .filter-group select option{background:var(--card)}
 .gen-btn{width:100%;margin-top:4px;font-size:12px;padding:9px;letter-spacing:1.5px}
 
-/* PANEL TABS */
-.panel-tabs{display:flex;gap:4px;margin-bottom:12px}
-.panel-tab{flex:1;padding:5px 4px;border-radius:4px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:'Cinzel',serif;font-size:9px;cursor:pointer;transition:all 0.15s;text-align:center;letter-spacing:0.5px;text-transform:uppercase}
-.panel-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(200,168,107,0.08)}
-
-/* EDITOR PANEL */
-.editor-section{display:none}
-.editor-section.active{display:block}
-.entry-list{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;max-height:260px;overflow-y:auto}
-.entry-item{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--card);border:1px solid var(--border);border-radius:4px}
-.entry-item-name{font-family:'Cinzel',serif;font-size:11px;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.entry-item-src{font-size:9px;color:var(--muted);font-family:'Cinzel',serif;letter-spacing:0.5px;text-transform:uppercase;flex-shrink:0}
-.entry-del{background:none;border:none;color:var(--red2);cursor:pointer;font-size:12px;padding:0 2px;flex-shrink:0;opacity:0.6;transition:opacity 0.15s}
-.entry-del:hover{opacity:1}
-.entry-del:disabled{opacity:0.2;cursor:not-allowed}
-.add-form{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:8px}
-.add-form-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
-.mini-field{margin-bottom:7px}
-.mini-field label{display:block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
-.mini-field input,.mini-field textarea{width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:4px 7px;border-radius:3px;font-family:'Crimson Text',serif;font-size:12px}
-.mini-field input:focus,.mini-field textarea:focus{outline:none;border-color:var(--gold)}
-.mini-field textarea{resize:vertical;min-height:46px}
-.mini-hint{font-size:10px;color:var(--muted);font-style:italic;margin-bottom:6px;line-height:1.4}
+/* PRESET SELECTOR */
+.preset-box{background:rgba(200,168,107,0.05);border:1px dashed var(--border);border-radius:5px;padding:10px;margin-bottom:16px}
+.preset-box label{display:block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.preset-box select{width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:4px 6px;border-radius:4px;font-family:'Cinzel',serif;font-size:10px;cursor:pointer;font-weight:700}
+.preset-box select:focus{outline:none;border-color:var(--gold)}
 
 /* RESULT */
 .result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-style:italic;gap:12px;min-height:300px}
@@ -73,7 +55,6 @@ body.light .gen-panel{background:#e0d8c4}
 .npc-sec{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 15px}
 .npc-sec-full{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 15px;margin-bottom:12px}
 .npc-sec h3{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.npc-sec h3 i{font-size:13px}
 
 .attr-row{display:flex;gap:6px;flex-wrap:wrap}
 .attr-mini{background:var(--card2);border:1px solid var(--border);border-radius:5px;padding:6px 8px;text-align:center;flex:1;min-width:56px}
@@ -135,6 +116,8 @@ body.light .gen-panel{background:#e0d8c4}
     <div class="header-actions">
       <a href="../index.html"   class="nav-link"><i class="ti ti-home"></i> Início</a>
       <a href="ficha.html"      class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link active"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link"><i class="ti ti-database"></i> Conteúdo</a>
       <a href="tracker.html"    class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
       <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
       <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
@@ -142,88 +125,67 @@ body.light .gen-panel{background:#e0d8c4}
     <nav class="mob-nav" id="mobNav">
       <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
       <a href="ficha.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-database"></i> Conteúdo</a>
       <a href="tracker.html"  class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Tracker</a>
     </nav>
   </div>
 
   <div class="gen-workspace">
 
-    <!-- PAINEL ESQUERDO: Filtros + Editor -->
     <div class="gen-panel">
-
-      <!-- TABS -->
-      <div class="panel-tabs">
-        <div class="panel-tab active" id="tab-filtros" onclick="switchTab('filtros')">Filtros</div>
-        <div class="panel-tab" id="tab-editor" onclick="switchTab('editor')">+ Conteúdo</div>
+      
+      <div class="preset-box">
+        <label><i class="ti ti-layout-grid-add"></i> Preset de Campanha</label>
+        <select id="presetSelector" onchange="alterarPresetAtivo(this.value)">
+          <option value="default">Padrão (Todo Conteúdo)</option>
+        </select>
       </div>
 
-      <!-- ── ABA: FILTROS ─────────────────────────────────────────────── -->
-      <div class="editor-section active" id="sec-filtros">
-        <div class="filter-group">
-          <label>Raça</label>
-          <select id="fRaca"><option value="">Aleatória</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Classe</label>
-          <select id="fClasse"><option value="">Aleatória</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Profissão</label>
-          <select id="fProf"><option value="">Aleatória</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Personalidade</label>
-          <select id="fPers"><option value="">Aleatória</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Estilo de Jogo</label>
-          <select id="fEstilo"><option value="">Aleatório</option></select>
-        </div>
-        <div class="filter-group">
-          <label>Nível</label>
-          <select id="fNivel">
-            <option value="">Aleatório</option>
-            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-            <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-            <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <label>Alinhamento</label>
-          <select id="fAlign">
-            <option value="">Aleatório</option>
-            <option>Leal e Bom</option><option>Neutro e Bom</option><option>Caótico e Bom</option>
-            <option>Leal e Neutro</option><option>Neutro</option><option>Caótico e Neutro</option>
-            <option>Leal e Mau</option><option>Neutro e Mau</option><option>Caótico e Mau</option>
-          </select>
-        </div>
-        <div class="divider"></div>
-        <button class="btn primary gen-btn" onclick="gerar()"><i class="ti ti-dice-5"></i> Gerar Personagem</button>
-        <button class="btn gen-btn" style="margin-top:6px" onclick="gerarAleatorio()"><i class="ti ti-refresh"></i> Totalmente Aleatório</button>
+      <div class="filter-group">
+        <label>Raça</label>
+        <select id="fRaca"><option value="">Aleatória</option></select>
       </div>
-
-      <!-- ── ABA: EDITOR DE CONTEÚDO ──────────────────────────────────── -->
-      <div class="editor-section" id="sec-editor">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">
-          Adicione entradas personalizadas ao banco de dados. Elas são salvas no navegador e mescladas com o JSON base.
-        </div>
-
-        <!-- Sub-tabs por categoria -->
-        <div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:10px">
-          <button class="btn xs active" id="etab_racas"       onclick="switchEtab('racas')"       style="flex:1;min-width:70px">Raças</button>
-          <button class="btn xs"        id="etab_classes"     onclick="switchEtab('classes')"     style="flex:1;min-width:70px">Classes</button>
-          <button class="btn xs"        id="etab_profissoes"  onclick="switchEtab('profissoes')"  style="flex:1;min-width:70px">Profissões</button>
-          <button class="btn xs"        id="etab_personalidades" onclick="switchEtab('personalidades')" style="flex:1;min-width:70px">Pers.</button>
-          <button class="btn xs"        id="etab_estilos"     onclick="switchEtab('estilos')"     style="flex:1;min-width:70px">Estilos</button>
-        </div>
-
-        <div id="etab-content"></div>
+      <div class="filter-group">
+        <label>Classe</label>
+        <select id="fClasse"><option value="">Aleatória</option></select>
       </div>
-
+      <div class="filter-group">
+        <label>Profissão</label>
+        <select id="fProf"><option value="">Aleatória</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Personalidade</label>
+        <select id="fPers"><option value="">Aleatória</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Estilo de Jogo</label>
+        <select id="fEstilo"><option value="">Aleatório</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Nível</label>
+        <select id="fNivel">
+          <option value="">Aleatório</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+          <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Alinhamento</label>
+        <select id="fAlign">
+          <option value="">Aleatório</option>
+          <option>Leal e Bom</option><option>Neutro e Bom</option><option>Caótico e Bom</option>
+          <option>Leal e Neutro</option><option>Neutro</option><option>Caótico e Neutro</option>
+          <option>Leal e Mau</option><option>Neutro e Mau</option><option>Caótico e Mau</option>
+        </select>
+      </div>
+      <div class="divider"></div>
+      <button class="btn primary gen-btn" onclick="gerar()"><i class="ti ti-dice-5"></i> Gerar Personagem</button>
+      <button class="btn gen-btn" style="margin-top:6px" onclick="gerarAleatorio()"><i class="ti ti-refresh"></i> Totalmente Aleatório</button>
     </div>
 
-    <!-- RESULTADO -->
     <div class="gen-main" id="genMain">
       <div class="result-empty">
         <div class="big">🎲</div>
@@ -234,7 +196,6 @@ body.light .gen-panel{background:#e0d8c4}
   </div>
 </div>
 
-<!-- MODAL: salvar -->
 <div class="modal-overlay" id="mSave" style="display:none">
   <div class="modal" style="max-width:400px">
     <h3><i class="ti ti-device-floppy" style="margin-right:6px"></i>Salvar Personagem</h3>
@@ -275,209 +236,106 @@ document.addEventListener('click',e=>{
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 const SK_FICHAS  = 'rpg_fichas_v1';
 const SK_CUSTOM  = 'rpg_gerador_custom_v1';
+const SK_PRESETS = 'rpg_conteudo_presets_v1';
+const SK_ACTIVE_PRESET = 'rpg_active_preset_id_v1';
+
 function loadFichas(){ try{return JSON.parse(localStorage.getItem(SK_FICHAS))||[];}catch(e){return[];} }
 function saveFichas(arr){ localStorage.setItem(SK_FICHAS, JSON.stringify(arr)); }
 function loadCustom(){ try{return JSON.parse(localStorage.getItem(SK_CUSTOM))||{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};}catch(e){return{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};} }
-function saveCustom(obj){ localStorage.setItem(SK_CUSTOM, JSON.stringify(obj)); }
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2); }
 function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2400); }
 function closeM(id){ document.getElementById(id).style.display='none'; }
 
-// ── TABS ──────────────────────────────────────────────────────────────────────
-function switchTab(t){
-  ['filtros','editor'].forEach(x=>{
-    document.getElementById('tab-'+x).classList.toggle('active',x===t);
-    document.getElementById('sec-'+x).classList.toggle('active',x===t);
-  });
-  if(t==='editor') renderEtab(currentEtab);
-}
-
-let currentEtab = 'racas';
-function switchEtab(t){
-  currentEtab=t;
-  ['racas','classes','profissoes','personalidades','estilos'].forEach(x=>{
-    document.getElementById('etab_'+x).classList.toggle('primary',x===t);
-  });
-  renderEtab(t);
-}
-
-// ── DB STATE (base JSON + custom merged) ──────────────────────────────────────
-let DB = null; // carregado via fetch
+// ── DB STATE & PRESETS FILTER ─────────────────────────────────────────────────
+let baseDB = null;
+let DB = null;
 
 async function carregarDB(){
   try {
     const res = await fetch('../data/personagens.json');
-    DB = await res.json();
+    baseDB = await res.json();
   } catch(e) {
-    // fallback vazio se fetch falhar (ex: abrir local sem servidor)
-    DB = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[],
+    baseDB = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[],
            nomes:{masculinos:[],femininos:[],sobrenomes:[]}, fisicos:[], maneirismos:[] };
-    console.warn('personagens.json não encontrado, usando DB vazio.', e);
+    console.warn('personagens.json não encontrado, rodando no modo local vazio.', e);
   }
-  // mescla custom por cima
+  reconstruirDB();
+}
+
+function reconstruirDB(){
+  DB = JSON.parse(JSON.stringify(baseDB));
+  
   const custom = loadCustom();
-  Object.keys(custom).forEach(cat=>{ if(DB[cat]) DB[cat] = DB[cat].concat(custom[cat]); });
+  Object.keys(custom).forEach(cat => { 
+    if(DB[cat]) {
+      DB[cat] = DB[cat].concat(custom[cat]); 
+    } 
+  });
+  
+  popularPresetsSelector();
   popularSelects();
 }
 
-function getMergedCat(cat){
-  // retorna array mesclado (base + custom), para o editor saber a origem
-  const base = (DB[cat]||[]).map(e=>({...e,_src:'base'}));
-  const custom = loadCustom()[cat]||[];
-  return base.concat(custom.map(e=>({...e,_src:'custom'})));
+// Retorna as categorias respeitando as restrições do preset ativo
+function getFilteredCat(cat){
+  if(!DB || !DB[cat]) return [];
+  
+  const activeId = localStorage.getItem(SK_ACTIVE_PRESET) || 'default';
+  let presets = [];
+  try { presets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
+  
+  const currentPreset = presets.find(p => p.id === activeId);
+  if(currentPreset && currentPreset.blocked && currentPreset.blocked[cat]) {
+    return DB[cat].filter(item => !currentPreset.blocked[cat].includes(item.id));
+  }
+  return DB[cat];
 }
 
-// ── POPULAR SELECTS ───────────────────────────────────────────────────────────
+// Popula a listagem de presets no topo do painel
+function popularPresetsSelector(){
+  const selector = document.getElementById('presetSelector');
+  if(!selector) return;
+  
+  // Limpa opções extras mantendo a padrão
+  while(selector.options.length > 1) selector.remove(1);
+  
+  let presets = [];
+  try { presets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
+  
+  presets.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = p.nome;
+    selector.appendChild(opt);
+  });
+  
+  const activeId = localStorage.getItem(SK_ACTIVE_PRESET) || 'default';
+  selector.value = activeId;
+}
+
+// Chamado ao trocar de preset no combo-box superior
+function alterarPresetAtivo(novoId) {
+  localStorage.setItem(SK_ACTIVE_PRESET, novoId);
+  popularSelects();
+  toast("Preset alterado! Filtros atualizados.");
+}
+
+// ── POPULAR SELECTS DE FILTRO ─────────────────────────────────────────────────
 function popularSelects(){
   const fill=(id,arr)=>{
     const el=document.getElementById(id); if(!el)return;
-    // remove opções existentes além da default
+    const antigoVal = el.value;
     while(el.options.length>1) el.remove(1);
     arr.forEach(item=>{ const o=document.createElement('option'); o.value=item.id; o.textContent=item.nome; el.appendChild(o); });
+    
+    // Tenta reestabelecer o valor previamente selecionado se ele ainda for válido
+    if(antigoVal) el.value = antigoVal;
   };
-  fill('fRaca',       DB.racas);
-  fill('fClasse',     DB.classes);
-  fill('fProf',       DB.profissoes);
-  fill('fPers',       DB.personalidades);
-  fill('fEstilo',     DB.estilos);
-}
-
-// ── EDITOR: RENDERIZAR LISTA + FORMULÁRIO ─────────────────────────────────────
-const ETAB_FORMS = {
-  racas: {
-    label: 'Raça',
-    fields: [
-      {key:'nome',       label:'Nome',          type:'text',     required:true},
-      {key:'desc',       label:'Descrição',     type:'textarea', required:true},
-      {key:'tracoRacial',label:'Traço Racial',  type:'textarea', required:true},
-      {key:'velocidade', label:'Velocidade (m)',type:'number',   required:true, default:9},
-      {key:'visaoNoturna',label:'Visão Noturna',type:'select',   options:['false','true'], required:false},
-    ]
-  },
-  classes: {
-    label: 'Classe',
-    fields: [
-      {key:'nome',        label:'Nome',               type:'text',     required:true},
-      {key:'desc',        label:'Descrição',          type:'textarea', required:true},
-      {key:'dadoVida',    label:'Dado de Vida (ex: 8)',type:'number',  required:true, default:8},
-      {key:'atribPrincipal',label:'Atributo Principal',type:'text',   required:true},
-      {key:'profArmadura',label:'Prof. em Armaduras',  type:'text',   required:true},
-      {key:'salvaguardas',label:'Salvaguardas',         type:'text',   required:true},
-      {key:'recurso',     label:'Recurso de Classe',   type:'textarea',required:true},
-    ]
-  },
-  profissoes: {
-    label: 'Profissão',
-    fields: [
-      {key:'nome',       label:'Nome',                   type:'text',     required:true},
-      {key:'desc',       label:'Descrição',              type:'textarea', required:true},
-      {key:'pericias',   label:'Perícias (sep. por vírgula)',type:'text', required:true},
-      {key:'equipamento',label:'Equipamento Inicial',    type:'textarea', required:true},
-      {key:'contatos',   label:'Contatos e Conexões',    type:'textarea', required:true},
-    ]
-  },
-  personalidades: {
-    label: 'Personalidade',
-    fields: [
-      {key:'nome',    label:'Nome',                       type:'text',     required:true},
-      {key:'tracos',  label:'Traços (sep. por "|")',       type:'textarea', required:true},
-      {key:'ideais',  label:'Ideais (sep. por "|")',       type:'textarea', required:true},
-      {key:'vinculos',label:'Vínculos (sep. por "|")',     type:'textarea', required:true},
-      {key:'defeitos',label:'Defeitos (sep. por "|")',     type:'textarea', required:true},
-    ]
-  },
-  estilos: {
-    label: 'Estilo de Jogo',
-    fields: [
-      {key:'nome',       label:'Nome',                         type:'text',     required:true},
-      {key:'desc',       label:'Descrição',                    type:'textarea', required:true},
-      {key:'pontosForts',label:'Pontos Fortes (sep. por "|")', type:'textarea', required:true},
-      {key:'dicas',      label:'Dica para o Jogador',          type:'textarea', required:true},
-    ]
-  }
-};
-
-function renderEtab(cat){
-  const form   = ETAB_FORMS[cat];
-  const merged = getMergedCat(cat);
-  const custom = loadCustom();
-
-  const listHtml = merged.length
-    ? merged.map(e=>`
-      <div class="entry-item">
-        <span class="entry-item-name">${e.nome}</span>
-        <span class="entry-item-src">${e._src==='base'?'base':'custom'}</span>
-        <button class="entry-del" onclick="delCustomEntry('${cat}','${e.id}')" ${e._src==='base'?'disabled title="Entradas base não podem ser removidas aqui"':''}>
-          <i class="ti ti-x"></i>
-        </button>
-      </div>`).join('')
-    : '<div style="color:var(--muted);font-size:12px;font-style:italic;padding:4px 0">Nenhuma entrada ainda.</div>';
-
-  const formHtml = form.fields.map(f=>{
-    if(f.type==='textarea') return `<div class="mini-field"><label>${f.label}</label><textarea id="ef_${f.key}" rows="2"></textarea></div>`;
-    if(f.type==='select')   return `<div class="mini-field"><label>${f.label}</label><select id="ef_${f.key}" style="width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:4px 7px;border-radius:3px;font-family:'Crimson Text',serif;font-size:12px">${(f.options||[]).map(o=>`<option value="${o}">${o==='true'?'Sim':'Não'}</option>`).join('')}</select></div>`;
-    return `<div class="mini-field"><label>${f.label}</label><input type="${f.type}" id="ef_${f.key}" ${f.default!==undefined?`value="${f.default}"`:''}></div>`;
-  }).join('');
-
-  document.getElementById('etab-content').innerHTML=`
-    <div class="entry-list">${listHtml}</div>
-    <div class="add-form">
-      <div class="add-form-title"><i class="ti ti-plus"></i> Nova ${form.label}</div>
-      <div class="mini-hint">Campos com "|" separam múltiplos valores. Ex: "Traço 1|Traço 2"</div>
-      ${formHtml}
-      <button class="btn xs primary" style="width:100%;margin-top:4px" onclick="addCustomEntry('${cat}')">Adicionar ${form.label}</button>
-    </div>`;
-}
-
-function addCustomEntry(cat){
-  const form   = ETAB_FORMS[cat];
-  const custom = loadCustom();
-  const entry  = { id: uid() };
-
-  for(const f of form.fields){
-    const el = document.getElementById('ef_'+f.key);
-    if(!el) continue;
-    let val = el.value.trim();
-    if(f.required && !val){ toast(`Campo "${f.label}" é obrigatório.`); el.focus(); return; }
-    // arrays via pipe
-    if(['tracos','ideais','vinculos','defeitos','pontosForts'].includes(f.key)){
-      val = val ? val.split('|').map(s=>s.trim()).filter(Boolean) : [];
-    }
-    // pericias via vírgula
-    if(f.key==='pericias') val = val ? val.split(',').map(s=>s.trim()).filter(Boolean) : [];
-    // boolean
-    if(f.key==='visaoNoturna') val = val==='true';
-    // number
-    if(f.type==='number') val = parseFloat(val)||0;
-    entry[f.key] = val;
-  }
-
-  if(!custom[cat]) custom[cat]=[];
-  custom[cat].push(entry);
-  saveCustom(custom);
-
-  // re-mescla no DB global
-  DB[cat] = DB[cat].filter(e=>!e._custom);
-  const fresh = loadCustom()[cat]||[];
-  // reconstrói merged sem duplicar
-  const baseIds = new Set(DB[cat].map(e=>e.id));
-  fresh.forEach(e=>{ if(!baseIds.has(e.id)) DB[cat].push(e); });
-
-  popularSelects();
-  renderEtab(cat);
-  toast(`${form.label} adicionada com sucesso!`);
-}
-
-function delCustomEntry(cat, id){
-  const custom = loadCustom();
-  if(!custom[cat]) return;
-  custom[cat] = custom[cat].filter(e=>e.id!==id);
-  saveCustom(custom);
-  // remove do DB em memória também
-  DB[cat] = DB[cat].filter(e=>e.id!==id);
-  popularSelects();
-  renderEtab(cat);
-  toast('Entrada removida.');
+  fill('fRaca',       getFilteredCat('racas'));
+  fill('fClasse',     getFilteredCat('classes'));
+  fill('fProf',       getFilteredCat('profissoes'));
+  fill('fPers',       getFilteredCat('personalidades'));
+  fill('fEstilo',     getFilteredCat('estilos'));
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
@@ -495,11 +353,23 @@ let currentNPC = null;
 
 function gerar(){
   if(!DB||!DB.racas.length){ toast('Banco de dados ainda carregando...'); return; }
-  const raca   = pickFrom('fRaca',   DB.racas);
-  const classe = pickFrom('fClasse', DB.classes);
-  const prof   = pickFrom('fProf',   DB.profissoes);
-  const pers   = pickFrom('fPers',   DB.personalidades);
-  const estilo = pickFrom('fEstilo', DB.estilos);
+  
+  const racasF = getFilteredCat('racas');
+  const classesF = getFilteredCat('classes');
+  const profsF = getFilteredCat('profissoes');
+  const persF = getFilteredCat('personalidades');
+  const estilosF = getFilteredCat('estilos');
+
+  if(!racasF.length || !classesF.length || !profsF.length || !persF.length || !estilosF.length) {
+    toast('Erro: O preset ativo bloqueia todo o conteúdo de alguma categoria!');
+    return;
+  }
+
+  const raca   = pickFrom('fRaca',   racasF);
+  const classe = pickFrom('fClasse', classesF);
+  const prof   = pickFrom('fProf',   profsF);
+  const pers   = pickFrom('fPers',   persF);
+  const estilo = pickFrom('fEstilo', estilosF);
   const nivel  = parseInt(document.getElementById('fNivel').value)  || Math.floor(Math.random()*10)+1;
   const align  = document.getElementById('fAlign').value || rand(['Leal e Bom','Neutro e Bom','Caótico e Bom','Leal e Neutro','Neutro','Caótico e Neutro','Leal e Mau','Neutro e Mau','Caótico e Mau']);
   _montarNPC(raca,classe,prof,pers,estilo,nivel,align);
@@ -507,13 +377,25 @@ function gerar(){
 
 function gerarAleatorio(){
   if(!DB||!DB.racas.length){ toast('Banco de dados ainda carregando...'); return; }
-  // limpa filtros
+  
   ['fRaca','fClasse','fProf','fPers','fEstilo','fNivel','fAlign'].forEach(id=>document.getElementById(id).value='');
-  const raca   = rand(DB.racas);
-  const classe = rand(DB.classes);
-  const prof   = rand(DB.profissoes);
-  const pers   = rand(DB.personalidades);
-  const estilo = rand(DB.estilos);
+  
+  const racasF = getFilteredCat('racas');
+  const classesF = getFilteredCat('classes');
+  const profsF = getFilteredCat('profissoes');
+  const persF = getFilteredCat('personalidades');
+  const estilosF = getFilteredCat('estilos');
+
+  if(!racasF.length || !classesF.length || !profsF.length || !persF.length || !estilosF.length) {
+    toast('Erro: O preset ativo bloqueia todo o conteúdo de alguma categoria!');
+    return;
+  }
+
+  const raca   = rand(racasF);
+  const classe = rand(classesF);
+  const prof   = rand(profsF);
+  const pers   = rand(persF);
+  const estilo = rand(estilosF);
   const nivel  = Math.floor(Math.random()*10)+1;
   const align  = rand(['Leal e Bom','Neutro e Bom','Caótico e Bom','Leal e Neutro','Neutro','Caótico e Neutro','Leal e Mau','Neutro e Mau','Caótico e Mau']);
   _montarNPC(raca,classe,prof,pers,estilo,nivel,align);
@@ -732,7 +614,6 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM('mSave');});
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 carregarDB();
-switchEtab('racas');
 </script>
 </body>
 </html>

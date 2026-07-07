@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gestor de Conteúdo — RPG System</title>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+body{display:flex;flex-direction:column;min-height:100vh}
+#app{display:flex;flex-direction:column;flex:1}
+
+/* LAYOUT WORKSPACE */
+.mgr-workspace{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
+.mgr-sidebar{width:320px;flex-shrink:0;border-right:1px solid var(--border);background:#120f0a;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+body.light .mgr-sidebar{background:#e0d8c4}
+.mgr-main{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px}
+
+/* PRESET CARDS */
+.sidebar-section-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:between}
+.preset-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px}
+.preset-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;cursor:pointer;transition:all 0.15s;position:relative}
+.preset-card:hover{border-color:var(--muted)}
+.preset-card.selected{border-color:var(--gold);background:rgba(200,168,107,0.06)}
+.preset-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.preset-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+.preset-badge{font-family:'Cinzel',serif;font-size:8px;padding:1px 5px;border-radius:3px;letter-spacing:0.5px;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);background:rgba(200,168,107,0.05)}
+.preset-actions{display:flex;gap:4px;margin-top:6px;justify-content:flex-end;border-top:1px solid rgba(200,168,107,0.1);padding-top:6px}
+.preset-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 4px;border-radius:3px;transition:all 0.15s}
+.preset-btn:hover{color:var(--text);background:rgba(200,168,107,0.1)}
+.preset-btn.del:hover{color:var(--red2);background:rgba(231,76,60,0.1)}
+
+/* CONTENT ROWS */
+.main-header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px}
+.category-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.search-container{display:flex;align-items:center;gap:8px;max-width:340px;width:100%}
+.search-box{position:relative;flex:1}
+.search-box input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 10px 6px 28px;border-radius:4px;font-family:'Crimson Text',serif;font-size:14px}
+.search-box i{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px}
+
+.items-grid{display:flex;flex-direction:column;gap:6px}
+.item-row{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 14px;transition:all 0.15s;cursor:pointer}
+.item-row:hover{border-color:var(--muted)}
+.item-row.disabled{opacity:0.55;background:var(--card2)}
+.item-info{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.item-toggle-wrapper{padding:4px;display:flex;align-items:center;color:var(--muted);transition:color 0.15s}
+.item-toggle-wrapper:hover{color:var(--gold)}
+.item-row:not(.disabled) .item-toggle-wrapper{color:var(--green2)}
+.item-meta{flex:1;min-width:0}
+.item-title-line{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.item-title{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.src-badge{font-family:'Cinzel',serif;font-size:8px;padding:1px 5px;border-radius:3px;text-transform:uppercase;border:1px solid}
+.src-badge.base{border-color:var(--blue2);color:var(--blue2);background:rgba(74,122,176,0.05)}
+.src-badge.custom{border-color:var(--gold);color:var(--gold);background:rgba(200,168,107,0.05)}
+.item-summary{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.item-right-actions{display:flex;align-items:center;gap:8px}
+
+/* FORM STYLES */
+.add-form-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.form-grid.full{grid-template-columns:1fr}
+.mini-field{display:flex;flex-direction:column;gap:4px}
+.mini-field label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.mini-field input, .mini-field textarea, .mini-field select{width:100%;background:var(--card2);border:1px solid var(--border);color:var(--text);padding:5px 8px;border-radius:4px;font-family:'Crimson Text',serif;font-size:13px}
+.mini-field textarea{resize:vertical;min-height:44px}
+.mini-field input:focus, .mini-field textarea:focus, .mini-field select:focus{outline:none;border-color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .mgr-workspace{flex-direction:column;height:auto}
+  .mgr-sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);max-height:none}
+  .mgr-main{padding:14px 16px}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="header">
+    <div class="header-brand">
+      <i class="ti ti-database header-icon"></i>
+      <div><h1>Gestor de Conteúdo</h1><div class="subtitle">Banco de Dados e Campanhas</div></div>
+    </div>
+    <div class="header-actions">
+      <a href="../index.html"   class="nav-link"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html"      class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link active"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html"    class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+    </div>
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html"  class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Tracker</a>
+    </nav>
+  </div>
+
+  <div class="mgr-workspace">
+
+    <div class="mgr-sidebar">
+      <div>
+        <div class="sidebar-section-title">
+          <span>Configurações / Presets</span>
+          <i class="ti ti-settings"></i>
+        </div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:10px">
+          Selecione ou crie conjuntos isolados de conteúdo para alternar entre diferentes mesas e campanhas.
+        </div>
+        <div class="preset-list" id="presetList"></div>
+      </div>
+
+      <button class="btn primary xs" style="width:100%" onclick="abrirModalPreset()"><i class="ti ti-plus"></i> Novo Preset</button>
+
+      <div class="add-form-card" style="margin-top:auto" id="formAddConteudo">
+        <div class="sidebar-section-title" id="formTitle">Novo Conteúdo</div>
+        <div class="mini-field" style="margin-bottom:6px">
+          <label>Categoria Alvo</label>
+          <select id="addCat" onchange="alterarCamposForm(this.value)">
+            <option value="racas">Raças</option>
+            <option value="classes">Classes</option>
+            <option value="profissoes">Profissões</option>
+            <option value="personalidades">Personalidades</option>
+            <option value="estilos">Estilos de Jogo</option>
+          </select>
+        </div>
+        <div id="dynamicFormFields"></div>
+        <button class="btn xs primary" style="width:100%;margin-top:10px" onclick="salvarNovoConteudo()"><i class="ti ti-check"></i> Adicionar Item</button>
+      </div>
+    </div>
+
+    <div class="mgr-main">
+      
+      <div class="main-header-row">
+        <div class="category-tabs">
+          <button class="btn sm active" id="tab_racas" onclick="switchMainTab('racas')">Raças</button>
+          <button class="btn sm" id="tab_classes" onclick="switchMainTab('classes')">Classes</button>
+          <button class="btn sm" id="tab_profissoes" onclick="switchMainTab('profissoes')">Profissões</button>
+          <button class="btn sm" id="tab_personalidades" onclick="switchMainTab('personalidades')">Personalidades</button>
+          <button class="btn sm" id="tab_estilos" onclick="switchMainTab('estilos')">Estilos</button>
+        </div>
+
+        <div class="search-container">
+          <div class="search-box">
+            <i class="ti ti-search"></i>
+            <input type="text" id="contentSearch" placeholder="Buscar conteúdo..." oninput="filtrarItens()">
+          </div>
+          <button class="btn sm primary" id="btnToggleAll" onclick="toggleTodosVisiveis()" title="Alternar seleção dos itens visíveis" style="white-space:nowrap; padding:6px 10px;">
+            <i class="ti ti-checklist"></i> Inverter
+          </button>
+        </div>
+      </div>
+
+      <div style="background:rgba(200,168,107,0.04);border:1px dashed var(--border);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px">
+        <i class="ti ti-info-circle" style="color:var(--gold);font-size:16px"></i>
+        <span>As ativações e desativações abaixo aplicam-se exclusivamente ao Preset selecionado ao lado. O Gerador lerá este filtro automaticamente.</span>
+      </div>
+
+      <div class="items-grid" id="itemsGrid"></div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="mPreset" style="display:none">
+  <div class="modal" style="max-width:380px">
+    <h3 id="modalPresetTitle"><i class="ti ti-settings" style="margin-right:6px"></i>Configuração de Campanha</h3>
+    <div class="form-field" style="margin-top:12px">
+      <label>Nome do Preset</label>
+      <input type="text" id="presetInputName" placeholder="Ex: Campanha Dark Fantasy, SemAnimais">
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="fecharM('mPreset')">Cancelar</button>
+      <button class="btn primary" onclick="salvarPreset()"><i class="ti ti-check"></i> Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── THEME ─────────────────────────────────────────────────────────────────────
+let dark = localStorage.getItem('rpg_theme') !== 'light';
+function applyTheme(){ document.body.classList.toggle('light',!dark); document.getElementById('themeBtn').textContent=dark?'☀':'🌙'; }
+function toggleTheme(){ dark=!dark; localStorage.setItem('rpg_theme',dark?'dark':'light'); applyTheme(); }
+applyTheme();
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+function toggleMobMenu(){ document.getElementById('mobNav').classList.toggle('open'); }
+function closeMobMenu(){ document.getElementById('mobNav').classList.remove('open'); }
+
+// ── KEYS & STORAGE SYSTEM ──────────────────────────────────────────────────────
+const SK_CUSTOM = 'rpg_gerador_custom_v1';
+const SK_PRESETS = 'rpg_conteudo_presets_v1';
+const SK_ACTIVE_PRESET = 'rpg_active_preset_id_v1';
+
+function loadCustom(){ try{return JSON.parse(localStorage.getItem(SK_CUSTOM))||{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};}catch(e){return{racas:[],classes:[],profissoes:[],personalidades:[],estilos:[]};} }
+function saveCustom(obj){ localStorage.setItem(SK_CUSTOM, JSON.stringify(obj)); }
+function loadPresets(){ try{return JSON.parse(localStorage.getItem(SK_PRESETS))||[];}catch(e){return[];} }
+function savePresets(arr){ localStorage.setItem(SK_PRESETS, JSON.stringify(arr)); }
+function getActivePresetId(){ return localStorage.getItem(SK_ACTIVE_PRESET) || 'default'; }
+function setActivePresetId(id){ localStorage.setItem(SK_ACTIVE_PRESET, id); }
+
+function uid(){ return 'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2); }
+function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2400); }
+function fecharM(id){ document.getElementById(id).style.display='none'; }
+
+// ── ESTADO GLOBAL ─────────────────────────────────────────────────────────────
+let DB = null; // Conteúdo Mesclado (Oficiais + Customizados)
+let currentCategory = 'racas';
+let presets = [];
+let activePresetId = 'default';
+let editingPresetId = null;
+
+// ── FORMULÁRIOS DINÂMICOS DE CONTEÚDO ──────────────────────────────────────────
+const FORMS_CONFIG = {
+  racas: [
+    {key:'nome', label:'Nome da Raça', type:'text', req:true},
+    {key:'desc', label:'Resumo / Descrição', type:'textarea', req:true},
+    {key:'tracoRacial', label:'Habilidade / Traço Racial', type:'textarea', req:true},
+    {key:'velocidade', label:'Velocidade (m)', type:'number', req:true, def:9},
+    {key:'visaoNoturna', label:'Possui Visão Noturna?', type:'select', options:[{v:'false',l:'Não'},{v:'true',l:'Sim'}]}
+  ],
+  classes: [
+    {key:'nome', label:'Nome da Classe', type:'text', req:true},
+    {key:'desc', label:'Descrição', type:'textarea', req:true},
+    {key:'dadoVida', label:'Dado de Vida (Ex: 8 para d8)', type:'number', req:true, def:8},
+    {key:'atribPrincipal', label:'Atributo Principal', type:'text', req:true, def:'FOR'},
+    {key:'profArmadura', label:'Proficiência em Armadura', type:'text', req:true},
+    {key:'salvaguardas', label:'Salvaguardas', type:'text', req:true},
+    {key:'recurso', label:'Recurso Inicial da Classe', type:'textarea', req:true}
+  ],
+  profissoes: [
+    {key:'nome', label:'Nome da Profissão/Antecedente', type:'text', req:true},
+    {key:'desc', label:'Histórico / Descrição', type:'textarea', req:true},
+    {key:'pericias', label:'Perícias Concedidas (sep. por vírgula)', type:'text', req:true},
+    {key:'equipamento', label:'Equipamento de Partida', type:'textarea', req:true},
+    {key:'contatos', label:'Contatos e Facções', type:'textarea', req:true}
+  ],
+  personalidades: [
+    {key:'nome', label:'Nome do Arquétipo', type:'text', req:true},
+    {key:'tracos', label:'Traços de Personalidade (use "|" para separar)', type:'textarea', req:true},
+    {key:'ideais', label:'Ideais (use "|" para separar)', type:'textarea', req:true},
+    {key:'vinculos', label:'Vínculos (use "|" para separar)', type:'textarea', req:true},
+    {key:'defeitos', label:'Defeitos (use "|" para separar)', type:'textarea', req:true}
+  ],
+  estilos: [
+    {key:'nome', label:'Nome do Estilo', type:'text', req:true},
+    {key:'desc', label:'Foco / Descrição tática', type:'textarea', req:true},
+    {key:'pontosForts', label:'Pontos Fortes (use "|" para separar)', type:'textarea', req:true},
+    {key:'dicas', label:'Dica de interpretação para o jogador', type:'textarea', req:true}
+  ]
+};
+
+// ── INICIALIZAÇÃO ─────────────────────────────────────────────────────────────
+async function inicializar(){
+  // 1. Carrega banco principal
+  try {
+    const res = await fetch('../data/personagens.json');
+    DB = await res.json();
+  } catch(e) {
+    DB = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] };
+    console.warn('Banco de dados JSON indisponível. Rodando no modo Local.', e);
+  }
+
+  // 2. Mescla Customizados criados pelo usuário
+  const custom = loadCustom();
+  Object.keys(custom).forEach(cat => {
+    if(DB[cat]) {
+      // Diferencia base de custom por flag em runtime
+      DB[cat] = DB[cat].map(item => ({...item, _src:'base'})).concat(
+        custom[cat].map(item => ({...item, _src:'custom'}))
+      );
+    }
+  });
+
+  // 3. Carrega e garante Presets
+  presets = loadPresets();
+  activePresetId = getActivePresetId();
+
+  // Se não houver presets salvos, cria o inicial de fábrica
+  if(presets.length === 0){
+    presets.push({
+      id: 'default',
+      nome: 'Padrão (Todo o Conteúdo)',
+      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] }
+    });
+    savePresets(presets);
+  }
+
+  // Garante integridade das listas de bloqueio para presets antigos
+  presets.forEach(p => {
+    if(!p.blocked) p.blocked = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] };
+    Object.keys(FORMS_CONFIG).forEach(c => { if(!p.blocked[c]) p.blocked[c] = []; });
+  });
+
+  // Se o active ID guardado não existir mais, reseta para o primeiro
+  if(!presets.find(p => p.id === activePresetId)) {
+    activePresetId = presets[0].id;
+    setActivePresetId(activePresetId);
+  }
+
+  // Correção 1: Inicializa os campos do formulário para garantir que ele esteja montado e pronto desde o carregamento da página
+  alterarCamposForm('racas');
+  renderizarPresets();
+  renderizarItens();
+}
+
+// ── RENDERIZAR PRESETS (PAINEL ESQUERDO) ──────────────────────────────────────
+function renderizarPresets(){
+  const container = document.getElementById('presetList');
+  container.innerHTML = presets.map(p => {
+    const isActive = p.id === activePresetId;
+    const isSystemDefault = p.id === 'default';
+    
+    // Contadores de itens bloqueados
+    let totalBloqueados = 0;
+    Object.keys(p.blocked).forEach(c => totalBloqueados += p.blocked[c].length);
+
+    return `
+      <div class="preset-card ${isActive ? 'selected' : ''}" onclick="selecionarPreset('${p.id}')">
+        <div class="preset-header">
+          <span class="preset-name" title="${p.nome}">${p.nome}</span>
+          ${isActive ? '<span class="preset-badge">Ativo</span>' : ''}
+        </div>
+        <div style="font-size:10px;color:var(--muted)">
+          ${totalBloqueados === 0 ? 'Todo o conteúdo liberado' : `${totalBloqueados} item(ns) restrito(s)`}
+        </div>
+        <div class="preset-actions" onclick="event.stopPropagation()">
+          <button class="preset-btn" onclick="duplicarPreset('${p.id}')" title="Duplicar Preset"><i class="ti ti-copy"></i> Duplicar</button>
+          ${!isSystemDefault ? `
+            <button class="preset-btn" onclick="abrirModalPreset('${p.id}')" title="Editar nome"><i class="ti ti-edit"></i> Nome</button>
+            <button class="preset-btn del" onclick="deletarPreset('${p.id}')" title="Excluir permanentemente"><i class="ti ti-trash"></i> Excluir</button>
+          ` : '<span style="font-size:9px;color:var(--border);font-style:italic">Fixo do Sistema</span>'}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selecionarPreset(id){
+  activePresetId = id;
+  setActivePresetId(id);
+  renderizarPresets();
+  renderizarItens();
+  toast('Preset de Campanha alterado!');
+}
+
+// ── OPERAÇÕES DE PRESETS ──────────────────────────────────────────────────────
+function abrirModalPreset(id = null){
+  editingPresetId = id;
+  const input = document.getElementById('presetInputName');
+  if(id) {
+    document.getElementById('modalPresetTitle').innerHTML = '<i class="ti ti-edit"></i> Renomear Configuração';
+    input.value = presets.find(p => p.id === id).nome;
+  } else {
+    document.getElementById('modalPresetTitle').innerHTML = '<i class="ti ti-plus"></i> Nova Configuração';
+    input.value = '';
+  }
+  document.getElementById('mPreset').style.display = 'flex';
+  input.focus();
+}
+
+function salvarPreset(){
+  const nome = document.getElementById('presetInputName').value.trim();
+  if(!nome) { toast('Diga um nome válido!'); return; }
+
+  if(editingPresetId) {
+    // Editar
+    const p = presets.find(x => x.id === editingPresetId);
+    if(p) p.nome = nome;
+  } else {
+    // Criar Novo
+    presets.push({
+      id: uid(),
+      nome: nome,
+      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] }
+    });
+  }
+  savePresets(presets);
+  fecharM('mPreset');
+  renderizarPresets();
+  toast('Configuração salva com sucesso!');
+}
+
+function duplicarPreset(id){
+  const original = presets.find(p => p.id === id);
+  if(!original) return;
+
+  const cópia = {
+    id: uid(),
+    nome: `${original.nome} (Cópia)`,
+    blocked: JSON.parse(JSON.stringify(original.blocked)) // deep clone das listas
+  };
+  
+  presets.push(cópia);
+  savePresets(presets);
+  renderizarPresets();
+  toast('Preset duplicado!');
+}
+
+function deletarPreset(id){
+  if(id === 'default') return;
+  if(!confirm('Tem certeza que deseja excluir esta configuração? Isso liberará os filtros associados a ela.')) return;
+
+  presets = presets.filter(p => p.id !== id);
+  if(activePresetId === id) {
+    activePresetId = 'default';
+    setActivePresetId('default');
+  }
+  savePresets(presets);
+  renderizarPresets();
+  renderizarItens();
+  toast('Preset removido.');
+}
+
+// ── RENDERIZAR ITENS & TOGGLES (PAINEL DIREITO) ───────────────────────────────
+function switchMainTab(cat){
+  currentCategory = cat;
+  document.querySelectorAll('.category-tabs .btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab_' + cat).classList.add('active');
+  document.getElementById('contentSearch').value = '';
+  renderizarItens();
+}
+
+// Função auxiliar que retorna os itens que estão atualmente visíveis com base no filtro de busca
+function obterItensVisiveis(){
+  const arr = DB[currentCategory] || [];
+  const query = document.getElementById('contentSearch').value.toLowerCase().trim();
+  return arr.filter(item => item.nome.toLowerCase().includes(query) || (item.desc && item.desc.toLowerCase().includes(query)));
+}
+
+function renderizarItens(){
+  const grid = document.getElementById('itemsGrid');
+  const filtrados = obterItensVisiveis();
+  
+  const currentPreset = presets.find(p => p.id === activePresetId) || presets[0];
+
+  if(filtrados.length === 0){
+    grid.innerHTML = '<div style="text-align:center;color:var(--muted);font-style:italic;padding:32px 0">Nenhum item localizado nesta categoria.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(item => {
+    // Verifica se está bloqueado no preset ativo
+    const isBlocked = currentPreset.blocked[currentCategory].includes(item.id);
+    const isCustom = item._src === 'custom';
+
+    // Correção 2: Toda a row agora possui o gatilho `onclick`. As ações internas possuem `event.stopPropagation()` para não duplicar ou conflitar cliques.
+    return `
+      <div class="item-row ${isBlocked ? 'disabled' : ''}" id="row_${item.id}" onclick="toggleAtivacaoItem('${currentCategory}', '${item.id}')">
+        <div class="item-info">
+          <div class="item-toggle-wrapper" title="Clique para Alternar Ativação">
+            <i class="ti ${isBlocked ? 'ti-square' : 'ti-square-check'}" style="font-size:20px"></i>
+          </div>
+          <div class="item-meta">
+            <div class="item-title-line">
+              <span class="item-title">${item.nome}</span>
+              <span class="src-badge ${isCustom ? 'custom' : 'base'}">${isCustom ? 'Custom' : 'Oficial'}</span>
+            </div>
+            <div class="item-summary" title="${item.desc || ''}">${item.desc || 'Sem descrição cadastrada.'}</div>
+          </div>
+        </div>
+        <div class="item-right-actions" onclick="event.stopPropagation()">
+          ${isCustom ? `
+            <button class="btn xs link" onclick="deletarConteudoCustomizado('${currentCategory}', '${item.id}')" style="color:var(--red2);padding:4px" title="Deletar do Banco de Dados">
+              <i class="ti ti-trash"></i>
+            </button>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function filtrarItens(){
+  renderizarItens();
+}
+
+// ── ATIVAR / DESATIVAR ITEM INDIVIDUAL NO PRESET ──────────────────────────────
+function toggleAtivacaoItem(cat, id){
+  const currentPreset = presets.find(p => p.id === activePresetId);
+  if(!currentPreset) return;
+
+  const index = currentPreset.blocked[cat].indexOf(id);
+  if(index > -1) {
+    // Se estava bloqueado, remove do bloqueio (Ativa)
+    currentPreset.blocked[cat].splice(index, 1);
+  } else {
+    // Se estava ativo, adiciona ao bloqueio (Desativa)
+    currentPreset.blocked[cat].push(id);
+  }
+
+  savePresets(presets);
+  renderizarPresets();
+  renderizarItens();
+}
+
+// Correção 3: Nova lógica de alternância global baseada no filtro/pesquisa atual
+function toggleTodosVisiveis(){
+  const currentPreset = presets.find(p => p.id === activePresetId);
+  if(!currentPreset) return;
+
+  const visiveis = obterItensVisiveis();
+  if(visiveis.length === 0) return;
+
+  // Verifica se existem itens desmarcados (bloqueados) entre os visíveis
+  const temDesmarcados = visiveis.some(item => currentPreset.blocked[currentCategory].includes(item.id));
+
+  visiveis.forEach(item => {
+    const idx = currentPreset.blocked[currentCategory].indexOf(item.id);
+    if(temDesmarcados) {
+      // Se há desmarcados, o objetivo é marcar todos (remover da lista de bloqueio)
+      if(idx > -1) {
+        currentPreset.blocked[currentCategory].splice(idx, 1);
+      }
+    } else {
+      // Se todos visíveis já estão marcados, desmarca todos (insere na lista de bloqueio se já não estiver lá)
+      if(idx === -1) {
+        currentPreset.blocked[currentCategory].push(item.id);
+      }
+    }
+  });
+
+  savePresets(presets);
+  renderizarPresets();
+  renderizarItens();
+  toast(temDesmarcados ? 'Todos os itens visíveis foram ativados!' : 'Todos os itens visíveis foram desativados!');
+}
+
+// ── FORMULÁRIOS DINÂMICOS DE ADIÇÃO ───────────────────────────────────────────
+function alterarCamposForm(cat){
+  const container = document.getElementById('dynamicFormFields');
+  const fields = FORMS_CONFIG[cat];
+
+  container.innerHTML = fields.map(f => {
+    if(f.type === 'textarea') {
+      return `<div class="mini-field" style="margin-top:5px"><label>${f.label}</label><textarea id="fld_${f.key}" placeholder="Digite o conteúdo..."></textarea></div>`;
+    }
+    if(f.type === 'select') {
+      return `
+        <div class="mini-field" style="margin-top:5px">
+          <label>${f.label}</label>
+          <select id="fld_${f.key}">
+            ${f.options.map(o => `<option value="${o.v}">${o.l}</option>`).join('')}
+          </select>
+        </div>`;
+    }
+    return `<div class="mini-field" style="margin-top:5px"><label>${f.label}</label><input type="${f.type}" id="fld_${f.key}" value="${f.def !== undefined ? f.def : ''}"></div>`;
+  }).join('');
+}
+
+function salvarNovoConteudo(){
+  const cat = document.getElementById('addCat').value;
+  const config = FORMS_CONFIG[cat];
+  const item = { id: uid() };
+
+  // Validação e captação
+  for(const f of config){
+    const el = document.getElementById('fld_' + f.key);
+    if(!el) continue;
+    let val = el.value.trim();
+
+    if(f.req && !val) {
+      toast(`O campo "${f.label}" é obrigatório.`);
+      el.focus();
+      return;
+    }
+
+    // Tratamento de Arrays separados por pipe ou vírgula
+    if(['tracos','ideais','vinculos','defeitos','pontosForts'].includes(f.key)){
+      val = val ? val.split('|').map(s=>s.trim()).filter(Boolean) : [];
+    }
+    if(f.key === 'pericias') {
+      val = val ? val.split(',').map(s=>s.trim()).filter(Boolean) : [];
+    }
+    if(f.key === 'visaoNoturna') val = (val === 'true');
+    if(f.type === 'number') val = parseInt(val) || 0;
+
+    item[f.key] = val;
+  }
+
+  // Persiste no storage de customizados
+  const custom = loadCustom();
+  custom[cat].push(item);
+  saveCustom(custom);
+
+  // Insere em runtime no DB global da página para visualização imediata
+  item._src = 'custom';
+  DB[cat].push(item);
+
+  // Limpa campos
+  config.forEach(f => {
+    const el = document.getElementById('fld_' + f.key);
+    if(el && f.type !== 'select') el.value = f.def !== undefined ? f.def : '';
+  });
+
+  if(currentCategory === cat) renderizarItens();
+  renderizarPresets();
+  toast('Item customizado adicionado ao banco!');
+}
+
+function deletarConteudoCustomizado(cat, id){
+  if(!confirm('Deseja excluir permanentemente este item do seu Banco de Dados?')) return;
+
+  // 1. Remove do Storage Custom
+  const custom = loadCustom();
+  custom[cat] = custom[cat].filter(i => i.id !== id);
+  saveCustom(custom);
+
+  // 2. Remove do DB em memória
+  DB[cat] = DB[cat].filter(i => i.id !== id);
+
+  // 3. Limpa referências em Presets para evitar lixo acumulado
+  presets.forEach(p => {
+    p.blocked[cat] = p.blocked[cat].filter(bid => bid !== id);
+  });
+  savePresets(presets);
+
+  renderizarItens();
+  renderizarPresets();
+  toast('Item removido do sistema.');
+}
+
+// ── FECHAR MODAL NO OVERLAY ───────────────────────────────────────────────────
+document.getElementById('mPreset').addEventListener('click', function(e){ if(e.target===this) fecharM('mPreset'); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') fecharM('mPreset'); });
+
+// Executa carga inicial
+inicializar();
+</script>
+</body>
+</html>

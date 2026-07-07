@@ -10,6 +10,9 @@
 body{display:flex;flex-direction:column;min-height:100vh}
 main{flex:1}
 
+/* Modificadores de Botão para remover underline */
+.btn { text-decoration: none !important; }
+
 /* ── HERO ─────────────────────────────────────────────────────────────────── */
 .hero{
   position:relative;overflow:hidden;
@@ -52,7 +55,7 @@ main{flex:1}
 .section-desc{font-size:15px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.6}
 
 /* ── APP CARDS ────────────────────────────────────────────────────────────── */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
 .app-card{
   background:var(--card);border:1px solid var(--border);border-radius:10px;
   overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;
@@ -70,7 +73,7 @@ main{flex:1}
   position:relative;overflow:hidden;
 }
 .app-card-img-placeholder{
-  width:100%;height:200px;
+  width:100%;height:180px;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,var(--card2) 0%,var(--surface) 100%);
   font-size:56px;color:var(--border);
@@ -87,7 +90,7 @@ main{flex:1}
 .app-card-title{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
 .app-card-desc{font-size:14px;color:var(--muted);line-height:1.55;flex:1}
 .app-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
-.app-card-link{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:5px}
+.app-card-link{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:5px;text-decoration:none}
 .app-card-link i{transition:transform 0.2s}
 .app-card:hover .app-card-link i{transform:translateX(4px)}
 .app-card-features{display:flex;gap:6px;flex-wrap:wrap}
@@ -212,7 +215,6 @@ main{flex:1}
 </head>
 <body>
 
-<!-- ── HEADER ──────────────────────────────────────────────────────────────── -->
 <header class="header" style="position:relative">
   <div class="header-brand">
     <i class="ti ti-dragon header-icon"></i>
@@ -220,26 +222,25 @@ main{flex:1}
   </div>
   <div class="header-actions">
     <nav class="nav-links">
-      <a href="index.html" class="nav-link active"><i class="ti ti-home"></i> Início</a>
-      <a href="./pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
-      <a href="./pages/gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
-      <a href="./pages/tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="index.html" class="nav-link active" style="text-decoration:none"><i class="ti ti-home"></i> Início</a>
+      <a href="./pages/ficha.html" class="nav-link" style="text-decoration:none"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="./pages/gerador.html" class="nav-link" style="text-decoration:none"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="./pages/conteudo.html" class="nav-link" style="text-decoration:none"><i class="ti ti-database"></i> Gestor</a>
     </nav>
     <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
     <button class="mob-menu-btn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
   </div>
-  <!-- mobile nav -->
   <nav class="mob-nav" id="mobNav">
-    <a href="index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
-    <a href="./pages/ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
-    <a href="./pages/gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
-    <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Combat Tracker</a>
+    <a href="index.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-home"></i> Início</a>
+    <a href="./pages/ficha.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
+    <a href="./pages/gerador.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
+    <a href="./pages/conteudo.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-database"></i> Gestor (Editor)</a>
+    <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sword"></i> Combat Tracker</a>
   </nav>
 </header>
 
 <main>
 
-<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -250,29 +251,25 @@ main{flex:1}
     </h1>
     <p class="hero-subtitle">Fichas completas, combate rastreado e dados na palma da mão. Tudo em um sistema integrado, sem instalação, sem cadastro.</p>
     <div class="hero-cta">
-      <a href="./pages/ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
-      <a href="./pages/tracker.html" class="btn" style="font-size:12px;padding:10px 24px"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
-      <a href="./pages/gerador.html" class="btn primary" style="font-size:12px;padding:10px 24px"><i class="ti ti-sparkles"></i> &nbsp;Gerar Personagem</a>
-
+      <a href="./pages/ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
+      <a href="./pages/tracker.html" class="btn" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
+      <a href="./pages/conteudo.html" class="btn primary" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-database"></i> &nbsp;Gestor de Dados</a>
     </div>
   </div>
 </section>
 
-<!-- ── APP CARDS ────────────────────────────────────────────────────────────── -->
 <section class="section reveal">
   <div class="section-inner">
     <div class="section-header">
       <div class="section-label">Ferramentas</div>
       <h2 class="section-title">Escolha sua Ferramenta</h2>
-      <p class="section-desc">Dois módulos integrados que se comunicam entre si. Crie fichas detalhadas e importe direto para o combate.</p>
+      <p class="section-desc">Módulos integrados que se comunicam entre si. Crie fichas detalhadas, customize tabelas e importe direto para o combate.</p>
     </div>
     <div class="rune-divider"><span>✦</span></div>
     <div class="cards-grid">
 
-      <!-- CARD: FICHAS -->
       <a href="./pages/ficha.html" class="app-card">
         <div class="app-card-img-placeholder">
-          <!-- substitua por: <img src="sua-imagem.jpg" alt="Fichas" class="app-card-img"> -->
           <i class="ti ti-scroll" style="font-size:64px"></i>
         </div>
         <div class="app-card-body">
@@ -291,7 +288,6 @@ main{flex:1}
         </div>
       </a>
 
-      <!-- CARD: TRACKER -->
       <a href="./pages/tracker.html" class="app-card">
         <div class="app-card-img-placeholder">
           <i class="ti ti-sword" style="font-size:64px"></i>
@@ -312,7 +308,6 @@ main{flex:1}
         </div>
       </a>
 
-      <!-- CARD: GERADOR -->
       <a href="./pages/gerador.html" class="app-card">
         <div class="app-card-img-placeholder">
           <i class="ti ti-sparkles" style="font-size:64px"></i>
@@ -333,18 +328,37 @@ main{flex:1}
         </div>
       </a>
 
+      <a href="./pages/conteudo.html" class="app-card">
+        <div class="app-card-img-placeholder">
+          <i class="ti ti-database" style="font-size:64px"></i>
+        </div>
+        <div class="app-card-body">
+          <div class="app-card-tag">Módulo 04</div>
+          <div class="app-card-title">Gestor de Dados</div>
+          <div class="app-card-desc">Expanda os horizontes do gerador. Customize e gerencie as listas de raças, classes, profissões, alinhamentos e traços de personalidade para se adequarem ao seu cenário de RPG.</div>
+          <div class="app-card-footer">
+            <div class="app-card-features">
+              <span class="feat-pill">Customização</span>
+              <span class="feat-pill">Editor</span>
+              <span class="feat-pill">Listas</span>
+              <span class="feat-pill">Local</span>
+            </div>
+            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- ── SOBRE ─────────────────────────────────────────────────────────────────── -->
 <section class="section about-section reveal">
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-icon-ring"><i class="ti ti-dragon"></i></div>
         <div class="about-stats">
-          <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Módulos</div></div>
+          <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Módulos</div></div>
           <div class="stat-box"><div class="stat-num">5e</div><div class="stat-lbl">Compatível</div></div>
           <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Fichas</div></div>
           <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Instalação</div></div>
@@ -357,15 +371,14 @@ main{flex:1}
         <p>Tudo roda <strong>diretamente no seu navegador</strong>, os dados ficam salvos localmente e qualquer dispositivo — computador, tablet ou celular — serve como tela de controle.</p>
         <p>O sistema foi construído seguindo as regras do <strong>D&D 5ª Edição</strong>, mas com campos totalmente customizáveis para suportar qualquer sistema que você queira jogar.</p>
         <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-          <a href="./pages/ficha.html" class="btn primary"><i class="ti ti-scroll"></i> Criar primeira ficha</a>
-          <a href="./pages/tracker.html" class="btn"><i class="ti ti-sword"></i> Ver o tracker</a>
+          <a href="./pages/ficha.html" class="btn primary" style="text-decoration:none"><i class="ti ti-scroll"></i> Criar primeira ficha</a>
+          <a href="./pages/tracker.html" class="btn" style="text-decoration:none"><i class="ti ti-sword"></i> Ver o tracker</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CHANGELOG ──────────────────────────────────────────────────────────────── -->
 <section class="section reveal">
   <div class="section-inner">
     <div class="section-header">
@@ -376,7 +389,6 @@ main{flex:1}
     <div class="rune-divider"><span>✦</span></div>
     <div class="updates-grid">
 
-      <!-- FILTROS -->
       <div class="updates-sidebar">
         <div class="updates-sidebar-card">
           <h3>Filtrar por Tipo</h3>
@@ -387,7 +399,6 @@ main{flex:1}
         </div>
       </div>
 
-      <!-- CHANGELOG ITEMS -->
       <div class="changelog" id="changelog">
 
         <div class="changelog-item open" data-type="new">
@@ -495,7 +506,6 @@ main{flex:1}
 
 </main>
 
-<!-- ── FOOTER ─────────────────────────────────────────────────────────────────── -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
@@ -508,6 +518,7 @@ main{flex:1}
         <a href="./index.html">Início</a>
         <a href="./pages/ficha.html">Criador de Fichas</a>
         <a href="./pages/gerador.html">Gerador de Personagens</a>
+        <a href="./pages/conteudo.html">Gestor de Dados</a>
         <a href="./pages/tracker.html">Combat Tracker</a>
       </div>
       <div class="footer-col">
