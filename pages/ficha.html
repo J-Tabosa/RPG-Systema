@@ -33,14 +33,18 @@ body{display:flex;flex-direction:column;min-height:100vh}
   gap: 4px;
 }
 
-/* PRINT */
+/* PRINT - Força a abertura de descrições e esconde elementos de UI */
 @media print{
-  .header,.sidebar,.theme-dropdown,.mob-nav,.mob-menu-btn{display:none!important}
+  .header,.sidebar,.theme-dropdown,.mob-nav,.mob-menu-btn,.rm-btn,.add-card,.btn:not(.print-hidden){display:none!important}
   .workspace{height:auto;display:block}
   .editor{padding:0;overflow:visible}
   body{background:#fff;color:#000}
   :root{--bg:#fff;--card:#f5f5f5;--card2:#eee;--border:#ccc;--text:#111;--muted:#555;--gold:#6a4e10;--gold2:#4a3000}
   .sec,.attr-card,.combat-card{break-inside:avoid}
+  
+  /* Força a abertura de blocos expansíveis no PDF */
+  .spell-item-desc, .habil-desc, .equip-desc { display: block !important; max-height: none !important; opacity: 1 !important; }
+  .expand-toggle { display: none !important; }
 }
 </style>
 </head>
@@ -50,7 +54,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
   <div class="header">
     <div class="header-brand">
       <i class="ti ti-scroll header-icon"></i>
-      <div><h1>Fichas de Personagem</h1><div class="subtitle">D&amp;D 5e — Criador e Gerenciador</div></div>
+      <div><h1>Fichas de Personagem</h1><div class="subtitle">RPG System — Criador e Gerenciador</div></div>
     </div>
     <div class="header-actions">
       <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
@@ -86,7 +90,13 @@ body{display:flex;flex-direction:column;min-height:100vh}
               <input class="color-input" type="color" id="customBg" onchange="setCustomBg(this.value)" title="Cor de fundo personalizada">
             </div>
 
-            <button class="color-reset-btn" onclick="resetColors()" style="margin-top:8px">↺ Restaurar padrão</button>
+            <div class="theme-dropdown-label" style="margin-top:10px">Cor da Fonte dos Campos</div>
+            <div class="color-row" style="margin-top:4px">
+              <span class="color-row-label">Texto de Rótulos/Valores</span>
+              <input class="color-input" type="color" id="customFieldFontColor" onchange="setCustomFieldFontColor(this.value)" title="Cor da fonte dos campos">
+            </div>
+
+            <button class="color-reset-btn" onclick="resetColors()" style="margin-top:12px">↺ Restaurar padrão</button>
           </div>
 
         </div>
@@ -136,7 +146,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
 </div></div>
 
 <div class="modal-overlay" id="mHabil" style="display:none"><div class="modal" style="max-width:480px">
-  <h3 id="mHabilTitle">Adicionar Habilidade</h3>
+  <h3 id="mHabilTitle">Adicionar Poder</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="hName" placeholder="Ex: Ataque Furtivo..."></div>
   <div style="display:flex;gap:8px">
     <div class="form-field" style="flex:1"><label>Usos (0=ilimitado)</label><input type="number" id="hUses" value="1" min="0" max="99"></div>
@@ -158,8 +168,9 @@ body{display:flex;flex-direction:column;min-height:100vh}
   </div>
   <div style="display:flex;gap:8px">
     <div class="form-field" style="flex:1"><label>Alcance</label><input type="text" id="spRange" placeholder="18m..."></div>
-    <div class="form-field" style="flex:1"><label>Duração</label><input type="text" id="spDuration" placeholder="Instantâneo..."></div>
+    <div class="form-field" style="flex:1"><label>Área de Efeito</label><input type="text" id="spAoE" placeholder="Cone de 4.5m..."></div>
   </div>
+  <div class="form-field"><label>Duração</label><input type="text" id="spDuration" placeholder="Instantâneo..."></div>
   <div class="form-field"><label>Descrição</label><textarea id="spDesc" style="min-height:80px"></textarea></div>
   <div class="modal-actions"><button class="btn" onclick="closeM('mSpell')">Cancelar</button><button class="btn primary" onclick="confirmSpell()">Salvar</button></div>
 </div></div>
@@ -179,7 +190,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
 </div></div>
 
 <div class="modal-overlay" id="mSkill" style="display:none"><div class="modal">
-  <h3>Adicionar Perícia</h3>
+  <h3>Adicionar Habilidade</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="skName"></div>
   <div class="form-field"><label>Atributo Base</label><select id="skAttr"></select></div>
   <div class="modal-actions"><button class="btn" onclick="closeM('mSkill')">Cancelar</button><button class="btn primary" onclick="confirmSkill()">Adicionar</button></div>
@@ -234,7 +245,7 @@ let editingAttr=null, editingHabil=null, editingSpell=null, editingEquip=null;
 let themeMenuOpen = false;
 let baseDB = null;
 let DB = null;
-let presetModalTargetFichaId = null; // null significa nova ficha
+let presetModalTargetFichaId = null; 
 
 // ── THEME (global claro/escuro) ───────────────────────────────────────────────
 let dark = localStorage.getItem('rpg_theme') !== 'light';
@@ -314,8 +325,14 @@ function openPresetModalForEdit(fichaId) {
 function populatePresetSelect(selectedId) {
   let listaPresets = [];
   try { listaPresets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
+  
+  // Usamos (p.name || p.nome) para garantir que funcione independentemente de como foi salvo
   const html = `<option value="default">Padrão (Todo Conteúdo)</option>` + 
-    listaPresets.map(p => `<option value="${p.id}" ${selectedId===p.id?'selected':''}>${p.nome}</option>`).join('');
+    listaPresets.map(p => {
+      const nomePreset = p.name || p.nome || 'Preset Sem Nome';
+      return `<option value="${p.id}" ${selectedId === p.id ? 'selected' : ''}>${nomePreset}</option>`;
+    }).join('');
+    
   document.getElementById('presetModalSelector').innerHTML = html;
 }
 
@@ -324,14 +341,11 @@ function confirmPresetModal() {
   closeM('mPreset');
 
   if (presetModalTargetFichaId === null) {
-    // Nova ficha
     newFicha(chosenPresetId);
   } else {
-    // Editando ficha existente
     activeId = presetModalTargetFichaId;
     upd(f => {
       f.presetId = chosenPresetId;
-      // Valida se conteúdos selecionados ainda existem no preset novo
       const validRacas = getFilteredCat('racas', chosenPresetId).map(x => x.nome);
       const validClasses = getFilteredCat('classes', chosenPresetId).map(x => x.nome);
       const validProfs = getFilteredCat('profissoes', chosenPresetId).map(x => x.nome);
@@ -382,13 +396,28 @@ function applyFichaColors(){
     bg=null;
   }
 
+  // Injeção da cor customizada dos rótulos dos campos e nomes de atributos
+  let customFieldStyle = '';
+  if(c.customFieldFontColor){
+    customFieldStyle = `
+      .form-field label, .attr-abr, .combat-label, .skill-name, .slot-lbl, .color-row-label { color: ${c.customFieldFontColor} !important; }
+      .attr-val-input, .combat-val-input, .attr-mod-display, .skill-bonus, .meta-grid select, .meta-grid input { color: ${c.customFieldFontColor} !important; }
+      .char-name-header { color: ${c.customFieldFontColor} !important; }
+    `;
+  } else {
+    customFieldStyle = `.char-name-header { color: ${gold} !important; }`;
+  }
+
   const bgVars = bg ? `--bg:${bg};--surface:${surface};--card:${card};--card2:${card2};--border:${border};` : '';
-  injectStyle(`:root{--gold:${gold};--gold2:${gold2};--accent:${accent};${bgVars}}`);
+  injectStyle(`:root{--gold:${gold};--gold2:${gold2};--accent:${accent};${bgVars}} ${customFieldStyle}`);
 
   if(document.getElementById('customAccent')) document.getElementById('customAccent').value = gold.slice(0,7);
   if(document.getElementById('customBg')) {
     if(c.customBg) document.getElementById('customBg').value = c.customBg.slice(0,7);
     else document.getElementById('customBg').value = (bg||'#0f0d0a').slice(0,7);
+  }
+  if(document.getElementById('customFieldFontColor')) {
+    document.getElementById('customFieldFontColor').value = c.customFieldFontColor || (dark ? '#ffffff' : '#111111');
   }
 
   if(document.getElementById('fichaNameLabel')) document.getElementById('fichaNameLabel').textContent = f.name;
@@ -435,6 +464,7 @@ function setAccentPreset(i){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.accentI
 function setCustomAccent(val){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.customAccent=val; delete f.colors.accentIdx; }); applyFichaColors(); }
 function setBgPreset(i){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.bgIdx=i; delete f.colors.customBg; }); applyFichaColors(); }
 function setCustomBg(val){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.customBg = val; delete f.colors.bgIdx;}); applyFichaColors(); }
+function setCustomFieldFontColor(val){ upd(f=>{ if(!f.colors)f.colors={}; f.colors.customFieldFontColor = val; }); applyFichaColors(); }
 function resetColors(){ upd(f=>{ f.colors={}; }); applyFichaColors(); toast('Cores restauradas ao padrão.'); }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
@@ -446,7 +476,7 @@ function skillBonus(f,s){
   const base=mod(getAttrVal(f,s.attr)), pb=f.profBonus||2;
   if(s.prof===0)return base; if(s.prof===1)return base+Math.floor(pb/2); return base+pb;
 }
-function typeColor(t){ return t==='player'?'#4a9c2e':t==='monster'?'#c05050':'#5080b0'; }
+function typeColor(t){ return '#5080b0'; }
 function getFicha(){ return fichas.find(f=>f.id===activeId); }
 function upd(fn){ const f=getFicha(); if(!f)return; fn(f); save(fichas); }
 function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
@@ -478,7 +508,7 @@ const DEF_SLOTS=Array.from({length:9},(_,i)=>({level:i+1,total:0,used:0}));
 function newFichaObj(name='Novo Personagem', presetId='default'){
   return {id:uid(),name,class:'',subclass:'',race:'',level:1,background:'',alignment:'',type:'player',
     presetId:presetId,
-    profBonus:2,xp:0,colors:{},
+    profBonus:2,colors:{},
     attrs:JSON.parse(JSON.stringify(DEF_ATTRS)),
     skills:JSON.parse(JSON.stringify(DEF_SKILLS)),
     combat:JSON.parse(JSON.stringify(DEF_COMBAT)),
@@ -488,15 +518,15 @@ function newFichaObj(name='Novo Personagem', presetId='default'){
 }
 
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
+// Removido o campo "Monstros" conforme solicitado
 const FOLDERS=[
   {id:'all',label:'Todas',icon:'ti-layout-list',color:'var(--muted)'},
   {id:'player',label:'Jogadores',icon:'ti-user',color:'#4a9c2e'},
   {id:'npc',label:'NPCs',icon:'ti-masks-theater',color:'#5080b0'},
-  {id:'monster',label:'Monstros',icon:'ti-skull',color:'#c05050'},
 ];
 let activeFolder='all';
 
-function folderFromType(t){return t==='player'?'player':t==='monster'?'monster':'npc';}
+function folderFromType(t){return t==='player'?'player':'npc';}
 function countFolder(fid){if(fid==='all')return fichas.length;return fichas.filter(f=>(f.folder||folderFromType(f.type))===fid).length;}
 function setFolder(f){activeFolder=f;renderSidebar();}
 
@@ -515,11 +545,11 @@ function renderSidebar(){
   if(!fichas.length){el.innerHTML=tabsHtml+'<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha.</div>';return;}
   if(!filtered.length){el.innerHTML=tabsHtml+'<div style="color:var(--muted);font-size:13px;font-style:italic;text-align:center;padding:16px 0">Nenhuma ficha nesta pasta.</div>';return;}
   el.innerHTML=tabsHtml+filtered.map(f=>{
-    const c=typeColor(f.type),sel=f.id===activeId;
+    const sel=f.id===activeId;
     return`<div class="fi${sel?' sel':''}" onclick="selFicha('${f.id}')">
-      <div class="fi-av" style="background:${c}22;border-color:${c};color:${c}">${f.name[0].toUpperCase()}</div>
+      <div class="fi-av" style="background:var(--border);border-color:var(--gold);color:var(--gold)">${f.name[0].toUpperCase()}</div>
       <div class="fi-info">
-        <div class="fi-name" style="color:${c}">${f.name}</div>
+        <div class="fi-name">${f.name}</div>
         <div class="fi-sub">${[f.race,f.class,f.level?'Nv '+f.level:''].filter(Boolean).join(' · ')}</div>
       </div>
       <div class="fi-actions">
@@ -534,7 +564,7 @@ function selFicha(id){activeId=id;renderSidebar();renderEditor();applyFichaColor
 function newFicha(presetId){
   const f=newFichaObj('Novo Personagem', presetId);
   f.folder=activeFolder==='all'?'player':activeFolder;
-  f.type=f.folder==='player'?'player':f.folder==='monster'?'monster':'neutral';
+  f.type=f.folder==='player'?'player':'neutral';
   fichas.push(f);save(fichas);activeId=f.id;
   renderSidebar();renderEditor();applyFichaColors();toast('Nova ficha criada!');
 }
@@ -546,17 +576,13 @@ function delFicha(id){
   renderSidebar();renderEditor();applyFichaColors();toast('Ficha excluída.');
 }
 
-function xpNext(lv){ const t=[0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000]; return t[Math.min(lv,19)]||'—'; }
-
 // ── EDITOR ────────────────────────────────────────────────────────────────────
 function renderEditor(){
   const editor=document.getElementById('editor');
   if(!editor) return;
   const f=getFicha();
   if(!f){ editor.innerHTML='<div class="empty-state" style="padding:80px 0"><div class="big">⚔</div>Selecione ou crie uma ficha.</div>'; return; }
-  const c=typeColor(f.type);
 
-  // Busca coleções de opções válidas pelo Preset da ficha ativa
   const racasPermitidas = getFilteredCat('racas', f.presetId);
   const classesPermitidas = getFilteredCat('classes', f.presetId);
   const profsPermitidas = getFilteredCat('profissoes', f.presetId);
@@ -602,7 +628,7 @@ function renderEditor(){
 
   const slotsHtml=f.spellSlots.map((sl,i)=>`
     <div class="spell-level-row">
-      <span class="slot-lbl">Nível ${sl.level}</span>
+      <span class="slot-lbl">Círculo ${sl.level}</span>
       <input class="slot-num" type="number" value="${sl.total}" min="0" max="9" onchange="setSlotTotal(${i},this.value)">
       <div class="spell-dots">${Array.from({length:sl.total},(_,k)=>`<div class="spell-dot ${k<sl.used?'used':'avail'}" onclick="toggleSlot(${i},${k})"></div>`).join('')}</div>
     </div>`).join('');
@@ -611,12 +637,12 @@ function renderEditor(){
     <div class="spell-item" id="spitem_${i}">
       <div class="spell-item-info">
         <div class="spell-item-name" style="cursor:pointer" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">${sp.name} <span style="font-family:'Cinzel',serif;font-size:10px;color:var(--muted)">[Nv ${sp.level}]</span></div>
-        <div class="spell-item-meta">${[sp.school,sp.cast,sp.range,sp.duration].filter(Boolean).join(' · ')}</div>
+        <div class="spell-item-meta">${[sp.school,sp.cast,sp.range,sp.aoe,sp.duration].filter(Boolean).join(' · ')}</div>
         ${sp.desc?`<div class="spell-item-desc">${sp.desc}</div><span class="expand-toggle" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">▸ detalhes</span>`:''}
       </div>
       <div style="display:flex;gap:4px;flex-shrink:0">
-        <button class="btn xs" onclick="editSpell(${i})"><i class="ti ti-edit"></i></button>
-        <button class="btn xs danger" onclick="removeSpell(${i})"><i class="ti ti-trash"></i></button>
+        <button class="btn xs print-hidden" onclick="editSpell(${i})"><i class="ti ti-edit"></i></button>
+        <button class="btn xs danger print-hidden" onclick="removeSpell(${i})"><i class="ti ti-trash"></i></button>
       </div>
     </div>`).join('');
 
@@ -630,10 +656,10 @@ function renderEditor(){
           ${h.level>1?`<span class="habil-badge lvl">Nv ${h.level}</span>`:''}
           <span class="habil-badge uses">${h.uses>0?`${h.uses-(h.usesSpent||0)}/${h.uses} usos`:'Ilimitado'}</span>
         </div>
-        <button class="btn xs" onclick="event.stopPropagation();editHabil(${i})"><i class="ti ti-edit"></i></button>
+        <button class="btn xs print-hidden" onclick="event.stopPropagation();editHabil(${i})"><i class="ti ti-edit"></i></button>
       </div>
       <div class="habil-desc">${h.desc||'Sem descrição.'}</div>
-      ${h.uses>0?`<div class="uses-tracker">${dots}<button class="btn xs" style="margin-left:6px" onclick="resetUses(${i})" title="Resetar">↺</button></div>`:''}
+      ${h.uses>0?`<div class="uses-tracker">${dots}<button class="btn xs print-hidden" style="margin-left:6px" onclick="resetUses(${i})" title="Resetar">↺</button></div>`:''}
     </div>`;
   }).join('');
 
@@ -649,7 +675,7 @@ function renderEditor(){
         </div>
         ${e.desc?`<div class="equip-meta expand-toggle" onclick="document.getElementById('eqitem_${i}').classList.toggle('expanded')">▸ ${e.desc.slice(0,50)}${e.desc.length>50?'...':''}</div><div class="equip-desc">${e.desc}</div>`:''}
       </div>
-      <button class="btn xs" onclick="editEquip(${i})"><i class="ti ti-edit"></i></button>
+      <button class="btn xs print-hidden" onclick="editEquip(${i})"><i class="ti ti-edit"></i></button>
     </div>`).join('');
 
   editor.innerHTML=`
@@ -657,7 +683,7 @@ function renderEditor(){
       <div style="display:grid;grid-template-columns: 1fr; gap:12px; margin-bottom:14px;" class="meta-grid">
         <div class="form-field" style="margin:0">
           <label>Nome do Personagem</label>
-          <input type="text" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:14px;color:${c}">
+          <input type="text" class="char-name-header" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:14px;">
         </div>
       </div>
 
@@ -689,14 +715,13 @@ function renderEditor(){
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
         <div class="form-field" style="margin:0"><label>Nível</label><input type="number" value="${f.level}" min="1" max="20" onchange="setField('level',parseInt(this.value));autoProf()"></div>
-        <div class="form-field" style="margin:0"><label>Bônus Prof.</label><input type="number" value="${f.profBonus}" min="2" max="6" onchange="setField('profBonus',parseInt(this.value));renderEditor()"></div>
+        <div class="form-field" style="margin:0"><label>Bônus</label><input type="number" value="${f.profBonus}" min="2" max="6" onchange="setField('profBonus',parseInt(this.value));renderEditor()"></div>
         <div class="form-field" style="margin:0"><label>Alinhamento</label><input type="text" value="${f.alignment||''}" onchange="setField('alignment',this.value)" placeholder="Leal e Bom..."></div>
         <div class="form-field" style="margin:0"><label>Tipo</label>
           <select onchange="setField('type',this.value);renderSidebar();renderEditor()" style="padding:4px 6px;">
             <option value="player" ${f.type==='player'?'selected':''}>Jogador</option>
-            <option value="monster" ${f.type==='monster'?'selected':''}>Monstro</option>
             <option value="neutral" ${f.type==='neutral'?'selected':''}>NPC</option>
           </select>
         </div>
@@ -708,14 +733,19 @@ function renderEditor(){
       <div class="attr-grid">${attrsHtml}</div>
     </div>
 
+    <div class="sec">
+      <div class="sec-head"><div class="sec-title"><i class="ti ti-sword sec-icon"></i><h2>Combate</h2></div></div>
+      <div class="combat-grid">${combatHtml}</div>
+    </div>
+
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
       <div class="sec" style="margin:0">
-        <div class="sec-head"><div class="sec-title"><i class="ti ti-shield-check sec-icon"></i><h2>Salvaguardas</h2></div></div>
+        <div class="sec-head"><div class="sec-title"><i class="ti ti-shield-check sec-icon"></i><h2>Testes de Atributo</h2></div></div>
         ${savesHtml}
       </div>
       <div class="sec" style="margin:0">
         <div class="sec-head">
-          <div class="sec-title"><i class="ti ti-star sec-icon"></i><h2>Perícias</h2></div>
+          <div class="sec-title"><i class="ti ti-star sec-icon"></i><h2>Habilidades</h2></div>
           <button class="btn xs" onclick="openAddSkill()"><i class="ti ti-plus"></i> Adicionar</button>
         </div>
         <div class="skills-grid">${skillsHtml}</div>
@@ -723,20 +753,15 @@ function renderEditor(){
     </div>
 
     <div class="sec">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-sword sec-icon"></i><h2>Combate</h2></div></div>
-      <div class="combat-grid">${combatHtml}</div>
-    </div>
-
-    <div class="sec">
       <div class="sec-head">
-        <div class="sec-title"><i class="ti ti-bolt sec-icon"></i><h2>Habilidades</h2></div>
+        <div class="sec-title"><i class="ti ti-bolt sec-icon"></i><h2>Poderes</h2></div>
         <button class="btn xs primary" onclick="openAddHabil()"><i class="ti ti-plus"></i> Adicionar</button>
       </div>
-      ${habilHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma habilidade ainda.</div>'}
+      ${habilHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum poder ainda.</div>'}
     </div>
 
     <div class="sec">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Espaços de Magia</h2></div></div>
+      <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Mana</h2></div></div>
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Clique nos círculos para marcar uso. Defina o total por nível.</div>
       ${slotsHtml}
     </div>
@@ -776,15 +801,7 @@ function renderEditor(){
     </div>
 
     <div style="text-align:right;margin-bottom:14px">
-      <button class="btn" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
-    </div>
-
-    <div class="sec" style="margin-bottom:0">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-trophy sec-icon"></i><h2>Experiência</h2></div></div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="form-field" style="margin:0;flex:1"><label>XP Atual</label><input type="number" value="${f.xp||0}" min="0" onchange="setField('xp',parseInt(this.value))"></div>
-        <div style="font-size:12px;color:var(--muted)">Próximo nível: ${xpNext(f.level)} xp</div>
-      </div>
+      <button class="btn print-hidden" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
     </div>`;
 }
 
@@ -840,7 +857,7 @@ function openAddSkill(){
 function confirmSkill(){
   const name=document.getElementById('skName').value.trim(),attr=document.getElementById('skAttr').value;
   if(!name)return;
-  upd(f=>{f.skills.push({id:uid(),name,attr,prof:0});}); closeM('mSkill'); renderEditor(); toast('Perícia adicionada!');
+  upd(f=>{f.skills.push({id:uid(),name,attr,prof:0});}); closeM('mSkill'); renderEditor(); toast('Habilidade adicionada!');
 }
 function setCombat(id,v){ upd(f=>{const s=f.combat.find(x=>x.id===id);if(s)s.val=parseInt(v)||0;}); }
 function removeCombat(id){
@@ -868,7 +885,7 @@ function toggleSlot(si,di){ upd(f=>{const sl=f.spellSlots[si];sl.used=di<sl.used
 function openAddSpell(){
   editingSpell=null;
   document.getElementById('mSpellTitle').textContent='Adicionar Magia';
-  ['spName','spSchool','spCast','spRange','spDuration','spDesc'].forEach(id=>document.getElementById(id).value='');
+  ['spName','spSchool','spCast','spRange','spAoE','spDuration','spDesc'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('spLevel').value=1;
   document.getElementById('mSpell').style.display='flex';
   setTimeout(()=>document.getElementById('spName').focus(),50);
@@ -882,6 +899,7 @@ function editSpell(i){
   document.getElementById('spSchool').value=sp.school||'';
   document.getElementById('spCast').value=sp.cast||'';
   document.getElementById('spRange').value=sp.range||'';
+  document.getElementById('spAoE').value=sp.aoe||'';
   document.getElementById('spDuration').value=sp.duration||'';
   document.getElementById('spDesc').value=sp.desc||'';
   document.getElementById('mSpell').style.display='flex';
@@ -890,7 +908,8 @@ function confirmSpell(){
   const name=document.getElementById('spName').value.trim(); if(!name)return;
   const sp={name,level:parseInt(document.getElementById('spLevel').value)||1,
     school:document.getElementById('spSchool').value.trim(),cast:document.getElementById('spCast').value.trim(),
-    range:document.getElementById('spRange').value.trim(),duration:document.getElementById('spDuration').value.trim(),
+    range:document.getElementById('spRange').value.trim(),aoe:document.getElementById('spAoE').value.trim(),
+    duration:document.getElementById('spDuration').value.trim(),
     desc:document.getElementById('spDesc').value.trim()};
   upd(f=>{if(!f.spells)f.spells=[];if(editingSpell!==null)f.spells[editingSpell]=sp;else f.spells.push(sp);f.spells.sort((a,b)=>a.level-b.level);});
   closeM('mSpell'); renderEditor(); toast(editingSpell!==null?'Magia atualizada!':'Magia adicionada!'); editingSpell=null;
@@ -898,7 +917,7 @@ function confirmSpell(){
 function removeSpell(i){ upd(f=>{f.spells.splice(i,1);}); renderEditor(); }
 function openAddHabil(){
   editingHabil=null;
-  document.getElementById('mHabilTitle').textContent='Adicionar Habilidade';
+  document.getElementById('mHabilTitle').textContent='Adicionar Poder';
   ['hName','hDesc'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('hUses').value=1; document.getElementById('hLevel').value=1;
   document.getElementById('mHabil').style.display='flex';
@@ -907,7 +926,7 @@ function openAddHabil(){
 function editHabil(i){
   const f=getFicha(); if(!f)return; const h=f.habilidades[i]; if(!h)return;
   editingHabil=i;
-  document.getElementById('mHabilTitle').textContent='Editar Habilidade';
+  document.getElementById('mHabilTitle').textContent='Editar Poder';
   document.getElementById('hName').value=h.name;
   document.getElementById('hUses').value=h.uses;
   document.getElementById('hLevel').value=h.level;
@@ -918,7 +937,7 @@ function confirmHabil(){
   const name=document.getElementById('hName').value.trim(); if(!name)return;
   const h={name,uses:parseInt(document.getElementById('hUses').value)||0,level:parseInt(document.getElementById('hLevel').value)||1,desc:document.getElementById('hDesc').value.trim(),usesSpent:0};
   upd(f=>{if(!f.habilidades)f.habilidades=[];if(editingHabil!==null){h.usesSpent=f.habilidades[editingHabil].usesSpent||0;f.habilidades[editingHabil]=h;}else f.habilidades.push(h);});
-  closeM('mHabil'); renderEditor(); toast(editingHabil!==null?'Atualizado!':'Habilidade adicionada!'); editingHabil=null;
+  closeM('mHabil'); renderEditor(); toast(editingHabil!==null?'Atualizado!':'Poder adicionado!'); editingHabil=null;
 }
 function removeHabil(i){ upd(f=>{f.habilidades.splice(i,1);}); renderEditor(); }
 function toggleUse(hi,ui){ upd(f=>{const h=f.habilidades[hi];if(h)h.usesSpent=ui<h.usesSpent?ui:ui+1;}); renderEditor(); }
