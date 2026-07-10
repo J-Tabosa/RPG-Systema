@@ -335,7 +335,7 @@ main{flex:1}
         <div class="app-card-body">
           <div class="app-card-tag">Módulo 04</div>
           <div class="app-card-title">Gestor de Dados</div>
-          <div class="app-card-desc">Expanda os horizontes do gerador. Customize e gerencie as listas de raças, classes, profissões, alinhamentos e traços de personalidade para se adequarem ao seu cenário de RPG.</div>
+          <div class="app-card-desc">Expanda os horizons do gerador. Customize e gerencie as listas de raças, classes, profissões, alinhamentos e traços de personalidade para se adequarem ao seu cenário de RPG.</div>
           <div class="app-card-footer">
             <div class="app-card-features">
               <span class="feat-pill">Customização</span>
@@ -401,7 +401,40 @@ main{flex:1}
 
       <div class="changelog" id="changelog">
 
-        <div class="changelog-item open" data-type="new">
+        <div class="changelog-item open" data-type="improvement">
+          <div class="changelog-header" onclick="toggleLog(this)">
+            <span class="changelog-version">v1.6</span>
+            <span class="changelog-date">Jul 2026</span>
+            <span class="changelog-title">Refatoração Estética Global</span>
+            <span class="changelog-badge badge-improvement">Melhoria</span>
+            <i class="ti ti-chevron-down changelog-chevron"></i>
+          </div>
+          <div class="changelog-body">
+            <ul class="change-list">
+              <li><strong>Melhoria de UI Geral</strong> — Ajuste e polimento fino na interface visual de todas as páginas do ecossistema</li>
+              <li>Consistência aprimorada nas paletas de cores ativos, espaçamentos internos e layouts de cards responsivos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="changelog-item" data-type="new">
+          <div class="changelog-header" onclick="toggleLog(this)">
+            <span class="changelog-version">v1.5</span>
+            <span class="changelog-date">Jul 2026</span>
+            <span class="changelog-title">Gestor de Dados Avançado</span>
+            <span class="changelog-badge badge-new">Nova</span>
+            <i class="ti ti-chevron-down changelog-chevron"></i>
+          </div>
+          <div class="changelog-body">
+            <ul class="change-list">
+              <li><strong>Módulo Gestor de Conteúdo</strong> — Nova ferramenta implementada para expandir o banco interno local do sistema</li>
+              <li>Inclusão de ferramentas nativas para **adicionar conteúdos customizados** (raças, classes, etc.)</li>
+              <li>Capacidade de **restringir ou filtrar seleções** por campanha ativa, customizando a mesa conforme o cenário do mestre</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="changelog-item" data-type="new">
           <div class="changelog-header" onclick="toggleLog(this)">
             <span class="changelog-version">v1.4</span>
             <span class="changelog-date">Jul 2025</span>
@@ -523,8 +556,8 @@ main{flex:1}
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
-        <span>📧 seuemail@email.com</span>
-        <span>💬 Discord: seuuser</span>
+        <span>📧 jtabosa028@email.com</span>
+        <span>💬 Discord: kammish_1</span>
         <span style="margin-top:8px;font-size:11px;color:var(--border)">Sugestões e bugs são bem-vindos!</span>
       </div>
     </div>
@@ -532,9 +565,9 @@ main{flex:1}
     <div class="footer-bottom">
       <span class="footer-copy">© 2025 RPG System — Feito com ⚔ para a mesa</span>
       <div class="footer-socials">
-        <a href="#" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
-        <a href="#" class="social-btn" title="Discord"><i class="ti ti-brand-discord"></i></a>
-        <a href="#" class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        <a href="https://github.com/J-Tabosa" target="_blank" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
+        <a href="https://x.com/el_tabosa" target="_blank" class="social-btn" title="X (Twitter)"><i class="ti ti-brand-x"></i></a>
+        <a href="https://www.instagram.com/el_tabosa/" target="_blank" class="social-btn" title="Instagram"><i class="ti ti-brand-instagram"></i></a>
       </div>
     </div>
   </div>
@@ -570,7 +603,7 @@ function filterLogs(type,btn){
   });
 }
 
-// ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
+// ── SCROLL REVEAL (CSS only) ───────────────────────────────────────────────
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
 },{threshold:0.08});
