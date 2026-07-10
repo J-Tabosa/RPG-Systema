@@ -39,7 +39,7 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
 .tok-hp{font-size:11px;color:var(--muted)}
 .init-token.player .tok-name{color:#4a9c2e}
 .init-token.monster .tok-name{color:#c05050}
-.init-token.neutral .tok-name{color:#5080b0}
+.init-token.neutral .tok-name{color:#2a5080}
 .no-combatants{color:var(--muted);font-style:italic;font-size:14px;padding:4px 0}
 
 /* ROUND BAR */
@@ -60,13 +60,13 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
 .c-card-top{display:flex;align-items:center;gap:10px}
 .c-avatar{width:34px;height:34px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:13px;font-weight:700;flex-shrink:0}
 .c-avatar.player{background:rgba(45,120,30,0.2);border-color:#4a9c2e;color:#4a9c2e}
-.c-avatar.monster{background:rgba(139,26,26,0.2);border-color:#c05050;color:#c05050}
-.c-avatar.neutral{background:rgba(40,70,140,0.2);border-color:#5080b0;color:#5080b0}
+.c-avatar.monster{background:rgba(192,80,80,0.2);border-color:#c05050;color:#c05050}
+.c-avatar.neutral{background:rgba(42,80,128,0.2);border-color:#2a5080;color:#2a5080}
 .c-info{flex:1;min-width:0}
 .c-name{font-family:'Cinzel',serif;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .c-name.player{color:#4a9c2e}
 .c-name.monster{color:#c05050}
-.c-name.neutral{color:#5080b0}
+.c-name.neutral{color:#2a5080}
 .c-meta{font-size:12px;color:var(--muted);margin-top:1px}
 .c-init-badge{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--gold);min-width:32px;text-align:center}
 .c-actions{display:flex;gap:4px;margin-left:auto}
@@ -92,13 +92,13 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
 .type-btn{flex:1;padding:5px 3px;border-radius:4px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-family:'Cinzel',serif;font-size:10px;cursor:pointer;transition:all 0.15s;text-align:center}
 .type-btn.sel.player{border-color:#4a9c2e;color:#4a9c2e;background:rgba(45,120,30,0.15)}
 .type-btn.sel.monster{border-color:#c05050;color:#c05050;background:rgba(139,26,26,0.15)}
-.type-btn.sel.neutral{border-color:#5080b0;color:#5080b0;background:rgba(40,70,140,0.15)}
+.type-btn.sel.neutral{border-color:#2a5080;color:#2a5080;background:rgba(40,70,140,0.15)}
 
 /* DICE */
-.dice-panel{background:#0d0b08;border-top:1px solid var(--border);padding:10px 20px;flex-shrink:0}
+.dice-panel{background:#0d0b08;border-bottom:1px solid var(--border);border-top: none;padding:10px 20px;flex-shrink:0}
 .dice-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .die-btn{font-family:'Cinzel',serif;font-size:11px;border:1px solid var(--border);background:var(--card);color:var(--muted);padding:4px 10px;border-radius:4px;cursor:pointer;transition:all 0.15s}
-.die-btn:hover,.die-btn.d20{border-color:var(--gold);color:var(--gold)}
+.die-btn:hover{border-color:var(--gold);color:var(--gold)}
 .die-btn:active{transform:scale(0.93)}
 .dice-result-area{display:flex;align-items:center;gap:8px;margin-top:6px;min-height:26px;flex-wrap:wrap}
 .roll-chip{font-family:'Cinzel',serif;font-size:13px;font-weight:700;padding:3px 10px;border-radius:4px;border:1px solid;animation:popIn 0.18s ease;flex-shrink:0}
@@ -170,6 +170,33 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
     <button class="btn sm primary" onclick="nextTurn()" id="btnNext" disabled>Próximo →</button>
   </div>
 
+  <!-- DICE PANEL (MOVIDO PARA CIMA) -->
+  <div class="dice-panel">
+    <div class="init-label" style="margin-bottom:6px">Rolador de Dados</div>
+    <div class="dice-row">
+      <button class="die-btn" onclick="quickRoll(4)">d4</button>
+      <button class="die-btn" onclick="quickRoll(6)">d6</button>
+      <button class="die-btn" onclick="quickRoll(8)">d8</button>
+      <button class="die-btn" onclick="quickRoll(10)">d10</button>
+      <button class="die-btn" onclick="quickRoll(12)">d12</button>
+      <button class="die-btn" onclick="quickRoll(20)">d20</button>
+      <button class="die-btn" onclick="quickRoll(100)">d%</button>
+      <span style="color:var(--border)">|</span>
+      <input class="dice-mini-input" id="dQty" type="number" value="1" min="1" max="20" title="Quantidade de dados">
+      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">d</span>
+      <select class="dice-side-select" id="dSide">
+        <option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option selected>20</option><option>100</option>
+      </select>
+      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">+</span>
+      <input class="dice-mini-input" id="dMod" type="number" value="0" title="Modificador">
+      <button class="btn sm primary" onclick="customRoll()">Rolar</button>
+      <button class="btn sm" onclick="rollInitAll()" title="Rola d20 de iniciativa para todos"><i class="ti ti-bolt"></i> Init ×todos</button>
+    </div>
+    <div class="dice-result-area" id="diceArea">
+      <span style="font-size:12px;color:var(--muted);font-style:italic">Clique em um dado...</span>
+    </div>
+  </div>
+
   <div class="main">
     <div class="panel">
       <div class="panel-title">Combatentes</div>
@@ -203,33 +230,6 @@ body.light .hp-bar-bg{background:rgba(0,0,0,0.15)}
       <div class="divider"></div>
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Condições</div>
       <div style="font-size:11px;color:var(--muted);font-style:italic;line-height:1.5">Clique numa condição no card para ativar/desativar.</div>
-    </div>
-  </div>
-
-  <!-- DICE PANEL -->
-  <div class="dice-panel">
-    <div class="init-label" style="margin-bottom:6px">Rolador de Dados</div>
-    <div class="dice-row">
-      <button class="die-btn" onclick="quickRoll(4)">d4</button>
-      <button class="die-btn" onclick="quickRoll(6)">d6</button>
-      <button class="die-btn" onclick="quickRoll(8)">d8</button>
-      <button class="die-btn" onclick="quickRoll(10)">d10</button>
-      <button class="die-btn" onclick="quickRoll(12)">d12</button>
-      <button class="die-btn d20" onclick="quickRoll(20)">d20</button>
-      <button class="die-btn" onclick="quickRoll(100)">d%</button>
-      <span style="color:var(--border)">|</span>
-      <input class="dice-mini-input" id="dQty" type="number" value="1" min="1" max="20" title="Quantidade de dados">
-      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">d</span>
-      <select class="dice-side-select" id="dSide">
-        <option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option selected>20</option><option>100</option>
-      </select>
-      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">+</span>
-      <input class="dice-mini-input" id="dMod" type="number" value="0" title="Modificador">
-      <button class="btn sm primary" onclick="customRoll()">Rolar</button>
-      <button class="btn sm" onclick="rollInitAll()" title="Rola d20 de iniciativa para todos"><i class="ti ti-bolt"></i> Init ×todos</button>
-    </div>
-    <div class="dice-result-area" id="diceArea">
-      <span style="font-size:12px;color:var(--muted);font-style:italic">Clique em um dado...</span>
     </div>
   </div>
 
@@ -328,12 +328,12 @@ function addCombatant(){
   const qty=Math.max(1,Math.min(30,parseInt(document.getElementById('newQty').value)||1));
   if(!name){document.getElementById('newName').focus();return;}
   if(qty===1){
-    combatants.push({id:uid(),name,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:null});
+    combatants.push({id:uid(),name,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:null,customBg:null});
     addLog(`<em>${name}</em> entrou no combate (HP ${hpMax}, Init ${init}, CA ${ac})`);
   } else {
     const gid=uid();
     for(let i=1;i<=qty;i++){
-      combatants.push({id:uid(),name:`${name} ${i}`,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:gid});
+      combatants.push({id:uid(),name:`${name} ${i}`,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:gid,customBg:null});
     }
     addLog(`Grupo <em>${name}</em> ×${qty} adicionado`);
   }
@@ -354,8 +354,8 @@ function openImportModal(){
     const hpMax=(f.combat.find(x=>x.id==='hpmax')||{val:20}).val;
     const ca=(f.combat.find(x=>x.id==='ca')||{val:10}).val;
     const init=(f.combat.find(x=>x.id==='init')||{val:0}).val;
-    const color=f.type==='player'?'#4a9c2e':f.type==='monster'?'#c05050':'#5080b0';
-    const bd=f.type==='player'?'#4a9c2e':f.type==='monster'?'#c05050':'#5080b0';
+    const color=f.type=='player'?(f.bg||'#4a9c2e'):f.type==='monster'?'#c05050':'#2a5080';
+    const bd=f.type==='player'?(f.bg||'#4a9c2e'):f.type==='monster'?'#c05050':'#2a5080';
     const already=combatants.some(x=>x.fichaId===f.id);
     return`<div class="fii${already?' already':''}" onclick="${already?'':("importFicha('"+f.id+"')")}">
       <div class="fii-av" style="background:${color}22;border-color:${bd};color:${color}">${f.name[0].toUpperCase()}</div>
@@ -373,7 +373,7 @@ function importFicha(id){
   const hpMax=(f.combat.find(x=>x.id==='hpmax')||{val:20}).val;
   const ca=(f.combat.find(x=>x.id==='ca')||{val:10}).val;
   const init=(f.combat.find(x=>x.id==='init')||{val:0}).val;
-  combatants.push({id:uid(),name:f.name,type:f.type,hpMax,hpCur:hpMax,init,ac:ca,conditions:[],dead:false,fichaId:f.id,fichaClass:f.class,fichaLevel:f.level,groupId:null});
+  combatants.push({id:uid(),name:f.name,type:f.type,hpMax,hpCur:hpMax,init,ac:ca,conditions:[],dead:false,fichaId:f.id,fichaClass:f.class,fichaLevel:f.level,groupId:null,customBg:f.bg||null});
   addLog(`📜 <em>${f.name}</em> importado (HP ${hpMax}, Init ${init}, CA ${ca})`);
   closeModal('importModal'); render();
 }
@@ -519,8 +519,9 @@ function renderTrack(){
   el.innerHTML=[...combatants].sort((a,b)=>b.init-a.init).map(c=>{
     const active=combatants[currentTurn]&&combatants[currentTurn].id===c.id;
     const pct=c.hpMax>0?c.hpCur/c.hpMax:0;
+    const itemColor = c.type === 'player' ? (c.customBg || '#4a9c2e') : (c.type === 'monster' ? '#c05050' : '#2a5080');
     return`<div class="init-token ${c.type}${active?' active':''}${c.dead?' dead':''}" onclick="setTurn('${c.id}')">
-      <div class="tok-name ${c.type}">${c.name}</div>
+      <div class="tok-name" style="color:${itemColor}">${c.name}</div>
       <div class="tok-init">${c.init}</div>
       <div class="tok-hp" style="color:${hpColor(pct)}">${c.hpCur}/${c.hpMax}</div>
     </div>`;
@@ -552,11 +553,14 @@ function renderCards(){
       c.fichaId?`<span class="badge-sm ficha-badge"><i class="ti ti-scroll"></i> ${c.fichaClass||'Ficha'} Nv${c.fichaLevel||'?'}</span>`:'',
       c.groupId?'<span class="badge-sm group-badge"><i class="ti ti-users"></i> Grupo</span>':''
     ].join('');
+    
+    const itemColor = c.type === 'player' ? (c.customBg || '#4a9c2e') : (c.type === 'monster' ? '#c05050' : '#2a5080');
+
     return`<div class="c-card${active?' active-turn':''}${c.dead?' dead':''}">
       <div class="c-card-top">
-        <div class="c-avatar ${c.type}">${c.name[0].toUpperCase()}</div>
+        <div class="c-avatar" style="background:${itemColor}22; border-color:${itemColor}; color:${itemColor}">${c.name[0].toUpperCase()}</div>
         <div class="c-info">
-          <div class="c-name ${c.type}">${c.name}${badges}</div>
+          <div class="c-name" style="color:${itemColor}">${c.name}${badges}</div>
           <div class="c-meta">CA ${c.ac} · Init ${c.init} · ${c.type==='player'?'Jogador':c.type==='monster'?'Monstro':'NPC'}</div>
         </div>
         <div class="c-init-badge">${c.init}</div>

@@ -13,11 +13,11 @@ body{display:flex;flex-direction:column;min-height:100vh}
 .mgr-workspace{display:flex;flex:1;overflow:hidden;height:calc(100vh - 52px)}
 .mgr-sidebar{width:320px;flex-shrink:0;border-right:1px solid var(--border);background:#120f0a;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
 body.light .mgr-sidebar{background:#e0d8c4}
-.mgr-main{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px}
+.mgr-main{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:16px}
 
 /* PRESET CARDS */
 .sidebar-section-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:between}
-.preset-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px}
+.preset-list{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;padding-right:4px}
 .preset-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;cursor:pointer;transition:all 0.15s;position:relative}
 .preset-card:hover{border-color:var(--muted)}
 .preset-card.selected{border-color:var(--gold);background:rgba(200,168,107,0.06)}
@@ -32,6 +32,13 @@ body.light .mgr-sidebar{background:#e0d8c4}
 /* CONTENT ROWS */
 .main-header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:12px}
 .category-tabs{display:flex;gap:4px;flex-wrap:wrap}
+
+/* SUB-ABAS FILTROS */
+.subcategory-nav{display:flex;gap:6px;flex-wrap:wrap;padding:2px 0 6px 0;border-bottom:1px solid rgba(200,168,107,0.08)}
+.sub-pill{background:transparent;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:20px;font-size:12px;font-family:'Cinzel',serif;cursor:pointer;transition:all 0.15s}
+.sub-pill:hover{border-color:var(--muted);color:var(--text)}
+.sub-pill.active{background:rgba(200,168,107,0.12);border-color:var(--gold);color:var(--gold)}
+
 .search-container{display:flex;align-items:center;gap:8px;max-width:340px;width:100%}
 .search-box{position:relative;flex:1}
 .search-box input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 10px 6px 28px;border-radius:4px;font-family:'Crimson Text',serif;font-size:14px}
@@ -51,8 +58,9 @@ body.light .mgr-sidebar{background:#e0d8c4}
 .src-badge{font-family:'Cinzel',serif;font-size:8px;padding:1px 5px;border-radius:3px;text-transform:uppercase;border:1px solid}
 .src-badge.base{border-color:var(--blue2);color:var(--blue2);background:rgba(74,122,176,0.05)}
 .src-badge.custom{border-color:var(--gold);color:var(--gold);background:rgba(200,168,107,0.05)}
+.src-badge.subcat{border-color:var(--muted);color:var(--muted);background:transparent;text-transform:lowercase}
 .item-summary{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
-.item-right-actions{display:flex;align-items:center;gap:8px}
+.item-right-actions{display:flex;align-items:center;gap:4px}
 
 /* FORM STYLES */
 .add-form-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px}
@@ -115,7 +123,7 @@ body.light .mgr-sidebar{background:#e0d8c4}
 
       <button class="btn primary xs" style="width:100%" onclick="abrirModalPreset()"><i class="ti ti-plus"></i> Novo Preset</button>
 
-      <div class="add-form-card" style="margin-top:auto" id="formAddConteudo">
+      <div class="add-form-card" style="margin-top:14px" id="formAddConteudo">
         <div class="sidebar-section-title" id="formTitle">Novo Conteúdo</div>
         <div class="mini-field" style="margin-bottom:6px">
           <label>Categoria Alvo</label>
@@ -128,7 +136,8 @@ body.light .mgr-sidebar{background:#e0d8c4}
           </select>
         </div>
         <div id="dynamicFormFields"></div>
-        <button class="btn xs primary" style="width:100%;margin-top:10px" onclick="salvarNovoConteudo()"><i class="ti ti-check"></i> Adicionar Item</button>
+        <button class="btn xs primary" style="width:100%;margin-top:10px" id="btnSalvarItem" onclick="salvarNovoConteudo()"><i class="ti ti-check"></i> Adicionar Item</button>
+        <button class="btn xs target" style="width:100%;margin-top:4px;display:none" id="btnCancelarEdicao" onclick="cancelarEdicaoItem()">Cancelar Edição</button>
       </div>
     </div>
 
@@ -154,9 +163,11 @@ body.light .mgr-sidebar{background:#e0d8c4}
         </div>
       </div>
 
+      <div class="subcategory-nav" id="subcatNav"></div>
+
       <div style="background:rgba(200,168,107,0.04);border:1px dashed var(--border);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px">
         <i class="ti ti-info-circle" style="color:var(--gold);font-size:16px"></i>
-        <span>As ativações e desativações abaixo aplicam-se exclusivamente ao Preset selecionado ao lado. O Gerador lerá este filtro automaticamente.</span>
+        <span>As ativações e desativações abaixo aplicam-se exclusivamente ao Preset selecionado ao lado. Itens de fábrica (Oficiais) editados serão salvos em suas customizações.</span>
       </div>
 
       <div class="items-grid" id="itemsGrid"></div>
@@ -210,9 +221,11 @@ function fecharM(id){ document.getElementById(id).style.display='none'; }
 // ── ESTADO GLOBAL ─────────────────────────────────────────────────────────────
 let DB = null; // Conteúdo Mesclado (Oficiais + Customizados)
 let currentCategory = 'racas';
+let activeSubcategory = ''; // Filtro selecionado por pílula
 let presets = [];
 let activePresetId = 'default';
 let editingPresetId = null;
+let editingItemId = null; // Guarda ID do item sendo editado no formulário lateral
 
 // ── FORMULÁRIOS DINÂMICOS DE CONTEÚDO ──────────────────────────────────────────
 const FORMS_CONFIG = {
@@ -221,7 +234,8 @@ const FORMS_CONFIG = {
     {key:'desc', label:'Resumo / Descrição', type:'textarea', req:true},
     {key:'tracoRacial', label:'Habilidade / Traço Racial', type:'textarea', req:true},
     {key:'velocidade', label:'Velocidade (m)', type:'number', req:true, def:9},
-    {key:'visaoNoturna', label:'Possui Visão Noturna?', type:'select', options:[{v:'false',l:'Não'},{v:'true',l:'Sim'}]}
+    {key:'visaoNoturna', label:'Possui Visão Noturna?', type:'select', options:[{v:'false',l:'Não'},{v:'true',l:'Sim'}]},
+    {key:'subcategoria', label:'Subcategoria / Tipo', type:'text', req:true, def:'geral'}
   ],
   classes: [
     {key:'nome', label:'Nome da Classe', type:'text', req:true},
@@ -256,7 +270,6 @@ const FORMS_CONFIG = {
 
 // ── INICIALIZAÇÃO ─────────────────────────────────────────────────────────────
 async function inicializar(){
-  // 1. Carrega banco principal
   try {
     const res = await fetch('../data/personagens.json');
     DB = await res.json();
@@ -265,22 +278,29 @@ async function inicializar(){
     console.warn('Banco de dados JSON indisponível. Rodando no modo Local.', e);
   }
 
-  // 2. Mescla Customizados criados pelo usuário
   const custom = loadCustom();
-  Object.keys(custom).forEach(cat => {
-    if(DB[cat]) {
-      // Diferencia base de custom por flag em runtime
-      DB[cat] = DB[cat].map(item => ({...item, _src:'base'})).concat(
-        custom[cat].map(item => ({...item, _src:'custom'}))
-      );
+  Object.keys(FORMS_CONFIG).forEach(cat => {
+    if(!DB[cat]) DB[cat] = [];
+    
+    // Marcar itens nativos
+    DB[cat] = DB[cat].map(item => ({...item, _src:'base'}));
+    
+    // Adicionar customizados injetando flag e substituindo caso possuam IDs idênticos (Edição de nativos)
+    if(custom[cat]) {
+      custom[cat].forEach(cItem => {
+        const idx = DB[cat].findIndex(bItem => bItem.id === cItem.id);
+        if(idx > -1) {
+          DB[cat][idx] = {...cItem, _src:'custom'};
+        } else {
+          DB[cat].push({...cItem, _src:'custom'});
+        }
+      });
     }
   });
 
-  // 3. Carrega e garante Presets
   presets = loadPresets();
   activePresetId = getActivePresetId();
 
-  // Se não houver presets salvos, cria o inicial de fábrica
   if(presets.length === 0){
     presets.push({
       id: 'default',
@@ -290,21 +310,49 @@ async function inicializar(){
     savePresets(presets);
   }
 
-  // Garante integridade das listas de bloqueio para presets antigos
   presets.forEach(p => {
     if(!p.blocked) p.blocked = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] };
     Object.keys(FORMS_CONFIG).forEach(c => { if(!p.blocked[c]) p.blocked[c] = []; });
   });
 
-  // Se o active ID guardado não existir mais, reseta para o primeiro
   if(!presets.find(p => p.id === activePresetId)) {
     activePresetId = presets[0].id;
     setActivePresetId(activePresetId);
   }
 
-  // Correção 1: Inicializa os campos do formulário para garantir que ele esteja montado e pronto desde o carregamento da página
   alterarCamposForm('racas');
   renderizarPresets();
+  renderizarSubcategoryNav();
+  renderizarItens();
+}
+
+// ── BARRA DE SUB-ABAS DE FILTRAGEM DINÂMICA (PÍLULAS) ─────────────────────────
+function renderizarSubcategoryNav(){
+  const container = document.getElementById('subcatNav');
+  const arr = DB[currentCategory] || [];
+  
+  // Extrai subcategorias únicas
+  const subcategorias = [...new Set(arr.map(item => item.subcategoria).filter(Boolean))];
+  
+  if(subcategorias.length === 0) {
+    container.style.display = 'none';
+    activeSubcategory = '';
+    return;
+  }
+  
+  container.style.display = 'flex';
+  
+  let html = `<button class="sub-pill ${activeSubcategory === '' ? 'active' : ''}" onclick="setSubcategoryFilter('')">Todas</button>`;
+  subcategorias.forEach(sub => {
+    html += `<button class="sub-pill ${activeSubcategory === sub ? 'active' : ''}" onclick="setSubcategoryFilter('${sub}')">${sub}</button>`;
+  });
+  
+  container.innerHTML = html;
+}
+
+function setSubcategoryFilter(sub){
+  activeSubcategory = sub;
+  renderizarSubcategoryNav();
   renderizarItens();
 }
 
@@ -315,7 +363,6 @@ function renderizarPresets(){
     const isActive = p.id === activePresetId;
     const isSystemDefault = p.id === 'default';
     
-    // Contadores de itens bloqueados
     let totalBloqueados = 0;
     Object.keys(p.blocked).forEach(c => totalBloqueados += p.blocked[c].length);
 
@@ -368,11 +415,9 @@ function salvarPreset(){
   if(!nome) { toast('Diga um nome válido!'); return; }
 
   if(editingPresetId) {
-    // Editar
     const p = presets.find(x => x.id === editingPresetId);
     if(p) p.nome = nome;
   } else {
-    // Criar Novo
     presets.push({
       id: uid(),
       nome: nome,
@@ -392,7 +437,7 @@ function duplicarPreset(id){
   const cópia = {
     id: uid(),
     nome: `${original.nome} (Cópia)`,
-    blocked: JSON.parse(JSON.stringify(original.blocked)) // deep clone das listas
+    blocked: JSON.parse(JSON.stringify(original.blocked))
   };
   
   presets.push(cópia);
@@ -419,23 +464,35 @@ function deletarPreset(id){
 // ── RENDERIZAR ITENS & TOGGLES (PAINEL DIREITO) ───────────────────────────────
 function switchMainTab(cat){
   currentCategory = cat;
+  activeSubcategory = ''; // Zera sub-aba ao mudar aba pai
   document.querySelectorAll('.category-tabs .btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab_' + cat).classList.add('active');
   document.getElementById('contentSearch').value = '';
+  
+  // Sincroniza formulário da sidebar esquerda para bater com a categoria ativa
+  if(!editingItemId) {
+    document.getElementById('addCat').value = cat;
+    alterarCamposForm(cat);
+  }
+  
+  renderizarSubcategoryNav();
   renderizarItens();
 }
 
-// Função auxiliar que retorna os itens que estão atualmente visíveis com base no filtro de busca
 function obterItensVisiveis(){
   const arr = DB[currentCategory] || [];
   const query = document.getElementById('contentSearch').value.toLowerCase().trim();
-  return arr.filter(item => item.nome.toLowerCase().includes(query) || (item.desc && item.desc.toLowerCase().includes(query)));
+  
+  return arr.filter(item => {
+    const matchBusca = item.nome.toLowerCase().includes(query) || (item.desc && item.desc.toLowerCase().includes(query));
+    const matchSubcat = activeSubcategory === '' || item.subcategoria === activeSubcategory;
+    return matchBusca && matchSubcat;
+  });
 }
 
 function renderizarItens(){
   const grid = document.getElementById('itemsGrid');
   const filtrados = obterItensVisiveis();
-  
   const currentPreset = presets.find(p => p.id === activePresetId) || presets[0];
 
   if(filtrados.length === 0){
@@ -444,11 +501,9 @@ function renderizarItens(){
   }
 
   grid.innerHTML = filtrados.map(item => {
-    // Verifica se está bloqueado no preset ativo
     const isBlocked = currentPreset.blocked[currentCategory].includes(item.id);
     const isCustom = item._src === 'custom';
 
-    // Correção 2: Toda a row agora possui o gatilho `onclick`. As ações internas possuem `event.stopPropagation()` para não duplicar ou conflitar cliques.
     return `
       <div class="item-row ${isBlocked ? 'disabled' : ''}" id="row_${item.id}" onclick="toggleAtivacaoItem('${currentCategory}', '${item.id}')">
         <div class="item-info">
@@ -459,16 +514,18 @@ function renderizarItens(){
             <div class="item-title-line">
               <span class="item-title">${item.nome}</span>
               <span class="src-badge ${isCustom ? 'custom' : 'base'}">${isCustom ? 'Custom' : 'Oficial'}</span>
+              ${item.subcategoria ? `<span class="src-badge subcat">${item.subcategoria}</span>` : ''}
             </div>
             <div class="item-summary" title="${item.desc || ''}">${item.desc || 'Sem descrição cadastrada.'}</div>
           </div>
         </div>
         <div class="item-right-actions" onclick="event.stopPropagation()">
-          ${isCustom ? `
-            <button class="btn xs link" onclick="deletarConteudoCustomizado('${currentCategory}', '${item.id}')" style="color:var(--red2);padding:4px" title="Deletar do Banco de Dados">
-              <i class="ti ti-trash"></i>
-            </button>
-          ` : ''}
+          <button class="btn xs link" onclick="carregarItemParaEdicao('${currentCategory}', '${item.id}')" style="color:var(--gold);padding:4px" title="Editar informações deste item">
+            <i class="ti ti-edit"></i>
+          </button>
+          <button class="btn xs link" onclick="deletarItemGeral('${currentCategory}', '${item.id}')" style="color:var(--red2);padding:4px" title="Excluir item permanentemente">
+            <i class="ti ti-trash"></i>
+          </button>
         </div>
       </div>
     `;
@@ -486,10 +543,8 @@ function toggleAtivacaoItem(cat, id){
 
   const index = currentPreset.blocked[cat].indexOf(id);
   if(index > -1) {
-    // Se estava bloqueado, remove do bloqueio (Ativa)
     currentPreset.blocked[cat].splice(index, 1);
   } else {
-    // Se estava ativo, adiciona ao bloqueio (Desativa)
     currentPreset.blocked[cat].push(id);
   }
 
@@ -498,7 +553,6 @@ function toggleAtivacaoItem(cat, id){
   renderizarItens();
 }
 
-// Correção 3: Nova lógica de alternância global baseada no filtro/pesquisa atual
 function toggleTodosVisiveis(){
   const currentPreset = presets.find(p => p.id === activePresetId);
   if(!currentPreset) return;
@@ -506,21 +560,14 @@ function toggleTodosVisiveis(){
   const visiveis = obterItensVisiveis();
   if(visiveis.length === 0) return;
 
-  // Verifica se existem itens desmarcados (bloqueados) entre os visíveis
   const temDesmarcados = visiveis.some(item => currentPreset.blocked[currentCategory].includes(item.id));
 
   visiveis.forEach(item => {
     const idx = currentPreset.blocked[currentCategory].indexOf(item.id);
     if(temDesmarcados) {
-      // Se há desmarcados, o objetivo é marcar todos (remover da lista de bloqueio)
-      if(idx > -1) {
-        currentPreset.blocked[currentCategory].splice(idx, 1);
-      }
+      if(idx > -1) currentPreset.blocked[currentCategory].splice(idx, 1);
     } else {
-      // Se todos visíveis já estão marcados, desmarca todos (insere na lista de bloqueio se já não estiver lá)
-      if(idx === -1) {
-        currentPreset.blocked[currentCategory].push(item.id);
-      }
+      if(idx === -1) currentPreset.blocked[currentCategory].push(item.id);
     }
   });
 
@@ -530,7 +577,7 @@ function toggleTodosVisiveis(){
   toast(temDesmarcados ? 'Todos os itens visíveis foram ativados!' : 'Todos os itens visíveis foram desativados!');
 }
 
-// ── FORMULÁRIOS DINÂMICOS DE ADIÇÃO ───────────────────────────────────────────
+// ── FORMULÁRIOS DINÂMICOS DE ADIÇÃO / EDIÇÃO ──────────────────────────────────
 function alterarCamposForm(cat){
   const container = document.getElementById('dynamicFormFields');
   const fields = FORMS_CONFIG[cat];
@@ -552,12 +599,66 @@ function alterarCamposForm(cat){
   }).join('');
 }
 
+// NOVO: Coloca as informações de um item existente para edição no card lateral
+function carregarItemParaEdicao(cat, id){
+  const arr = DB[cat] || [];
+  const item = arr.find(i => i.id === id);
+  if(!item) return;
+
+  editingItemId = id;
+  
+  // Força select da sidebar a mostrar a categoria do item
+  document.getElementById('addCat').value = cat;
+  document.getElementById('addCat').disabled = true; // Impede mudar de aba no formulário no meio da edição
+  alterarCamposForm(cat);
+
+  document.getElementById('formTitle').textContent = "Editar Item";
+  document.getElementById('btnSalvarItem').innerHTML = '<i class="ti ti-check"></i> Salvar Alterações';
+  document.getElementById('btnCancelarEdicao').style.display = 'block';
+
+  // Popula os campos do formulário lateral
+  const config = FORMS_CONFIG[cat];
+  config.forEach(f => {
+    const el = document.getElementById('fld_' + f.key);
+    if(!el) return;
+
+    let val = item[f.key];
+    if(Array.isArray(val)) {
+      if(['tracos','ideais','vinculos','defeitos','pontosForts'].includes(f.key)){
+        val = val.join(' | ');
+      } else if(f.key === 'pericias') {
+        val = val.join(', ');
+      }
+    }
+    
+    if(f.type === 'select') {
+      el.value = String(val);
+    } else {
+      el.value = (val !== undefined) ? val : '';
+    }
+  });
+
+  document.getElementById('formAddConteudo').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelarEdicaoItem(){
+  editingItemId = null;
+  document.getElementById('addCat').disabled = false;
+  document.getElementById('formTitle').textContent = "Novo Conteúdo";
+  document.getElementById('btnSalvarItem').innerHTML = '<i class="ti ti-check"></i> Adicionar Item';
+  document.getElementById('btnCancelarEdicao').style.display = 'none';
+  
+  const cat = document.getElementById('addCat').value;
+  alterarCamposForm(cat);
+}
+
 function salvarNovoConteudo(){
   const cat = document.getElementById('addCat').value;
   const config = FORMS_CONFIG[cat];
-  const item = { id: uid() };
+  
+  // Se está editando mantém ID original, se não, gera novo UID
+  const item = { id: editingItemId ? editingItemId : uid() };
 
-  // Validação e captação
   for(const f of config){
     const el = document.getElementById('fld_' + f.key);
     if(!el) continue;
@@ -569,7 +670,6 @@ function salvarNovoConteudo(){
       return;
     }
 
-    // Tratamento de Arrays separados por pipe ou vírgula
     if(['tracos','ideais','vinculos','defeitos','pontosForts'].includes(f.key)){
       val = val ? val.split('|').map(s=>s.trim()).filter(Boolean) : [];
     }
@@ -582,53 +682,66 @@ function salvarNovoConteudo(){
     item[f.key] = val;
   }
 
-  // Persiste no storage de customizados
+  // Grava localmente no armazenamento customizado
   const custom = loadCustom();
-  custom[cat].push(item);
+  if(editingItemId) {
+    const idx = custom[cat].findIndex(i => i.id === editingItemId);
+    if(idx > -1) custom[cat][idx] = item;
+    else custom[cat].push(item);
+  } else {
+    custom[cat].push(item);
+  }
   saveCustom(custom);
 
-  // Insere em runtime no DB global da página para visualização imediata
+  // Injeta / Atualiza em runtime no DB global em memória da página
   item._src = 'custom';
-  DB[cat].push(item);
+  const dbIdx = DB[cat].findIndex(i => i.id === item.id);
+  if(dbIdx > -1) {
+    DB[cat][dbIdx] = item;
+  } else {
+    DB[cat].push(item);
+  }
 
-  // Limpa campos
-  config.forEach(f => {
-    const el = document.getElementById('fld_' + f.key);
-    if(el && f.type !== 'select') el.value = f.def !== undefined ? f.def : '';
-  });
-
-  if(currentCategory === cat) renderizarItens();
+  toast(editingItemId ? 'Item atualizado!' : 'Item customizado adicionado!');
+  cancelarEdicaoItem();
+  
+  renderizerSubcategoryNav();
+  renderizarItens();
   renderizarPresets();
-  toast('Item customizado adicionado ao banco!');
 }
 
-function deletarConteudoCustomizado(cat, id){
-  if(!confirm('Deseja excluir permanentemente este item do seu Banco de Dados?')) return;
+// NOVO: Exclusão unificada capaz de expurgar customizados ou apagar da memória itens nativos
+function deletarItemGeral(cat, id){
+  if(!confirm('Deseja deletar permanentemente este item do sistema?')) return;
 
-  // 1. Remove do Storage Custom
+  // 1. Apagar do storage local
   const custom = loadCustom();
   custom[cat] = custom[cat].filter(i => i.id !== id);
   saveCustom(custom);
 
-  // 2. Remove do DB em memória
+  // 2. Apagar da memória ativa
   DB[cat] = DB[cat].filter(i => i.id !== id);
 
-  // 3. Limpa referências em Presets para evitar lixo acumulado
+  // 3. Limpar de travas ou bloqueios salvos em presets
   presets.forEach(p => {
-    p.blocked[cat] = p.blocked[cat].filter(bid => bid !== id);
+    if(p.blocked && p.blocked[cat]) {
+      p.blocked[cat] = p.blocked[cat].filter(bid => bid !== id);
+    }
   });
   savePresets(presets);
 
+  if(editingItemId === id) cancelarEdicaoItem();
+
+  toast('Item removido com sucesso.');
+  renderizerSubcategoryNav();
   renderizarItens();
   renderizarPresets();
-  toast('Item removido do sistema.');
 }
 
 // ── FECHAR MODAL NO OVERLAY ───────────────────────────────────────────────────
 document.getElementById('mPreset').addEventListener('click', function(e){ if(e.target===this) fecharM('mPreset'); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') fecharM('mPreset'); });
 
-// Executa carga inicial
 inicializar();
 </script>
 </body>
