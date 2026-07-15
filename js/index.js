@@ -70,3 +70,34 @@ const observer = new IntersectionObserver(entries => {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
+
+// ── MODAL CONTROL (Jogador / Mestre) ────────────────────────────────────────
+function openRoleModal(role) {
+  const modal = document.getElementById('roleModal');
+  const playerContent = document.getElementById('modalPlayerContent');
+  const masterContent = document.getElementById('modalMasterContent');
+
+  if (role === 'jogador') {
+    playerContent.style.display = 'block';
+    masterContent.style.display = 'none';
+  } else if (role === 'mestre') {
+    playerContent.style.display = 'none';
+    masterContent.style.display = 'block';
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden'; // Impede scroll atrás do modal
+}
+
+function closeRoleModal() {
+  const modal = document.getElementById('roleModal');
+  modal.classList.remove('open');
+  document.body.style.overflow = ''; // Restaura scroll
+}
+
+function closeRoleModalOnBackdrop(event) {
+  // Fecha o modal caso clique na área desfocada externa ao container principal
+  if (event.target.id === 'roleModal') {
+    closeRoleModal();
+  }
+}

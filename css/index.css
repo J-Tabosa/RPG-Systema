@@ -708,3 +708,247 @@ body {
     opacity: 1;
     transform: none;
   }
+
+  /* ── ROLE SELECTION CARDS ─────────────────────────────────────────────────── */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin: 20px 0;
+}
+.role-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 40px 30px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.role-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(200,168,107,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.role-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 48px rgba(200, 168, 107, 0.2);
+}
+.role-card:hover::after {
+  opacity: 1;
+}
+.role-card.master:hover {
+  border-color: #9a1f2e; /* Tom carmesim/místico para o Mestre */
+  box-shadow: 0 12px 48px rgba(154, 31, 46, 0.2);
+}
+.role-card.master::after {
+  background: radial-gradient(circle at top, rgba(154, 31, 46, 0.08) 0%, transparent 70%);
+}
+.role-card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: var(--gold);
+  transition: all 0.3s;
+}
+.role-card:hover .role-card-icon {
+  transform: scale(1.1);
+  border-color: var(--gold);
+  background: rgba(200,168,107,0.1);
+}
+.role-card.master .role-card-icon {
+  color: #c95261;
+}
+.role-card.master:hover .role-card-icon {
+  border-color: #9a1f2e;
+  background: rgba(154, 31, 46, 0.1);
+}
+.role-card-body h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.role-card-body p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.role-card-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+.role-card.master .role-card-btn {
+  color: #c95261;
+}
+.role-card:hover .role-card-btn i {
+  transform: translateX(6px);
+  transition: transform 0.2s;
+}
+
+/* ── MODAL (POP-UP ENORME) ───────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 24px;
+}
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 900px;
+  padding: 48px;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-backdrop.open .modal-content {
+  transform: scale(1);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+.modal-close-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: rotate(90deg);
+}
+.modal-role-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.modal-header-accent {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.modal-header-accent i {
+  font-size: 56px;
+  color: var(--gold);
+}
+.modal-header-accent.master i {
+  color: #c95261;
+}
+.modal-header-accent h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: var(--text);
+  margin: 12px 0 8px;
+}
+.modal-header-accent p {
+  color: var(--muted);
+  font-size: 15px;
+}
+.modal-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.modal-link-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+.modal-link-card i {
+  font-size: 32px;
+  color: var(--gold);
+  background: var(--card2);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.modal-links-grid.mestre .modal-link-card i {
+  color: #c95261;
+}
+.modal-link-card h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.modal-link-card p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.modal-link-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  background: var(--card2);
+}
+.modal-links-grid.mestre .modal-link-card:hover {
+  border-color: #9a1f2e;
+}
+
+@media(max-width: 768px) {
+  .modal-content {
+    padding: 32px 20px;
+  }
+  .modal-links-grid {
+    grid-template-columns: 1fr;
+  }
+}

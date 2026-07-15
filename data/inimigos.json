@@ -1,0 +1,1790 @@
+{
+  "_meta": {
+    "versao": "2.0",
+    "descricao": "Bestiário Oficial de Inimigos e Ameaças — RPG System"
+  },
+  "monstros": [
+    {
+      "id": "m_goblin",
+      "name": "Goblin",
+      "tamanho": "Pequeno",
+      "race": "Humanoide (Goblinoide)",
+      "alignment": "Neutro e Mau",
+      "level": "1/4",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 7},
+        {"id": "hpcur", "label": "HP Atual", "val": 7}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 8}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 10},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 8}
+      ],
+      "habilidades": [
+        {"name": "Fuga Ágil", "level": "trait", "desc": "Pode desengajar ou se esconder como ação bônus."},
+        {"name": "Cimitarra", "level": "action", "desc": "Ataque Corpo-a-Corpo: +4 para atingir. Dano: 5 (1d6+2) cortante."}
+      ],
+      "traits": "Cimitarra, Arco Curto, 2d6 PC",
+      "notes": "Ataca em bandos coordenados e foge se superado.",
+      "backstory": "Pequenos renegados verdes que infestam cavernas e estradas."
+    },
+    {
+      "id": "m_kobold",
+      "name": "Kobold",
+      "tamanho": "Pequeno",
+      "race": "Humanoide (Reptiliano)",
+      "alignment": "Ordeiro e Mau",
+      "level": "1/8",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 5},
+        {"id": "hpcur", "label": "HP Atual", "val": 5}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 7}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 9},
+        {"abr": "INT", "val": 8}, {"abr": "SAB", "val": 7}, {"abr": "CAR", "val": 8}
+      ],
+      "habilidades": [
+        {"name": "Táticas de Bando", "level": "trait", "desc": "Vantagem no ataque se houver um aliado adjacente ao alvo."},
+        {"name": "Adaga", "level": "action", "desc": "Ataque Corpo-a-Corpo: +4 para atingir. Dano: 4 (1d4+2) perfurante."}
+      ],
+      "traits": "Funda, adaga enferrujada",
+      "notes": "Atraem inimigos para armadilhas mortais.",
+      "backstory": "Pequenos homens-lagarto que veneram dragões."
+    },
+    {
+      "id": "m_esqueleto",
+      "name": "Esqueleto",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Ordeiro e Mau",
+      "level": "1/4",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 13},
+        {"id": "hpcur", "label": "HP Atual", "val": 13}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 15},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Vulnerabilidade a Concussão", "level": "trait", "desc": "Sofre dano dobrado de armas de esmagamento."},
+        {"name": "Espada Curta", "level": "action", "desc": "Ataque Corpo-a-Corpo: +4 para atingir. Dano: 5 (1d6+2) perfurante."}
+      ],
+      "traits": "Espada curta, arco curto",
+      "notes": "Imune a veneno e exaustão.",
+      "backstory": "Ossos erguidos por necromancia profana."
+    },
+    {
+      "id": "m_zumbi",
+      "name": "Zumbi",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "1/4",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 8},
+        {"id": "init", "label": "Iniciativa", "val": -2},
+        {"id": "vel", "label": "Velocidade", "val": "6m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 22},
+        {"id": "hpcur", "label": "HP Atual", "val": 22}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 13}, {"abr": "DES", "val": 6}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 6}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Fortitude Zumbi", "level": "trait", "desc": "Se o dano reduzir o HP a 0, faz salvaguarda de CON para voltar com 1 HP."},
+        {"name": "Pancada", "level": "action", "desc": "Ataque Corpo-a-Corpo: +3 para atingir. Dano: 4 (1d6+1) de impacto."}
+      ],
+      "traits": "Nenhum",
+      "notes": "Persegue alvos cegamente até a destruição.",
+      "backstory": "Corpos em decomposição reanimados pela fome de carne."
+    },
+    {
+      "id": "m_orc",
+      "name": "Orc",
+      "tamanho": "Médio",
+      "race": "Humanoide (Orc)",
+      "alignment": "Caótico e Mau",
+      "level": "1/2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 15},
+        {"id": "hpcur", "label": "HP Atual", "val": 15}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 7}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Agressivo", "level": "trait", "desc": "Como ação bônus, pode se mover até sua velocidade em direção a um inimigo."},
+        {"name": "Machado Grande", "level": "action", "desc": "Ataque Corpo-a-Corpo: +5 para atingir. Dano: 9 (1d12+3) cortante."}
+      ],
+      "traits": "Machado Grande, Javelinas, 1d10 PO",
+      "notes": "Ataca gritando juras de guerra.",
+      "backstory": "Guerreiros tribais ferozes que louvam deuses da destruição."
+    },
+    {
+      "id": "m_lobo",
+      "name": "Lobo",
+      "tamanho": "Médio",
+      "race": "Besta",
+      "alignment": "Sem Alinhamento",
+      "level": "1/4",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 11},
+        {"id": "hpcur", "label": "HP Atual", "val": 11}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 12}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 6}
+      ],
+      "habilidades": [
+        {"name": "Táticas de Matilha", "level": "trait", "desc": "Vantagem no ataque se houver aliados adjacentes."},
+        {"name": "Mordida", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 7 (2d4+2) perfurante. O alvo deve passar em teste de FOR ou cair derrubado."}
+      ],
+      "traits": "Pele de Lobo",
+      "notes": "Isola e derruba as presas antes de consumir.",
+      "backstory": "Caçadores eficientes das florestas temperadas."
+    },
+    {
+      "id": "m_urso_coruja",
+      "name": "Urso-Coruja",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "3",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 59},
+        {"id": "hpcur", "label": "HP Atual", "val": 59}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 17},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Ataque Múltiplo", "level": "action", "desc": "Faz um ataque de Garra e um de Mordida por turno."},
+        {"name": "Garras Devastadoras", "level": "action", "desc": "Corpo-a-Corpo: +7. Dano: 14 (2d8+5) de impacto."}
+      ],
+      "traits": "Pele e penas raras (50 PO)",
+      "notes": "Territorialista e agressivo ao extremo.",
+      "backstory": "A bizarra fusão mágica entre um urso pardo e uma coruja gigante."
+    },
+    {
+      "id": "m_mimico",
+      "name": "Mímico",
+      "tamanho": "Médio",
+      "race": "Monstruosidade",
+      "alignment": "Neutro",
+      "level": "2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "4.5m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 58},
+        {"id": "hpcur", "label": "HP Atual", "val": 58}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 17}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 15},
+        {"abr": "INT", "val": 5}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 8}
+      ],
+      "habilidades": [
+        {"name": "Aparência Falsa", "level": "trait", "desc": "Enquanto parado, é indistinguível de um objeto."},
+        {"name": "Pseudópode (Aderente)", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 7 (1d8+3). Alvo fica preso por cola natural."}
+      ],
+      "traits": "Gemas no estômago (100 PO)",
+      "notes": "Disfarça-se de baús para atrair aventureiros gananciosos.",
+      "backstory": "Predadores metamorfos das profundezas de masmorras."
+    },
+    {
+      "id": "m_gelatina_ocre",
+      "name": "Gelatina Ocre",
+      "tamanho": "Grande",
+      "race": "Limo",
+      "alignment": "Sem Alinhamento",
+      "level": "2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 8},
+        {"id": "init", "label": "Iniciativa", "val": -2},
+        {"id": "vel", "label": "Velocidade", "val": "3m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 45},
+        {"id": "hpcur", "label": "HP Atual", "val": 45}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 15}, {"abr": "DES", "val": 6}, {"abr": "CON", "val": 14},
+        {"abr": "INT", "val": 2}, {"abr": "SAB", "val": 6}, {"abr": "CAR", "val": 1}
+      ],
+      "habilidades": [
+        {"name": "Divisão", "level": "reaction", "desc": "Ao sofrer dano cortante ou elétrico, divide-se em duas gelatinas menores com metade do HP atual."},
+        {"name": "Pseudópode Ácido", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 9 (2d6+2) de esmagamento mais 3 (1d6) de ácido."}
+      ],
+      "traits": "Ácido corrosivo",
+      "notes": "Desliza sob frestas de portas e tetos.",
+      "backstory": "Limo gelatinoso e faminto que dissolve matéria orgânica."
+    },
+    {
+      "id": "m_devorador_mentes",
+      "name": "Devorador de Mentes (Illithid)",
+      "tamanho": "Médio",
+      "race": "Aberração",
+      "alignment": "Ordeiro e Mau",
+      "level": "7",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 71},
+        {"id": "hpcur", "label": "HP Atual", "val": 71}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 11}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 19}, {"abr": "SAB", "val": 17}, {"abr": "CAR", "val": 17}
+      ],
+      "habilidades": [
+        {"name": "Rajada Psiônica", "level": "action", "desc": "Cone de 18m. Alvos devem fazer salvaguarda de INT ou sofrer 22 de dano psíquico e ficar atordoados."},
+        {"name": "Extrair Cérebro", "level": "action", "desc": "Corpo-a-Corpo: +7 contra alvo incapacitado. Dano: 55 perfurante. Se reduzir o HP a 0, devora o cérebro matando na hora."}
+      ],
+      "traits": "Manto de Proteção Mental, Joias Antigas",
+      "notes": "Prefere dominar mentes e lutar através de escravos antes de atacar diretamente.",
+      "backstory": "Tiranos psíquicos ancestrais que habitam as profundezas do Subterrâneo."
+    },
+    {
+      "id": "m_dragao_vermelho",
+      "name": "Dragão Vermelho Jovem",
+      "tamanho": "Grande",
+      "race": "Dragão",
+      "alignment": "Caótico e Mau",
+      "level": "10",
+      "folder": "dragões",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 18},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "12m (Voo 24m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 178},
+        {"id": "hpcur", "label": "HP Atual", "val": 178}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 23}, {"abr": "DES", "val": 10}, {"abr": "CON", "val": 21},
+        {"abr": "INT", "val": 14}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 19}
+      ],
+      "habilidades": [
+        {"name": "Sopro de Fogo", "level": "action", "desc": "Cone de 9m. Dano: 56 (16d6) de fogo. Salvaguarda de DES reduz pela metade."},
+        {"name": "Mordida Incineradora", "level": "action", "desc": "Corpo-a-Corpo: +10. Dano: 17 (2d10+6) de perfuração mais 3 (1d6) de fogo."}
+      ],
+      "traits": "Escamas Vermelhas, Presas de Dragão, Tesouro Pessoal",
+      "notes": "Extremamente arrogante, prefere incinerar exércitos do alto.",
+      "backstory": "Monarca dos céus e das montanhas, impiedoso e ganancioso."
+    },
+    {
+      "id": "m_espectro_fantasma",
+      "name": "Espectro",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Caótico e Mau",
+      "level": "2",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "Voo 15m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 22},
+        {"id": "hpcur", "label": "HP Atual", "val": 22}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 1}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 11},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 11}
+      ],
+      "habilidades": [
+        {"name": "Incorpóreo", "level": "trait", "desc": "Pode atravessar objetos sólidos. Resistente a ataques não mágicos."},
+        {"name": "Dreno de Vida", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 10 (3d6) necrótico. O HP máximo do alvo é reduzido pelo mesmo valor."}
+      ],
+      "traits": "Ectoplasma",
+      "notes": "Detesta a luz do dia e caça os vivos sem descanso.",
+      "backstory": "Almas corrompidas que não puderam fazer a travessia."
+    },
+    {
+      "id": "m_gargula",
+      "name": "Gárgula",
+      "tamanho": "Médio",
+      "race": "Elemental",
+      "alignment": "Caótico e Mau",
+      "level": "2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Voo 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 52},
+        {"id": "hpcur", "label": "HP Atual", "val": 52}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 15}, {"abr": "DES", "val": 11}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Aparência de Pedra", "level": "trait", "desc": "Enquanto parado, é indistinguível de uma estátua de pedra."},
+        {"name": "Garras e Mordida", "level": "action", "desc": "Faz dois ataques combinados de garra por turno. Dano: 5 (1d6+2) de impacto."}
+      ],
+      "traits": "Pedras semipreciosas",
+      "notes": "Espera pacientemente no topo de templos e masmorras.",
+      "backstory": "Sentinelas de pedra viva trazidos à vida por pactos elementais."
+    },
+    {
+      "id": "m_lich",
+      "name": "Lich",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "21",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 135},
+        {"id": "hpcur", "label": "HP Atual", "val": 135}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 11}, {"abr": "DES", "val": 16}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 20}, {"abr": "SAB", "val": 14}, {"abr": "CAR", "val": 16}
+      ],
+      "habilidades": [
+        {"name": "Resistência Lendária", "level": "trait", "desc": "Se falhar em uma salvaguarda, pode escolher passar (3/dia)."},
+        {"name": "Toque Paralisante", "level": "action", "desc": "Corpo-a-Corpo: +12. Dano: 10 (3d6) necrótico. O alvo deve fazer salvaguarda de CON ou ficar paralisado."}
+      ],
+      "traits": "Filactéria Oculta, Livros de Magia Suprema, Pergaminhos",
+      "notes": "Conjura magias de 9º nível como Desintegrar e Palavra de Poder Matar.",
+      "backstory": "Magos lendários que sacrificaram suas almas para alcançar a imortalidade profana."
+    },
+    {
+      "id": "m_beholder",
+      "name": "Observador (Beholder)",
+      "tamanho": "Grande",
+      "race": "Aberração",
+      "alignment": "Ordeiro e Mau",
+      "level": "13",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 18},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "Flutuar 6m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 180},
+        {"id": "hpcur", "label": "HP Atual", "val": 180}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 17}, {"abr": "SAB", "val": 15}, {"abr": "CAR", "val": 17}
+      ],
+      "habilidades": [
+        {"name": "Cone Antimagia", "level": "trait", "desc": "O olho central emite um cone de 45m de antimagia total. Magias não funcionam nele."},
+        {"name": "Raios Oculares (Aleatórios)", "level": "action", "desc": "Dispara 3 raios oculares por turno: Raio de Desintegração, Raio de Morte, Raio de Medo ou Raio de Paralisia."}
+      ],
+      "traits": "Olhos Mágicos, Grande Tesouro de Masmorra",
+      "notes": "Extremamente paranoico. Acredita que todos conspiram contra sua genialidade.",
+      "backstory": "Criatura flutuante composta por um olho imenso, boca cheia de dentes afiados e dez tentáculos oculares."
+    },
+    {
+      "id": "m_minotauro",
+      "name": "Minotauro",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "3",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 76},
+        {"id": "hpcur", "label": "HP Atual", "val": 76}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 11}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 16}, {"abr": "CAR", "val": 9}
+      ],
+      "habilidades": [
+        {"name": "Investida de Chifres", "level": "trait", "desc": "Se correr em linha reta e acertar, causa 10 de dano de impacto extra e tenta derrubar."},
+        {"name": "Machado de Batalha Gigante", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 17 (2d12+4) cortante."}
+      ],
+      "traits": "Machado Gigante, Argola de Nariz",
+      "notes": "Nunca se perde em labirintos ou masmorras complexas.",
+      "backstory": "Poderosos guardiões híbridos com cabeça de touro e corpo humanoide."
+    },
+    {
+      "id": "m_troll",
+      "name": "Troll",
+      "tamanho": "Grande",
+      "race": "Gigante",
+      "alignment": "Caótico e Mau",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 84},
+        {"id": "hpcur", "label": "HP Atual", "val": 84}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 13}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 7}, {"abr": "SAB", "val": 9}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Regeneração Acelerada", "level": "trait", "desc": "Recupera 10 HP no início de seu turno. Só não regenera se sofrer dano de fogo ou ácido."},
+        {"name": "Garras e Mordida", "level": "action", "desc": "Faz dois ataques de garra e um de mordida. Dano: 11 (2d6+4) cortante."}
+      ],
+      "traits": "Garras ásperas, dentes podres",
+      "notes": "Luta sem medo da morte devido à sua cura inacreditável.",
+      "backstory": "Gigantes grotescos e deformados com apetite insaciável por carne fresca."
+    },
+    {
+      "id": "m_vampiro_chefe",
+      "name": "Vampiro (Nobre)",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Ordeiro e Mau",
+      "level": "13",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 16},
+        {"id": "init", "label": "Iniciativa", "val": 4},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 144},
+        {"id": "hpcur", "label": "HP Atual", "val": 144}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 18}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 17}, {"abr": "SAB", "val": 15}, {"abr": "CAR", "val": 18}
+      ],
+      "habilidades": [
+        {"name": "Regeneração Vampírica", "level": "trait", "desc": "Recupera 20 HP no início de seu turno se estiver na escuridão e acima de 0 HP."},
+        {"name": "Mordida Drenadora", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 7 (1d6+4) perfurante mais 10 (3d6) necrótico. Cura a si mesmo no valor necrótico."}
+      ],
+      "traits": "Capa Nobre, Joias de Família, Chave da Cripta",
+      "notes": "Pode se transformar em névoa ou morcego para escapar.",
+      "backstory": "Nobre imortal que governa castelos sombrios e amaldiçoados."
+    },
+    {
+      "id": "m_quimera",
+      "name": "Quimera",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "6",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Voo 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 91},
+        {"id": "hpcur", "label": "HP Atual", "val": 91}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 19}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 17},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 14}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Ataque Triplo", "level": "action", "desc": "Faz um ataque de mordida de leão, uma mordida de bode e garra de dragão."},
+        {"name": "Sopro de Fogo", "level": "action", "desc": "Cone de 4.5m. Dano: 31 (9d6) de fogo. Salvaguarda de DES reduz pela metade."}
+      ],
+      "traits": "Chifres e Asas rústicas",
+      "notes": "Ataca de surpresa rasgando com as garras antes de usar o sopro.",
+      "backstory": "Fusão perversa entre cabeça de leão, cabeça de bode e cabeça de dragão alado."
+    },
+    {
+      "id": "m_hidra",
+      "name": "Hidra",
+      "tamanho": "Enorme",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "8",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Natação 9m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 172},
+        {"id": "hpcur", "label": "HP Atual", "val": 172}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 2}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Múltiplas Cabeças", "level": "trait", "desc": "Começa com 5 cabeças. Ganha 1 ataque extra por cabeça ativa. Se perder 1 cabeça, crescem mais 2 no final do turno, a menos que sofra dano de fogo."},
+        {"name": "Mordidas Vorazes", "level": "action", "desc": "Corpo-a-Corpo: +8. Ataca uma vez para cada cabeça ativa. Dano: 10 (1d10+5) perfurante por mordida."}
+      ],
+      "traits": "Dentes e Sangue venoso",
+      "notes": "Prefere viver em pântanos profundos e lagos subterrâneos.",
+      "backstory": "Répteis gigantescos com cabeças serpentinas que se multiplicam ao serem cortadas."
+    },
+    {
+      "id": "m_esfinge",
+      "name": "Androsfinge",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Ordeiro e Neutro",
+      "level": "17",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "12m (Voo 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 199},
+        {"id": "hpcur", "label": "HP Atual", "val": 199}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 22}, {"abr": "DES", "val": 10}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 16}, {"abr": "SAB", "val": 18}, {"abr": "CAR", "val": 18}
+      ],
+      "habilidades": [
+        {"name": "Rugido Divino", "level": "action", "desc": "Ruge emitindo uma onda sônica. Todos a 15m ficam assustados ou ensurdecidos."},
+        {"name": "Garras Sagradas", "level": "action", "desc": "Corpo-a-Corpo: +11. Dano: 24 (4d8+6) psíquico/radiante."}
+      ],
+      "traits": "Pedras Runas, Pergaminhos do Destino",
+      "notes": "Desafia oponentes com enigmas complexos antes de julgar a força de suas mentes.",
+      "backstory": "Guardiões divinos com corpo de leão majestoso, asas de águia e cabeça humana."
+    },
+    {
+      "id": "m_banshee",
+      "name": "Banshee",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Caótico e Mau",
+      "level": "4",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "Voo 12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 58},
+        {"id": "hpcur", "label": "HP Atual", "val": 58}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 1}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 10},
+        {"abr": "INT", "val": 12}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 17}
+      ],
+      "habilidades": [
+        {"name": "Lamento da Morte (1/dia)", "level": "action", "desc": "Grito fúnebre. Todos a 9m devem passar em salvaguarda de CON ou cair imediatamente a 0 HP."},
+        {"name": "Toque Corrosivo", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 12 (3d6+2) necrótico."}
+      ],
+      "traits": "Ectoplasma brilhante",
+      "notes": "Detecta a presença de criaturas vivas a até 8 quilômetros de distância.",
+      "backstory": "Espíritos atormentados de elfas que se apegaram a riquezas ou vaidades extremas em vida."
+    },
+    {
+      "id": "m_basilisco",
+      "name": "Basilisco",
+      "tamanho": "Médio",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "3",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "6m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 52},
+        {"id": "hpcur", "label": "HP Atual", "val": 52}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 8}, {"abr": "CON", "val": 15},
+        {"abr": "INT", "val": 2}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Olhar Petrificante", "level": "trait", "desc": "Se um inimigo iniciar o turno olhando para ele, deve passar em salvaguarda de CON ou começar a virar pedra."},
+        {"name": "Mordida Trituradora", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 10 (2d6+3) perfurante mais 7 (2d6) de veneno."}
+      ],
+      "traits": "Líquido Despetrificante (estômago)",
+      "notes": "Consome suas presas de pedra que se dissolvem lentamente em seu estômago.",
+      "backstory": "Répteis de oito patas de cores escuras cujo mero olhar transforma carne em pedra rígida."
+    },
+    {
+      "id": "m_bugbear",
+      "name": "Bugbear",
+      "tamanho": "Médio",
+      "race": "Humanoide (Goblinoide)",
+      "alignment": "Caótico e Mau",
+      "level": "1",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 16},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 27},
+        {"id": "hpcur", "label": "HP Atual", "val": 27}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 15}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 13},
+        {"abr": "INT", "val": 8}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 9}
+      ],
+      "habilidades": [
+        {"name": "Ataque Surpresa", "level": "trait", "desc": "Causa 7 (2d6) de dano extra se atacar uma criatura surpresa."},
+        {"name": "Estrela da Manhã (Maça)", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 11 (2d8+2) perfurante."}
+      ],
+      "traits": "Maça Estrela, Couro Bruto",
+      "notes": "Prefere emboscar aventureiros em corredores escuros.",
+      "backstory": "Os maiores e mais fortes da família goblinoide, cobertos de pelos marrons espessos."
+    },
+    {
+      "id": "m_centauro_selvagem",
+      "name": "Centauro Caçador",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Neutro",
+      "level": "2",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "15m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 45},
+        {"id": "hpcur", "label": "HP Atual", "val": 45}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 14},
+        {"abr": "INT", "val": 9}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 11}
+      ],
+      "habilidades": [
+        {"name": "Cascos Correndo", "level": "action", "desc": "Faz um ataque de Cascos após um ataque de Lança. Dano: 9 (2d4+4) de impacto."},
+        {"name": "Arco Longo", "level": "action", "desc": "Ataque à Distância: +4. Alcance 45/180m. Dano: 6 (1d8+2) perfurante."}
+      ],
+      "traits": "Arco Longo, Lança Rústica",
+      "notes": "Usa táticas de correr e disparar mantendo distância.",
+      "backstory": "Nômades da floresta que unem as habilidades de um cavaleiro com a agilidade de um cavalo."
+    },
+    {
+      "id": "m_ciclopes",
+      "name": "Ciclope",
+      "tamanho": "Enorme",
+      "race": "Gigante",
+      "alignment": "Caótico e Neutro",
+      "level": "6",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 107},
+        {"id": "hpcur", "label": "HP Atual", "val": 107}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 22}, {"abr": "DES", "val": 9}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 8}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Profundidade Ruim", "level": "trait", "desc": "Desvantagem em ataques à distância acima de 9m devido a possuir apenas um olho."},
+        {"name": "Clava Gigante", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 19 (3d8+6) de impacto."}
+      ],
+      "traits": "Clava, Pele de Animais",
+      "notes": "Arremessa rochas imensas de longe se não puder se aproximar.",
+      "backstory": "Gigantes isolados de um olho só conhecidos pela força bruta e pouca inteligência."
+    },
+    {
+      "id": "m_dragao_azul_jovem",
+      "name": "Dragão Azul Jovem",
+      "tamanho": "Grande",
+      "race": "Dragão",
+      "alignment": "Ordeiro e Mau",
+      "level": "9",
+      "folder": "dragões",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 18},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "12m (Voo 24m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 152},
+        {"id": "hpcur", "label": "HP Atual", "val": 152}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 21}, {"abr": "DES", "val": 10}, {"abr": "CON", "val": 19},
+        {"abr": "INT", "val": 14}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 17}
+      ],
+      "habilidades": [
+        {"name": "Sopro de Eletricidade", "level": "action", "desc": "Linha de 18m por 1.5m. Dano: 55 (10d10) elétrico. Salvaguarda de DES reduz pela metade."},
+        {"name": "Mordida Eletrizante", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 16 (2d10+5) perfurante mais 3 (1d6) elétrico."}
+      ],
+      "traits": "Escamas Azuis, Presas, Joias do Deserto",
+      "notes": "Vive sob dunas de areia de desertos antigos.",
+      "backstory": "Soberanos arrogantes e manipuladores das planícies áridas e dunas desertas."
+    },
+    {
+      "id": "m_draegloth",
+      "name": "Draegloth",
+      "tamanho": "Grande",
+      "race": "Demônio",
+      "alignment": "Caótico e Mau",
+      "level": "7",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 84},
+        {"id": "hpcur", "label": "HP Atual", "val": 84}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 14},
+        {"abr": "INT", "val": 13}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 11}
+      ],
+      "habilidades": [
+        {"name": "Visão no Escuro Superior", "level": "trait", "desc": "Enxerga na escuridão total a até 36 metros de distância."},
+        {"name": "Mordida e Quatro Garras", "level": "action", "desc": "Executa um ataque de Mordida (+8, 1d10+5) e dois de Garras (+8, 2d6+5)."}
+      ],
+      "traits": "Amuleto de Lolth",
+      "notes": "Luta como um campeão fanático das sacerdotisas drow.",
+      "backstory": "Híbrido monstruoso profano de quatro braços nascido de rituais com demônios das aranhas."
+    },
+    {
+      "id": "m_drider",
+      "name": "Drider",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "6",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 19},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Escalar 9m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 123},
+        {"id": "hpcur", "label": "HP Atual", "val": 123}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 16}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 13}, {"abr": "SAB", "val": 14}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Andar em Teias", "level": "trait", "desc": "Ignora restrições de movimento causadas por teias de aranha."},
+        {"name": "Espada Longa", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 8 (1d8+3) ou 9 (1d10+3) se usada com duas mãos."}
+      ],
+      "traits": "Espada de Ferro Negro, Arco Longo, Veneno",
+      "notes": "Ataca usando magias de suporte e veneno.",
+      "backstory": "Drows castigados pela Rainha Aranha, transformados em aranhas com torso drow."
+    },
+    {
+      "id": "m_driade",
+      "name": "Dríade Protetora",
+      "tamanho": "Médio",
+      "race": "Fada",
+      "alignment": "Neutro",
+      "level": "1",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 11},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 22},
+        {"id": "hpcur", "label": "HP Atual", "val": 22}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 11},
+        {"abr": "INT", "val": 14}, {"abr": "SAB", "val": 15}, {"abr": "CAR", "val": 18}
+      ],
+      "habilidades": [
+        {"name": "Mesclar-se à Árvore", "level": "trait", "desc": "Pode entrar no tronco de uma árvore viva e reaparecer em outra próxima."},
+        {"name": "Clava Encantada", "level": "action", "desc": "Corpo-a-Corpo: +2 (+6 mágico). Dano: 8 (1d8+4) de impacto."}
+      ],
+      "traits": "Ervas medicinais, sementes raras",
+      "notes": "Conjura magias como Constrição e Pele de Árvore.",
+      "backstory": "Espíritos florestais belos acoplados a uma árvore-mãe."
+    },
+    {
+      "id": "m_duergar",
+      "name": "Duergar (Anão Cinzento)",
+      "tamanho": "Médio",
+      "race": "Humanoide (Anão)",
+      "alignment": "Ordeiro e Mau",
+      "level": "1",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 16},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "7.5m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 26},
+        {"id": "hpcur", "label": "HP Atual", "val": 26}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 14}, {"abr": "DES", "val": 11}, {"abr": "CON", "val": 14},
+        {"abr": "INT", "val": 11}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 9}
+      ],
+      "habilidades": [
+        {"name": "Crescimento Rápido (1/dia)", "level": "action", "desc": "Fica gigante por 1 minuto, dobrando o dano de suas armas."},
+        {"name": "Invisibilidade (1/dia)", "level": "action", "desc": "Fica invisível por 1 minuto ou até atacar."}
+      ],
+      "traits": "Picareta de Guerra, Escudo Metálico",
+      "notes": "Embosca intrusos usando invisibilidade e expandindo de tamanho.",
+      "backstory": "Anões cinzentos corrompidos pela opressão das masmorras do Subterrâneo."
+    },
+    {
+      "id": "m_elemental_fogo",
+      "name": "Elemental do Fogo",
+      "tamanho": "Grande",
+      "race": "Elemental",
+      "alignment": "Neutro",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "15m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 102},
+        {"id": "hpcur", "label": "HP Atual", "val": 102}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 17}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Forma de Fogo", "level": "trait", "desc": "Criaturas que tocarem ou golpearem de perto sofrem 5 (1d10) de fogo."},
+        {"name": "Golpe Incendiário", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 10 (2d6+3) de fogo. O alvo pega fogo."}
+      ],
+      "traits": "Essência do Fogo Primordial",
+      "notes": "Cruza o campo de batalha queimando tudo o que toca.",
+      "backstory": "Pura energia ígnea moldada na forma de uma coluna de fogo viva."
+    },
+    {
+      "id": "m_elemental_terra",
+      "name": "Elemental da Terra",
+      "tamanho": "Grande",
+      "race": "Elemental",
+      "alignment": "Neutro",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 126},
+        {"id": "hpcur", "label": "HP Atual", "val": 126}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 8}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 5}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Deslizar na Terra", "level": "trait", "desc": "Pode se mover através de rocha e terra sólida sem perturbar o material."},
+        {"name": "Pancadas de Rocha", "level": "action", "desc": "Faz dois golpes de punho por turno. Dano: 14 (2d8+5) de impacto por soco."}
+      ],
+      "traits": "Gemas e Minerais Brutos",
+      "notes": "Esmaga oponentes contra as paredes de pedra.",
+      "backstory": "Um colosso robusto e furioso feito de pedras brutas e solo denso."
+    },
+    {
+      "id": "m_etereas",
+      "name": "Filhote de Verme Púrpura",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "2",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "6m (Escavar 6m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 42},
+        {"id": "hpcur", "label": "HP Atual", "val": 42}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 8}, {"abr": "CON", "val": 14},
+        {"abr": "INT", "val": 1}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 4}
+      ],
+      "habilidades": [
+        {"name": "Ferrão Venenoso", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 6 (1d6+3) perfurante mais 10 (3d6) de veneno."},
+        {"name": "Abocanhar", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 7 (1d8+3) de esmagamento. Engole oponentes menores."}
+      ],
+      "traits": "Muco Ácido",
+      "notes": "Ataca rastejando de debaixo da areia ou solo.",
+      "backstory": "Uma versão em escala menor dos titânicos vermes do deserto."
+    },
+    {
+      "id": "m_fantasma",
+      "name": "Fantasma Aparição",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Qualquer Alinhamento",
+      "level": "4",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 11},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "Voo 13.5m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 45},
+        {"id": "hpcur", "label": "HP Atual", "val": 45}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 7}, {"abr": "DES", "val": 13}, {"abr": "CON", "val": 10},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 17}
+      ],
+      "habilidades": [
+        {"name": "Olhar Horripilante", "level": "action", "desc": "Alvos que olharem devem passar em salvaguarda de SAB ou envelhecer 1d4x10 anos na hora."},
+        {"name": "Possessão (1/dia)", "level": "action", "desc": "Tenta possuir o corpo de um humanoide vivo, assumindo total controle."}
+      ],
+      "traits": "Pó de Fantasma",
+      "notes": "Vaga lamentando sua ruína antiga e assombrando herdeiros.",
+      "backstory": "A alma residual de uma pessoa cuja morte foi trágica ou violenta."
+    },
+    {
+      "id": "m_flesh_golem",
+      "name": "Golem de Carne",
+      "tamanho": "Grande",
+      "race": "Constructo",
+      "alignment": "Neutro",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 9},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 93},
+        {"id": "hpcur", "label": "HP Atual", "val": 93}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 19}, {"abr": "DES", "val": 9}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Aversão ao Fogo", "level": "trait", "desc": "Se sofrer dano de fogo, tem desvantagem em testes de atributos até o fim de seu próximo turno."},
+        {"name": "Golpe de Punhos", "level": "action", "desc": "Faz dois socos maciços por turno. Dano: 13 (2d8+4) de impacto."}
+      ],
+      "traits": "Peças cirúrgicas, runa de controle",
+      "notes": "Absorve eletricidade para recuperar seus pontos de vida.",
+      "backstory": "Uma colagem grotesca de membros costurados trazida à vida por raios e magia arcana."
+    },
+    {
+      "id": "m_flind",
+      "name": "Flind (Líder Gnoll)",
+      "tamanho": "Médio",
+      "race": "Humanoide (Gnoll)",
+      "alignment": "Caótico e Mau",
+      "level": "9",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 16},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 127},
+        {"id": "hpcur", "label": "HP Atual", "val": 127}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 11}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Aura de Fúria Gemente", "level": "trait", "desc": "Gnolls aliados próximos ganham bônus de dano de ataque."},
+        {"name": "Flagelo de Flind", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 26 (3d12+5) de impacto mais efeitos de loucura ou paralisia."}
+      ],
+      "traits": "Flagelo de Três Cabeças",
+      "notes": "Comanda as hordas rindo de desespero dos inimigos.",
+      "backstory": "Um gnoll de poder e tamanho colossal escolhido pelo lorde demônio Yeenoghu."
+    },
+    {
+      "id": "m_frost_giant",
+      "name": "Gigante do Gelo",
+      "tamanho": "Enorme",
+      "race": "Gigante",
+      "alignment": "Caótico e Mau",
+      "level": "8",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 138},
+        {"id": "hpcur", "label": "HP Atual", "val": 138}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 23}, {"abr": "DES", "val": 9}, {"abr": "CON", "val": 21},
+        {"abr": "INT", "val": 9}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Imunidade a Frio", "level": "trait", "desc": "Não sofre nenhum dano de gelo ou geada."},
+        {"name": "Machado de Batalha de Gelo", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 25 (3d12+6) cortante."}
+      ],
+      "traits": "Machado de Ferro de Gelo, Armadura de Placas Rústica",
+      "notes": "Arremessa blocos de gelo imensos de longe.",
+      "backstory": "Saqueadores brutais e corpulentos que habitam os picos congelados do norte."
+    },
+    {
+      "id": "m_ghoul",
+      "name": "Carniçal (Ghoul)",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Caótico e Mau",
+      "level": "1",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 22},
+        {"id": "hpcur", "label": "HP Atual", "val": 22}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 13}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 10},
+        {"abr": "INT", "val": 7}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 6}
+      ],
+      "habilidades": [
+        {"name": "Garras Paralisantes", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 7 (2d4+2) cortante. Alvos devem passar em CON ou ficar paralisados (elfos são imunes)."},
+        {"name": "Mordida Podre", "level": "action", "desc": "Corpo-a-Corpo: +2. Dano: 9 (2d6+2) perfurante."}
+      ],
+      "traits": "Dentes podres, garras afiadas",
+      "notes": "Paralisa um alvo e tenta consumi-lo vivo no chão.",
+      "backstory": "Abominações vorazes geradas por mortes causadas por fome extrema."
+    },
+    {
+      "id": "m_githyanki",
+      "name": "Githyanki Guerreiro",
+      "tamanho": "Médio",
+      "race": "Humanoide",
+      "alignment": "Ordeiro e Mau",
+      "level": "3",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 49},
+        {"id": "hpcur", "label": "HP Atual", "val": 49}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 15}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 13}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Conjuração Psiônica", "level": "trait", "desc": "Pode conjurar Mão Arcana invisível e salto ampliado."},
+        {"name": "Espada de Prata Grande", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 12 (2d6+5) cortante mais 3 psíquico."}
+      ],
+      "traits": "Espada de Prata, Armadura de Meia-Placa",
+      "notes": "Usa táticas coordenadas de ataque flutuando ou teleportando.",
+      "backstory": "Piratas astrais extremamente orgulhosos que montam dragões vermelhos."
+    },
+    {
+      "id": "m_glabrezu",
+      "name": "Glabrezu",
+      "tamanho": "Grande",
+      "race": "Demônio",
+      "alignment": "Caótico e Mau",
+      "level": "9",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 157},
+        {"id": "hpcur", "label": "HP Atual", "val": 157}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 20}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 16}, {"abr": "SAB", "val": 17}, {"abr": "CAR", "val": 16}
+      ],
+      "habilidades": [
+        {"name": "Duas Garras e Duas Pinças", "level": "action", "desc": "Ataca duas vezes com Pinças Gigantes e duas com Garras normais por turno."},
+        {"name": "Pinças de Glabrezu", "level": "action", "desc": "Corpo-a-Corpo: +9. Dano: 16 (2d10+5) de impacto. Alvo fica agarrado."}
+      ],
+      "traits": "Joias Abissais, Runa de Portal",
+      "notes": "Tenta enganar e seduzir aventureiros prometendo desejos antes de esmagá-los.",
+      "backstory": "Demônios gigantes de quatro braços criados para seduzir mortais ao caminho da ruína."
+    },
+    {
+      "id": "m_gnoll",
+      "name": "Gnoll",
+      "tamanho": "Médio",
+      "race": "Humanoide (Gnoll)",
+      "alignment": "Caótico e Mau",
+      "level": "1/2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 22},
+        {"id": "hpcur", "label": "HP Atual", "val": 22}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 14}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Frenesi de Sangue", "level": "trait", "desc": "Se reduzir um alvo a 0 HP, ganha movimento extra e um ataque de mordida grátis."},
+        {"name": "Lança Longa", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 5 (1d6+2) perfurante."}
+      ],
+      "traits": "Lança, Arco Curto",
+      "notes": "Risada histérica em grupo que quebra a moral de adversários.",
+      "backstory": "Híbridos bárbaros hienas-humanos famintos por saques profanos."
+    },
+    {
+      "id": "m_goblin_boss",
+      "name": "Chefe Goblin",
+      "tamanho": "Pequeno",
+      "race": "Humanoide (Goblinoide)",
+      "alignment": "Neutro e Mau",
+      "level": "1",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 17},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 21},
+        {"id": "hpcur", "label": "HP Atual", "val": 21}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Redirecionar Ataque", "level": "reaction", "desc": "Ao ser atacado, pode puxar outro goblin adjacente para sofrer o golpe no lugar dele."},
+        {"name": "Espada Curta Dupla", "level": "action", "desc": "Faz dois ataques de espada curta por turno. Dano: 5 (1d6+2) por corte."}
+      ],
+      "traits": "Cimitarra de Luxo, Escudo Amassado, 2d10 PO",
+      "notes": "Ordena que os goblins menores se sacrifiquem por ele.",
+      "backstory": "Líder astuto e egoísta que governa através da pura intimidação física."
+    },
+    {
+      "id": "m_harpy",
+      "name": "Harpia",
+      "tamanho": "Médio",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "1",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 11},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "6m (Voo 12m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 38},
+        {"id": "hpcur", "label": "HP Atual", "val": 38}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 12}, {"abr": "DES", "val": 13}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 7}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 13}
+      ],
+      "habilidades": [
+        {"name": "Canto Sedutor", "level": "action", "desc": "Canta uma balada mágica. Todos a 90m que ouvirem devem passar em salvaguarda de SAB ou ficarem atraídos caminhando até ela."},
+        {"name": "Garras", "level": "action", "desc": "Corpo-a-Corpo: +3. Dano: 6 (2d4+1) perfurante."}
+      ],
+      "traits": "Penas finas, joias simples",
+      "notes": "Atrai inimigos para penhascos altos ou fossos cheios de espinhos.",
+      "backstory": "Criaturas sádicas com cabeça e torso feminino e asas e pernas de ave de rapina."
+    },
+    {
+      "id": "m_hobgoblin",
+      "name": "Hobgoblin Soldado",
+      "tamanho": "Médio",
+      "race": "Humanoide (Goblinoide)",
+      "alignment": "Ordeiro e Mau",
+      "level": "1/2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 18},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 11},
+        {"id": "hpcur", "label": "HP Atual", "val": 11}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 13}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 9}
+      ],
+      "habilidades": [
+        {"name": "Vantagem Marcial", "level": "trait", "desc": "Causa 7 (2d6) dano extra a uma criatura se houver um aliado a até 1.5m dela."},
+        {"name": "Espada Longa", "level": "action", "desc": "Corpo-a-Corpo: +3. Dano: 6 (1d8+1) ou 7 (1d10+1) cortante."}
+      ],
+      "traits": "Espada Longa, Escudo de Metal, Arco Longo",
+      "notes": "Luta em falanges rígidas e coordenadas.",
+      "backstory": "Guerreiros militarizados e disciplinados da raça goblinoide."
+    },
+    {
+      "id": "m_intellect_devourer",
+      "name": "Devorador de Intelecto",
+      "tamanho": "Miúdo",
+      "race": "Aberração",
+      "alignment": "Ordeiro e Mau",
+      "level": "2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 21},
+        {"id": "hpcur", "label": "HP Atual", "val": 21}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 6}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 13},
+        {"abr": "INT", "val": 12}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Devorar Intelecto", "level": "action", "desc": "Alvo a até 3m deve fazer salvaguarda de INT ou ter seu valor de INT reduzido a 0."},
+        {"name": "Invasão Corporal", "level": "action", "desc": "Consome telepaticamente o cérebro de uma criatura com INT 0 e entra na cabeça, controlando seu corpo completamente."}
+      ],
+      "traits": "Nenhum",
+      "notes": "Procura heróis vulneráveis para usá-los como cascas.",
+      "backstory": "Cérebros andantes sobre patas de gatinho criados por devoradores de mentes."
+    },
+    {
+      "id": "m_kraken",
+      "name": "Kraken",
+      "tamanho": "Colossal",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "23",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 18},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "6m (Natação 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 472},
+        {"id": "hpcur", "label": "HP Atual", "val": 472}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 30}, {"abr": "DES", "val": 11}, {"abr": "CON", "val": 25},
+        {"abr": "INT", "val": 22}, {"abr": "SAB", "val": 18}, {"abr": "CAR", "val": 20}
+      ],
+      "habilidades": [
+        {"name": "Tempestade Relâmpago", "level": "action", "desc": "Dispara 3 relâmpagos a até 150m. Dano: 22 (4d10) elétrico por raio."},
+        {"name": "Tentáculos Esmagadores", "level": "action", "desc": "Corpo-a-Corpo: +17. Dano: 20 (3d6+10) de impacto. Alvo fica agarrado."}
+      ],
+      "traits": "Corações de Kraken, Tesouros de Navios Afundados",
+      "notes": "Imunidade a relâmpagos e ataques não mágicos.",
+      "backstory": "Entidades titânicas divinas dos mares capazes de afundar frotas inteiras."
+    },
+    {
+      "id": "m_lich_demilich",
+      "name": "Demilich",
+      "tamanho": "Miúdo",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "18",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 20},
+        {"id": "init", "label": "Iniciativa", "val": 5},
+        {"id": "vel", "label": "Velocidade", "val": "Voo 9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 80},
+        {"id": "hpcur", "label": "HP Atual", "val": 80}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 1}, {"abr": "DES", "val": 20}, {"abr": "CON", "val": 10},
+        {"abr": "INT", "val": 20}, {"abr": "SAB", "val": 17}, {"abr": "CAR", "val": 20}
+      ],
+      "habilidades": [
+        {"name": "Soneca de Morte", "level": "trait", "desc": "Evita quase todos os danos de efeitos em área. Resistente a ataques não mágicos."},
+        {"name": "Uivo Doloroso (1/dia)", "level": "action", "desc": "Uiva profanamente. Todos a até 9m que ouvirem devem passar em salvaguarda de CON ou cair a 0 HP."}
+      ],
+      "traits": "Gemas Oculares Raras (10.000 PO)",
+      "notes": "Drena a energia vital e as almas de quem se aproxima.",
+      "backstory": "O crânio flutuante residual de um Lich cujas energias corporais se esgotaram."
+    },
+    {
+      "id": "m_mummy",
+      "name": "Múmia Comum",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Ordeiro e Mau",
+      "level": "3",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 11},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "6m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 58},
+        {"id": "hpcur", "label": "HP Atual", "val": 58}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 8}, {"abr": "CON", "val": 15},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Podridão da Tumba", "level": "trait", "desc": "Ataques físicos transmitem uma maldição necrótica que impede o alvo de curar seu HP."},
+        {"name": "Soco Podre", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 10 (3d6) de impacto mais 10 (3d6) necrótico."}
+      ],
+      "traits": "Bandagens sagradas, vaso canópico",
+      "notes": "Vulnerável ao elemento Fogo.",
+      "backstory": "Cadáveres reanimados por rituais antigos de embalsamamento desértico."
+    },
+    {
+      "id": "m_nothic",
+      "name": "Nothic",
+      "tamanho": "Médio",
+      "race": "Aberração",
+      "alignment": "Neutro e Mau",
+      "level": "2",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 45},
+        {"id": "hpcur", "label": "HP Atual", "val": 45}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 14}, {"abr": "DES", "val": 16}, {"abr": "CON", "val": 13},
+        {"abr": "INT", "val": 13}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 8}
+      ],
+      "habilidades": [
+        {"name": "Olhar Apodrecedor", "level": "action", "desc": "Alvo a até 9m deve passar em CON ou sofrer 10 (3d6) de dano necrótico."},
+        {"name": "Aprender Segredo", "level": "action", "desc": "Lê a mente do alvo de forma mística, descobrindo um segredo pessoal oculto."}
+      ],
+      "traits": "Pergaminho rasgado, gemas simples",
+      "notes": "Vende informações em troca de itens mágicos.",
+      "backstory": "Magos punidos por maldições arcanas, transformados em feras de um olho imenso."
+    },
+    {
+      "id": "m_onocentauro",
+      "name": "Nogitsune (Besta Vulpina)",
+      "tamanho": "Médio",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "4",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 52},
+        {"id": "hpcur", "label": "HP Atual", "val": 52}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 12}, {"abr": "DES", "val": 17}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 14}, {"abr": "SAB", "val": 13}, {"abr": "CAR", "val": 16}
+      ],
+      "habilidades": [
+        {"name": "Ilusão Espectral", "level": "trait", "desc": "Pode criar até duas duplicatas de si mesmo no início de seu turno."},
+        {"name": "Presas e Furtividade", "level": "action", "desc": "Corpo-a-Corpo: +5. Dano: 10 (2d6+3) cortante com bônus se estiver furtivo."}
+      ],
+      "traits": "Máscara de Raposa Pintada",
+      "notes": "Gosta de ridicularizar oponentes usando truques mentais antes de golpear.",
+      "backstory": "Espíritos raposa selvagens corrompidos por energias sombrias da floresta."
+    },
+    {
+      "id": "m_owlbear_titan",
+      "name": "Urso-Coruja Ancião",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "5",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 95},
+        {"id": "hpcur", "label": "HP Atual", "val": 95}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 22}, {"abr": "DES", "val": 12}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Abraço de Urso", "level": "trait", "desc": "Se acertar dois ataques de garra no mesmo alvo, agarra e esmaga causando 10 extras."},
+        {"name": "Bicada Perfurante", "level": "action", "desc": "Corpo-a-Corpo: +8. Dano: 16 (2d10+5) perfurante."}
+      ],
+      "traits": "Garras gigantegscas, penas nobres",
+      "notes": "Ruge emitindo vibrações assustadoras na mata fechada.",
+      "backstory": "Líder alfa dos bandos de ursos-coruja que vivem nas florestas profundas."
+    },
+    {
+      "id": "m_pegaso",
+      "name": "Pégaso Selvagem",
+      "tamanho": "Grande",
+      "race": "Besta",
+      "alignment": "Caótico e Bom",
+      "level": "2",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "18m (Voo 27m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 59},
+        {"id": "hpcur", "label": "HP Atual", "val": 59}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 15}, {"abr": "CAR", "val": 13}
+      ],
+      "habilidades": [
+        {"name": "Passada Alada", "level": "trait", "desc": "Não sofre ataques de oportunidade enquanto voa."},
+        {"name": "Cascos de Luz", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 11 (2d6+4) de impacto."}
+      ],
+      "traits": "Penas Brancas Divinas",
+      "notes": "Luta apenas para defender seu ninho ou cavaleiro de confiança.",
+      "backstory": "Cavalos alados divinos de plumagem branca brilhante."
+    },
+    {
+      "id": "m_pit_fiend",
+      "name": "Demônio das Covas (Pit Fiend)",
+      "tamanho": "Grande",
+      "race": "Diabo",
+      "alignment": "Ordeiro e Mau",
+      "level": "20",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 19},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Voo 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 300},
+        {"id": "hpcur", "label": "HP Atual", "val": 300}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 26}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 24},
+        {"abr": "INT", "val": 22}, {"abr": "SAB", "val": 18}, {"abr": "CAR", "val": 24}
+      ],
+      "habilidades": [
+        {"name": "Aura de Medo", "level": "trait", "desc": "Qualquer criatura hostil que começar o turno a até 6m fica apavorada."},
+        {"name": "Maça de Fogo e Cauda", "level": "action", "desc": "Corpo-a-Corpo: +14. Dano: 22 (4d6+8) de impacto mais 10 (3d6) de fogo."}
+      ],
+      "traits": "Maça Infernal, Chifres, Sangue Corrosivo",
+      "notes": "Comanda legiões infernais com táticas militares brilhantes.",
+      "backstory": "Os generais supremos do inferno, dotados de asas de morcego imensas e cauda peçonhenta."
+    },
+    {
+      "id": "m_pseudo_dragao",
+      "name": "Pseudodragão",
+      "tamanho": "Miúdo",
+      "race": "Dragão",
+      "alignment": "Neutro e Bom",
+      "level": "1/4",
+      "folder": "dragões",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "4.5m (Voo 18m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 7},
+        {"id": "hpcur", "label": "HP Atual", "val": 7}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 6}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 13},
+        {"abr": "INT", "val": 10}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 10}
+      ],
+      "habilidades": [
+        {"name": "Telepatia de Companheiro", "level": "trait", "desc": "Pode se comunicar telepaticamente compartilhando sentidos com seu mestre."},
+        {"name": "Ferrão de Sonolência", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 4 (1d4+2) perfurante. Alvo deve passar em CON ou dormir por 1 hora."}
+      ],
+      "traits": "Nenhum",
+      "notes": "Funciona muito bem como familiar ou pet de magos.",
+      "backstory": "Pequenos dragõezinhos de estimação, espertos e extremamente brincalhões."
+    },
+    {
+      "id": "m_rakshasa",
+      "name": "Rakshasa",
+      "tamanho": "Médio",
+      "race": "Corruptor",
+      "alignment": "Ordeiro e Mau",
+      "level": "13",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 16},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 110},
+        {"id": "hpcur", "label": "HP Atual", "val": 110}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 14}, {"abr": "DES", "val": 17}, {"abr": "CON", "val": 18},
+        {"abr": "INT", "val": 13}, {"abr": "SAB", "val": 16}, {"abr": "CAR", "val": 20}
+      ],
+      "habilidades": [
+        {"name": "Imunidade de Magia Limiar", "level": "trait", "desc": "Imunidade total a magias de 6º nível ou inferiores, a menos que queira ser afetado."},
+        {"name": "Garras Amaldiçoadas", "level": "action", "desc": "Corpo-a-Corpo: +7. Dano: 9 (2d6+2) de corte. O alvo é amaldiçoado impedindo descanso."}
+      ],
+      "traits": "Joias Aristocráticas, Manto Nobre",
+      "notes": "Disfarça-se como nobres e reis para minar impérios por dentro.",
+      "backstory": "Tigres humanoides aristocráticos e sádicos com as palmas das mãos invertidas."
+    },
+    {
+      "id": "m_remorhaz",
+      "name": "Remorhaz Jovem",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "5",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 14},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "9m (Escavar 6m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 93},
+        {"id": "hpcur", "label": "HP Atual", "val": 93}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 13}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 4}
+      ],
+      "habilidades": [
+        {"name": "Corpo Aquecido", "level": "trait", "desc": "Criaturas que baterem de perto sofrem 7 (2d6) de fogo devido ao calor de sua carapaça."},
+        {"name": "Mordida Fervente", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 20 (3d10+4) perfurante mais 7 de fogo."}
+      ],
+      "traits": "Carapaça Térmica Brilhante",
+      "notes": "Derrete o gelo ao seu redor para afogar ou enterrar presas.",
+      "backstory": "Centopeias colossais árticas que geram calor extremo sob sua couraça."
+    },
+    {
+      "id": "m_salamandra",
+      "name": "Salamandra de Fogo",
+      "tamanho": "Médio",
+      "race": "Elemental",
+      "alignment": "Caótico e Mau",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 90},
+        {"id": "hpcur", "label": "HP Atual", "val": 90}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 15},
+        {"abr": "INT", "val": 11}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Corpo Ígneo", "level": "trait", "desc": "Ataques corporais dela causam 3 (1d6) fogo extra e quebram escudos inflamáveis."},
+        {"name": "Tridente de Bronze", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 11 (2d6+4) perfurante mais 3 de fogo."}
+      ],
+      "traits": "Tridente de Bronze, Couro Fervente",
+      "notes": "Prende oponentes com sua cauda de serpente afogando-os em fogo.",
+      "backstory": "Serpentes com torso humanoide feitas de fogo e metal refinado no Plano do Fogo."
+    },
+    {
+      "id": "m_shadow",
+      "name": "Sombra (Shadow)",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Caótico e Mau",
+      "level": "1/2",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 16},
+        {"id": "hpcur", "label": "HP Atual", "val": 16}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 6}, {"abr": "DES", "val": 14}, {"abr": "CON", "val": 13},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 8}
+      ],
+      "habilidades": [
+        {"name": "Mesclar-se às Sombras", "level": "trait", "desc": "Pode se esconder como ação bônus em áreas sob penumbra."},
+        {"name": "Dreno de Força", "level": "action", "desc": "Corpo-a-Corpo: +4. Dano: 9 (2d6+2) necrótico. Reduz em 1d4 a FOR do alvo até um descanso."}
+      ],
+      "traits": "Nenhum",
+      "notes": "Se a força de um herói chegar a 0 devido ao dreno, ele morre na hora.",
+      "backstory": "Silhuetas escuras flutuantes que sugam a energia física dos heróis."
+    },
+    {
+      "id": "m_shambling_mound",
+      "name": "Monte Errante (Shambling Mound)",
+      "tamanho": "Grande",
+      "race": "Planta",
+      "alignment": "Sem Alinhamento",
+      "level": "5",
+      "folder": "comuns",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": -1},
+        {"id": "vel", "label": "Velocidade", "val": "6m (Natação 6m)"},
+        {"id": "hpmax", "label": "HP Máx", "val": 136},
+        {"id": "hpcur", "label": "HP Atual", "val": 136}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 8}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 5}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Absorção de Eletricidade", "level": "trait", "desc": "Se sofrer dano elétrico, não sofre dano e recupera HP igual ao valor."},
+        {"name": "Sufocar com Vinhas", "level": "action", "desc": "Puxa alvos agarrados para dentro de sua massa vegetal, sufocando-os."}
+      ],
+      "traits": "Ramos raros, sementes",
+      "notes": "Vive escondido sob musgo e pântanos rasos esperando presas.",
+      "backstory": "Massa senciente gigante de vinhas apodrecidas, raízes e lama viva."
+    },
+    {
+      "id": "m_skeleton_archer",
+      "name": "Esqueleto Arqueiro",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Ordeiro e Mau",
+      "level": "1/2",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 13},
+        {"id": "hpcur", "label": "HP Atual", "val": 13}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 10}, {"abr": "DES", "val": 15}, {"abr": "CON", "val": 12},
+        {"abr": "INT", "val": 6}, {"abr": "SAB", "val": 8}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Esquiva de Ossos", "level": "trait", "desc": "Imune a venenos e exaustão."},
+        {"name": "Arco Curto Veloz", "level": "action", "desc": "Ataque à Distância: +4. Alcance 24/96m. Dano: 5 (1d6+2) perfurante."}
+      ],
+      "traits": "Arco Curto, Aljava com 20 Flechas",
+      "notes": "Mantém distância atirando do topo de ameias ou muralhas.",
+      "backstory": "Atiradores militares de eras passadas trazidos à ativa."
+    },
+    {
+      "id": "m_specter",
+      "name": "Aparição Sombria (Wraith)",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "5",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 13},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "Voo 18m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 67},
+        {"id": "hpcur", "label": "HP Atual", "val": 67}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 6}, {"abr": "DES", "val": 16}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 12}, {"abr": "SAB", "val": 14}, {"abr": "CAR", "val": 15}
+      ],
+      "habilidades": [
+        {"name": "Criar Espectros menores", "level": "action", "desc": "Pode erguer a alma de uma criatura recém-morta sob seu controle."},
+        {"name": "Garra de Dreno Necrótico", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 21 (4d8+3) necrótico."}
+      ],
+      "traits": "Joia de Alma",
+      "notes": "Atravessa barreiras sólidas para atacar magos vulneráveis de surpresa.",
+      "backstory": "Senhores espectrais que comandam sombras menores com fúria eterna."
+    },
+    {
+      "id": "m_tarrasque",
+      "name": "Tarrasque",
+      "tamanho": "Colossal",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "level": "30",
+      "folder": "bosses",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 25},
+        {"id": "init", "label": "Iniciativa", "val": 0},
+        {"id": "vel", "label": "Velocidade", "val": "18m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 676},
+        {"id": "hpcur", "label": "HP Atual", "val": 676}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 30}, {"abr": "DES", "val": 11}, {"abr": "CON", "val": 30},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 11}, {"abr": "CAR", "val": 11}
+      ],
+      "habilidades": [
+        {"name": "Carapaça Refletora", "level": "trait", "desc": "Imune a projéteis mágicos, linhas de energia ou magias de toque à distância. Reflete de volta para quem conjurou."},
+        {"name": "Mordida, Chifres, Cauda", "level": "action", "desc": "Executa até 5 ataques combinados por turno. Dano médio por golpe: 28 de impacto/corte."}
+      ],
+      "traits": "Sangue de Titã, Carapaça Indestrutível",
+      "notes": "Ignora imunidades a danos físicos normais.",
+      "backstory": "O flagelo supremo do planeta. Um devorador de reinos inteiro que desperta de tempos em tempos."
+    },
+    {
+      "id": "m_vampire_spawn",
+      "name": "Cria Vampírica",
+      "tamanho": "Médio",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "5",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 15},
+        {"id": "init", "label": "Iniciativa", "val": 3},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 82},
+        {"id": "hpcur", "label": "HP Atual", "val": 82}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 16}, {"abr": "DES", "val": 16}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 11}, {"abr": "SAB", "val": 10}, {"abr": "CAR", "val": 12}
+      ],
+      "habilidades": [
+        {"name": "Escalar Paredes Ágil", "level": "trait", "desc": "Pode escalar superfícies difíceis, incluindo de ponta-cabeça nos tetos, sem testes."},
+        {"name": "Mordida de Dreno", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 6 perfurante mais 7 necrótico. Cura a si mesmo."}
+      ],
+      "traits": "Roupas desgastadas, dentes afiados",
+      "notes": "Luta sob as ordens estritas de seu vampiro mestre.",
+      "backstory": "Criaturas transformadas que ainda não alcançaram a suserania vampírica completa."
+    },
+    {
+      "id": "m_yeti",
+      "name": "Yeti",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Mau",
+      "level": "3",
+      "folder": "bestas",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 12},
+        {"id": "init", "label": "Iniciativa", "val": 1},
+        {"id": "vel", "label": "Velocidade", "val": "12m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 51},
+        {"id": "hpcur", "label": "HP Atual", "val": 51}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 18}, {"abr": "DES", "val": 13}, {"abr": "CON", "val": 16},
+        {"abr": "INT", "val": 8}, {"abr": "SAB", "val": 12}, {"abr": "CAR", "val": 7}
+      ],
+      "habilidades": [
+        {"name": "Olhar Gelado", "level": "action", "desc": "Olha nos olhos de um alvo. Ele deve passar em salvaguarda de CON ou ficar paralisado de frio por 1 turno."},
+        {"name": "Garras de Gelo", "level": "action", "desc": "Corpo-a-Corpo: +6. Dano: 7 (1d6+4) cortante mais 3 de frio."}
+      ],
+      "traits": "Pele Branca Espessa (Yeti)",
+      "notes": "Mescla-se com a neve total, ficando invisível de longe.",
+      "backstory": "Abomináveis homens das neves que caçam aventureiros perdidos em nevascas."
+    },
+    {
+      "id": "m_zombie_giant",
+      "name": "Gigante Zumbi",
+      "tamanho": "Enorme",
+      "race": "Morto-Vivo",
+      "alignment": "Neutro e Mau",
+      "level": "5",
+      "folder": "mortos_vivos",
+      "combat": [
+        {"id": "ca", "label": "CA", "val": 9},
+        {"id": "init", "label": "Iniciativa", "val": -2},
+        {"id": "vel", "label": "Velocidade", "val": "9m"},
+        {"id": "hpmax", "label": "HP Máx", "val": 112},
+        {"id": "hpcur", "label": "HP Atual", "val": 112}
+      ],
+      "attrs": [
+        {"abr": "FOR", "val": 23}, {"abr": "DES", "val": 6}, {"abr": "CON", "val": 20},
+        {"abr": "INT", "val": 3}, {"abr": "SAB", "val": 6}, {"abr": "CAR", "val": 5}
+      ],
+      "habilidades": [
+        {"name": "Fortitude Morta", "level": "trait", "desc": "Reduz danos de impacto não mágicos recebidos pela metade."},
+        {"name": "Esmagar Gigante", "level": "action", "desc": "Corpo-a-Corpo: +8. Dano: 21 (3d10+5) de impacto."}
+      ],
+      "traits": "Clava Gigante Quebrada",
+      "notes": "Esmaga construções e alvos lentos sem distinção.",
+      "backstory": "O cadáver reanimado e infectado de um colosso das colinas."
+    }
+  ]
+}

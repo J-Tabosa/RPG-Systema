@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Monstropédia — RPG System</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/monstros.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+<div id="app">
+
+  <div class="header no-print">
+    <div class="header-brand">
+      <i class="ti ti-skull header-icon"></i>
+      <div><h1>Monstropédia</h1><div class="subtitle">Bestiário e Criador de Ameaças</div></div>
+    </div>
+    <div class="header-actions">
+      <a href="../index.html"   class="nav-link"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html"      class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html"    class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="monstros.html"   class="nav-link active"><i class="ti ti-skull"></i> Monstros</a>
+      <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+    </div>
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html"    class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="monstros.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-skull"></i> Monstros</a>
+    </nav>
+  </div>
+
+  <div class="bestiary-workspace">
+    
+    <div class="bestiary-sidebar no-print">
+      <div class="sidebar-section folders-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+          <span class="section-title" style="margin:0">Pastas</span>
+          <button class="btn xs link" onclick="criarNovaPasta()" title="Nova Pasta" style="color:var(--gold)"><i class="ti ti-folder-plus"></i> Nova</button>
+        </div>
+        <div class="folders-list" id="foldersList"></div>
+      </div>
+
+      <div class="sidebar-section action-buttons-row">
+        <button class="btn primary sm" onclick="abrirCriadorNovo()"><i class="ti ti-plus"></i> Novo Monstro</button>
+        <button class="btn outline sm" onclick="document.getElementById('importFile').click()"><i class="ti ti-upload"></i> Importar</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarMonstroJSON(event)">
+      </div>
+
+      <div class="sidebar-section search-filter-section">
+        <div class="search-and-funnel">
+          <div class="search-box">
+            <input type="text" id="monsterSearch" placeholder="Buscar monstro..." oninput="filtrarMonstros()">
+          </div>
+          <div class="filter-popup-container">
+            <button class="btn icon-btn" id="filterPopupBtn" onclick="toggleFilterPopup(event)" title="Ordenar bestiário">
+              <i class="ti ti-filter"></i>
+            </button>
+            <div class="filter-popup" id="filterPopup">
+              <div class="filter-popup-title">Ordenar por</div>
+              <div class="filter-option" onclick="selecionarOrdenacao('nome')">Nome (A-Z)</div>
+              <div class="filter-option" onclick="selecionarOrdenacao('nivel')">Nível (ND)</div>
+              <div class="filter-option" onclick="selecionarOrdenacao('tipo')">Tipo / Raça</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section list-section">
+        <div class="section-title">Monstros na pasta (<span id="countMonstros">0</span>)</div>
+        <div class="monster-list" id="monsterList"></div>
+      </div>
+    </div>
+
+    <div class="bestiary-main" id="bestiaryMain">
+      <div class="empty-state">
+        <div class="big">💀</div>
+        <h3>Nenhum Monstro Selecionado</h3>
+        <p>Selecione ou crie uma nova ameaça no menu ao lado.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="mAction" style="display:none">
+  <div class="modal" style="max-width:450px">
+    <h3><i class="ti ti-swords"></i> Adicionar Ação/Habilidade</h3>
+    <div class="form-field">
+      <label>Nome da Habilidade / Ação</label>
+      <input type="text" id="actionName" placeholder="Ex: Sopro de Fogo, Mordida">
+    </div>
+    <div class="form-field">
+      <label>Tipo</label>
+      <select id="actionType">
+        <option value="trait">Habilidade Passiva / Traço</option>
+        <option value="action">Ação Ativa / Ataque</option>
+        <option value="reaction">Reação</option>
+        <option value="legendary">Ação Lendária</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Descrição / Efeito</label>
+      <textarea id="actionDesc" placeholder="Descreva os efeitos mecânicos..." rows="4"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="fecharModalAcao()">Cancelar</button>
+      <button class="btn primary" onclick="salvarAcaoCustomizada()"><i class="ti ti-check"></i> Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mPasta" style="display:none">
+  <div class="modal" style="max-width:400px">
+    <h3><i class="ti ti-folder-plus"></i> Criar Nova Pasta</h3>
+    <div class="form-field">
+      <label>Nome da Pasta</label>
+      <input type="text" id="newFolderName" placeholder="Ex: Mortos-vivos, Chefes, Cavernas...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="fecharModalPasta()">Cancelar</button>
+      <button class="btn primary" onclick="confirmarCriarPasta()"><i class="ti ti-check"></i> Criar Pasta</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/monstros.js"></script>
+</body>
+</html>

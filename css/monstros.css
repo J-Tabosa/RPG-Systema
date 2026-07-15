@@ -1,0 +1,356 @@
+body { display: flex; flex-direction: column; min-height: 100vh; }
+#app { display: flex; flex-direction: column; flex: 1; }
+
+/* WORKSPACE LAYOUT */
+.bestiary-workspace { display: flex; flex: 1; overflow: hidden; height: calc(100vh - 52px); }
+.bestiary-sidebar { width: 310px; flex-shrink: 0; border-right: 1px solid var(--border); background: #120f0a; display: flex; flex-direction: column; }
+body.light .bestiary-sidebar { background: #e0d8c4; }
+.bestiary-main { flex: 1; overflow-y: auto; padding: 16px; background: var(--bg); position: relative; }
+
+/* SIDEBAR COMPONENTS */
+.sidebar-section { padding: 8px 12px; border-bottom: 1px solid rgba(200, 168, 107, 0.15); }
+.section-title { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+
+/* BOTÕES LADO A LADO */
+.action-buttons-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+}
+.action-buttons-row .btn {
+  flex: 1;
+  white-space: nowrap;
+}
+
+/* BUSCA E POPUP DE FILTRO */
+.search-and-funnel {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.search-box {
+  flex: 1;
+}
+.search-box input { 
+  width: 100%; 
+  padding: 8px 10px; 
+  background: var(--card); 
+  border: 1px solid var(--border); 
+  border-radius: 4px; 
+  color: var(--text); 
+  font-family: 'Crimson Text', serif; 
+  font-size: 15px; 
+}
+.search-box input:focus { outline: none; border-color: var(--gold); }
+
+/* CONTAINER DO POP-UP DO FUNIL */
+.filter-popup-container {
+  position: relative;
+}
+.filter-popup-container .icon-btn {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.filter-popup-container .icon-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* POP-UP FLUTUANTE DE ORDENAÇÃO */
+.filter-popup {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 100;
+  width: 130px;
+  padding: 4px 0;
+}
+.filter-popup.show {
+  display: block;
+}
+.filter-popup-title {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  color: var(--gold);
+  padding: 6px 10px 4px 10px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(200, 168, 107, 0.15);
+  margin-bottom: 4px;
+}
+.filter-option {
+  padding: 6px 10px;
+  font-family: 'Crimson Text', serif;
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.filter-option:hover {
+  background: rgba(200, 168, 107, 0.1);
+  color: var(--gold);
+}
+
+/* LISTA DE MONSTROS ESTENDIDA (OCUPA MAIS ESPAÇO VERTICAL) */
+.sidebar-section.list-section {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 280px); /* Otimizado para ir o mais baixo possível */
+  padding-right: 4px;
+}
+
+/* Customização de barra de rolagem */
+.sidebar-section.list-section::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar-section.list-section::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.sidebar-section.list-section::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+  opacity: 0.6;
+}
+.sidebar-section.list-section::-webkit-scrollbar-thumb:hover {
+  background: var(--gold2);
+}
+
+/* LIST CARDS */
+.monster-list { display: flex; flex-direction: column; gap: 6px; }
+.monster-card-item { background: var(--card2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.monster-card-item:hover, .monster-card-item.active { border-color: var(--gold); background: rgba(200, 168, 107, 0.08); }
+.m-item-info { display: flex; flex-direction: column; gap: 1px; }
+.m-item-name { font-family: 'Cinzel', serif; font-weight: 700; font-size: 13px; color: var(--gold2); }
+.m-item-meta { font-size: 11px; color: var(--muted); }
+.m-item-actions { display: flex; gap: 4px; }
+
+/* EMPTY STATE */
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--muted); text-align: center; gap: 8px; max-width: 320px; margin: 0 auto; }
+.empty-state .big { font-size: 54px; opacity: 0.15; }
+
+/* FORMULÁRIO DO CRIADOR DE MONSTROS */
+.monster-creator-form { max-width: 95%; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; }
+.form-grid-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px; }
+.form-grid-6 { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.form-row > div { flex: 1; }
+
+.form-field { margin-bottom: 12px; display: flex; flex-direction: column; }
+.form-field label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1.2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+
+/* Campos de entrada mais gordinhos e fáceis de ler */
+.form-field input, .form-field select, .form-field textarea { 
+  background: var(--card2); 
+  border: 1px solid var(--border); 
+  border-radius: 4px; 
+  color: var(--text); 
+  padding: 10px 12px; 
+  font-family: 'Crimson Text', serif; 
+  font-size: 15px; 
+  line-height: 1.4;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--gold); }
+
+/* ATRIBUTOS FORMATO DE ENTRADA MINI DINÂMICO */
+.attr-input-box { position: relative; text-align: center; background: var(--card2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 6px 8px 6px; }
+.attr-input-box .remove-attr-btn { position: absolute; top: 2px; right: 2px; background: transparent; border: none; color: var(--red2); cursor: pointer; font-size: 10px; padding: 2px; }
+.attr-input-box input.attr-lbl-input { width: 100%; border: none; background: transparent; text-align: center; font-family: 'Cinzel', serif; font-size: 10px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px dashed var(--border); }
+.attr-input-box input.attr-lbl-input:focus { outline: none; border-bottom-color: var(--gold); }
+.attr-input-box input.attr-val-input { width: 100%; max-width: 60px; text-align: center; background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; border-radius: 4px; padding: 4px; }
+
+/* LISTAS DE AÇÕES DINÂMICAS */
+.added-actions-preview { margin-top: 6px; display: flex; flex-direction: column; gap: 6px; }
+.action-preview-item { display: flex; justify-content: space-between; align-items: flex-start; background: var(--card2); border: 1px dashed var(--border); padding: 8px 10px; border-radius: 4px; font-size: 14px; }
+.action-preview-item strong { color: var(--gold); }
+
+/* LEITOR DE FICHA (90% DE LARGURA, COM ESPAÇAMENTO EQUILIBRADO) */
+.monster-sheet-read { width: 90%; max-width: 90%; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px 24px; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.sheet-actions-header { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(200, 168, 107, 0.2); padding-bottom: 10px; }
+
+.dnd-divider { height: 2px; background: var(--gold) !important; margin: 10px 0; border: none; display: block; width: 100%; }
+.dnd-red-title { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: var(--red2); margin: 0 0 2px 0; line-height: 1.1; }
+.dnd-meta-line { font-style: italic; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+
+.dnd-stat-block { display: flex; justify-content: space-between; gap: 10px; margin: 8px 0; font-size: 14px; flex-wrap: wrap; }
+.dnd-stat-block strong { color: var(--gold); }
+
+/* TABELA DE ATRIBUTOS */
+.dnd-attr-table { width: 100%; border-collapse: collapse; margin: 10px 0; text-align: center; }
+.dnd-attr-table th { font-family: 'Cinzel', serif; font-size: 11px; color: var(--red2); letter-spacing: 1px; font-weight: 700; padding: 6px; border-bottom: 1px solid var(--border); }
+.dnd-attr-table td { font-size: 14px; font-weight: bold; color: var(--text); font-family: 'Cinzel', serif; padding: 8px; }
+
+.dnd-section { margin-top: 12px; }
+.dnd-section-title { font-family: 'Cinzel', serif; font-size: 14px; color: var(--red2); border-bottom: 1px solid var(--gold); padding-bottom: 2px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.dnd-desc-item { font-size: 14px; margin-bottom: 8px; line-height: 1.45; color: var(--text); }
+.dnd-desc-item strong { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold2); margin-right: 4px; }
+
+/* IMPRESSÃO DE ALTO CONTRASTE PREMIUM */
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .header, 
+  .bestiary-sidebar, 
+  .sheet-actions-header, 
+  .monster-creator-form,
+  .no-print { 
+    display: none !important; 
+  }
+  
+  .bestiary-workspace {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    border: none !important;
+  }
+  
+  .bestiary-main {
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  
+  .monster-sheet-read {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 1px solid #1a1a1a !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .dnd-divider {
+    height: 2px !important;
+    background-color: #1a1a1a !important;
+    background: #1a1a1a !important;
+    border: none !important;
+    margin: 8px 0 !important;
+  }
+
+  .dnd-red-title {
+    color: #5c1414 !important;
+    font-size: 24px !important;
+  }
+
+  .dnd-section-title {
+    color: #5c1414 !important;
+    border-bottom: 1.5px solid #1a1a1a !important;
+    font-size: 12px !important;
+    margin-top: 12px !important;
+  }
+
+  .dnd-attr-table {
+    border: 1.5px solid #1a1a1a !important;
+    margin: 10px 0 !important;
+  }
+  .dnd-attr-table th {
+    border-bottom: 1.5px solid #1a1a1a !important;
+    background-color: #f0f0f2 !important;
+    color: #5c1414 !important;
+    font-weight: bold !important;
+    font-size: 10px !important;
+  }
+  .dnd-attr-table td {
+    border-right: 1px solid #e0e0e0 !important;
+    color: #1a1a1a !important;
+    background: #ffffff !important;
+    font-size: 11px !important;
+  }
+  .dnd-attr-table td:last-child {
+    border-right: none !important;
+  }
+
+  .dnd-desc-item {
+    color: #2b2b2b !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+  .dnd-desc-item strong {
+    color: #5c1414 !important;
+    font-weight: bold !important;
+  }
+  
+  .dnd-stat-block {
+    font-size: 11px !important;
+    color: #2b2b2b !important;
+  }
+  .dnd-stat-block strong {
+    color: #5c1414 !important;
+  }
+}
+
+/* RESPONSIVIDADE */
+@media(max-width: 768px){
+  .bestiary-workspace { flex-direction: column; height: auto; }
+  .bestiary-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); max-height: 550px; }
+  .form-grid-3, .form-grid-4, .form-grid-6 { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; gap: 0; }
+  .monster-sheet-read { width: 95%; max-width: 95%; }
+}
+
+/* Gerenciamento de Pastas na Sidebar */
+.folders-section {
+  background: rgba(200, 168, 107, 0.03);
+  padding: 8px 12px;
+}
+.folders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 120px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+.folder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--text);
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.folder-item i {
+  color: var(--gold);
+}
+.folder-item:hover, .folder-item.active {
+  background: rgba(200, 168, 107, 0.12);
+  color: var(--gold);
+  font-weight: bold;
+}
+
+/* Loader de Autossalvamento Animado */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  display: inline-block;
+  animation: spin 1.2s linear infinite;
+}

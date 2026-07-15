@@ -312,11 +312,10 @@ function newFichaObj(name='Novo Personagem', presetId='default'){
 
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
 const FOLDERS=[
-  {id:'all',label:'Todas',icon:'ti-layout-list',color:'var(--muted)'},
   {id:'player',label:'Jogadores',icon:'ti-user',color:'#4a9c2e'},
   {id:'npc',label:'NPCs',icon:'ti-masks-theater',color:'#5080b0'},
 ];
-let activeFolder='all';
+let activeFolder='player';
 
 function folderFromType(t){return t==='player'?'player':'npc';}
 function countFolder(fid){if(fid==='all')return fichas.length;return fichas.filter(f=>(f.folder||folderFromType(f.type))===fid).length;}

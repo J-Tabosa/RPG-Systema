@@ -31,306 +31,319 @@
     <a href="./pages/gerador.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
     <a href="./pages/conteudo.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-database"></i> Gestor (Editor)</a>
     <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sword"></i> Combat Tracker</a>
+    <a href="./pages/monstros.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-ghost"></i> Monstropedia</a>
   </nav>
 </header>
 
 <main>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">⚔ &nbsp;Sistema de RPG Digital&nbsp; ⚔</div>
-    <h1 class="hero-title">
-      Domine sua Mesa.
-      <span>Conquiste o Destino.</span>
-    </h1>
-    <p class="hero-subtitle">Fichas completas, combate rastreado e dados na palma da mão. Tudo em um sistema integrado, sem instalação, sem cadastro.</p>
-    <div class="hero-cta">
-      <a href="./pages/ficha.html" class="btn primary" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-scroll"></i> &nbsp;Criar Ficha</a>
-      <a href="./pages/tracker.html" class="btn" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-sword"></i> &nbsp;Abrir Tracker</a>
-      <a href="./pages/conteudo.html" class="btn primary" style="font-size:12px;padding:10px 24px;text-decoration:none"><i class="ti ti-database"></i> &nbsp;Gestor de Dados</a>
-    </div>
-  </div>
-</section>
-
-<section class="section reveal">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-label">Ferramentas</div>
-      <h2 class="section-title">Escolha sua Ferramenta</h2>
-      <p class="section-desc">Módulos integrados que se comunicam entre si. Crie fichas detalhadas, customize tabelas e importe direto para o combate.</p>
-    </div>
-    <div class="rune-divider"><span>✦</span></div>
-    <div class="cards-grid">
-
-      <a href="./pages/ficha.html" class="app-card">
-        <div class="app-card-img-placeholder">
-          <i class="ti ti-scroll" style="font-size:64px"></i>
-        </div>
-        <div class="app-card-body">
-          <div class="app-card-tag">Módulo 01</div>
-          <div class="app-card-title">Criador de Fichas</div>
-          <div class="app-card-desc">Monte fichas completas de D&amp;D 5e com atributos customizáveis, perícias, habilidades próprias, magias, equipamentos com peso e muito mais. Cada ficha tem seu próprio tema de cores.</div>
-          <div class="app-card-footer">
-            <div class="app-card-features">
-              <span class="feat-pill">Atributos</span>
-              <span class="feat-pill">Magias</span>
-              <span class="feat-pill">Habilidades</span>
-              <span class="feat-pill">Inventário</span>
-            </div>
-            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
+  <!-- SEÇÃO DE SELEÇÃO: JOGADOR OU MESTRE -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Acesso ao Sistema</div>
+        <h2 class="section-title">Qual é a sua função hoje?</h2>
+        <p class="section-desc">Selecione seu papel na mesa para abrir os portais e ferramentas que você precisa utilizar.</p>
+      </div>
+      <div class="rune-divider"><span>✦</span></div>
+      
+      <div class="role-grid">
+        <!-- Card Jogador -->
+        <div class="role-card" onclick="openRoleModal('jogador')">
+          <div class="role-card-icon">
+            <i class="ti ti-user-shield"></i>
+          </div>
+          <div class="role-card-body">
+            <h3>JOGADOR</h3>
+            <p>Acesse suas Fichas de Personagem, use o Gerador Rápido de atributos e prepare seu herói para o combate.</p>
+            <span class="role-card-btn">Explorar Ferramentas <i class="ti ti-arrow-right"></i></span>
           </div>
         </div>
-      </a>
 
-      <a href="./pages/tracker.html" class="app-card">
-        <div class="app-card-img-placeholder">
-          <i class="ti ti-sword" style="font-size:64px"></i>
-        </div>
-        <div class="app-card-body">
-          <div class="app-card-tag">Módulo 02</div>
-          <div class="app-card-title">Combat Tracker</div>
-          <div class="app-card-desc">Gerencie combates com ordem de iniciativa rotativa, HP em tempo real, condições de status, grupos de monstros e um rolador de dados integrado com histórico de rolagens.</div>
-          <div class="app-card-footer">
-            <div class="app-card-features">
-              <span class="feat-pill">Iniciativa</span>
-              <span class="feat-pill">HP</span>
-              <span class="feat-pill">Grupos</span>
-              <span class="feat-pill">Dados</span>
-            </div>
-            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
+        <!-- Card Mestre -->
+        <div class="role-card master" onclick="openRoleModal('mestre')">
+          <div class="role-card-icon">
+            <i class="ti ti-crown"></i>
           </div>
-        </div>
-      </a>
-
-      <a href="./pages/gerador.html" class="app-card">
-        <div class="app-card-img-placeholder">
-          <i class="ti ti-sparkles" style="font-size:64px"></i>
-        </div>
-        <div class="app-card-body">
-          <div class="app-card-tag">Módulo 03</div>
-          <div class="app-card-title">Gerador de Personagens</div>
-          <div class="app-card-desc">Gere NPCs e personagens completos com um clique. Raça, classe, profissão, personalidade, atributos e história — tudo aleatório ou filtrado. Salve direto nas fichas ou exporte como PDF.</div>
-          <div class="app-card-footer">
-            <div class="app-card-features">
-              <span class="feat-pill">Aleatório</span>
-              <span class="feat-pill">Filtros</span>
-              <span class="feat-pill">PDF</span>
-              <span class="feat-pill">Integrado</span>
-            </div>
-            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
+          <div class="role-card-body">
+            <h3>MESTRE</h3>
+            <p>Controle combates com o Tracker, acesse o Gestor de Dados, utilize o Gerador de NPCs e consulte a Monstropedia.</p>
+            <span class="role-card-btn">Explorar Painel <i class="ti ti-arrow-right"></i></span>
           </div>
-        </div>
-      </a>
-
-      <a href="./pages/conteudo.html" class="app-card">
-        <div class="app-card-img-placeholder">
-          <i class="ti ti-database" style="font-size:64px"></i>
-        </div>
-        <div class="app-card-body">
-          <div class="app-card-tag">Módulo 04</div>
-          <div class="app-card-title">Gestor de Dados</div>
-          <div class="app-card-desc">Expanda os horizons do gerador. Customize e gerencie as listas de raças, classes, profissões, alinhamentos e traços de personalidade para se adequarem ao seu cenário de RPG.</div>
-          <div class="app-card-footer">
-            <div class="app-card-features">
-              <span class="feat-pill">Customização</span>
-              <span class="feat-pill">Editor</span>
-              <span class="feat-pill">Listas</span>
-              <span class="feat-pill">Local</span>
-            </div>
-            <span class="app-card-link">Abrir <i class="ti ti-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<section class="section about-section reveal">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-visual">
-        <div class="about-icon-ring"><i class="ti ti-dragon"></i></div>
-        <div class="about-stats">
-          <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Módulos</div></div>
-          <div class="stat-box"><div class="stat-num">5e</div><div class="stat-lbl">Compatível</div></div>
-          <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Fichas</div></div>
-          <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Instalação</div></div>
         </div>
       </div>
-      <div class="about-text">
-        <div class="section-label">Sobre o Projeto</div>
-        <h2>Feito para quem joga de verdade.</h2>
-        <p>O <strong>RPG System</strong> nasceu da necessidade de ter uma ferramenta de mesa funcional, rápida e que não atrapalhasse o fluxo da sessão. Sem abas duplicadas, sem apps pesados, sem anúncios no meio da ficha.</p>
-        <p>Tudo roda <strong>diretamente no seu navegador</strong>, os dados ficam salvos localmente e qualquer dispositivo — computador, tablet ou celular — serve como tela de controle.</p>
-        <p>O sistema foi construído seguindo as regras do <strong>D&amp;D 5ª Edição</strong>, mas com campos totalmente customizáveis para suportar qualquer sistema que você queira jogar.</p>
-        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-          <a href="./pages/ficha.html" class="btn primary" style="text-decoration:none"><i class="ti ti-scroll"></i> Criar primeira ficha</a>
-          <a href="./pages/tracker.html" class="btn" style="text-decoration:none"><i class="ti ti-sword"></i> Ver o tracker</a>
+    </div>
+  </section>
+
+  <!-- POP-UP ENORME (MODAL) -->
+  <div id="roleModal" class="modal-backdrop" onclick="closeRoleModalOnBackdrop(event)">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeRoleModal()"><i class="ti ti-x"></i></button>
+      
+      <div id="modalPlayerContent" class="modal-role-section" style="display: none;">
+        <div class="modal-header-accent">
+          <i class="ti ti-user-shield"></i>
+          <h2>Painel do Jogador</h2>
+          <p>Prepare-se para a aventura. Selecione um dos caminhos abaixo:</p>
+        </div>
+        <div class="modal-links-grid">
+          <a href="./pages/ficha.html" class="modal-link-card">
+            <i class="ti ti-scroll"></i>
+            <div>
+              <h4>Fichas de Personagem</h4>
+              <p>Gerencie suas fichas de D&D 5e e controle seus atributos, magias e equipamentos em tempo real.</p>
+            </div>
+          </a>
+          <a href="./pages/gerador.html" class="modal-link-card">
+            <i class="ti ti-sparkles"></i>
+            <div>
+              <h4>Gerador de Personagens</h4>
+              <p>Gere atributos (4d6 drop lowest) ou crie novas ideias de personagens instantaneamente.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div id="modalMasterContent" class="modal-role-section" style="display: none;">
+        <div class="modal-header-accent master">
+          <i class="ti ti-crown"></i>
+          <h2>Painel do Mestre</h2>
+          <p>O controle do mundo está em suas mãos. Acesse as ferramentas de campanha:</p>
+        </div>
+        <div class="modal-links-grid mestre">
+          <a href="./pages/gerador.html" class="modal-link-card">
+            <i class="ti ti-sparkles"></i>
+            <div>
+              <h4>Gerador de NPCs</h4>
+              <p>Gere NPCs com histórico, raça, classe, atributos e salve-os diretamente nas suas pastas locais.</p>
+            </div>
+          </a>
+          <a href="./pages/tracker.html" class="modal-link-card">
+            <i class="ti ti-sword"></i>
+            <div>
+              <h4>Combat Tracker</h4>
+              <p>Rastreie iniciativas, HP do grupo de monstros, condições e use o rolador de dados integrado.</p>
+            </div>
+          </a>
+          <a href="./pages/conteudo.html" class="modal-link-card">
+            <i class="ti ti-database"></i>
+            <div>
+              <h4>Gestor (Banco de Dados)</h4>
+              <p>Customize o banco de dados interno de raças, classes, perícias e domine as regras do seu cenário.</p>
+            </div>
+          </a>
+          <a href="./pages/monstros.html" class="modal-link-card">
+            <i class="ti ti-ghost"></i>
+            <div>
+              <h4>Monstropedia</h4>
+              <p>Consulte a lista oficial de monstros, verifique o ND, atributos e importe-os diretamente para o tracker.</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<section class="section reveal">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-label">Novidades</div>
-      <h2 class="section-title">Atualizações do Sistema</h2>
-      <p class="section-desc">Veja o que foi adicionado, corrigido e melhorado em cada versão.</p>
-    </div>
-    <div class="rune-divider"><span>✦</span></div>
-    <div class="updates-grid">
-
-      <div class="updates-sidebar">
-        <div class="updates-sidebar-card">
-          <h3>Filtrar por Tipo</h3>
-          <button class="update-filter-btn active" onclick="filterLogs('all',this)">Todos</button>
-          <button class="update-filter-btn" onclick="filterLogs('new',this)">✦ Novidades</button>
-          <button class="update-filter-btn" onclick="filterLogs('improvement',this)">↑ Melhorias</button>
-          <button class="update-filter-btn" onclick="filterLogs('fix',this)">✓ Correções</button>
+  <!-- SOBRE O PROJETO (MOVIDO LOGO ABAIXO DOS CARDS) -->
+  <section class="section about-section reveal">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-icon-ring"><i class="ti ti-dragon"></i></div>
+          <div class="about-stats">
+            <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Módulos</div></div>
+            <div class="stat-box"><div class="stat-num">5e</div><div class="stat-lbl">Compatível</div></div>
+            <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Fichas</div></div>
+            <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Instalação</div></div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="section-label">Sobre o Projeto</div>
+          <h2>Feito para quem joga de verdade.</h2>
+          <p>O <strong>RPG System</strong> nasceu da necessidade de ter uma ferramenta de mesa funcional, rápida e que não atrapalhasse o fluxo da sessão. Sem abas duplicadas, sem apps pesados, sem anúncios no meio da ficha.</p>
+          <p>Tudo roda <strong>diretamente no seu navegador</strong>, os dados ficam salvos localmente e qualquer dispositivo — computador, tablet ou celular — serve como tela de controle.</p>
+          <p>O sistema foi construído seguindo as regras do <strong>D&amp;D 5ª Edição</strong>, mas com campos totalmente customizáveis para suportar qualquer sistema que você queira jogar.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="changelog" id="changelog">
+  <!-- CHANGELOG COM A ATUALIZAÇÃO v1.7 -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Novidades</div>
+        <h2 class="section-title">Atualizações do Sistema</h2>
+        <p class="section-desc">Veja o que foi adicionado, corrigido e melhorado em cada versão.</p>
+      </div>
+      <div class="rune-divider"><span>✦</span></div>
+      <div class="updates-grid">
 
-        <div class="changelog-item open" data-type="improvement">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.6</span>
-            <span class="changelog-date">Jul 2026</span>
-            <span class="changelog-title">Refatoração Estética Global</span>
-            <span class="changelog-badge badge-improvement">Melhoria</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
-          </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Melhoria de UI Geral</strong> — Ajuste e polimento fino na interface visual de todas as páginas do ecossistema</li>
-              <li>Consistência aprimorada nas paletas de cores ativos, espaçamentos internos e layouts de cards responsivos</li>
-            </ul>
+        <div class="updates-sidebar">
+          <div class="updates-sidebar-card">
+            <h3>Filtrar por Tipo</h3>
+            <button class="update-filter-btn active" onclick="filterLogs('all',this)">Todos</button>
+            <button class="update-filter-btn" onclick="filterLogs('new',this)">✦ Novidades</button>
+            <button class="update-filter-btn" onclick="filterLogs('improvement',this)">↑ Melhorias</button>
+            <button class="update-filter-btn" onclick="filterLogs('fix',this)">✓ Correções</button>
           </div>
         </div>
 
-        <div class="changelog-item" data-type="new">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.5</span>
-            <span class="changelog-date">Jul 2026</span>
-            <span class="changelog-title">Gestor de Dados Avançado</span>
-            <span class="changelog-badge badge-new">Nova</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
-          </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Módulo Gestor de Conteúdo</strong> — Nova ferramenta implementada para expandir o banco interno local do sistema</li>
-              <li>Inclusão de ferramentas nativas para **adicionar conteúdos customizados** (raças, classes, etc.)</li>
-              <li>Capacidade de **restringir ou filtrar seleções** por campanha ativa, customizando a mesa conforme o cenário do mestre</li>
-            </ul>
-          </div>
-        </div>
+        <div class="changelog" id="changelog">
 
-        <div class="changelog-item" data-type="new">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.4</span>
-            <span class="changelog-date">Jul 2025</span>
-            <span class="changelog-title">Gerador de Personagens</span>
-            <span class="changelog-badge badge-new">Nova</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
+          <!-- UPDATE v1.7 -->
+          <div class="changelog-item open" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.7</span>
+              <span class="changelog-date">Jul 2026</span>
+              <span class="changelog-title">Monstropedia & Atualizações de Fluxo na UI</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Módulo Monstropedia</strong> — Adicionada a nova página <code>monstros.html</code> para listar, filtrar e buscar criaturas para a mesa</li>
+                <li><strong>Centralização de Fluxo UI</strong> — Nova tela inicial sem heróis genéricos, focada em segmentar a navegação inteligente entre <strong>Jogador</strong> e <strong>Mestre</strong> por meio de Modais Expandidos de forma prática</li>
+                <li>Consistência de menus mobile e suporte aos novos caminhos unificados do ecossistema</li>
+              </ul>
+            </div>
           </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Gerador de Personagens</strong> — novo módulo com JSON de raças, classes, profissões, personalidades e estilos de jogo</li>
-              <li>Filtros opcionais por raça, classe, profissão, estilo, nível e alinhamento</li>
-              <li>Geração completa: atributos rolados (4d6 drop lowest), HP, CA, iniciativa e velocidade</li>
-              <li>Salvar personagem direto nas fichas, escolhendo pasta (Jogador / NPC / Monstro)</li>
-              <li>Exportar como PDF via impressão do navegador</li>
-              <li><strong>Pastas na ficha</strong> — sidebar com abas Todas / Jogadores / NPCs / Monstros com contador</li>
-              <li>Botão <strong>Salvar como PDF</strong> adicionado também na ficha do jogador</li>
-              <li>Menu hamburguer mobile em Fichas e Tracker com todos os links de navegação</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="changelog-item" data-type="new">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.3</span>
-            <span class="changelog-date">Jul 2025</span>
-            <span class="changelog-title">Sistema de Temas e Index</span>
-            <span class="changelog-badge badge-new">Nova</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
+          <div class="changelog-item" data-type="improvement">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.6</span>
+              <span class="changelog-date">Jul 2026</span>
+              <span class="changelog-title">Refatoração Estética Global</span>
+              <span class="changelog-badge badge-improvement">Melhoria</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Melhoria de UI Geral</strong> — Ajuste e polimento fino na interface visual de todas as páginas do ecossistema</li>
+                <li>Consistência aprimorada nas paletas de cores ativos, espaçamentos internos e layouts de cards responsivos</li>
+              </ul>
+            </div>
           </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Página inicial</strong> com cards de navegação, sobre e changelog</li>
-              <li><strong>Menu retrátil de tema</strong> no header da ficha com toggle claro/escuro</li>
-              <li><strong>Cores por ficha</strong> — destaque e fundo customizáveis individualmente, com presets e picker livre</li>
-              <li><strong>CSS centralizado</strong> no base.css, mínimo de CSS nas páginas HTML</li>
-              <li><strong>Design responsivo</strong> para celular e tablet em todas as páginas</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="changelog-item" data-type="new">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.2</span>
-            <span class="changelog-date">Jun 2025</span>
-            <span class="changelog-title">Fichas Expandidas + Rolador</span>
-            <span class="changelog-badge badge-new">Nova</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
+          <div class="changelog-item" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.5</span>
+              <span class="changelog-date">Jul 2026</span>
+              <span class="changelog-title">Gestor de Dados Avançado</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Módulo Gestor de Conteúdo</strong> — Nova ferramenta implementada para expandir o banco interno local do sistema</li>
+                <li>Inclusão de ferramentas nativas para **adicionar conteúdos customizados** (raças, classes, etc.)</li>
+                <li>Capacidade de **restringir ou filtrar seleções** por campanha ativa, customizando a mesa conforme o cenário do mestre</li>
+              </ul>
+            </div>
           </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Habilidades</strong> com nome, descrição, nível de desbloqueio, usos rastreados e reset</li>
-              <li><strong>Magias conhecidas</strong> com escola, alcance, duração, conjuração e descrição expandível</li>
-              <li><strong>Itens</strong> agora têm categoria (Item / Equipamento / Consumível), peso e descrição</li>
-              <li><strong>Rolador de dados</strong> no tracker com d4 a d% e histórico de rolagens</li>
-              <li><strong>Grupo de monstros</strong> — adicione N instâncias de uma vez com HP individual</li>
-              <li><strong>Tema claro/escuro</strong> no tracker</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="changelog-item" data-type="improvement">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.1</span>
-            <span class="changelog-date">Jun 2025</span>
-            <span class="changelog-title">Integração Ficha → Tracker</span>
-            <span class="changelog-badge badge-improvement">Melhoria</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
+          <div class="changelog-item" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.4</span>
+              <span class="changelog-date">Jul 2025</span>
+              <span class="changelog-title">Gerador de Personagens</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Gerador de Personagens</strong> — novo módulo com JSON de raças, classes, profissões, personalidades e estilos de jogo</li>
+                <li>Filtros opcionais por raça, classe, profissão, estilo, nível e alinhamento</li>
+                <li>Geração completa: atributos rolados (4d6 drop lowest), HP, CA, iniciativa e velocidade</li>
+                <li>Salvar personagem direto nas fichas, escolhendo pasta (Jogador / NPC / Monstro)</li>
+                <li>Exportar como PDF via impressão do navegador</li>
+                <li><strong>Pastas na ficha</strong> — sidebar com abas Todas / Jogadores / NPCs / Monstros com contador</li>
+                <li>Botão <strong>Salvar como PDF</strong> adicionado também na ficha do jogador</li>
+                <li>Menu hamburguer mobile em Fichas e Tracker com todos os links de navegação</li>
+              </ul>
+            </div>
           </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Importar ficha</strong> no tracker — HP, CA e Iniciativa lidos automaticamente</li>
-              <li><strong>Badge de ficha</strong> no card do combatente mostrando classe e nível</li>
-              <li>Prevenção de importação duplicada (ícone ✓ em fichas já no combate)</li>
-              <li>Navegação entre páginas pelo header em ambos os módulos</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="changelog-item" data-type="fix">
-          <div class="changelog-header" onclick="toggleLog(this)">
-            <span class="changelog-version">v1.0</span>
-            <span class="changelog-date">Mai 2025</span>
-            <span class="changelog-title">Lançamento Inicial</span>
-            <span class="changelog-badge badge-fix">Base</span>
-            <i class="ti ti-chevron-down changelog-chevron"></i>
+          <div class="changelog-item" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.3</span>
+              <span class="changelog-date">Jul 2025</span>
+              <span class="changelog-title">Sistema de Temas e Index</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Página inicial</strong> com cards de navegação, sobre e changelog</li>
+                <li><strong>Menu retrátil de tema</strong> no header da ficha com toggle claro/escuro</li>
+                <li><strong>Cores por ficha</strong> — destaque e fundo customizáveis individualmente, com presets e picker livre</li>
+                <li><strong>CSS centralizado</strong> no base.css, mínimo de CSS nas páginas HTML</li>
+                <li><strong>Design responsivo</strong> para celular e tablet em todas as páginas</li>
+              </ul>
+            </div>
           </div>
-          <div class="changelog-body">
-            <ul class="change-list">
-              <li><strong>Combat Tracker</strong> com iniciativa rotativa, HP, condições e log de combate</li>
-              <li><strong>Criador de Fichas</strong> com atributos D&amp;D 5e, perícias, salvaguardas e espaços de magia</li>
-              <li>Atributos, perícias e estatísticas de combate totalmente customizáveis</li>
-              <li>Dados salvos no navegador via localStorage</li>
-              <li>Tema escuro com estética de fantasia sombria</li>
-            </ul>
-          </div>
-        </div>
 
+          <div class="changelog-item" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.2</span>
+              <span class="changelog-date">Jun 2025</span>
+              <span class="changelog-title">Fichas Expandidas + Rolador</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Habilidades</strong> com nome, descrição, nível de desbloqueio, usos rastreados e reset</li>
+                <li><strong>Magias conhecidas</strong> com escola, alcance, duração, conjuração e descrição expandível</li>
+                <li><strong>Itens</strong> agora têm categoria (Item / Equipamento / Consumível), peso e descrição</li>
+                <li><strong>Rolador de dados</strong> no tracker com d4 a d% e histórico de rolagens</li>
+                <li><strong>Grupo de monstros</strong> — adicione N instâncias de uma vez com HP individual</li>
+                <li><strong>Tema claro/escuro</strong> no tracker</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="changelog-item" data-type="improvement">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.1</span>
+              <span class="changelog-date">Jun 2025</span>
+              <span class="changelog-title">Integração Ficha → Tracker</span>
+              <span class="changelog-badge badge-improvement">Melhoria</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Importar ficha</strong> no tracker — HP, CA e Iniciativa lidos automaticamente</li>
+                <li><strong>Badge de ficha</strong> no card do combatente mostrando classe e nível</li>
+                <li>Prevenção de importação duplicada (ícone ✓ em fichas já no combate)</li>
+                <li>Navegação entre páginas pelo header em ambos os módulos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="changelog-item" data-type="fix">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.0</span>
+              <span class="changelog-date">Mai 2025</span>
+              <span class="changelog-title">Lançamento Inicial</span>
+              <span class="changelog-badge badge-fix">Base</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Combat Tracker</strong> com iniciativa rotativa, HP, condições e log de combate</li>
+                <li><strong>Criador de Fichas</strong> com atributos D&amp;D 5e, perícias, salvaguardas e espaços de magia</li>
+                <li>Atributos, perícias e estatísticas de combate totalmente customizáveis</li>
+                <li>Dados salvos no navegador via localStorage</li>
+                <li>Tema escuro com estética de fantasia sombria</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
@@ -348,6 +361,7 @@
         <a href="./pages/gerador.html">Gerador de Personagens</a>
         <a href="./pages/conteudo.html">Gestor de Dados</a>
         <a href="./pages/tracker.html">Combat Tracker</a>
+        <a href="./pages/monstros.html">Monstropedia</a>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
