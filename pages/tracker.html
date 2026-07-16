@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/tracker.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-
 </head>
 <body>
 <div id="app">
@@ -139,13 +138,19 @@
 </div>
 
 <div class="modal-overlay" id="importModal" style="display:none">
-  <div class="modal" style="max-width:520px">
+  <div class="modal" style="max-width:520px; width:90%">
     <h3><i class="ti ti-file-import" style="margin-right:6px"></i>Importar Ficha</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">HP, CA e Iniciativa são lidos da ficha salva.</p>
-    <div id="importList"></div>
-    <div class="modal-actions"><button class="btn" onclick="closeModal('importModal')">Fechar</button></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="importModalDesc">Escolha o tipo de combatente para importar.</p>
+    
+    <div id="importModalContent"></div>
+    
+    <div class="modal-actions" style="margin-top:15px">
+      <button class="btn" id="btnBackImport" style="display:none" onclick="renderImportSelection()">← Voltar</button>
+      <button class="btn" onclick="closeModal('importModal')">Fechar</button>
+    </div>
   </div>
 </div>
 
-<script src="../js/tracker.js"></script> </body>
+<script src="../js/tracker.js"></script>
+</body>
 </html>

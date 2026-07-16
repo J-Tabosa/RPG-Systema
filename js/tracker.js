@@ -5,13 +5,25 @@ function toggleTheme(){ dark=!dark; localStorage.setItem('rpg_theme',dark?'dark'
 applyTheme();
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
-function loadFichas(){ try{return JSON.parse(localStorage.getItem('rpg_fichas_v1'))||[];}catch(e){return[];} }
+function loadAllFichas(){ try{return JSON.parse(localStorage.getItem('rpg_fichas_v1'))||[];}catch(e){return[];} }
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 const CONDITIONS=['Atordoado','Assustado','Envenenado','Paralisado','Caído','Cego','Surdo','Encantado','Agarrado','Invisível'];
 let combatants=[],currentTurn=0,round=1,selType_='player',editId=null,editType_='player',logs=[],diceHistory=[];
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 function hpColor(p){return p>.5?'#3a8c1e':p>.25?'#d4a843':'#c0392b';}
+
+let lastModalState = { screen: 'menu', folderName: null };
+
+function getCombatantColor(c) {
+  if (c.type === 'player') {
+    return c.customBg || '#4a9c2e'; 
+  } else if (c.type === 'monster') {
+    return '#c05050'; // Vermelho para inimigos/monstros
+  } else {
+    return '#2a5080'; // Azul para NPCs
+  }
+}
 
 // ── LOG ───────────────────────────────────────────────────────────────────────
 function addLog(t){
@@ -41,7 +53,7 @@ function selEditType(t){
   });
 }
 
-// ── ADD COMBATANT ─────────────────────────────────────────────────────────────
+// ── ADD COMBATANT (MANUAL) ────────────────────────────────────────────────────
 function addCombatant(){
   const name=document.getElementById('newName').value.trim();
   const hpMax=parseInt(document.getElementById('newHpMax').value)||20;
@@ -64,40 +76,214 @@ function addCombatant(){
   render();
 }
 
-// ── IMPORT ────────────────────────────────────────────────────────────────────
+// ── IMPORT MODAL (POP-UP DINÂMICO COM MEMÓRIA) ───────────────────────────────
 function openImportModal(){
-  const fichas=loadFichas();
-  const el=document.getElementById('importList');
-  if(!fichas.length){
-    el.innerHTML='<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha.<br><a href="ficha.html" style="color:var(--gold)">Criar fichas →</a></div>';
-    document.getElementById('importModal').style.display='flex'; return;
+  document.getElementById('importModal').style.display='flex';
+  
+  if (lastModalState.screen === 'players') {
+    showPlayersImport();
+  } else if (lastModalState.screen === 'folders') {
+    showMonstersFolders();
+  } else if (lastModalState.screen === 'folder-detail' && lastModalState.folderName) {
+    showMonstersInFolder(lastModalState.folderName);
+  } else {
+    renderImportSelection();
   }
-  el.innerHTML=fichas.map(f=>{
-    const hpMax=(f.combat.find(x=>x.id==='hpmax')||{val:20}).val;
-    const ca=(f.combat.find(x=>x.id==='ca')||{val:10}).val;
-    const init=(f.combat.find(x=>x.id==='init')||{val:0}).val;
-    const color=f.type=='player'?(f.bg||'#4a9c2e'):f.type==='monster'?'#c05050':'#2a5080';
-    const bd=f.type==='player'?(f.bg||'#4a9c2e'):f.type==='monster'?'#c05050':'#2a5080';
-    const already=combatants.some(x=>x.fichaId===f.id);
-    return`<div class="fii${already?' already':''}" onclick="${already?'':("importFicha('"+f.id+"')")}">
-      <div class="fii-av" style="background:${color}22;border-color:${bd};color:${color}">${f.name[0].toUpperCase()}</div>
-      <div class="fii-info">
-        <div class="fii-name" style="color:${color}">${f.name}${already?' <span style="font-size:10px;color:var(--gold)">✓ No combate</span>':''}</div>
-        <div class="fii-sub">${[f.race,f.class,f.level?'Nv '+f.level:''].filter(Boolean).join(' · ')}</div>
+}
+
+function renderImportSelection(){
+  lastModalState = { screen: 'menu', folderName: null };
+  document.getElementById('btnBackImport').style.display = 'none';
+  document.getElementById('importModalDesc').textContent = 'Escolha o tipo de combatente para importar:';
+  
+  const container = document.getElementById('importModalContent');
+  container.innerHTML = `
+    <div style="display:flex; gap:12px; margin-top:10px;">
+      <button class="btn primary" style="flex:1; padding: 16px; font-size: 14px; border-color:#4a9c2e" onclick="showPlayersImport()">
+        <i class="ti ti-user" style="font-size:18px; display:block; margin-bottom:4px"></i> Jogador
+      </button>
+      <button class="btn primary" style="flex:1; padding: 16px; font-size: 14px; border-color:#c05050" onclick="showMonstersFolders()">
+        <i class="ti ti-ghost" style="font-size:18px; display:block; margin-bottom:4px"></i> Monstro
+      </button>
+    </div>
+  `;
+}
+
+// Exibir Fichas de Jogadores
+function showPlayersImport(){
+  lastModalState = { screen: 'players', folderName: null };
+  document.getElementById('btnBackImport').style.display = 'inline-block';
+  document.getElementById('importModalDesc').textContent = 'Selecione um Jogador para importar:';
+  
+  const todas = loadAllFichas();
+  const fichas = todas.filter(f => f.type === 'player' || !f.type);
+  const container = document.getElementById('importModalContent');
+  
+  if(!fichas.length){
+    container.innerHTML = '<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha de jogador encontrada.<br><a href="ficha.html" style="color:var(--gold)">Criar fichas →</a></div>';
+    return;
+  }
+  
+  container.innerHTML = fichas.map(f => {
+    const hpMax = (f.combat?.find(x=>x.id==='hpmax')||{val:20}).val;
+    const ca = (f.combat?.find(x=>x.id==='ca')||{val:10}).val;
+    const init = (f.combat?.find(x=>x.id==='init')||{val:0}).val;
+    const color = (f.colors && f.colors.customFieldFontColor) || f.bg || '#4a9c2e';
+    const instances = combatants.filter(x => x.fichaId === f.id).length;
+    const badgeText = instances > 0 ? ` <span style="font-size:11px;color:var(--gold);font-weight:bold;margin-left:4px">(${instances}x)</span>` : '';
+    
+    // Agora o card inteiro não tem mais a classe "already" (não fica cinza)
+    // Clicar no botão "+" ou no card dispara a adição
+    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;" onclick="importFicha('${f.id}', 'player')">
+      <div style="display:flex; align-items:center; gap:10px; flex:1">
+        <div class="fii-av" style="background:${color}22;border-color:${color};color:${color}">${f.name[0].toUpperCase()}</div>
+        <div class="fii-info">
+          <div class="fii-name" style="color:${color}">${f.name}${badgeText}</div>
+          <div class="fii-sub">${[f.race,f.class,f.level?'Nv '+f.level:''].filter(Boolean).join(' · ')}</div>
+        </div>
       </div>
-      <div class="fii-stats"><div style="color:var(--gold);font-family:Cinzel,serif">Init ${init}</div><div>HP ${hpMax} · CA ${ca}</div></div>
+      <div style="display:flex; align-items:center; gap:12px">
+        <div class="fii-stats" style="text-align:right"><div style="color:var(--gold);font-family:Cinzel,serif">Init ${init}</div><div style="font-size:11px;opacity:0.8">HP ${hpMax} · CA ${ca}</div></div>
+        <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" onclick="event.stopPropagation(); importFicha('${f.id}', 'player')"><i class="ti ti-plus"></i></button>
+      </div>
     </div>`;
   }).join('');
-  document.getElementById('importModal').style.display='flex';
 }
-function importFicha(id){
-  const f=loadFichas().find(x=>x.id===id); if(!f) return;
-  const hpMax=(f.combat.find(x=>x.id==='hpmax')||{val:20}).val;
-  const ca=(f.combat.find(x=>x.id==='ca')||{val:10}).val;
-  const init=(f.combat.find(x=>x.id==='init')||{val:0}).val;
-  combatants.push({id:uid(),name:f.name,type:f.type,hpMax,hpCur:hpMax,init,ac:ca,conditions:[],dead:false,fichaId:f.id,fichaClass:f.class,fichaLevel:f.level,groupId:null,customBg:f.bg||null});
-  addLog(`📜 <em>${f.name}</em> importado (HP ${hpMax}, Init ${init}, CA ${ca})`);
-  closeModal('importModal'); render();
+
+// Exibir Pastas de Monstros
+function showMonstersFolders(){
+  lastModalState = { screen: 'folders', folderName: null };
+  document.getElementById('btnBackImport').style.display = 'inline-block';
+  document.getElementById('importModalDesc').textContent = 'Selecione uma pasta de monstros:';
+  
+  const todas = loadAllFichas();
+  const monstros = todas.filter(m => m.type === 'monster');
+  const container = document.getElementById('importModalContent');
+  
+  if(!monstros.length){
+    container.innerHTML = '<div class="empty-state" style="padding:16px 0"><div class="big">☠</div>Nenhum monstro cadastrado como ficha.</div>';
+    return;
+  }
+
+  let folders = [...new Set(monstros.map(m => m.folder || m.pasta || 'Geral'))];
+  if(folders.length === 0) folders = ['Geral'];
+
+  container.innerHTML = `<div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">` + folders.map(folder => {
+    const qtd = monstros.filter(m => (m.folder || m.pasta || 'Geral') === folder).length;
+    return `<button class="btn" style="padding:12px; font-family:'Cinzel', serif; text-align:left; display:flex; align-items:center; justify-content:space-between; gap:8px" onclick="showMonstersInFolder('${folder}')">
+      <span><i class="ti ti-folder" style="color:var(--gold); margin-right:4px"></i> ${folder}</span>
+      <span style="font-size:11px; opacity:0.6">(${qtd})</span>
+    </button>`;
+  }).join('') + `</div>`;
+}
+
+// Exibir Monstros de uma Pasta Específica
+function showMonstersInFolder(folderName){
+  lastModalState = { screen: 'folder-detail', folderName: folderName };
+  document.getElementById('btnBackImport').style.display = 'inline-block';
+  document.getElementById('importModalDesc').textContent = `Monstros na pasta: ${folderName}`;
+  
+  const todas = loadAllFichas();
+  const monstros = todas
+    .filter(m => m.type === 'monster' && (m.folder || m.pasta || 'Geral') === folderName)
+    .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
+  
+  const container = document.getElementById('importModalContent');
+  
+  if(!monstros.length){
+    container.innerHTML = `<button class="btn sm" style="margin-bottom:10px" onclick="showMonstersFolders()">← Voltar para Pastas</button>
+                           <div class="empty-state" style="padding:16px 0">Nenhum monstro nesta pasta.</div>`;
+    return;
+  }
+  
+  container.innerHTML = `<button class="btn sm" style="margin-bottom:10px" onclick="showMonstersFolders()">← Voltar para Pastas</button>` + monstros.map(f => {
+    const hpMax = (f.combat?.find(x=>x.id==='hpmax')||{val:20}).val;
+    const ca = (f.combat?.find(x=>x.id==='ca')||{val:10}).val;
+    const init = (f.combat?.find(x=>x.id==='init')||{val:0}).val;
+    const color = '#c05050'; 
+    const instances = combatants.filter(x => x.fichaId === f.id).length;
+    const badgeText = instances > 0 ? ` <span style="font-size:11px;color:var(--gold);font-weight:bold;margin-left:4px">(${instances}x)</span>` : '';
+    
+    // Adicionado botão de "+" vermelho à direita para os monstros. 
+    // O card não fica mais apagado/cinza!
+    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;" onclick="importFicha('${f.id}', 'monster')">
+      <div style="display:flex; align-items:center; gap:10px; flex:1">
+        <div class="fii-av" style="background:${color}22;border-color:${color};color:${color}">${f.name[0].toUpperCase()}</div>
+        <div class="fii-info">
+          <div class="fii-name" style="color:${color}">${f.name}${badgeText}</div>
+          <div class="fii-sub">${f.race || 'Monstro'}</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px">
+        <div class="fii-stats" style="text-align:right"><div style="color:var(--gold);font-family:Cinzel,serif">Init ${init}</div><div style="font-size:11px;opacity:0.8">HP ${hpMax} · CA ${ca}</div></div>
+        <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" onclick="event.stopPropagation(); importFicha('${f.id}', 'monster')"><i class="ti ti-plus"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Função de importação unificada (sempre mantém o modal aberto ao adicionar)
+function importFicha(id, type){
+  const todas = loadAllFichas();
+  const f = todas.find(x=>x.id===id); if(!f) return;
+  const hpMax=(f.combat?.find(x=>x.id==='hpmax')||{val:20}).val;
+  const ca=(f.combat?.find(x=>x.id==='ca')||{val:10}).val;
+  const init=(f.combat?.find(x=>x.id==='init')||{val:0}).val;
+  
+  const corFicha = (f.colors && f.colors.customFieldFontColor) || f.bg || null;
+
+  let finalName = f.name;
+  const existingCopies = combatants.filter(x => x.fichaId === f.id);
+  
+  if (existingCopies.length > 0) {
+    const firstCopy = existingCopies.find(x => x.name === f.name);
+    if (firstCopy) {
+      firstCopy.name = `${f.name} 1`;
+    }
+    
+    let nextNum = 1;
+    const rx = new RegExp(`^${f.name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')}\\s+(\\d+)$`);
+    
+    existingCopies.forEach(c => {
+      const match = c.name.match(rx);
+      if (match) {
+        const num = parseInt(match[1]);
+        if (num >= nextNum) {
+          nextNum = num + 1;
+        }
+      }
+    });
+    
+    finalName = `${f.name} ${nextNum}`;
+  }
+
+  combatants.push({
+    id:uid(),
+    name:finalName,
+    type:type,
+    hpMax,
+    hpCur:hpMax,
+    init,
+    ac:ca,
+    conditions:[],
+    dead:false,
+    fichaId:f.id,
+    fichaClass:f.class || '',
+    fichaLevel:f.level || null,
+    groupId:null,
+    customBg:corFicha
+  });
+  
+  addLog(`📜 <em>${finalName}</em> importado (HP ${hpMax}, Init ${init}, CA ${ca})`);
+  
+  // Atualiza apenas os números de contador do modal em tempo de execução sem fechar ou resetar a tela
+  if (lastModalState.screen === 'players') {
+    showPlayersImport();
+  } else if (lastModalState.screen === 'folder-detail' && lastModalState.folderName) {
+    showMonstersInFolder(lastModalState.folderName);
+  }
+  
+  render();
 }
 
 // ── REMOVE ────────────────────────────────────────────────────────────────────
@@ -241,7 +427,7 @@ function renderTrack(){
   el.innerHTML=[...combatants].sort((a,b)=>b.init-a.init).map(c=>{
     const active=combatants[currentTurn]&&combatants[currentTurn].id===c.id;
     const pct=c.hpMax>0?c.hpCur/c.hpMax:0;
-    const itemColor = c.type === 'player' ? (c.customBg || '#4a9c2e') : (c.type === 'monster' ? '#c05050' : '#2a5080');
+    const itemColor = getCombatantColor(c);
     return`<div class="init-token ${c.type}${active?' active':''}${c.dead?' dead':''}" onclick="setTurn('${c.id}')">
       <div class="tok-name" style="color:${itemColor}">${c.name}</div>
       <div class="tok-init">${c.init}</div>
@@ -276,7 +462,7 @@ function renderCards(){
       c.groupId?'<span class="badge-sm group-badge"><i class="ti ti-users"></i> Grupo</span>':''
     ].join('');
     
-    const itemColor = c.type === 'player' ? (c.customBg || '#4a9c2e') : (c.type === 'monster' ? '#c05050' : '#2a5080');
+    const itemColor = getCombatantColor(c);
 
     return`<div class="c-card${active?' active-turn':''}${c.dead?' dead':''}">
       <div class="c-card-top">

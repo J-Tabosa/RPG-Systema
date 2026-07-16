@@ -617,3 +617,23 @@ body {
   .theme-btn:hover {
     border-color: var(--gold);
   }
+
+  /* Correção de Layout Responsivo para o Combat Tracker em dispositivos móveis */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+  
+  .panel, .panel-right {
+    width: 90% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .dice-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+}
