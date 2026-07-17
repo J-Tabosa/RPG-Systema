@@ -27,6 +27,65 @@ const BG_LIGHT_PRESETS = [
   {name:'Rosa', bg:'#f4e8ec', surface:'#ecd8dc', card:'#faf0f2', card2:'#f0e4e8', border:'#c8a0a8'},
 ];
 
+// ── INDEXEDDB FOR IMAGES ──────────────────────────────────────────────────────
+const DB_NAME = 'rpg_images_db';
+const DB_VERSION = 1;
+const STORE_NAME = 'char_avatars';
+
+function openImagesDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+      }
+    };
+    request.onsuccess = (e) => resolve(e.target.result);
+    request.onerror = (e) => reject(e.target.error);
+  });
+}
+
+async function saveImageToDB(id, base64Data) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.put({ id, image: base64Data });
+    return new Promise((resolve) => tx.oncomplete = () => resolve());
+  } catch (err) {
+    console.error("Erro ao salvar imagem no IndexedDB", err);
+  }
+}
+
+async function loadImageFromDB(id) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readonly');
+    const store = tx.objectStore(STORE_NAME);
+    const request = store.get(id);
+    return new Promise((resolve) => {
+      request.onsuccess = () => resolve(request.result ? request.result.image : null);
+      request.onerror = () => resolve(null);
+    });
+  } catch (err) {
+    console.error("Erro ao carregar imagem do IndexedDB", err);
+    return null;
+  }
+}
+
+async function deleteImageFromDB(id) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.delete(id);
+    return new Promise((resolve) => tx.oncomplete = () => resolve());
+  } catch (err) {
+    console.error("Erro ao deletar imagem do IndexedDB", err);
+  }
+}
+
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 function load(){ try{return JSON.parse(localStorage.getItem(SK))||[];}catch(e){return[];} }
 function save(arr){ localStorage.setItem(SK,JSON.stringify(arr)); }
@@ -307,7 +366,7 @@ function newFichaObj(name='Novo Personagem', presetId='default'){
     combat:JSON.parse(JSON.stringify(DEF_COMBAT)),
     spellSlots:JSON.parse(JSON.stringify(DEF_SLOTS)),
     spells:[],habilidades:[],equipment:[],
-    traits:'',ideals:'',bonds:'',flaws:'',backstory:'',notes:''};
+    traits:'',ideals:'',bonds:'',flaws:'',backstory:'',appearanceDesc:'',notes:''};
 }
 
 // ── SIDEBAR ───────────────────────────────────────────────────────────────────
@@ -321,7 +380,7 @@ function folderFromType(t){return t==='player'?'player':'npc';}
 function countFolder(fid){if(fid==='all')return fichas.length;return fichas.filter(f=>(f.folder||folderFromType(f.type))===fid).length;}
 function setFolder(f){activeFolder=f;renderSidebar();}
 
-function renderSidebar(){
+async function renderSidebar(){
   const el=document.getElementById('fichaList');
   if(!el) return;
   const tabsHtml=`<div style="display:flex;flex-direction:column;gap:3px;margin-bottom:10px">
@@ -335,10 +394,16 @@ function renderSidebar(){
   const filtered=activeFolder==='all'?fichas:fichas.filter(f=>(f.folder||folderFromType(f.type))===activeFolder);
   if(!fichas.length){el.innerHTML=tabsHtml+'<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha.</div>';return;}
   if(!filtered.length){el.innerHTML=tabsHtml+'<div style="color:var(--muted);font-size:13px;font-style:italic;text-align:center;padding:16px 0">Nenhuma ficha nesta pasta.</div>';return;}
-  el.innerHTML=tabsHtml+filtered.map(f=>{
+  
+  const itemsHtml = await Promise.all(filtered.map(async f => {
     const sel=f.id===activeId;
-    return`<div class="fi${sel?' sel':''}" onclick="selFicha('${f.id}')">
-      <div class="fi-av" style="background:var(--border);border-color:var(--gold);color:var(--gold)">${f.name[0].toUpperCase()}</div>
+    const customImg = await loadImageFromDB(f.id);
+    const avContent = customImg 
+      ? `<img src="${customImg}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` 
+      : f.name[0].toUpperCase();
+
+    return `<div class="fi${sel?' sel':''}" onclick="selFicha('${f.id}')">
+      <div class="fi-av" style="background:var(--border);border-color:var(--gold);color:var(--gold)">${avContent}</div>
       <div class="fi-info">
         <div class="fi-name">${f.name}</div>
         <div class="fi-sub">${[f.race,f.class,f.level?'Nv '+f.level:''].filter(Boolean).join(' · ')}</div>
@@ -348,7 +413,9 @@ function renderSidebar(){
         <button class="btn xs danger fi-del" onclick="event.stopPropagation();delFicha('${f.id}')"><i class="ti ti-trash"></i></button>
       </div>
     </div>`;
-  }).join('');
+  }));
+
+  el.innerHTML=tabsHtml + itemsHtml.join('');
 }
 
 function selFicha(id){activeId=id;renderSidebar();renderEditor();applyFichaColors();}
@@ -359,16 +426,18 @@ function newFicha(presetId){
   fichas.push(f);save(fichas);activeId=f.id;
   renderSidebar();renderEditor();applyFichaColors();toast('Nova ficha criada!');
 }
-function delFicha(id){
+async function delFicha(id){
   const f=fichas.find(x=>x.id===id);
   if(!f||!confirm(`Excluir "${f.name}"?`))return;
   fichas=fichas.filter(x=>x.id!==id);save(fichas);
+  await deleteImageFromDB(id); 
+  await deleteImageFromDB(id + '_full'); // Remove também a imagem grande
   if(activeId===id){activeId=fichas.length?fichas[0].id:null;}
   renderSidebar();renderEditor();applyFichaColors();toast('Ficha excluída.');
 }
 
 // ── EDITOR ────────────────────────────────────────────────────────────────────
-function renderEditor(){
+async function renderEditor(){
   const editor=document.getElementById('editor');
   if(!editor) return;
   const f=getFicha();
@@ -377,6 +446,10 @@ function renderEditor(){
   const racasPermitidas = getFilteredCat('racas', f.presetId);
   const classesPermitidas = getFilteredCat('classes', f.presetId);
   const profsPermitidas = getFilteredCat('profissoes', f.presetId);
+
+  // Carrega as duas imagens assincronamente
+  const characterImg = await loadImageFromDB(f.id);
+  const fullBodyImg = await loadImageFromDB(f.id + '_full');
 
   const attrsHtml=f.attrs.map(a=>`
     <div class="attr-card">
@@ -470,130 +543,251 @@ function renderEditor(){
     </div>`).join('');
 
   editor.innerHTML=`
-    <div class="sec">
-      <div style="display:grid;grid-template-columns: 1fr; gap:12px; margin-bottom:14px;" class="meta-grid">
-        <div class="form-field" style="margin:0">
-          <label>Nome do Personagem</label>
-          <input type="text" class="char-name-header" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:14px;">
+    <!-- PÁGINA 1: Informações Principais, Atributos, Combate, Perícias e Mana -->
+    <div class="pdf-page-block">
+      <div class="sec">
+        <!-- Cabeçalho Principal -->
+        <div class="character-header-grid-compact">
+          <div class="avatar-compact-area print-hidden">
+            <div class="avatar-compact-preview" id="editorAvatarPreview" onclick="document.getElementById('avatarFileInput').click()" title="Alterar Ícone">
+              ${characterImg ? `<img src="${characterImg}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="ti ti-user" style="font-size:32px;color:var(--muted)"></i>'}
+            </div>
+            ${characterImg ? `<button class="btn text danger xs" onclick="removeAvatar()" style="padding:2px; font-size:10px;"><i class="ti ti-trash"></i></button>` : ''}
+            <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
+          </div>
+          
+          <!-- Preview do Ícone para Impressão PDF (Maior e com espaçamento) -->
+          <div class="avatar-compact-preview print-only-avatar-compact" style="display:none;">
+            ${characterImg ? `<img src="${characterImg}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">` : ''}
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; flex:1">
+            <div style="display:grid;grid-template-columns: 1fr; gap:12px;" class="meta-grid">
+              <div class="form-field" style="margin:0">
+                <label>Nome do Personagem</label>
+                <input type="text" class="char-name-header" value="${f.name}" onchange="setField('name',this.value);renderSidebar()" style="font-family:'Cinzel',serif;font-size:18px; padding: 6px 10px;">
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;" class="meta-grid">
+              <div class="form-field" style="margin:0">
+                <label>Classe</label>
+                <select onchange="setField('class',this.value)" style="padding: 6px 10px;">
+                  <option value="">Selecione uma Classe...</option>
+                  ${classesPermitidas.map(x => `<option value="${x.nome}" ${f.class===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+                </select>
+              </div>
+              <div class="form-field" style="margin:0">
+                <label>Subclasse</label>
+                <input type="text" value="${f.subclass||''}" onchange="setField('subclass',this.value)" placeholder="Ex: Ladino..." style="padding: 6px 10px;">
+              </div>
+              <div class="form-field" style="margin:0">
+                <label>Raça</label>
+                <select onchange="setField('race',this.value)" style="padding: 6px 10px;">
+                  <option value="">Selecione uma Raça...</option>
+                  ${racasPermitidas.map(x => `<option value="${x.nome}" ${f.race===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+                </select>
+              </div>
+              <div class="form-field" style="margin:0">
+                <label>Profissão</label> <!-- Rótulo simplificado para evitar quebra -->
+                <select onchange="setField('background',this.value)" style="padding: 6px 10px;">
+                  <option value="">Selecione uma Profissão...</option>
+                  ${profsPermitidas.map(x => `<option value="${x.nome}" ${f.background===x.nome?'selected':''}>${x.nome}</option>`).join('')}
+                </select>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+              <div class="form-field" style="margin:0"><label>Nível</label><input type="number" value="${f.level}" min="1" max="20" onchange="setField('level',parseInt(this.value));autoProf()" style="padding: 6px 10px;"></div>
+              <div class="form-field" style="margin:0"><label>Bônus</label><input type="number" value="${f.profBonus}" min="2" max="6" onchange="setField('profBonus',parseInt(this.value));renderEditor()" style="padding: 6px 10px;"></div>
+              <div class="form-field" style="margin:0"><label>Alinhamento</label><input type="text" value="${f.alignment||''}" onchange="setField('alignment',this.value)" placeholder="Leal e Bom..." style="padding: 6px 10px;"></div>
+              <div class="form-field" style="margin:0"><label>Tipo</label>
+                <select onchange="setField('type',this.value);renderSidebar();renderEditor()" style="padding: 6px 10px;">
+                  <option value="player" ${f.type==='player'?'selected':''}>Jogador</option>
+                  <option value="neutral" ${f.type==='neutral'?'selected':''}>NPC</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:12px;" class="meta-grid">
-        <div class="form-field" style="margin:0">
-          <label>Classe</label>
-          <select onchange="setField('class',this.value)">
-            <option value="">Selecione uma Classe...</option>
-            ${classesPermitidas.map(x => `<option value="${x.nome}" ${f.class===x.nome?'selected':''}>${x.nome}</option>`).join('')}
-          </select>
+      <div class="sec">
+        <div class="sec-head"><div class="sec-title"><i class="ti ti-shield sec-icon"></i><h2>Atributos</h2></div></div>
+        <div class="attr-grid">${attrsHtml}</div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-head"><div class="sec-title"><i class="ti ti-sword sec-icon"></i><h2>Combate</h2></div></div>
+        <div class="combat-grid">${combatHtml}</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div class="sec" style="margin:0">
+          <div class="sec-head"><div class="sec-title"><i class="ti ti-shield-check sec-icon"></i><h2>Testes de Atributo</h2></div></div>
+          ${savesHtml}
         </div>
-        <div class="form-field" style="margin:0">
-          <label>Subclasse</label>
-          <input type="text" value="${f.subclass||''}" onchange="setField('subclass',this.value)" placeholder="Ex: Ladino Assassino...">
-        </div>
-        <div class="form-field" style="margin:0">
-          <label>Raça</label>
-          <select onchange="setField('race',this.value)">
-            <option value="">Selecione uma Raça...</option>
-            ${racasPermitidas.map(x => `<option value="${x.nome}" ${f.race===x.nome?'selected':''}>${x.nome}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-field" style="margin:0">
-          <label>Antecedente / Profissão</label>
-          <select onchange="setField('background',this.value)">
-            <option value="">Selecione um Antecedente...</option>
-            ${profsPermitidas.map(x => `<option value="${x.nome}" ${f.background===x.nome?'selected':''}>${x.nome}</option>`).join('')}
-          </select>
+        <div class="sec" style="margin:0">
+          <div class="sec-head">
+            <div class="sec-title"><i class="ti ti-star sec-icon"></i><h2>Habilidades</h2></div>
+            <button class="btn xs" onclick="openAddSkill()"><i class="ti ti-plus"></i> Adicionar</button>
+          </div>
+          <div class="skills-grid">${skillsHtml}</div>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        <div class="form-field" style="margin:0"><label>Nível</label><input type="number" value="${f.level}" min="1" max="20" onchange="setField('level',parseInt(this.value));autoProf()"></div>
-        <div class="form-field" style="margin:0"><label>Bônus</label><input type="number" value="${f.profBonus}" min="2" max="6" onchange="setField('profBonus',parseInt(this.value));renderEditor()"></div>
-        <div class="form-field" style="margin:0"><label>Alinhamento</label><input type="text" value="${f.alignment||''}" onchange="setField('alignment',this.value)" placeholder="Leal e Bom..."></div>
-        <div class="form-field" style="margin:0"><label>Tipo</label>
-          <select onchange="setField('type',this.value);renderSidebar();renderEditor()" style="padding:4px 6px;">
-            <option value="player" ${f.type==='player'?'selected':''}>Jogador</option>
-            <option value="neutral" ${f.type==='neutral'?'selected':''}>NPC</option>
-          </select>
-        </div>
+      <!-- Mana reposicionado para a Página 1 (Espaço de sobra preenchido) -->
+      <div class="sec">
+        <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Mana</h2></div></div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px" class="print-hidden">Clique nos círculos para marcar uso. Defina o total por nível.</div>
+        ${slotsHtml}
       </div>
     </div>
 
     <div class="sec">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-shield sec-icon"></i><h2>Atributos</h2></div></div>
-      <div class="attr-grid">${attrsHtml}</div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-sword sec-icon"></i><h2>Combate</h2></div></div>
-      <div class="combat-grid">${combatHtml}</div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-      <div class="sec" style="margin:0">
-        <div class="sec-head"><div class="sec-title"><i class="ti ti-shield-check sec-icon"></i><h2>Testes de Atributo</h2></div></div>
-        ${savesHtml}
+        <div class="sec-head">
+          <div class="sec-title"><i class="ti ti-sparkles sec-icon"></i><h2>Magias Conhecidas</h2></div>
+          <button class="btn xs primary" onclick="openAddSpell()"><i class="ti ti-plus"></i> Adicionar</button>
+        </div>
+        ${spellsHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma magia ainda.</div>'}
       </div>
+
+    <!-- PÁGINA 2: Poderes, Magias Conhecidas e Equipamentos -->
+    <div class="pdf-page-block pdf-page-break">
+      <div class="sec">
+        <div class="sec-head">
+          <div class="sec-title"><i class="ti ti-bolt sec-icon"></i><h2>Poderes</h2></div>
+          <button class="btn xs primary" onclick="openAddHabil()"><i class="ti ti-plus"></i> Adicionar</button>
+        </div>
+        ${habilHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum poder ainda.</div>'}
+      </div>
+
       <div class="sec" style="margin:0">
         <div class="sec-head">
-          <div class="sec-title"><i class="ti ti-star sec-icon"></i><h2>Habilidades</h2></div>
-          <button class="btn xs" onclick="openAddSkill()"><i class="ti ti-plus"></i> Adicionar</button>
+          <div class="sec-title"><i class="ti ti-backpack sec-icon"></i><h2>Equipamentos &amp; Itens</h2></div>
+          <div style="display:flex;align-items:center;gap:8px">
+            ${f.equipment.length?`<span style="font-size:11px;color:var(--muted)">${f.equipment.reduce((a,e)=>a+(e.weight||0)*(e.qty||1),0).toFixed(1)}kg</span>`:''}
+            <button class="btn xs primary" onclick="openAddEquip()"><i class="ti ti-plus"></i> Adicionar</button>
+          </div>
         </div>
-        <div class="skills-grid">${skillsHtml}</div>
+        ${equipHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum item ainda.</div>'}
       </div>
     </div>
 
-    <div class="sec">
-      <div class="sec-head">
-        <div class="sec-title"><i class="ti ti-bolt sec-icon"></i><h2>Poderes</h2></div>
-        <button class="btn xs primary" onclick="openAddHabil()"><i class="ti ti-plus"></i> Adicionar</button>
-      </div>
-      ${habilHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum poder ainda.</div>'}
-    </div>
+    <!-- PÁGINA 3: Aparência, Personalidade, História e Notas -->
+    <div class="pdf-page-block pdf-page-break">
+      <div class="story-appearance-grid">
+        
+        <!-- Bloco de Arte & Aparência Física -->
+        <div class="sec visual-section" style="margin:0;">
+          <div class="sec-head"><div class="sec-title"><i class="ti ti-photo sec-icon"></i><h2>Aparência &amp; Arte Corporal</h2></div></div>
+          
+          <div class="appearance-vertical-layout">
+            <!-- Bloco de Imagem Único (sem duplicação no PDF) -->
+            <div class="full-body-wrapper">
+              <div class="full-body-preview" id="editorFullBodyPreview">
+                ${fullBodyImg ? `<img src="${fullBodyImg}" class="full-body-img-render">` : '<div class="upload-placeholder"><i class="ti ti-photo"></i><div>Adicione a Arte de Corpo Inteiro</div></div>'}
+              </div>
+              <div class="full-body-actions print-hidden" style="display:flex; gap:6px; margin-top:8px; justify-content:center;">
+                <button class="btn xs" onclick="document.getElementById('fullBodyFileInput').click()"><i class="ti ti-upload"></i> Subir Arte</button>
+                ${fullBodyImg ? `<button class="btn xs danger" onclick="removeFullBody()"><i class="ti ti-trash"></i></button>` : ''}
+              </div>
+              <input type="file" id="fullBodyFileInput" accept="image/*" style="display:none;" onchange="uploadFullBody(event)">
+            </div>
 
-    <div class="sec">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Mana</h2></div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Clique nos círculos para marcar uso. Defina o total por nível.</div>
-      ${slotsHtml}
-    </div>
+            <div class="form-field desc-visual-field">
+              <label class="field-label">Descrição Visual Detalhada</label>
+              <textarea class="textarea-fixed" onchange="setField('appearanceDesc',this.value)">${f.appearanceDesc||''}</textarea>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Coluna Direita: Personalidade + História -->
+        <div class="text-sections-column">
+          
+          <!-- Bloco de Personalidade -->
+          <div class="sec" style="margin:0">
+            <div class="sec-head"><div class="sec-title"><i class="ti ti-user sec-icon"></i><h2>Personalidade</h2></div></div>
+            <div class="compact-fields-grid">
+              <div class="form-field"><label class="field-label">Traços</label><textarea class="textarea-fixed compact" onchange="setField('traits',this.value)">${f.traits||''}</textarea></div>
+              <div class="form-field"><label class="field-label">Ideais</label><textarea class="textarea-fixed compact" onchange="setField('ideals',this.value)">${f.ideals||''}</textarea></div>
+              <div class="form-field"><label class="field-label">Vínculos</label><textarea class="textarea-fixed compact" onchange="setField('bonds',this.value)">${f.bonds||''}</textarea></div>
+              <div class="form-field"><label class="field-label">Defeitos</label><textarea class="textarea-fixed compact" onchange="setField('flaws',this.value)">${f.flaws||''}</textarea></div>
+            </div>
+          </div>
 
-    <div class="sec">
-      <div class="sec-head">
-        <div class="sec-title"><i class="ti ti-sparkles sec-icon"></i><h2>Magias Conhecidas</h2></div>
-        <button class="btn xs primary" onclick="openAddSpell()"><i class="ti ti-plus"></i> Adicionar</button>
-      </div>
-      ${spellsHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma magia ainda.</div>'}
-    </div>
+          <!-- Bloco de História & Notas -->
+          <div class="sec" style="margin:0; display:flex; flex-direction:column; gap:10px;">
+            <div class="sec-head"><div class="sec-title"><i class="ti ti-book sec-icon"></i><h2>História &amp; Notas</h2></div></div>
+            <div class="form-field" style="margin:0;"><label class="field-label">Backstory</label><textarea class="textarea-fixed history" onchange="setField('backstory',this.value)">${f.backstory||''}</textarea></div>
+            <div class="form-field" style="margin:0;"><label class="field-label">Notas Livres</label><textarea class="textarea-fixed history" onchange="setField('notes',this.value)">${f.notes||''}</textarea></div>
+          </div>
 
-    <div class="sec">
-      <div class="sec-head">
-        <div class="sec-title"><i class="ti ti-backpack sec-icon"></i><h2>Equipamentos &amp; Itens</h2></div>
-        <div style="display:flex;align-items:center;gap:8px">
-          ${f.equipment.length?`<span style="font-size:11px;color:var(--muted)">${f.equipment.reduce((a,e)=>a+(e.weight||0)*(e.qty||1),0).toFixed(1)}kg</span>`:''}
-          <button class="btn xs primary" onclick="openAddEquip()"><i class="ti ti-plus"></i> Adicionar</button>
         </div>
       </div>
-      ${equipHtml||'<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum item ainda.</div>'}
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-      <div class="sec" style="margin:0">
-        <div class="sec-head"><div class="sec-title"><i class="ti ti-user sec-icon"></i><h2>Personalidade</h2></div></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Traços</label><textarea onchange="setField('traits',this.value)">${f.traits||''}</textarea></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Ideais</label><textarea onchange="setField('ideals',this.value)">${f.ideals||''}</textarea></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Vínculos</label><textarea onchange="setField('bonds',this.value)">${f.bonds||''}</textarea></div>
-        <div class="form-field" style="margin:0"><label>Defeitos</label><textarea onchange="setField('flaws',this.value)">${f.flaws||''}</textarea></div>
-      </div>
-      <div class="sec" style="margin:0">
-        <div class="sec-head"><div class="sec-title"><i class="ti ti-book sec-icon"></i><h2>História &amp; Notas</h2></div></div>
-        <div class="form-field" style="margin-bottom:8px"><label>Backstory</label><textarea style="min-height:100px" onchange="setField('backstory',this.value)">${f.backstory||''}</textarea></div>
-        <div class="form-field" style="margin:0"><label>Notas Livres</label><textarea style="min-height:100px" onchange="setField('notes',this.value)">${f.notes||''}</textarea></div>
-      </div>
-    </div>
-
-    <div style="text-align:right;margin-bottom:14px">
-      <button class="btn print-hidden" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
+    <div style="text-align:right;margin-bottom:14px" class="print-hidden">
+      <button class="btn" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
     </div>`;
+}
+
+// ── AVATAR COMPACT (UP/DEL) ──────────────────────────────────────────────────
+function uploadAvatar(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result;
+    const f = getFicha();
+    if (f) {
+      await saveImageToDB(f.id, base64);
+      renderSidebar();
+      renderEditor();
+      toast('Ícone do personagem atualizado!');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function removeAvatar() {
+  const f = getFicha();
+  if (f && confirm('Remover o ícone deste personagem?')) {
+    await deleteImageFromDB(f.id);
+    renderSidebar();
+    renderEditor();
+    toast('Ícone removido.');
+  }
+}
+
+// ── FULL BODY ART (UP/DEL) ────────────────────────────────────────────────────
+function uploadFullBody(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result;
+    const f = getFicha();
+    if (f) {
+      await saveImageToDB(f.id + '_full', base64); // Salva com sufixo especial
+      renderSidebar();
+      renderEditor();
+      toast('Arte corporal atualizada!');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function removeFullBody() {
+  const f = getFicha();
+  if (f && confirm('Remover a arte de corpo inteiro deste personagem?')) {
+    await deleteImageFromDB(f.id + '_full');
+    renderSidebar();
+    renderEditor();
+    toast('Arte corporal removida.');
+  }
 }
 
 // ── SETTERS ───────────────────────────────────────────────────────────────────
@@ -610,7 +804,7 @@ function editAttr(id){
   editingAttr=id;
   document.getElementById('mAttrTitle').textContent='Editar Atributo';
   document.getElementById('aName').value=a.label;
-  document.getElementById('aAbr').value=a.abr;
+  document.getElementById('aAbr').value=a.val; // Corrige atribuição de valor anterior
   document.getElementById('aVal').value=a.val;
   document.getElementById('mAttr').style.display='flex';
   setTimeout(()=>document.getElementById('aName').focus(),50);
@@ -768,61 +962,67 @@ function autoProf(){
 }
 
 // ── EXPORTAR E IMPORTAR FICHAS (JSON) ─────────────────────────────────────────
-
-// Função para exportar a ficha que está atualmente selecionada/ativa
-function exportarFichaAtiva() {
+async function exportarFichaAtiva() {
   const f = getFicha();
   if (!f) {
     alert("Selecione uma ficha ativa para poder exportar.");
     return;
   }
   
-  // Converte a ficha ativa em uma string formatada em JSON
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(f, null, 2));
+  const exportData = JSON.parse(JSON.stringify(f));
+  const characterImg = await loadImageFromDB(f.id);
+  const fullBodyImg = await loadImageFromDB(f.id + '_full');
   
-  // Cria um elemento <a> temporário no DOM para forçar o download do arquivo
+  if (characterImg) exportData.characterImg = characterImg;
+  if (fullBodyImg) exportData.fullBodyImg = fullBodyImg;
+  
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute("href", dataStr);
   
-  // Define o nome do arquivo com base no nome do personagem
   const nomeArquivo = f.name.toLowerCase().replace(/[^a-z0-9]/gi, '_') + "_ficha.json";
   downloadAnchor.setAttribute("download", nomeArquivo);
   
   document.body.appendChild(downloadAnchor);
-  downloadAnchor.click(); // Dispara o download
-  downloadAnchor.remove(); // Remove o elemento do DOM
+  downloadAnchor.click();
+  downloadAnchor.remove();
   
   toast("Ficha exportada com sucesso!");
 }
 
-// Aciona o seletor de arquivos invisível do HTML
 function acionarImportador() {
   document.getElementById('importFileInput').click();
 }
 
-// Processa o arquivo JSON importado pelo usuário
 function importarFicha(event) {
   const file = event.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = async function(e) {
     try {
       const fichaImportada = JSON.parse(e.target.result);
       
-      // Validação básica do formato do arquivo importado
       if (!fichaImportada.id || !fichaImportada.name || !fichaImportada.attrs) {
-        alert("Erro: O arquivo selecionado não parece ser uma ficha de personagem válida do RPG System.");
+        alert("Erro: O arquivo selecionado não é uma ficha válida.");
         return;
       }
       
-      // Gera um novo ID único para evitar conflitos com fichas existentes no Local Storage
-      fichaImportada.id = uid();
+      const novoId = uid();
       
-      // Adiciona à lista local, salva e atualiza a interface
+      if (fichaImportada.characterImg) {
+        await saveImageToDB(novoId, fichaImportada.characterImg);
+        delete fichaImportada.characterImg;
+      }
+      if (fichaImportada.fullBodyImg) {
+        await saveImageToDB(novoId + '_full', fichaImportada.fullBodyImg);
+        delete fichaImportada.fullBodyImg;
+      }
+      
+      fichaImportada.id = novoId;
       fichas.push(fichaImportada);
       save(fichas);
-      activeId = fichaImportada.id; // Define a ficha importada como ativa
+      activeId = fichaImportada.id;
       
       renderSidebar();
       renderEditor();
@@ -830,15 +1030,14 @@ function importarFicha(event) {
       
       toast(`Ficha de "${fichaImportada.name}" importada!`);
     } catch (err) {
-      alert("Erro ao ler o arquivo JSON. Certifique-se de que o arquivo está íntegro e no formato correto.");
+      alert("Erro ao ler o arquivo JSON.");
       console.error(err);
     }
-    // Limpa o input para que o mesmo arquivo possa ser importado novamente se necessário
     event.target.value = '';
   };
-  
   reader.readAsText(file);
 }
+
 // ── MODAL CLOSE ───────────────────────────────────────────────────────────────
 ['mPreset','mAttr','mHabil','mSpell','mEquip','mSkill','mCombat'].forEach(id=>{
   if(document.getElementById(id)) {

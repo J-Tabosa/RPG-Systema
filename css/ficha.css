@@ -1,101 +1,352 @@
+/* ── ESTILOS GERAIS DO APP ──────────────────────────────────────────────── */
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Ajuste fino para os selects na meta area */
+.meta-grid select, 
+.meta-grid input[type="text"] {
+  width: 100%;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px !important;
+  border-radius: 4px;
+  font-family: 'Crimson Text', serif;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.meta-grid select { 
+  cursor: pointer; 
+}
+
+.meta-grid select:focus, 
+.meta-grid input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+/* ── AVATAR COMPACTO NO TOPO ────────────────────────────────────────────── */
+.character-header-grid-compact {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.avatar-compact-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 88px;
+  flex-shrink: 0;
+}
+
+.avatar-compact-preview {
+  width: 80px; 
+  height: 80px; 
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--card2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.avatar-compact-preview:hover {
+  transform: scale(1.05);
+  border-color: var(--gold2);
+}
+
+.meta-grid input, 
+.meta-grid select,
+.character-header-grid-compact input,
+.character-header-grid-compact select {
+  padding: 6px 10px !important;
+  box-sizing: border-box;
+}
+
+/* ── CENTRALIZAÇÃO COMPLETA DE ATRIBUTOS E COMBATE ───────────────────────── */
+.attr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.attr-val-input, 
+.attr-mod-display {
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.combat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.combat-label {
+  text-align: center;
+  width: 100%;
+}
+
+.combat-val-input {
+  text-align: center !important;
+  margin: 0 auto;
+}
+
+/* ── CORREÇÃO DAS LABELS E ALTURAS (SEM ENCAVALAMENTO) ─────────────────── */
+.form-field {
+  display: block !important; /* Bloco rígido para a label ficar sempre acima do textarea */
+  margin-bottom: 12px;
+}
+
+.field-label {
+  display: block !important;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 6px !important;
+  color: var(--gold);
+}
+
+/* Alturas fixas e saudáveis para evitar vazamento de texto */
+.textarea-fixed {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-family: inherit;
+  display: block;
+}
+
+.textarea-fixed.compact {
+  height: 64px;
+}
+
+.textarea-fixed.history {
+  height: 125px;
+}
+
+.desc-visual-field .textarea-fixed {
+  height: 130px;
+}
+
+/* ── CORREÇÃO DA ARTE CORPORAL VERTICAL (EM PÉ, SEM CORTAR) ─────────────── */
+.story-appearance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.text-sections-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.appearance-vertical-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.full-body-wrapper {
+  width: 100%;
+}
+
+.full-body-preview {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Força a proporção "em pé" (vertical de retrato) */
+  max-height: 400px;
+  border-radius: 6px;
+  border: 2px dashed var(--border);
+  background: var(--card2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.full-body-img-render {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante o preenchimento sem distorcer */
+}
+
+.upload-placeholder {
+  text-align: center;
+  padding: 20px;
+}
+
+.upload-placeholder i {
+  font-size: 42px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.upload-placeholder div {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pdf-page-block {
+  width: 100%;
+}
+
+/* ── AJUSTES DE IMPRESSÃO (PERFEIÇÃO NO PDF) ───────────────────────────── */
+@media print {
+  .pdf-page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+    margin-top: 20px !important;
+  }
+
+  .sec {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+  }
+
+  /* ── AJUSTES DE IMPRESSÃO (PERFEIÇÃO NO PDF) ───────────────────────────── */
+@media print {
+  
+  /* 1. Força a exibição de todas as descrições de Magias */
+  .spell-item .spell-item-desc {
+    display: block !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   
-  #app {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+  /* 2. Força a exibição de todas as descrições de Poderes/Habilidades */
+  .habil-item .habil-desc {
+    display: block !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   
-  /* Injetor de estilos dinâmicos por ficha */
-  #fichaStyle {}
-  
-  /* Ajuste fino para os selects na meta area */
-  .meta-grid select, 
-  .meta-grid input[type="text"] {
-    width: 100%;
-    background: var(--card2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 6px 8px;
-    border-radius: 4px;
-    font-family: 'Crimson Text', serif;
-    font-size: 13px;
+  /* 3. Força a exibição de todas as descrições de Equipamentos & Itens */
+  .equip-item .equip-desc {
+    display: block !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Oculta os botões "▸ detalhes" e "▸ texto..." para não poluírem o papel */
+  .expand-toggle {
+    display: none !important;
+  }
+}
+  /* Compactação para fazer a folha 1 caber sem gerar brancos */
+  .attr-card, .combat-card {
+    padding: 4px !important;
+  }
+
+  .story-appearance-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ajusta o tamanho da arte perfeitamente no papel */
+  .full-body-preview {
+    max-height: 350px !important;
+    aspect-ratio: 3 / 4 !important;
+    border: 1px solid var(--border) !important;
+  }
+
+  /* Esconde os botões de ação sob a foto na hora de imprimir */
+  .full-body-actions {
+    display: none !important;
+  }
+
+  /* Força a integridade visual das caixas de texto */
+  .textarea-fixed {
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Garante o sumiço dos controles interativos da interface */
+  .header,
+  .sidebar,
+  .theme-dropdown,
+  .mob-nav,
+  .mob-menu-btn,
+  .rm-btn,
+  .add-card,
+  .btn:not(.print-hidden),
+  .avatar-compact-area {
+    display: none !important;
   }
   
-  .meta-grid select { 
-    cursor: pointer; 
+  .workspace {
+    height: auto;
+    display: block;
   }
   
-  .meta-grid select:focus, 
-  .meta-grid input:focus {
-    outline: none;
-    border-color: var(--gold);
+  .editor {
+    padding: 0;
+    overflow: visible;
   }
   
-  .fi-actions {
-    display: flex;
-    gap: 4px;
+  body {
+    background: #fff;
+    color: #000;
   }
   
-  /* PRINT - Força a abertura de descrições e esconde elementos de UI */
-  @media print {
-    .header,
-    .sidebar,
-    .theme-dropdown,
-    .mob-nav,
-    .mob-menu-btn,
-    .rm-btn,
-    .add-card,
-    .btn:not(.print-hidden) {
-      display: none !important;
-    }
-    
-    .workspace {
-      height: auto;
-      display: block;
-    }
-    
-    .editor {
-      padding: 0;
-      overflow: visible;
-    }
-    
-    body {
-      background: #fff;
-      color: #000;
-    }
-    
-    :root {
-      --bg: #fff;
-      --card: #f5f5f5;
-      --card2: #eee;
-      --border: #ccc;
-      --text: #111;
-      --muted: #555;
-      --gold: #6a4e10;
-      --gold2: #4a3000;
-    }
-    
-    .sec,
-    .attr-card,
-    .combat-card {
-      break-inside: avoid;
-    }
-    
-    /* Força a abertura de blocos expansíveis no PDF */
-    .spell-item-desc, 
-    .habil-desc, 
-    .equip-desc { 
-      display: block !important; 
-      max-height: none !important; 
-      opacity: 1 !important; 
-    }
-    
-    .expand-toggle { 
-      display: none !important; 
-    }
+  :root {
+    --bg: #fff;
+    --card: #f5f5f5;
+    --card2: #eee;
+    --border: #ccc;
+    --text: #111;
+    --muted: #555;
+    --gold: #6a4e10;
+    --gold2: #4a3000;
   }
+}
+
+/* Responsividade Mobile */
+@media(max-width: 768px) {
+  .story-appearance-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-body-preview {
+    height: 350px;
+  }
+  .compact-fields-grid {
+    grid-template-columns: 1fr;
+  }
+}
