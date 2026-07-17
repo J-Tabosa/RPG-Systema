@@ -472,198 +472,834 @@
 
   "classes": [
     {
-      "id": "guerreiro",
-      "nome": "Guerreiro",
-      "desc": "Mestre de armas e armaduras, o guerreiro é o combatente mais versátil do grupo, capaz de adaptar seu estilo a qualquer situação.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR ou DES",
-      "profArmadura": "Todas as armaduras e escudos",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Ação Surpreendente — ataque extra como ação bônus (2 usos/descanso curto)",
-      "habilidades": ["Atletismo", "Percepção", "Intimidação", "Sobrevivência"]
-    },
-    {
-      "id": "mago",
-      "nome": "Mago",
-      "desc": "Estudiosos da magia arcana, os magos dobram a realidade com o poder da mente. Frágeis no corpo, imbatíveis no intelecto.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Recuperação Arcana — recupera espaços de magia gastos (1x/descanso longo)",
-      "habilidades": ["Arcanismo", "Investigação", "História", "Medicina"]
-    },
-    {
-      "id": "ladino",
-      "nome": "Ladino",
-      "desc": "Habilidosos e sorrateiros, os ladinos resolvem problemas com astúcia e precisão cirúrgica, desaparecendo antes de qualquer resposta.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Armaduras leves",
-      "salvaguardas": "DES e INT",
-      "recurso": "Ataque Furtivo — dano extra quando tem vantagem ou aliado adjacente ao alvo",
-      "habilidades": ["Furtividade", "Prestidigitação", "Enganação", "Percepção"]
-    },
-    {
-      "id": "clerigo",
-      "nome": "Clérigo",
-      "desc": "Canalizadores do poder divino, os clérigos curam aliados e castigam inimigos em nome dos deuses que servem com devoção inabalável.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Armaduras médias e escudos",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Canalizar Divindade — efeito poderoso baseado no domínio escolhido (1–3x/descanso curto)",
-      "habilidades": ["Medicina", "Persuasão", "Religião", "Intuição"]
-    },
-    {
-      "id": "bardo",
-      "nome": "Bardo",
-      "desc": "Contadores de histórias e artistas mágicos, os bardos inspiram aliados com palavras e música enquanto tecem magia entre as notas.",
-      "dadoVida": 8,
-      "atribPrincipal": "CAR",
-      "profArmadura": "Armaduras leves",
-      "salvaguardas": "DES e CAR",
-      "recurso": "Inspiração de Bardo — dado de bônus (d6→d12) que aliados usam em testes (CAR/descanso longo)",
-      "habilidades": ["Persuasão", "Performance", "Intuição", "Enganação"]
-    },
-    {
-      "id": "paladino",
-      "nome": "Paladino",
-      "desc": "Guerreiros sagrados que combinam combate físico com poder divino e um juramento que define sua existência inteira.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR e CAR",
-      "profArmadura": "Todas as armaduras e escudos",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Imposição de Mãos — pool de cura (Nível×5 PV) para curar ou curar doenças/venenos",
-      "habilidades": ["Atletismo", "Persuasão", "Religião", "Medicina"]
-    },
-    {
-      "id": "ranger",
-      "nome": "Patrulheiro",
-      "desc": "Caçadores e rastreadores que dominam os ambientes selvagens e protegem as fronteiras entre a civilização e o desconhecido.",
-      "dadoVida": 10,
-      "atribPrincipal": "DES e SAB",
-      "profArmadura": "Armaduras leves e médias",
-      "salvaguardas": "FOR e DES",
-      "recurso": "Inimigo Favorito e Terreno Favorito — bônus em rastreamento, sobrevivência e percepção no terreno",
-      "habilidades": ["Sobrevivência", "Percepção", "Furtividade", "Atletismo"]
-    },
-    {
-      "id": "barbaro",
-      "nome": "Bárbaro",
-      "desc": "Guerreiros furiosos que canalizam sua raiva em poder físico sobre-humano, tornando-se máquinas de guerra praticamente imparáveis.",
-      "dadoVida": 12,
-      "atribPrincipal": "FOR",
-      "profArmadura": "Armaduras leves e médias (não usa escudo facilmente)",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Fúria — bônus de dano, resistência a dano físico, vantagem em testes de FOR (2–6 usos/descanso longo)",
-      "habilidades": ["Atletismo", "Intimidação", "Sobrevivência", "Percepção"]
-    },
-    {
-      "id": "druida",
-      "nome": "Druida",
-      "desc": "Guardiões da natureza que canalizam sua magia das forças primais do mundo, assumindo formas animais e conjurando tempestades.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Armaduras leves e médias (não metálicas)",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Forma Selvagem — transforma-se em animal (CR limitado pelo nível) por horas/descanso curto",
-      "habilidades": ["Natureza", "Medicina", "Percepção", "Sobrevivência"]
-    },
-    {
-      "id": "feiticeiro",
-      "nome": "Feiticeiro",
-      "desc": "Conjuradores inatos cujo poder emana de dentro, não de livros. Sua magia é visceral, pessoal e muitas vezes imprevisível.",
-      "dadoVida": 6,
-      "atribPrincipal": "CAR",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "CON e CAR",
-      "recurso": "Pontos de Feitiçaria — pool para criar espaços de magia extras ou aplicar metamagia",
-      "habilidades": ["Arcanismo", "Persuasão", "Intuição", "Enganação"]
-    }
+    "id": "algoz",
+    "nome": "Algoz",
+    "desc": "Guerreiro sombrio focado em espalhar medo e debilidades.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e CAR",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e CAR",
+    "recurso": "Aura de Pavor"
+  },
+  {
+    "id": "alquimista",
+    "nome": "Alquimista",
+    "desc": "Cientista místico que bombardeia inimigos com poções.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves",
+    "salvaguardas": "INT e DES",
+    "recurso": "Elixires Instáveis"
+  },
+  {
+    "id": "andarilho_vazio",
+    "nome": "Andarilho do Vazio",
+    "desc": "Guerreiro que teleporta curtas distâncias rasgando o espaço.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Fenda Curta"
+  },
+  {
+    "id": "arqueiro",
+    "nome": "Arqueiro",
+    "desc": "Especialista em longa distância, capaz de acertar alvos com precisão mortal.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Tiro Certeiro"
+  },
+  {
+    "id": "artesao",
+    "nome": "Artesão",
+    "desc": "Artesão habilidoso que cria itens únicos e poderosos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves",
+    "salvaguardas": "INT e DES",
+    "recurso": "Criatividade Infinita"
+  },
+  {
+    "id": "artifice",
+    "nome": "Artífice",
+    "desc": "Um engenheiro de armas e mecanismos geralmente mágicos.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Criação Mágica"
+  },
+  {
+    "id": "astrologo",
+    "nome": "Astrólogo",
+    "desc": "Conjurador que lê o destino nas estrelas e cartas cósmicas.",
+    "dadoVida": 6,
+    "atribPrincipal": "SAB ou INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Leitura do Cosmos"
+  },
+  {
+    "id": "barbaro",
+    "nome": "Bárbaro",
+    "desc": "Combatente furioso que usa a raiva como escudo.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Fúria"
+  },
+  {
+    "id": "bardo",
+    "nome": "Bardo",
+    "desc": "Artista que tece magia através de canções e palavras.",
+    "dadoVida": 8,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Inspiração de Bardo"
+  },
+  {
+    "id": "bruxo",
+    "nome": "Bruxo",
+    "desc": "Conjurador que barganhou sua alma com uma entidade cósmica.",
+    "dadoVida": 8,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Invocações Místicas"
+  },
+  {
+    "id": "caçador_recompensas",
+    "nome": "Caçador de Recompensas",
+    "desc": "Especialista em capturar alvos vivos usando redes e armadilhas.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Marca de Captura"
+  },
+  {
+    "id": "cavaleiro",
+    "nome": "Cavaleiro",
+    "desc": "Guerreiro montado que domina a arte da cavalaria.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR",
+    "profArmadura": "Todas e Escudos Pesados",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Montaria Aprimorada"
+  },
+  {
+    "id": "cavaleiro_runico",
+    "nome": "Cavaleiro Rúnico",
+    "desc": "Guerreiro que grava runas em seus equipamentos.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e INT",
+    "profArmadura": "Todas",
+    "salvaguardas": "CON e INT",
+    "recurso": "Ativação de Runas"
+  },
+  {
+    "id": "clerigo",
+    "nome": "Clérigo",
+    "desc": "Canalizador das preces e milagres divinos.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Médias e Escudos",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Canalizar Divindade"
+  },
+  {
+    "id": "cronomante",
+    "nome": "Cronomante",
+    "desc": "Manipulador do tempo, capaz de acelerar ou desacelerar o turno.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Dilação Temporal"
+  },
+  {
+    "id": "dancarino_laminas",
+    "nome": "Dançarino das Lâminas",
+    "desc": "Combatente ágil que transforma esquivas em arte letal.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Passo Gracioso"
+  },
+  {
+    "id": "domador",
+    "nome": "Domador de Feras",
+    "desc": "Combatente que luta em perfeita sintonia com um monstro aliado.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Comando de Matilha"
+  },
+  {
+    "id": "druida",
+    "nome": "Druida",
+    "desc": "Guardião espiritual das forças brutas da natureza.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias (não metálicas)",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Forma Selvagem"
+  },
+  {
+    "id": "elementalista",
+    "nome": "Elementalista",
+    "desc": "Conjurador que manipula os elementos da natureza.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "CON e SAB",
+    "recurso": "Resistência Elemental"
+  },
+  {
+    "id": "espadachim_arcano",
+    "nome": "Espadachim Arcano",
+    "desc": "Mestre que infunde feitiços diretamente em sua lâmina.",
+    "dadoVida": 8,
+    "atribPrincipal": "FOR/DES e INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "CON e INT",
+    "recurso": "Golpe Conjurado"
+  },
+  {
+    "id": "exorcista",
+    "nome": "Exorcista",
+    "desc": "Especialista em caçar demônios, fantasmas e purificar locais.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Selo de Purificação"
+  },
+  {
+    "id": "feiticeiro",
+    "nome": "Feiticeiro",
+    "desc": "Conjurador com magia inata correndo no sangue.",
+    "dadoVida": 6,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "CON e CAR",
+    "recurso": "Pontos de Feitiçaria"
+  },
+  {
+    "id": "geomante",
+    "nome": "Geomante",
+    "desc": "Conjurador que manipula a terra, rochas e cristais do solo.",
+    "dadoVida": 10,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e SAB",
+    "recurso": "Pulsar Terreno"
+  },
+  {
+    "id": "guerreiro",
+    "nome": "Guerreiro",
+    "desc": "Mestre de armas e armaduras versátil.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR ou DES",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Ação Surpreendente"
+  },
+  {
+    "id": "ilusionista",
+    "nome": "Ilusionista",
+    "desc": "Mago focado em enganar os sentidos e criar falsas realidades.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "DES e INT",
+    "recurso": "Fantasmagoria"
+  },
+  {
+    "id": "inquisidor",
+    "nome": "Inquisidor",
+    "desc": "Caçador de heresias especializado em quebrar magias.",
+    "dadoVida": 10,
+    "atribPrincipal": "SAB e FOR",
+    "profArmadura": "Todas",
+    "salvaguardas": "SAB e INT",
+    "recurso": "Chama Anuladora"
+  },
+  {
+    "id": "invocador",
+    "nome": "Invocador",
+    "desc": "Conjurador focado em trazer monstros de outros planos de existência.",
+    "dadoVida": 6,
+    "atribPrincipal": "CAR ou INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CAR",
+    "recurso": "Pacto de Invocação"
+  },
+  {
+    "id": "ladino",
+    "nome": "Ladino",
+    "desc": "Mestre do improviso, furtividade e precisão.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e INT",
+    "recurso": "Ataque Furtivo"
+  },
+  {
+    "id": "lamina_maldita",
+    "nome": "Lâmina Maldita",
+    "desc": "Combatente que empunha uma arma senciente sedenta de sangue.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e CAR",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Sede da Lâmina"
+  },
+  {
+    "id": "mago",
+    "nome": "Mago",
+    "desc": "Estudioso da magia arcana acadêmica.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Recuperação Arcana"
+  },
+  {
+    "id": "marionetista",
+    "nome": "Marionetista",
+    "desc": "Tático que controla bonecos armados à distância por fios mágicos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT ou DES",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "DES e INT",
+    "recurso": "Fios de Alma"
+  },
+  {
+    "id": "mecanomante",
+    "nome": "Mecanomante",
+    "desc": "Engenheiro que constrói torres e autômatos de batalha.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "INT e DES",
+    "recurso": "Engenhocas Prontas"
+  },
+  {
+    "id": "medico_peste",
+    "nome": "Médico da Peste",
+    "desc": "Curandeiro sombrio que usa gases e toxinas para curar ou matar.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT ou SAB",
+    "profArmadura": "Leves",
+    "salvaguardas": "CON e SAB",
+    "recurso": "Vapor Sanador"
+  },
+  {
+    "id": "monge",
+    "nome": "Monge",
+    "desc": "Mestre das artes marciais que ataca com os punhos nus.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Pontos de Ki"
+  },
+  {
+    "id": "necromante",
+    "nome": "Necromante",
+    "desc": "Mago focado em manipular a morte e reanimar os caídos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CON",
+    "recurso": "Ceifa Sombria"
+  },
+  {
+    "id": "ninja",
+    "nome": "Ninja",
+    "desc": "Agente das sombras focado em infiltração e jutsus letais.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e INT",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Técnicas de Ki/Ninjutsu"
+  },
+  {
+    "id": "paladino",
+    "nome": "Paladino",
+    "desc": "Guerreiro sagrado movido por um juramento rígido.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e CAR",
+    "profArmadura": "Todas",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Imposição de Mãos"
+  },
+  {
+    "id": "pirata",
+    "nome": "Pirata",
+    "desc": "Combatente sujo que usa truques, ganchos e agilidade no convés.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CON",
+    "recurso": "Ginga Marítima"
+  },
+  {
+    "id": "pistoleiro",
+    "nome": "Pistoleiro",
+    "desc": "Atirador rápido que confia no metal e na pólvora.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Pontos de Bravura"
+  },
+  {
+    "id": "psionico",
+    "nome": "Psiónico",
+    "desc": "Guerreiro mental que dobra a física com o poder do cérebro.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CAR",
+    "recurso": "Energia Psíquica"
+  },
+  {
+    "id": "pugilista",
+    "nome": "Pugilista",
+    "desc": "Lutador de rua brutal focado em ganchos e resiliência pura.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR e CON",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Contragolpe de Sangue"
+  },
+  {
+    "id": "ranger",
+    "nome": "Patrulheiro",
+    "desc": "Caçador e rastreador implacável de fronteiras.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Inimigo Favorito"
+  },
+  {
+    "id": "samurai",
+    "nome": "Samurai",
+    "desc": "Guerreiro disciplinado com foco inabalável em um único golpe.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR ou DES",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e SAB",
+    "recurso": "Espírito de Luta"
+  },
+  {
+    "id": "vanguardista",
+    "nome": "Vanguardista",
+    "desc": "Especialista em muralhas portando escudos colossais duplos.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR e CON",
+    "profArmadura": "Todas e Escudos Pesados",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Muralha Inquebrável"
+  },
+  {
+    "id": "xama",
+    "nome": "Xamã",
+    "desc": "Conjurador que barganha e canaliza espíritos ancestrais.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves",
+    "salvaguardas": "SAB e CON",
+    "recurso": "Totens Espirituais"
+  }
   ],
 
   "profissoes": [
     {
-      "id": "mercador",
-      "nome": "Mercador",
-      "desc": "Compra, vende e negocia em mercados e feiras por todo o reino. Conhece preços, rotas comerciais e pessoas influentes.",
-      "pericias": ["Persuasão", "História"],
-      "equipamento": "Balança de mercador, 5 moedas de ouro, carta de crédito de uma guilda",
-      "contatos": "Guildas comerciais, outros mercadores e funcionários alfandegários"
-    },
-    {
-      "id": "soldado",
-      "nome": "Soldado",
-      "desc": "Veterano de conflitos armados, conhece táticas militares, disciplina de campo e a brutalidade sem romantismo da guerra.",
-      "pericias": ["Atletismo", "Intimidação"],
-      "equipamento": "Insígnia de patente, tabuleiro de jogo com dados, kit básico de primeiros socorros",
-      "contatos": "Companheiros de arma, ex-comandantes e veteranos espalhados pelo reino"
-    },
-    {
-      "id": "erudito",
-      "nome": "Erudito",
-      "desc": "Dedicou anos ao estudo em bibliotecas e academias, acumulando conhecimento enciclopédico sobre história, ciências e artes.",
-      "pericias": ["Arcanismo", "História"],
-      "equipamento": "Garrafa de tinta, pena de qualidade, pequena faca para apontar, carta de um colega erudito",
-      "contatos": "Outros acadêmicos, bibliotecários e instituições de ensino arcano"
-    },
-    {
-      "id": "criminoso",
-      "nome": "Criminoso",
-      "desc": "Operou nas sombras da sociedade — seja roubando, contrabandeando ou prestando serviços que poucos ousam questionar.",
-      "pericias": ["Furtividade", "Enganação"],
-      "equipamento": "Ferramentas de ladrão, dados viciados, capuz escuro e capa sem insígnias",
-      "contatos": "Rede subterrânea de criminosos, receptadores e intermediários anônimos"
-    },
-    {
-      "id": "herborista",
-      "nome": "Herborista",
-      "desc": "Conhece plantas medicinais e venenosas, prepara poções e remédios. Procurado tanto por curandeiros quanto por envenenadores.",
-      "pericias": ["Medicina", "Natureza"],
-      "equipamento": "Kit de herborismo completo, ervas raras embrulhadas em pano, mortar e pilão portátil",
-      "contatos": "Curandeiros locais, druidas e apotecários de cidades grandes"
-    },
-    {
-      "id": "ferreiro",
-      "nome": "Ferreiro",
-      "desc": "Forja armas, armaduras e ferramentas com habilidade. Seu ofício é valorizado em qualquer assentamento, do vilarejo à capital.",
-      "pericias": ["Atletismo", "Percepção"],
-      "equipamento": "Kit de ferreiro portátil, amuleto do santo padroeiro dos artesãos, martelo de viagem",
-      "contatos": "Guildas de artesãos, mercadores de metal e nobres que encomendam armaduras"
-    },
-    {
-      "id": "guarda",
-      "nome": "Guarda da Cidade",
-      "desc": "Mantém a ordem nas ruas, conhece os moradores honestos e os marginais do seu distrito melhor do que qualquer outro.",
-      "pericias": ["Percepção", "Intimidação"],
-      "equipamento": "Uniforme desgastado da guarda, apito de prata, algemas e um apelido entre os colegas",
-      "contatos": "Rede de informantes locais, outros guardas e o comandante da guarda regional"
-    },
-    {
-      "id": "bardo_errante",
-      "nome": "Bardo Errante",
-      "desc": "Viaja de cidade em cidade contando histórias, cantando baladas e colhendo fofocas valiosas em cada estalagem que frequenta.",
-      "pericias": ["Performance", "Persuasão"],
-      "equipamento": "Instrumento musical de viagem, fantasia de palco simples, livro de letras manuscritas",
-      "contatos": "Estalajadeiros, nobres entediados, outros bardos e a Guilda dos Contadores de Histórias"
-    },
-    {
-      "id": "marinheiro",
-      "nome": "Marinheiro",
-      "desc": "Passou anos em alto mar, enfrentando tempestades, piratas e criaturas das profundezas. Conhece rotas e portos secretos.",
-      "pericias": ["Atletismo", "Percepção"],
-      "equipamento": "Amuleto de boa viagem, carta náutica desgastada, faca de marinheiro e corda de 15m",
-      "contatos": "Capitães de navios mercantes, contrabandistas portuários e tavernas costeiras"
-    },
-    {
-      "id": "monge_errante",
-      "nome": "Monge Errante",
-      "desc": "Deixou seu mosteiro em busca de iluminação ou cumprindo uma missão sagrada. Disciplina de ferro, poucas palavras, muita ação.",
-      "pericias": ["Religião", "Intuição"],
-      "equipamento": "Manto simples de viagem, diário de meditações, contas de oração desgastadas",
-      "contatos": "Rede de mosteiros e templos, outros monges e sacerdotes de divindades variadas"
-    }
+    "id": "adestrador",
+    "nome": "Adestrador",
+    "desc": "Treinava feras de caça ou cães de guarda para a nobreza.",
+    "pericias": ["Adestramento", "Intimidação"],
+    "equipamento": "Coleira reforçada, petiscos secos",
+    "contatos": "Canis reais e caçadores"
+  },
+  {
+    "id": "alfaiate",
+    "nome": "Alfaiate",
+    "desc": "Costura desde as roupas de camponeses até os mantos de magos.",
+    "pericias": ["Prestidigitação", "Persuasão"],
+    "equipamento": "Kit de costura, fita métrica",
+    "contatos": "Comerciantes de tecido"
+  },
+  {
+    "id": "alquimista_sarjeta",
+    "nome": "Alquimista de Sarjeta",
+    "desc": "Fabricava narcóticos ilegais ou venenos em porões escuros.",
+    "pericias": ["Enganação", "Medicina"],
+    "equipamento": "Alambique quebrado, frascos escuros",
+    "contatos": "Barões do crime subterrâneo"
+  },
+  {
+    "id": "amaldicoado",
+    "nome": "Amaldiçoado",
+    "desc": "Nasceu sob uma estrela sombria que atrai pequenos azares.",
+    "pericias": ["Arcanismo", "Intimidação"],
+    "equipamento": "Amuleto quebrado, sal de proteção",
+    "contatos": "Bruxas e exorcistas"
+  },
+  {
+    "id": "amnesico",
+    "nome": "Amnésico (Histórico)",
+    "desc": "Acordou sem memórias in uma vala, com apenas instintos nas mãos.",
+    "pericias": ["Percepção", "Sobrevivência"],
+    "equipamento": "Pingente sem foto, diário em branco",
+    "contatos": "Nenhum (passado apagado)"
+  },
+  {
+    "id": "artista",
+    "nome": "Artista de Rua",
+    "desc": "Ganhava moedas atraindo plateias em praças públicas.",
+    "pericias": ["Performance", "Furtividade"],
+    "equipamento": "Tinta corporal prateada, um instrumento musical, caneca",
+    "contatos": "Artistas urbanos"
+  },
+  {
+    "id": "bardo_errante",
+    "nome": "Bardo Errante",
+    "desc": "Viaja coletando e espalhando fofocas.",
+    "pericias": ["Performance", "Persuasão"],
+    "equipamento": "Instrumento musical",
+    "contatos": "Estalajadeiros"
+  },
+  {
+    "id": "bobo",
+    "nome": "Bobo da Corte",
+    "desc": "O único autorizado a zombar do rei sem perder a cabeça.",
+    "pericias": ["Performance", "Enganação"],
+    "equipamento": "Guizos, maquiagem teatral",
+    "contatos": "Bobos da corte e criados"
+  },
+  {
+    "id": "caçador_tesouros",
+    "nome": "Caçador de Tesouros",
+    "desc": "Explorador de ruínas antigas atrás de relíquias douradas.",
+    "pericias": ["Investigação", "Arcanismo"],
+    "equipamento": "Pé de cabra, pergaminho de mapa antigo",
+    "contatos": "Arqueólogos e contrabandistas"
+  },
+  {
+    "id": "carpinteiro",
+    "nome": "Carpinteiro",
+    "desc": "Especialista em erguer estruturas de madeira e móveis.",
+    "pericias": ["Atletismo", "Investigação"],
+    "equipamento": "Serrote, caixa de pregos",
+    "contatos": "Construtores civis"
+  },
+  {
+    "id": "carrasco",
+    "nome": "Carrasco",
+    "desc": "A lei final; aquele que empunhava o machado nas execuções públicas.",
+    "pericias": ["Intimidação", "Medicina"],
+    "equipamento": "Capuz preto, afiador de lâminas",
+    "contatos": "Juízes e carrascos reais"
+  },
+  {
+    "id": "cartografo",
+    "nome": "Cartógrafo",
+    "desc": "Viajou o world desenhando linhas e fronteiras em pergaminhos.",
+    "pericias": ["História", "Percepção"],
+    "equipamento": "Tubo de pergaminhos, compasso",
+    "contatos": "Exploradores e generais"
+  },
+  {
+    "id": "colecionador",
+    "nome": "Colecionador de Insetos",
+    "desc": "Passou a vida catalogando besouros, borboletas e venenos.",
+    "pericias": ["Natureza", "Investigação"],
+    "equipamento": "Rede de insetos, potes de vidro",
+    "contatos": "Naturalistas e museus"
+  },
+  {
+    "id": "contrabandista",
+    "nome": "Contrabandista",
+    "desc": "Especialista em passar mercadorias proibidas pelas fronteiras.",
+    "pericias": ["Enganação", "Furtividade"],
+    "equipamento": "Fundo falso de baú, suborno pronto",
+    "contatos": "Marinheiros e guardas corruptos"
+  },
+  {
+    "id": "cozinheiro",
+    "nome": "Cozinheiro",
+    "desc": "Preparou banquetes extravagantes para palácios ou tavernas imundas.",
+    "pericias": ["História", "Prestidigitação"],
+    "equipamento": "Faca de chef, temperos exóticos",
+    "contatos": "Mordomos e fornecedores de comida"
+  },
+  {
+    "id": "coveiro",
+    "nome": "Coveiro",
+    "desc": "Enterrou segredos e corpos, acostumado com o silêncio da morte.",
+    "pericias": ["Intuição", "Religião"],
+    "equipamento": "Pá gasta, lanterna de óleo",
+    "contatos": "Necromantes e clérigos funerários"
+  },
+  {
+    "id": "criminoso",
+    "nome": "Criminoso",
+    "desc": "Sobreviveu agindo à margem das leis.",
+    "pericias": ["Furtividade", "Enganação"],
+    "equipamento": "Ferramentas de ladrão",
+    "contatos": "Receptadores"
+  },
+  {
+    "id": "cruzado",
+    "nome": "Cruzado (Histórico)",
+    "desc": "Marchou em uma guerra santa que fracassou miseravelmente.",
+    "pericias": ["Religião", "Atletismo"],
+    "equipamento": "Estandarte rasgado, símbolo sagrado",
+    "contatos": "Ordens religiosas caídas"
+  },
+  {
+    "id": "desbravador",
+    "nome": "Desbravador de Florestas",
+    "desc": "Abria trilhas à força de machado em matas fechadas e selvagens.",
+    "pericias": ["Sobrevivência", "Atletismo"],
+    "equipamento": "Machete, pederneira grande",
+    "contatos": "Lenhadores e colonos"
+  },
+  {
+    "id": "doente",
+    "nome": "Doente Crônico (Histórico)",
+    "desc": "Sobreviveu a uma praga terrível que deixou marcas permanentes.",
+    "pericias": ["Medicina", "Sobrevivência"],
+    "equipamento": "Frasco de tônico, bandagens limpas",
+    "contatos": "Médicos e curandeiros de sarjeta"
+  },
+  {
+    "id": "engenheiro",
+    "nome": "Engenheiro de Cerco",
+    "desc": "Projetava catapultas e arietes para derrubar muralhas inimigas.",
+    "pericias": ["Investigação", "História"],
+    "equipamento": "Giz, trena de couro, esquemas",
+    "contatos": "Arsenais do exército"
+  },
+  {
+    "id": "eremita",
+    "nome": "Eremita (Histórico)",
+    "desc": "Viveu isolado em uma caverna por anos conversando com o vento.",
+    "pericias": ["Religião", "Natureza"],
+    "equipamento": "Manto de trapos, ervas secas",
+    "contatos": "Nenhum (vida eremita)"
+  },
+  {
+    "id": "erudito",
+    "nome": "Erudito",
+    "desc": "Dedicou a vida ao estudo acadêmico.",
+    "pericias": ["Arcanismo", "História"],
+    "equipamento": "Tinta, pena, diário",
+    "contatos": "Bibliotecários"
+  },
+  {
+    "id": "escravo_fugitivo",
+    "nome": "Escravo Fugitivo (Histórico)",
+    "desc": "Quebrou os grilhões e vive fugindo dos caçadores de escravos.",
+    "pericias": ["Furtividade", "Atletismo"],
+    "equipamento": "Grilhão partido, mapa de rotas seguras",
+    "contatos": "Abolicionistas e fugitivos"
+  },
+  {
+    "id": "exilado",
+    "nome": "Exilado Político (Histórico)",
+    "desc": "Banido de sua terra natal sob pena de morte caso retorne.",
+    "pericias": ["Enganação", "História"],
+    "equipamento": "Decreto de banimento, disfarce simples",
+    "contatos": "Rebeldes e contrabandistas de fronteira"
+  },
+  {
+    "id": "fazendeiro",
+    "nome": "Fazendeiro",
+    "desc": "Trabalhou a terra de sol a sol plantando o sustento.",
+    "pericias": ["Natureza", "Adestramento"],
+    "equipamento": "Foice curta, saco de sementes",
+    "contatos": "Cooperativas agrárias"
+  },
+  {
+    "id": "ferreiro",
+    "nome": "Ferreiro",
+    "desc": "Molda o metal em armas e ferramentas úteis.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Martelo de viagem",
+    "contatos": "Mineradores"
+  },
+  {
+    "id": "falsificador",
+    "nome": "Falsificador",
+    "desc": "Imitava assinaturas reais e criava sinetes falsos perfeitos.",
+    "pericias": ["Prestidigitação", "Enganação"],
+    "equipamento": "Lente, ceras coloridas, tintas",
+    "contatos": "Criminosos de colarinho branco"
+  },
+  {
+    "id": "gladiador",
+    "nome": "Gladiador",
+    "desc": "Lutou em arenas sob os aplausos e sangue da multidão.",
+    "pericias": ["Atletismo", "Performance"],
+    "equipamento": "Tridente decorativo, óleo corporal",
+    "contatos": "Donos de arena e apostadores"
+  },
+  {
+    "id": "guarda",
+    "nome": "Guarda da Cidade",
+    "desc": "Manteve a ordem nas patrulhas urbanas.",
+    "pericias": ["Percepção", "Intimização"],
+    "equipamento": "Apito, algemas",
+    "contatos": "Informantes locais"
+  },
+  {
+    "id": "herborista",
+    "nome": "Herborista",
+    "desc": "Coleta plantas para fazer poções e chás.",
+    "pericias": ["Medicina", "Natureza"],
+    "equipamento": "Kit de herborismo",
+    "contatos": "Apotecários"
+  },
+  {
+    "id": "investigador",
+    "nome": "Detetive / Investigador",
+    "desc": "Contratado para resolver crimes que a guarda prefere ignorar.",
+    "pericias": ["Investigação", "Intuição"],
+    "equipamento": "Lupa de bolso, bloco de notas",
+    "contatos": "Informantes e legistas"
+  },
+  {
+    "id": "marinheiro",
+    "nome": "Marinheiro",
+    "desc": "Trabalhou enfrentando os perigos do alto mar.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Corda de 15m, bússola",
+    "contatos": "Capitães de navio"
+  },
+  {
+    "id": "mensageiro",
+    "nome": "Mensageiro",
+    "desc": "Corria milhas entregando cartas urgentes por estradas perigosas.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Bolsa de couro selada, botas reforçadas",
+    "contatos": "Mestres de postos de cavalos"
+  },
+  {
+    "id": "mercador",
+    "nome": "Mercador",
+    "desc": "Compra, vende e negocia em feiras.",
+    "pericias": ["Persuasão", "História"],
+    "equipamento": "Balança, 5 moedas de ouro",
+    "contatos": "Guildas de comércio"
+  },
+  {
+    "id": "minerador",
+    "nome": "Minerador",
+    "desc": "Trabalhou na escuridão das minas extraindo carvão e joias.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Picareta, vela de cabeça",
+    "contatos": "Guildas de mineração"
+  },
+  {
+    "id": "nobre",
+    "nome": "Nobre (Histórico)",
+    "desc": "Nascido em berço de ouro, acostumado com etiqueta e privilégios.",
+    "pericias": ["Persuasão", "História"],
+    "equipamento": "Roupas finas, anel de sinete familiar",
+    "contatos": "Aristocratas e nobreza local"
+  },
+  {
+    "id": "orfao_rua",
+    "nome": "Órfão de Rua",
+    "desc": "Cresceu em becos revirando lixo e fugindo de guardas.",
+    "pericias": ["Furtividade", "Prestidigitação"],
+    "equipamento": "Pequena faca, mapa de esconderijos",
+    "contatos": "Crianças de rua e mendigos"
+  },
+  {
+    "id": "pastor",
+    "nome": "Pastor de Ovelhas",
+    "desc": "Passou noites acordado defendendo o rebanho contra lobos.",
+    "pericias": ["Adestramento", "Percepção"],
+    "equipamento": "Cajado longo, apito de pastor",
+    "contatos": "Comerciantes de lã"
+  },
+  {
+    "id": "pescador",
+    "nome": "Pescador",
+    "desc": "Conhece as marés e as melhores histórias de pescador da região.",
+    "pericias": ["Natureza", "Sobrevivência"],
+    "equipamento": "Vara de pesca, rede remendada",
+    "contatos": "Mercado de peixes local"
+  },
+  {
+    "id": "professor",
+    "nome": "Tutor / Professor",
+    "desc": "Ensinou crianças ricas mimadas a ler, escrever e calcular.",
+    "pericias": ["História", "Persuasão"],
+    "equipamento": "Palmatória, livro de caligrafia",
+    "contatos": "Famílias ricas e intelectuais"
+  },
+  {
+    "id": "rebelde",
+    "nome": "Rebelde (Histórico)",
+    "desc": "Lutou clandestinamente para derrubar o tirano local.",
+    "pericias": ["Furtividade", "Intimidação"],
+    "equipamento": "Panfleto revolucionário, máscara",
+    "contatos": "Células rebeldes ativas"
+  },
+  {
+    "id": "renascido",
+    "nome": "Renascido (Histórico)",
+    "desc": "Morreu uma vez, mas voltou à vida por motivos misteriosos.",
+    "pericias": ["Arcanismo", "Intuição"],
+    "equipamento": "Moeda fúnebre, estilhaço do próprio caixão",
+    "contatos": "Coveiros e cultistas do além"
+  },
+  {
+    "id": "soldado",
+    "nome": "Soldado",
+    "desc": "Veterano disciplinado de infantaria militar.",
+    "pericias": ["Atletismo", "Intimidação"],
+    "equipamento": "Insígnia, dados viciados",
+    "contatos": "Ex-comandantes"
+  },
+  {
+    "id": "teologo",
+    "nome": "Teólogo",
+    "desc": "Estudou a hierarquia dos deuses e os dogmas das igrejas.",
+    "pericias": ["Religião", "História"],
+    "equipamento": "Escritura sagrada comentada",
+    "contatos": "Sumos sacerdotes"
+  },
+  {
+    "id": "vendedora_ervas",
+    "nome": "Curandeira",
+    "desc": "Trouxe vidas ao mundo e tratou de resfriados em vilas isoladas.",
+    "pericias": ["Medicina", "Intuição"],
+    "equipamento": "Ervas secas, tesoura de parto",
+    "contatos": "Mães de vilarejos"
+  },
+  {
+    "id": "veterano_guerra",
+    "nome": "Veterano de Guerra (Histórico)",
+    "desc": "Carrega o estresse pós-traumático e as glórias de batalhas passadas.",
+    "pericias": ["Intimidação", "Sobrevivência"],
+    "equipamento": "Medalha militar manchada, cantil",
+    "contatos": "Oficiais aposentados"
+  }
   ],
 
   "personalidades": [
