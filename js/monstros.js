@@ -13,6 +13,65 @@ applyTheme();
 function toggleMobMenu(){ document.getElementById('mobNav').classList.toggle('open'); }
 function closeMobMenu(){ document.getElementById('mobNav').classList.remove('open'); }
 
+// ── INDEXEDDB FOR IMAGES ──────────────────────────────────────────────────────
+const DB_NAME = 'rpg_images_db';
+const DB_VERSION = 1;
+const STORE_NAME = 'char_avatars';
+
+function openImagesDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+      }
+    };
+    request.onsuccess = (e) => resolve(e.target.result);
+    request.onerror = (e) => reject(e.target.error);
+  });
+}
+
+async function saveImageToDB(id, base64Data) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.put({ id, image: base64Data });
+    return new Promise((resolve) => tx.oncomplete = () => resolve());
+  } catch (err) {
+    console.error("Erro ao salvar imagem no IndexedDB", err);
+  }
+}
+
+async function loadImageFromDB(id) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readonly');
+    const store = tx.objectStore(STORE_NAME);
+    const request = store.get(id);
+    return new Promise((resolve) => {
+      request.onsuccess = () => resolve(request.result ? request.result.image : null);
+      request.onerror = () => resolve(null);
+    });
+  } catch (err) {
+    console.error("Erro ao carregar imagem do IndexedDB", err);
+    return null;
+  }
+}
+
+async function deleteImageFromDB(id) {
+  try {
+    const db = await openImagesDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    store.delete(id);
+    return new Promise((resolve) => tx.oncomplete = () => resolve());
+  } catch (err) {
+    console.error("Erro ao deletar imagem do IndexedDB", err);
+  }
+}
+
 // ── STORAGE & STATE ───────────────────────────────────────────────────────────
 const SK_FICHAS = 'rpg_fichas_v1';
 const SK_PASTAS = 'rpg_monstros_pastas';
@@ -26,16 +85,16 @@ let acoesTemporarias = [];
 let atributosTemporarios = []; 
 let autoSaveInterval = null;
 let mudouSemSalvar = false;
+let editandoMonstroId = null;
 
 // Inicializa pastas e monstros do Local Storage
 async function inicializar(){
   carregarPastas();
   await carregarMonstros();
   renderizarPastas();
-  renderizarListaMonstros();
+  await renderizarListaMonstros();
   configurarFechamentoPopup();
 
-  // Listener para criar pasta ao pressionar Enter dentro do input do modal
   const folderInput = document.getElementById('newFolderName');
   if (folderInput) {
     folderInput.addEventListener('keydown', function(e) {
@@ -59,16 +118,15 @@ function carregarPastas(){
   } catch(e) {
     pastas = [{ id: 'base', nome: 'Base' }];
   }
-  // Garante que a pasta ativa existe, senão reseta para a primeira disponível
   if(!pastas.some(p => p.id === pastaAtiva)) {
     pastaAtiva = pastas[0].id;
   }
 }
 
-// ── MODAL DE PASTAS ESTILIZADO ────────────────────────────────────────────────
+// ── MODAL DE PASTAS ──────────────────────────────────────────────────────────
 function criarNovaPasta(){
   const input = document.getElementById('newFolderName');
-  if (input) input.value = ''; // Limpa entrada de rascunhos anteriores
+  if (input) input.value = '';
   document.getElementById('mPasta').style.display = 'flex';
   setTimeout(() => { if (input) input.focus(); }, 100);
 }
@@ -147,7 +205,6 @@ async function carregarMonstros(){
     }
     
     monstros = todasFichas.filter(f => f.type === 'monster' || f.folder === 'monster');
-    // Garante compatibilidade de tipo e pasta em todos os monstros
     monstros.forEach(m => {
       m.type = 'monster';
       if(!m.folder) m.folder = 'base';
@@ -170,22 +227,25 @@ function salvarListaCompletaNoStorage(novaFicha, silencioso = false){
     carregarMonstros().then(() => {
       renderizarListaMonstros();
     });
-    if (!silencioso) toast("Monstro salvo no Local Storage!");
+    if (!silencioso) toast("Monstro salvo!");
   } catch(e) {
     toast("Erro ao salvar monstro.");
   }
 }
 
-function excluirMonstro(id){
+async function excluirMonstro(id){
   if(!confirm("Tem certeza que deseja apagar este monstro do bestiário?")) return;
   try {
     let todasFichas = JSON.parse(localStorage.getItem(SK_FICHAS)) || [];
     todasFichas = todasFichas.filter(f => f.id !== id);
     localStorage.setItem(SK_FICHAS, JSON.stringify(todasFichas));
     
+    await deleteImageFromDB(id);
+    await deleteImageFromDB(id + '_full');
+
     toast("Monstro removido.");
     monsterSelecionadoId = null;
-    inicializar();
+    await inicializar();
     document.getElementById('bestiaryMain').innerHTML = `
       <div class="empty-state">
         <div class="big">💀</div>
@@ -209,7 +269,6 @@ function toast(msg){
 function mod(v){ return Math.floor((v - 10) / 2); }
 function fmod(v){ const m = mod(v); return (m >= 0 ? '+' : '') + m; }
 
-// Auxiliar para converter nível de desafio em valor numérico para ordenação
 function avaliarND(nivel) {
   if (!nivel) return 0;
   const str = String(nivel).trim();
@@ -248,11 +307,10 @@ function configurarFechamentoPopup() {
 }
 
 // ── LISTAGEM FILTRADA E ORDENADA ───────────────────────────────────────────────
-function renderizarListaMonstros(filtrados = monstros){
+async function renderizarListaMonstros(filtrados = monstros){
   const container = document.getElementById('monsterList');
   if(!container) return;
 
-  // Filtra monstros para pertencerem à pasta ativa
   let monstrosParaExibir = filtrados.filter(m => (m.folder || 'base') === pastaAtiva);
   document.getElementById('countMonstros').textContent = monstrosParaExibir.length;
 
@@ -261,7 +319,6 @@ function renderizarListaMonstros(filtrados = monstros){
     return;
   }
 
-  // Realiza a ordenação
   monstrosParaExibir.sort((a, b) => {
     if (ordenacaoAtiva === 'nivel') {
       const ndA = avaliarND(a.level);
@@ -277,12 +334,18 @@ function renderizarListaMonstros(filtrados = monstros){
     return nomeA.localeCompare(nomeB, 'pt');
   });
 
-  container.innerHTML = monstrosParaExibir.map(m => {
+  const itemsHtml = await Promise.all(monstrosParaExibir.map(async m => {
     const nd = m.level ? `ND ${m.level}` : 'ND -';
     const activeClass = m.id === monsterSelecionadoId ? 'active' : '';
+    const avatarImg = await loadImageFromDB(m.id);
+    const avContent = avatarImg 
+      ? `<img src="${avatarImg}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:8px;">`
+      : `<div style="width:32px;height:32px;border-radius:50%;background:var(--border);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:bold;margin-right:8px;font-size:12px;">${(m.name[0]||'M').toUpperCase()}</div>`;
+
     return `
-      <div class="monster-card-item ${activeClass}" onclick="visualizarMonstro('${m.id}')">
-        <div class="m-item-info">
+      <div class="monster-card-item ${activeClass}" onclick="visualizarMonstro('${m.id}')" style="display:flex;align-items:center;">
+        ${avContent}
+        <div class="m-item-info" style="flex:1;">
           <span class="m-item-name">${m.name}</span>
           <span class="m-item-meta">${m.race || 'Monstro'} · ${nd}</span>
         </div>
@@ -292,7 +355,9 @@ function renderizarListaMonstros(filtrados = monstros){
         </div>
       </div>
     `;
-  }).join('');
+  }));
+
+  container.innerHTML = itemsHtml.join('');
 }
 
 function filtrarMonstros(){
@@ -305,13 +370,16 @@ function filtrarMonstros(){
   renderizarListaMonstros(filtrados);
 }
 
-// ── LEITOR DE FICHA (VISUALIZADOR) ────────────────────────────────────────────
-function visualizarMonstro(id){
+// ── LEITOR DE FICHA (VISUALIZADOR EM DUAS COLUNAS) ───────────────────────────
+async function visualizarMonstro(id){
   desativarAutoSalvamento();
   monsterSelecionadoId = id;
   renderizarListaMonstros();
   const m = monstros.find(x => x.id === id);
   if(!m) return;
+
+  const avatarImg = await loadImageFromDB(m.id);
+  const fullBodyImg = await loadImageFromDB(m.id + '_full');
 
   const container = document.getElementById('bestiaryMain');
 
@@ -338,85 +406,115 @@ function visualizarMonstro(id){
         </div>
       </div>
 
-      <h2 class="dnd-red-title">${m.name}</h2>
-      <div class="dnd-meta-line">${m.tamanho || 'Médio'} · ${m.race || 'Monstro'} · ${m.alignment || 'Neutro'} — ND ${m.level}</div>
-      
-      <hr class="dnd-divider">
-      
-      <div class="dnd-stat-block">
-        <div><strong>Classe de Armadura (CA):</strong> ${ca}</div>
-        <div><strong>Pontos de Vida (HP):</strong> ${hp}</div>
-        <div><strong>Velocidade:</strong> ${vel}</div>
+      <!-- CONTAINER DAS DUAS COLUNAS -->
+      <div class="monster-read-content">
+        
+        <!-- COLUNA DA ESQUERDA (Título, Status, Atributos e Ações) -->
+        <div class="monster-read-details">
+          
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
+            ${avatarImg ? `<img src="${avatarImg}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">` : ''}
+            <div>
+              <h2 class="dnd-red-title" style="margin:0;">${m.name}</h2>
+              <div class="dnd-meta-line">${m.tamanho || 'Médio'} · ${m.race || 'Monstro'} · ${m.alignment || 'Neutro'} — ND ${m.level}</div>
+            </div>
+          </div>
+          
+          <hr class="dnd-divider">
+
+          <div class="dnd-stat-block">
+            <div><strong>Classe de Armadura:</strong> ${ca}</div>
+            <div><strong>Pontos de Vida:</strong> ${hp}</div>
+            <div><strong>Deslocamento:</strong> ${vel}</div>
+          </div>
+
+          <hr class="dnd-divider">
+
+          <table class="dnd-attr-table">
+            <thead>
+              <tr>
+                ${(m.attrs || []).map(a => `<th>${a.abr}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                ${(m.attrs || []).map(a => `<td>${a.val} (${fmod(a.val)})</td>`).join('')}
+              </tr>
+            </tbody>
+          </table>
+
+          <hr class="dnd-divider">
+
+          <!-- TEXTO DAS AÇÕES (Ficarão do lado esquerdo da arte, como nas linhas amarelas) -->
+          ${m.backstory ? `<div class="dnd-desc-item" style="font-style:italic;margin-top:10px">${m.backstory}</div>` : ''}
+
+          ${traits.length > 0 ? `
+            <div class="dnd-section">
+              ${traits.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
+            </div>
+          ` : ''}
+
+          ${actions.length > 0 ? `
+            <div class="dnd-section">
+              <div class="dnd-section-title">Ações</div>
+              ${actions.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
+            </div>
+          ` : ''}
+
+          ${reactions.length > 0 ? `
+            <div class="dnd-section">
+              <div class="dnd-section-title">Reações</div>
+              ${reactions.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
+            </div>
+          ` : ''}
+
+          ${legendaries.length > 0 ? `
+            <div class="dnd-section">
+              <div class="dnd-section-title">Ações Lendárias</div>
+              ${legendaries.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
+            </div>
+          ` : ''}
+
+          ${m.notes ? `
+            <div class="dnd-section">
+              <div class="dnd-section-title">Comportamento &amp; Ecologia</div>
+              <div class="dnd-desc-item" style="white-space: pre-line;">${m.notes}</div>
+            </div>
+          ` : ''}
+
+          ${m.traits ? `
+            <div class="dnd-section">
+              <div class="dnd-section-title">Drops &amp; Saque (Tesouros)</div>
+              <div class="dnd-desc-item" style="white-space: pre-line;"><i class="ti ti-gift" style="color:var(--gold)"></i> ${m.traits}</div>
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- COLUNA DA DIREITA (O Box Vermelho com a Arte) -->
+        ${fullBodyImg ? `
+          <div class="monster-read-art">
+            <img src="${fullBodyImg}" alt="${m.name}">
+          </div>
+        ` : ''}
+
       </div>
-
-      <hr class="dnd-divider">
-
-      <table class="dnd-attr-table">
-        <thead>
-          <tr>
-            ${(m.attrs || []).map(a => `<th>${a.abr}</th>`).join('')}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            ${(m.attrs || []).map(a => `<td>${a.val} (${fmod(a.val)})</td>`).join('')}
-          </tr>
-        </tbody>
-      </table>
-
-      <hr class="dnd-divider">
-
-      ${m.backstory ? `<div class="dnd-desc-item" style="font-style:italic;margin-top:10px">${m.backstory}</div>` : ''}
-
-      ${traits.length > 0 ? `
-        <div class="dnd-section">
-          ${traits.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
-        </div>
-      ` : ''}
-
-      ${actions.length > 0 ? `
-        <div class="dnd-section">
-          <div class="dnd-section-title">Ações</div>
-          ${actions.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
-        </div>
-      ` : ''}
-
-      ${reactions.length > 0 ? `
-        <div class="dnd-section">
-          <div class="dnd-section-title">Reações</div>
-          ${reactions.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
-        </div>
-      ` : ''}
-
-      ${legendaries.length > 0 ? `
-        <div class="dnd-section">
-          <div class="dnd-section-title">Ações Lendárias</div>
-          ${legendaries.map(t => `<div class="dnd-desc-item"><strong>${t.name}.</strong> ${t.desc}</div>`).join('')}
-        </div>
-      ` : ''}
-
-      ${m.notes ? `
-        <div class="dnd-section">
-          <div class="dnd-section-title">Comportamento &amp; Ecologia</div>
-          <div class="dnd-desc-item" style="white-space: pre-line;">${m.notes}</div>
-        </div>
-      ` : ''}
-
-      ${m.traits ? `
-        <div class="dnd-section">
-          <div class="dnd-section-title">Drops &amp; Saque (Tesouros)</div>
-          <div class="dnd-desc-item" style="white-space: pre-line;"><i class="ti ti-gift" style="color:var(--gold)"></i> ${m.traits}</div>
-        </div>
-      ` : ''}
     </div>
   `;
 }
 
 // ── IMPORTAR E EXPORTAR MONSTRO ──────────────────────────────────────────────
-function exportarFichaJSON(id){
+async function exportarFichaJSON(id){
   const m = monstros.find(x => x.id === id);
   if(!m) return;
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(m, null, 2));
+
+  const exportData = JSON.parse(JSON.stringify(m));
+  const avatarImg = await loadImageFromDB(m.id);
+  const fullBodyImg = await loadImageFromDB(m.id + '_full');
+
+  if (avatarImg) exportData.characterImg = avatarImg;
+  if (fullBodyImg) exportData.fullBodyImg = fullBodyImg;
+
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute("href", dataStr);
   downloadAnchor.setAttribute("download", `${m.name.toLowerCase().replace(/\s+/g, '_')}_ficha.json`);
@@ -430,7 +528,7 @@ function importarMonstroJSON(event) {
   if (!file) return;
 
   const reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = async function(e) {
     try {
       const dados = JSON.parse(e.target.result);
       
@@ -438,10 +536,21 @@ function importarMonstroJSON(event) {
         let importadosContador = 0;
         const todasFichas = JSON.parse(localStorage.getItem(SK_FICHAS)) || [];
         
-        dados.monstros.forEach(m => {
+        for (const m of dados.monstros) {
+          const novoId = m.id || uid();
+          
+          if (m.characterImg) {
+            await saveImageToDB(novoId, m.characterImg);
+            delete m.characterImg;
+          }
+          if (m.fullBodyImg) {
+            await saveImageToDB(novoId + '_full', m.fullBodyImg);
+            delete m.fullBodyImg;
+          }
+
           const novoMonstro = {
             ...m,
-            id: m.id || uid(),
+            id: novoId,
             type: 'monster',
             folder: pastaAtiva
           };
@@ -453,19 +562,29 @@ function importarMonstroJSON(event) {
             todasFichas.push(novoMonstro);
           }
           importadosContador++;
-        });
+        }
 
         localStorage.setItem(SK_FICHAS, JSON.stringify(todasFichas));
         
-        carregarMonstros().then(() => {
-          renderizarPastas();
-          renderizarListaMonstros();
-        });
+        await carregarMonstros();
+        renderizarPastas();
+        renderizarListaMonstros();
 
         toast(`${importadosContador} monstros importados na pasta ativa!`);
       } 
       else if (dados && typeof dados === 'object') {
-        dados.id = dados.id || uid();
+        const novoId = dados.id || uid();
+
+        if (dados.characterImg) {
+          await saveImageToDB(novoId, dados.characterImg);
+          delete dados.characterImg;
+        }
+        if (dados.fullBodyImg) {
+          await saveImageToDB(novoId + '_full', dados.fullBodyImg);
+          delete dados.fullBodyImg;
+        }
+
+        dados.id = novoId;
         dados.type = 'monster';
         dados.folder = pastaAtiva;
         
@@ -485,8 +604,6 @@ function importarMonstroJSON(event) {
 }
 
 // ── CRIADOR / EDITOR ─────────────────────────────────────────────────────────
-let editandoMonstroId = null;
-
 function abrirCriadorNovo(){
   editandoMonstroId = null;
   acoesTemporarias = [];
@@ -521,67 +638,100 @@ function editarMonstro(id){
   mostrarFormulario(m);
 }
 
-function mostrarFormulario(mon = null){
+async function mostrarFormulario(mon = null){
   const container = document.getElementById('bestiaryMain');
   const getCombatVal = (lbl, def) => mon ? (mon.combat.find(c => c.label === lbl || c.id === lbl)?.val || def) : def;
 
+  const currentId = mon ? mon.id : editandoMonstroId;
+  const avatarImg = currentId ? await loadImageFromDB(currentId) : null;
+  const fullBodyImg = currentId ? await loadImageFromDB(currentId + '_full') : null;
+
   container.innerHTML = `
     <form class="monster-creator-form" id="creatorForm" onsubmit="event.preventDefault();">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h2 class="section-title" style="font-size:18px;margin-bottom:20px">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:16px;">
+        <h2 class="section-title" style="font-size:18px;margin:0;">
           <i class="ti ti-edit"></i> ${mon ? 'Editar Ameaça' : 'Criar Nova Ameaça'}
         </h2>
         <span id="saveBadge" style="font-size: 11px; color: var(--gold); font-style: italic; font-weight: bold;">Rascunho pronto</span>
       </div>
 
-      <div class="form-grid-4">
-        <div class="form-field">
-          <label>Nome do Monstro</label>
-          <input type="text" id="mFormName" value="${mon ? mon.name : ''}" placeholder="Ex: Dragão Vermelho">
+      <!-- ÍCONE DO MONSTRO -->
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+        <div style="width:56px; height:56px; border-radius:50%; border:2px dashed var(--gold); display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; background:var(--card);" onclick="document.getElementById('mAvatarFileInput').click()" title="Alterar Ícone">
+          ${avatarImg ? `<img src="${avatarImg}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="ti ti-skull" style="font-size:24px;color:var(--muted)"></i>'}
         </div>
-        <div class="form-field">
-          <label>Tamanho</label>
-          <select id="mFormSize">
-            <option value="Miúdo" ${mon && mon.tamanho === 'Miúdo' ? 'selected' : ''}>Miúdo</option>
-            <option value="Pequeno" ${mon && mon.tamanho === 'Pequeno' ? 'selected' : ''}>Pequeno</option>
-            <option value="Médio" ${mon && (!mon.tamanho || mon.tamanho === 'Médio') ? 'selected' : ''}>Médio</option>
-            <option value="Grande" ${mon && mon.tamanho === 'Grande' ? 'selected' : ''}>Grande</option>
-            <option value="Enorme" ${mon && mon.tamanho === 'Enorme' ? 'selected' : ''}>Enorme</option>
-            <option value="Colossal" ${mon && mon.tamanho === 'Colossal' ? 'selected' : ''}>Colossal</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>Tipo de Criatura</label>
-          <input type="text" id="mFormRace" value="${mon ? mon.race : 'Monstro'}" placeholder="Ex: Morto-vivo, Construto...">
-        </div>
-        <div class="form-field">
-          <label>Alinhamento / Tendência</label>
-          <input type="text" id="mFormAlignment" value="${mon ? mon.alignment : 'Neutro'}" placeholder="Ex: Caótico e Mau">
+        <div>
+          <label style="font-weight:bold; font-size:12px; display:block; margin-bottom:4px;">Ícone do Monstro (Avatar)</label>
+          <button type="button" class="btn xs" onclick="document.getElementById('mAvatarFileInput').click()"><i class="ti ti-upload"></i> Escolher Ícone</button>
+          ${avatarImg ? `<button type="button" class="btn xs danger" onclick="removerAvatarMonstro()"><i class="ti ti-trash"></i></button>` : ''}
+          <input type="file" id="mAvatarFileInput" accept="image/*" style="display:none" onchange="uploadAvatarMonstro(event)">
         </div>
       </div>
 
-      <div class="form-grid-3">
-        <div class="form-field">
-          <label>Nível de Desafio (ND)</label>
-          <input type="text" id="mFormND" value="${mon ? mon.level : '1'}" placeholder="1/4, 5, 20...">
+      <!-- PAINEL SUPERIOR COM DUAS COLUNAS: FORMULÁRIO À ESQUERDA, ARTE À DIREITA -->
+      <div class="monster-editor-layout">
+        <div class="monster-editor-fields">
+          <div class="form-grid-4">
+            <div class="form-field">
+              <label>Nome do Monstro</label>
+              <input type="text" id="mFormName" value="${mon ? mon.name : ''}" placeholder="Ex: Dragão Vermelho">
+            </div>
+            <div class="form-field">
+              <label>Tamanho</label>
+              <select id="mFormSize">
+                <option value="Miúdo" ${mon && mon.tamanho === 'Miúdo' ? 'selected' : ''}>Miúdo</option>
+                <option value="Pequeno" ${mon && mon.tamanho === 'Pequeno' ? 'selected' : ''}>Pequeno</option>
+                <option value="Médio" ${mon && (!mon.tamanho || mon.tamanho === 'Médio') ? 'selected' : ''}>Médio</option>
+                <option value="Grande" ${mon && mon.tamanho === 'Grande' ? 'selected' : ''}>Grande</option>
+                <option value="Enorme" ${mon && mon.tamanho === 'Enorme' ? 'selected' : ''}>Enorme</option>
+                <option value="Colossal" ${mon && mon.tamanho === 'Colossal' ? 'selected' : ''}>Colossal</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Tipo de Criatura</label>
+              <input type="text" id="mFormRace" value="${mon ? mon.race : 'Monstro'}" placeholder="Morto-vivo, Construto...">
+            </div>
+            <div class="form-field">
+              <label>Alinhamento</label>
+              <input type="text" id="mFormAlignment" value="${mon ? mon.alignment : 'Neutro'}" placeholder="Caótico e Mau...">
+            </div>
+          </div>
+
+          <div class="form-grid-4">
+            <div class="form-field">
+              <label>Nível de Desafio (ND)</label>
+              <input type="text" id="mFormND" value="${mon ? mon.level : '1'}" placeholder="1/4, 5, 20...">
+            </div>
+            <div class="form-field">
+              <label>CA</label>
+              <input type="number" id="mFormCA" value="${getCombatVal('ca', 10)}">
+            </div>
+            <div class="form-field">
+              <label>HP Máximo</label>
+              <input type="number" id="mFormHP" value="${getCombatVal('hpmax', 15)}">
+            </div>
+            <div class="form-field">
+              <label>Velocidade</label>
+              <input type="text" id="mFormVel" value="${getCombatVal('vel', '9m')}" placeholder="9m, voo 18m">
+            </div>
+          </div>
         </div>
-        <div class="form-field">
-          <label>Classe de Armadura (CA)</label>
-          <input type="number" id="mFormCA" value="${getCombatVal('ca', 10)}">
-        </div>
-        <div class="form-field">
-          <label>Pontos de Vida (HP)</label>
-          <input type="number" id="mFormHP" value="${getCombatVal('hpmax', 15)}">
+
+        <!-- QUADRO DA ARTE À DIREITA DO FORMULÁRIO -->
+        <div class="monster-editor-art-box">
+          <label style="font-weight:bold; font-size:11px; display:block; margin-bottom:6px; color:var(--gold);">ARTE DA CRIATURA</label>
+          <div style="height: 140px; width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+            ${fullBodyImg ? `<img src="${fullBodyImg}" style="max-height: 100%; max-width: 100%; border-radius: 6px; object-fit: contain;">` : '<span style="color:var(--muted); font-size:11px; font-style:italic;">Sem arte definida</span>'}
+          </div>
+          <div style="display:flex; justify-content:center; gap:6px;">
+            <button type="button" class="btn xs" onclick="document.getElementById('mFullBodyFileInput').click()"><i class="ti ti-photo"></i> Carregar</button>
+            ${fullBodyImg ? `<button type="button" class="btn xs danger" onclick="removerFullBodyMonstro()"><i class="ti ti-trash"></i></button>` : ''}
+          </div>
+          <input type="file" id="mFullBodyFileInput" accept="image/*" style="display:none" onchange="uploadFullBodyMonstro(event)">
         </div>
       </div>
 
-      <div class="form-grid-3">
-        <div class="form-field">
-          <label>Deslocamento (Velocidade)</label>
-          <input type="text" id="mFormVel" value="${getCombatVal('vel', '9m')}" placeholder="Ex: 9m, voo 18m">
-        </div>
-      </div>
-
+      <!-- ATRIBUTOS -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
         <div class="form-field" style="margin:0"><label>Atributos Customizados</label></div>
         <button type="button" class="btn sm" onclick="adicionarNovoAtributoInput()"><i class="ti ti-plus"></i> Novo Atributo</button>
@@ -605,6 +755,7 @@ function mostrarFormulario(mon = null){
         <textarea id="mFormBackstory" rows="2" placeholder="Aparência física da criatura...">${mon ? mon.backstory : ''}</textarea>
       </div>
 
+      <!-- HABILIDADES E AÇÕES -->
       <div style="border-top: 1px solid var(--border); padding-top:16px; margin-top:20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
           <h4 class="section-title" style="margin:0">Ações e Características</h4>
@@ -634,6 +785,59 @@ function mostrarFormulario(mon = null){
 
   form.addEventListener('input', marcarComoAlterado);
   form.addEventListener('change', marcarComoAlterado);
+}
+
+// ── UPLOAD/REMOÇÃO DE IMAGENS DO MONSTRO ──────────────────────────────────────
+function uploadAvatarMonstro(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    if (!editandoMonstroId) editandoMonstroId = uid();
+    await saveImageToDB(editandoMonstroId, e.target.result);
+    marcarComoAlterado();
+    const mon = monstros.find(x => x.id === editandoMonstroId);
+    mostrarFormulario(mon);
+    toast("Ícone carregado!");
+  };
+  reader.readAsDataURL(file);
+}
+
+async function removerAvatarMonstro() {
+  if (editandoMonstroId && confirm("Remover o ícone desta criatura?")) {
+    await deleteImageFromDB(editandoMonstroId);
+    marcarComoAlterado();
+    const mon = monstros.find(x => x.id === editandoMonstroId);
+    mostrarFormulario(mon);
+    toast("Ícone removido.");
+  }
+}
+
+function uploadFullBodyMonstro(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    if (!editandoMonstroId) editandoMonstroId = uid();
+    await saveImageToDB(editandoMonstroId + '_full', e.target.result);
+    marcarComoAlterado();
+    const mon = monstros.find(x => x.id === editandoMonstroId);
+    mostrarFormulario(mon);
+    toast("Arte corporal carregada!");
+  };
+  reader.readAsDataURL(file);
+}
+
+async function removerFullBodyMonstro() {
+  if (editandoMonstroId && confirm("Remover a arte desta criatura?")) {
+    await deleteImageFromDB(editandoMonstroId + '_full');
+    marcarComoAlterado();
+    const mon = monstros.find(x => x.id === editandoMonstroId);
+    mostrarFormulario(mon);
+    toast("Arte removida.");
+  }
 }
 
 // ── REALTIME AUTOSAVE ────────────────────────────────────────────────
@@ -705,7 +909,6 @@ function sincronizarEExibirAtributosNoForm(){
   `).join('');
 }
 
-// Funções para adicionar, remover e atualizar atributos dinâmicos
 function adicionarNovoAtributoInput(){
   atributosTemporarios.push({ label: 'Atributo', abr: 'NOVO', val: 10 });
   sincronizarEExibirAtributosNoForm();
