@@ -428,7 +428,17 @@ function prevTurn(){
 }
 function setTurn(id){const i=combatants.findIndex(x=>x.id===id);if(i>-1){currentTurn=i;render();}}
 function sortByInitiative(){combatants.sort((a,b)=>b.init-a.init);currentTurn=0;addLog('Iniciativa reorganizada');render();}
-function resetCombat(){if(!confirm('Resetar o combate?'))return;combatants=[];currentTurn=0;round=1;logs=[];render();renderLog();}
+
+// POP-UP / MODAL CONFIRMAÇÃO DE RESET
+function confirmResetCombat(){
+  document.getElementById('resetModal').style.display = 'flex';
+}
+
+function resetCombat(){
+  combatants=[]; currentTurn=0; round=1; logs=[];
+  closeModal('resetModal');
+  render(); renderLog();
+}
 
 // ── DICE ──────────────────────────────────────────────────────────────────────
 function roll(sides){return Math.floor(Math.random()*sides)+1;}
@@ -449,8 +459,29 @@ function rollInitAll(){
   combatants.forEach(c=>{c.init=roll(20);});
   sortByInitiative();
   addLog('🎲 Iniciativa d20 rolada para todos');
-  document.getElementById('diceArea').innerHTML='<span style="font-size:12px;color:var(--muted)">🎲 Iniciativa rolada para todos!</span>';
+  renderDiceArea();
 }
+
+function clearDiceHistory(){
+  diceHistory = [];
+  renderDiceArea();
+}
+
+function renderDiceArea(){
+  const el = document.getElementById('diceArea');
+  if(!el) return;
+  if(!diceHistory.length){
+    el.innerHTML = '<span style="font-size:12px;color:var(--muted)">Nenhum dado rolado ainda.</span>';
+    return;
+  }
+  el.innerHTML = `
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; flex:1">
+      ${diceHistory.map(h => `<div style="display:flex;align-items:center;gap:6px">${h.chip}${h.note}</div>`).join('')}
+    </div>
+    <button class="btn sm danger" style="padding: 2px 6px; font-size: 11px;" title="Limpar histórico de dados" onclick="clearDiceHistory()"><i class="ti ti-trash"></i></button>
+  `;
+}
+
 function pushDice(rolls,sides,total,mod,qty){
   const isNat20=sides===20&&qty===1&&rolls[0]===20;
   const isNat1=sides===20&&qty===1&&rolls[0]===1;
@@ -458,19 +489,22 @@ function pushDice(rolls,sides,total,mod,qty){
   const label=isNat20?' 🌟':isNat1?' 💀':'';
   const display=qty>1||mod!==0?total:rolls[0];
   const note=qty>1?`[${rolls.join('+')}]${mod!==0?(mod>0?'+':'')+mod+' =':'='} ${total}`:mod!==0?(mod>0?'+':'')+mod+` = ${total}`:'';
+  
   diceHistory.unshift({chip:`<div class="roll-chip ${cls}">${display}${label}</div>`,note:`<span class="roll-note">d${sides}${qty>1?'×'+qty:''} ${note}</span>`});
-  if(diceHistory.length>4) diceHistory.pop();
-  document.getElementById('diceArea').innerHTML=diceHistory.map(h=>`<div style="display:flex;align-items:center;gap:6px">${h.chip}${h.note}</div>`).join('');
+  if(diceHistory.length > 8) diceHistory.pop(); // Aumentado limite para 8 itens no histórico
+  
+  renderDiceArea();
   addLog(`🎲 d${sides}${qty>1?'×'+qty:''}: ${rolls.join('+')}${mod!==0?(mod>0?'+':'')+mod:''} = <em>${total}</em>${isNat20?' 🌟 NAT 20!':isNat1?' 💀 NAT 1!':''}`);
 }
 
 // ── MODAL UTILS ───────────────────────────────────────────────────────────────
 function closeModal(id){document.getElementById(id).style.display='none';}
-['editModal','importModal'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeModal(id);});
+['editModal','importModal','resetModal'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('click',function(e){if(e.target===this)closeModal(id);});
 });
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeModal('editModal');closeModal('importModal');}
+  if(e.key==='Escape'){closeModal('editModal');closeModal('importModal');closeModal('resetModal');}
   if(e.key==='n'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='SELECT') nextTurn();
 });
 

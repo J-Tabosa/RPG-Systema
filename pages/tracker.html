@@ -20,7 +20,7 @@
       <a href="../pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
       <button class="btn sm" onclick="sortByInitiative()"><i class="ti ti-arrows-sort"></i> Ordenar</button>
-      <button class="btn sm danger" onclick="resetCombat()"><i class="ti ti-refresh"></i> Resetar</button>
+      <button class="btn sm danger" onclick="confirmResetCombat()"><i class="ti ti-refresh"></i> Resetar</button>
       <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
     </div>
     <nav class="mob-nav" id="mobNav">
@@ -111,6 +111,7 @@
   </div>
 </div>
 
+<!-- MODAL DE EDIÇÃO -->
 <div class="modal-overlay" id="editModal" style="display:none">
   <div class="modal">
     <h3 id="editTitle">Editar Combatente</h3>
@@ -137,6 +138,7 @@
   </div>
 </div>
 
+<!-- MODAL DE IMPORTAÇÃO -->
 <div class="modal-overlay" id="importModal" style="display:none">
   <div class="modal" style="max-width:520px; width:90%">
     <h3><i class="ti ti-file-import" style="margin-right:6px"></i>Importar Ficha</h3>
@@ -147,6 +149,18 @@
     <div class="modal-actions" style="margin-top:15px">
       <button class="btn" id="btnBackImport" style="display:none" onclick="renderImportSelection()">← Voltar</button>
       <button class="btn" onclick="closeModal('importModal')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE RESET -->
+<div class="modal-overlay" id="resetModal" style="display:none">
+  <div class="modal" style="max-width:400px; width:90%; text-align:center;">
+    <h3 style="font-family:'Cinzel',serif; color:var(--gold); margin-bottom:10px;">Resetar Combate</h3>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">Tem certeza de que deseja resetar o combate? Todos os combatentes e históricos de ações atuais serão removidos.</p>
+    <div class="modal-actions" style="justify-content:center; gap:10px;">
+      <button class="btn" onclick="closeModal('resetModal')">Cancelar</button>
+      <button class="btn danger" onclick="resetCombat()">Sim, Resetar</button>
     </div>
   </div>
 </div>
