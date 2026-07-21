@@ -21,7 +21,7 @@ function getCombatantColor(c) {
   } else if (c.type === 'monster') {
     return '#c05050'; // Vermelho para inimigos/monstros
   } else {
-    return '#2a5080'; // Azul para NPCs
+    return '#2a5080'; // Azul para NPCs / Neutros
   }
 }
 
@@ -62,12 +62,12 @@ function addCombatant(){
   const qty=Math.max(1,Math.min(30,parseInt(document.getElementById('newQty').value)||1));
   if(!name){document.getElementById('newName').focus();return;}
   if(qty===1){
-    combatants.push({id:uid(),name,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:null,customBg:null});
+    combatants.push({id:uid(),name,type:selType_,hpMax,hpCur:hpMax,hpTemp:0,init,ac,conditions:[],dead:false,fichaId:null,groupId:null,customBg:null});
     addLog(`<em>${name}</em> entrou no combate (HP ${hpMax}, Init ${init}, CA ${ac})`);
   } else {
     const gid=uid();
     for(let i=1;i<=qty;i++){
-      combatants.push({id:uid(),name:`${name} ${i}`,type:selType_,hpMax,hpCur:hpMax,init,ac,conditions:[],dead:false,fichaId:null,groupId:gid,customBg:null});
+      combatants.push({id:uid(),name:`${name} ${i}`,type:selType_,hpMax,hpCur:hpMax,hpTemp:0,init,ac,conditions:[],dead:false,fichaId:null,groupId:gid,customBg:null});
     }
     addLog(`Grupo <em>${name}</em> ×${qty} adicionado`);
   }
@@ -82,6 +82,8 @@ function openImportModal(){
   
   if (lastModalState.screen === 'players') {
     showPlayersImport();
+  } else if (lastModalState.screen === 'npcs') {
+    showNpcsImport();
   } else if (lastModalState.screen === 'folders') {
     showMonstersFolders();
   } else if (lastModalState.screen === 'folder-detail' && lastModalState.folderName) {
@@ -102,6 +104,9 @@ function renderImportSelection(){
       <button class="btn primary" style="flex:1; padding: 16px; font-size: 14px; border-color:#4a9c2e" onclick="showPlayersImport()">
         <i class="ti ti-user" style="font-size:18px; display:block; margin-bottom:4px"></i> Jogador
       </button>
+      <button class="btn primary" style="flex:1; padding: 16px; font-size: 14px; border-color:#2a5080" onclick="showNpcsImport()">
+        <i class="ti ti-users" style="font-size:18px; display:block; margin-bottom:4px"></i> NPC
+      </button>
       <button class="btn primary" style="flex:1; padding: 16px; font-size: 14px; border-color:#c05050" onclick="showMonstersFolders()">
         <i class="ti ti-ghost" style="font-size:18px; display:block; margin-bottom:4px"></i> Monstro
       </button>
@@ -117,10 +122,25 @@ function showPlayersImport(){
   
   const todas = loadAllFichas();
   const fichas = todas.filter(f => f.type === 'player' || !f.type);
-  const container = document.getElementById('importModalContent');
+  renderImportList(fichas, 'player', '#4a9c2e');
+}
+
+// Exibir Fichas de NPCs
+function showNpcsImport(){
+  lastModalState = { screen: 'npcs', folderName: null };
+  document.getElementById('btnBackImport').style.display = 'inline-block';
+  document.getElementById('importModalDesc').textContent = 'Selecione um NPC para importar:';
   
+  const todas = loadAllFichas();
+  const fichas = todas.filter(f => f.type === 'neutral' || f.type === 'npc');
+  renderImportList(fichas, 'neutral', '#2a5080');
+}
+
+// Função auxiliar para renderizar a lista de importação (Jogadores e NPCs)
+function renderImportList(fichas, type, defaultColor) {
+  const container = document.getElementById('importModalContent');
   if(!fichas.length){
-    container.innerHTML = '<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha de jogador encontrada.<br><a href="ficha.html" style="color:var(--gold)">Criar fichas →</a></div>';
+    container.innerHTML = '<div class="empty-state" style="padding:16px 0"><div class="big">📜</div>Nenhuma ficha encontrada.<br><a href="ficha.html" style="color:var(--gold)">Criar fichas →</a></div>';
     return;
   }
   
@@ -128,13 +148,11 @@ function showPlayersImport(){
     const hpMax = (f.combat?.find(x=>x.id==='hpmax')||{val:20}).val;
     const ca = (f.combat?.find(x=>x.id==='ca')||{val:10}).val;
     const init = (f.combat?.find(x=>x.id==='init')||{val:0}).val;
-    const color = (f.colors && f.colors.customFieldFontColor) || f.bg || '#4a9c2e';
+    const color = (f.colors && f.colors.customFieldFontColor) || f.bg || defaultColor;
     const instances = combatants.filter(x => x.fichaId === f.id).length;
     const badgeText = instances > 0 ? ` <span style="font-size:11px;color:var(--gold);font-weight:bold;margin-left:4px">(${instances}x)</span>` : '';
     
-    // Agora o card inteiro não tem mais a classe "already" (não fica cinza)
-    // Clicar no botão "+" ou no card dispara a adição
-    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;" onclick="importFicha('${f.id}', 'player')">
+    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;">
       <div style="display:flex; align-items:center; gap:10px; flex:1">
         <div class="fii-av" style="background:${color}22;border-color:${color};color:${color}">${f.name[0].toUpperCase()}</div>
         <div class="fii-info">
@@ -144,7 +162,10 @@ function showPlayersImport(){
       </div>
       <div style="display:flex; align-items:center; gap:12px">
         <div class="fii-stats" style="text-align:right"><div style="color:var(--gold);font-family:Cinzel,serif">Init ${init}</div><div style="font-size:11px;opacity:0.8">HP ${hpMax} · CA ${ca}</div></div>
-        <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" onclick="event.stopPropagation(); importFicha('${f.id}', 'player')"><i class="ti ti-plus"></i></button>
+        <div style="display:flex; gap:4px">
+          ${instances > 0 ? `<button class="btn sm danger" style="padding:4px 8px; font-weight:bold" title="Remover um" onclick="removeImportedFicha('${f.id}')"><i class="ti ti-minus"></i></button>` : ''}
+          <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" title="Adicionar" onclick="importFicha('${f.id}', '${type}')"><i class="ti ti-plus"></i></button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -204,9 +225,7 @@ function showMonstersInFolder(folderName){
     const instances = combatants.filter(x => x.fichaId === f.id).length;
     const badgeText = instances > 0 ? ` <span style="font-size:11px;color:var(--gold);font-weight:bold;margin-left:4px">(${instances}x)</span>` : '';
     
-    // Adicionado botão de "+" vermelho à direita para os monstros. 
-    // O card não fica mais apagado/cinza!
-    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;" onclick="importFicha('${f.id}', 'monster')">
+    return `<div class="fii" style="border: 1px solid ${color}44; background: var(--bg-panel); display: flex; justify-content: space-between; align-items: center;">
       <div style="display:flex; align-items:center; gap:10px; flex:1">
         <div class="fii-av" style="background:${color}22;border-color:${color};color:${color}">${f.name[0].toUpperCase()}</div>
         <div class="fii-info">
@@ -216,13 +235,16 @@ function showMonstersInFolder(folderName){
       </div>
       <div style="display:flex; align-items:center; gap:12px">
         <div class="fii-stats" style="text-align:right"><div style="color:var(--gold);font-family:Cinzel,serif">Init ${init}</div><div style="font-size:11px;opacity:0.8">HP ${hpMax} · CA ${ca}</div></div>
-        <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" onclick="event.stopPropagation(); importFicha('${f.id}', 'monster')"><i class="ti ti-plus"></i></button>
+        <div style="display:flex; gap:4px">
+          ${instances > 0 ? `<button class="btn sm danger" style="padding:4px 8px; font-weight:bold" title="Remover um" onclick="removeImportedFicha('${f.id}')"><i class="ti ti-minus"></i></button>` : ''}
+          <button class="btn sm" style="border-color:${color}; color:${color}; padding:4px 8px; font-weight:bold" title="Adicionar" onclick="importFicha('${f.id}', 'monster')"><i class="ti ti-plus"></i></button>
+        </div>
       </div>
     </div>`;
   }).join('');
 }
 
-// Função de importação unificada (sempre mantém o modal aberto ao adicionar)
+// Função de importação unificada
 function importFicha(id, type){
   const todas = loadAllFichas();
   const f = todas.find(x=>x.id===id); if(!f) return;
@@ -263,6 +285,7 @@ function importFicha(id, type){
     type:type,
     hpMax,
     hpCur:hpMax,
+    hpTemp:0,
     init,
     ac:ca,
     conditions:[],
@@ -275,15 +298,35 @@ function importFicha(id, type){
   });
   
   addLog(`📜 <em>${finalName}</em> importado (HP ${hpMax}, Init ${init}, CA ${ca})`);
+  refreshImportModalView();
+  render();
+}
+
+// Remover especificamente uma instância do modal através do botão "-"
+function removeImportedFicha(fichaId) {
+  const existingCopies = combatants.filter(x => x.fichaId === fichaId);
+  if (!existingCopies.length) return;
   
-  // Atualiza apenas os números de contador do modal em tempo de execução sem fechar ou resetar a tela
+  const lastCopy = existingCopies[existingCopies.length - 1];
+  const idx = combatants.findIndex(x => x.id === lastCopy.id);
+  if (idx > -1) {
+    if(idx < currentTurn && combatants.length > 1) currentTurn = Math.max(0, currentTurn - 1);
+    combatants.splice(idx, 1);
+    if(currentTurn >= combatants.length) currentTurn = 0;
+    addLog(`<em>${lastCopy.name}</em> removido`);
+    refreshImportModalView();
+    render();
+  }
+}
+
+function refreshImportModalView() {
   if (lastModalState.screen === 'players') {
     showPlayersImport();
+  } else if (lastModalState.screen === 'npcs') {
+    showNpcsImport();
   } else if (lastModalState.screen === 'folder-detail' && lastModalState.folderName) {
     showMonstersInFolder(lastModalState.folderName);
   }
-  
-  render();
 }
 
 // ── REMOVE ────────────────────────────────────────────────────────────────────
@@ -297,19 +340,40 @@ function removeCombatant(id){
   addLog(`<em>${c.name}</em> removido`); render();
 }
 
-// ── DAMAGE/HEAL ───────────────────────────────────────────────────────────────
+// ── DAMAGE/HEAL/TEMP HP ───────────────────────────────────────────────────────
 function applyDmg(id,amt,heal){
-  const c=combatants.find(x=>x.id===id); if(!c) return;
+  const c=combatants.find(x=>x.id===id); if(!c||amt<=0) return;
   if(heal){
     const prev=c.hpCur; c.hpCur=Math.min(c.hpMax,c.hpCur+amt); c.dead=false;
     addLog(`<em>${c.name}</em> curado por ${c.hpCur-prev} HP (${c.hpCur}/${c.hpMax})`);
   } else {
-    c.hpCur=Math.max(0,c.hpCur-amt);
-    if(c.hpCur===0&&!c.dead){c.dead=true;addLog(`☠ <em>${c.name}</em> caiu!`);}
-    else if(!c.dead) addLog(`<em>${c.name}</em> recebeu ${amt} de dano (${c.hpCur}/${c.hpMax})`);
+    let remainingDmg = amt;
+    if ((c.hpTemp || 0) > 0) {
+      if (c.hpTemp >= remainingDmg) {
+        c.hpTemp -= remainingDmg;
+        remainingDmg = 0;
+      } else {
+        remainingDmg -= c.hpTemp;
+        c.hpTemp = 0;
+      }
+    }
+    if (remainingDmg > 0) {
+      c.hpCur = Math.max(0, c.hpCur - remainingDmg);
+    }
+    
+    if(c.hpCur===0 && !c.dead){ c.dead=true; addLog(`☠ <em>${c.name}</em> caiu!`); }
+    else if(!c.dead) addLog(`<em>${c.name}</em> recebeu ${amt} de dano (${c.hpCur}/${c.hpMax}${c.hpTemp ? ` +${c.hpTemp} Temp` : ''})`);
   }
   render();
 }
+
+function applyTempHp(id, amt){
+  const c=combatants.find(x=>x.id===id); if(!c) return;
+  c.hpTemp = (c.hpTemp || 0) + amt;
+  addLog(`<em>${c.name}</em> recebeu ${amt} HP Temporário (Total Temp: ${c.hpTemp})`);
+  render();
+}
+
 function getDmg(id){const el=document.getElementById('dmg_'+id);return el?parseInt(el.value)||0:0;}
 
 // ── CONDITIONS ────────────────────────────────────────────────────────────────
@@ -428,10 +492,11 @@ function renderTrack(){
     const active=combatants[currentTurn]&&combatants[currentTurn].id===c.id;
     const pct=c.hpMax>0?c.hpCur/c.hpMax:0;
     const itemColor = getCombatantColor(c);
+    const tempHpDisplay = c.hpTemp > 0 ? ` (+${c.hpTemp})` : '';
     return`<div class="init-token ${c.type}${active?' active':''}${c.dead?' dead':''}" onclick="setTurn('${c.id}')">
       <div class="tok-name" style="color:${itemColor}">${c.name}</div>
       <div class="tok-init">${c.init}</div>
-      <div class="tok-hp" style="color:${hpColor(pct)}">${c.hpCur}/${c.hpMax}</div>
+      <div class="tok-hp" style="color:${hpColor(pct)}">${c.hpCur}/${c.hpMax}${tempHpDisplay}</div>
     </div>`;
   }).join('');
 }
@@ -463,6 +528,7 @@ function renderCards(){
     ].join('');
     
     const itemColor = getCombatantColor(c);
+    const tempText = c.hpTemp > 0 ? `<span style="color:#2980b9; font-weight:bold; margin-left:4px">(+${c.hpTemp} Temp)</span>` : '';
 
     return`<div class="c-card${active?' active-turn':''}${c.dead?' dead':''}">
       <div class="c-card-top">
@@ -480,12 +546,13 @@ function renderCards(){
       <div class="hp-row">
         <span style="font-family:'Cinzel',serif;font-size:10px;color:var(--muted);width:20px;flex-shrink:0">HP</span>
         <div class="hp-bar-bg"><div class="hp-bar-fill" style="width:${Math.max(0,pct*100)}%;background:${hc}"></div></div>
-        <div class="hp-nums" style="color:${hc}">${c.hpCur}/${c.hpMax}</div>
+        <div class="hp-nums" style="color:${hc}">${c.hpCur}/${c.hpMax}${tempText}</div>
       </div>
       <div class="hp-actions">
         <input class="hp-input" type="number" id="dmg_${c.id}" placeholder="Qtd" min="0">
         <button class="btn sm danger" onclick="applyDmg('${c.id}',getDmg('${c.id}'),false)"><i class="ti ti-shield-off"></i> Dano</button>
         <button class="btn sm" style="border-color:#3a8c1e;color:#3a8c1e" onclick="applyDmg('${c.id}',getDmg('${c.id}'),true)"><i class="ti ti-heart"></i> Cura</button>
+        <button class="btn sm" style="border-color:#2980b9;color:#2980b9" onclick="applyTempHp('${c.id}',getDmg('${c.id}'))"><i class="ti ti-shield"></i> + Temp</button>
       </div>
       <div class="conditions">${conds}</div>
     </div>`;
