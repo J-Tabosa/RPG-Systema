@@ -1,170 +1,416 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Combat Tracker — RPG System</title>
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/tracker.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-</head>
-<body>
-<div id="app">
-
-  <div class="header">
-    <i class="ti ti-sword header-icon"></i>
-    <div><h1>Combat Tracker</h1><div class="subtitle">D&amp;D 5e — Controle de Batalha</div></div>
-    <div class="header-actions">
-      <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
-      <a href="../pages/gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
-      <a href="../pages/ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
-      <button class="btn sm" onclick="sortByInitiative()"><i class="ti ti-arrows-sort"></i> Ordenar</button>
-      <button class="btn sm danger" onclick="confirmResetCombat()"><i class="ti ti-refresh"></i> Resetar</button>
-      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
-    </div>
-    <nav class="mob-nav" id="mobNav">
-      <a href="../index.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
-      <a href="../pages/ficha.html"   class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
-      <a href="../pages/gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
-    </nav>
-  </div>
-
-  <div class="initiative-section">
-    <div class="init-label">Ordem de Iniciativa</div>
-    <div class="initiative-track" id="initiativeTrack">
-      <div class="no-combatants">Adicione combatentes para começar</div>
-    </div>
-  </div>
-
-  <div class="round-bar">
-    <div class="round-badge" id="roundBadge">Rodada 1</div>
-    <div class="turn-info" id="turnInfo">Nenhum combate ativo</div>
-    <button class="btn sm" onclick="prevTurn()" id="btnPrev" disabled>← Voltar</button>
-    <button class="btn sm primary" onclick="nextTurn()" id="btnNext" disabled>Próximo →</button>
-  </div>
-
-  <div class="dice-panel">
-    <div class="init-label" style="margin-bottom:6px">Rolador de Dados</div>
-    <div class="dice-row">
-      <button class="die-btn" onclick="quickRoll(4)">d4</button>
-      <button class="die-btn" onclick="quickRoll(6)">d6</button>
-      <button class="die-btn" onclick="quickRoll(8)">d8</button>
-      <button class="die-btn" onclick="quickRoll(10)">d10</button>
-      <button class="die-btn" onclick="quickRoll(12)">d12</button>
-      <button class="die-btn" onclick="quickRoll(20)">d20</button>
-      <button class="die-btn" onclick="quickRoll(100)">d%</button>
-      <span style="color:var(--border)">|</span>
-      <input class="dice-mini-input" id="dQty" type="number" value="1" min="1" max="20" title="Quantidade de dados">
-      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">d</span>
-      <select class="dice-side-select" id="dSide">
-        <option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option selected>20</option><option>100</option>
-      </select>
-      <span style="font-family:'Cinzel',serif;font-size:11px;color:var(--muted)">+</span>
-      <input class="dice-mini-input" id="dMod" type="number" value="0" title="Modificador">
-      <button class="btn sm primary" onclick="customRoll()">Rolar</button>
-      <button class="btn sm" onclick="rollInitAll()" title="Rola d20 de iniciativa para todos"><i class="ti ti-bolt"></i> Init ×todos</button>
-    </div>
-    <div class="dice-result-area" id="diceArea">
-      <span style="font-size:12px;color:var(--muted);font-style:italic">Clique em um dado...</span>
-    </div>
-  </div>
-
-  <div class="main">
-    <div class="panel">
-      <div class="panel-title">Combatentes</div>
-      <div class="combatant-list" id="combatantList">
-        <div class="empty-state"><div class="big">⚔</div>Nenhum combatente ainda.<br>Adicione pelo painel à direita.</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Combat Tracker — RPG System</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/tracker.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <div class="header">
+        <i class="ti ti-sword header-icon"></i>
+        <div>
+          <h1>Combat Tracker</h1>
+          <div class="subtitle">D&amp;D 5e — Controle de Batalha</div>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="nav-link"
+            ><i class="ti ti-home"></i> Início</a
+          >
+          <a href="../pages/gerador.html" class="nav-link"
+            ><i class="ti ti-sparkles"></i> Gerador</a
+          >
+          <a href="../pages/ficha.html" class="nav-link"
+            ><i class="ti ti-scroll"></i> Fichas</a
+          >
+          <button
+            class="theme-btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+            title="Alternar tema"
+          >
+            ☀
+          </button>
+          <button class="btn sm" onclick="sortByInitiative()">
+            <i class="ti ti-arrows-sort"></i> Ordenar
+          </button>
+          <button class="btn sm danger" onclick="confirmResetCombat()">
+            <i class="ti ti-refresh"></i> Resetar
+          </button>
+          <button
+            class="mob-menu-btn"
+            id="mobMenuBtn"
+            onclick="toggleMobMenu()"
+            aria-label="Menu"
+          >
+            <i class="ti ti-menu-2"></i>
+          </button>
+        </div>
+        <nav class="mob-nav" id="mobNav">
+          <a href="../index.html" class="nav-link" onclick="closeMobMenu()"
+            ><i class="ti ti-home"></i> Início</a
+          >
+          <a
+            href="../pages/ficha.html"
+            class="nav-link"
+            onclick="closeMobMenu()"
+            ><i class="ti ti-scroll"></i> Fichas de Personagem</a
+          >
+          <a
+            href="../pages/gerador.html"
+            class="nav-link"
+            onclick="closeMobMenu()"
+            ><i class="ti ti-sparkles"></i> Gerador de Personagens</a
+          >
+        </nav>
       </div>
-    </div>
 
-    <div class="panel-right">
-      <div class="panel-title">Adicionar</div>
-      <button class="btn success" style="width:100%;margin-bottom:8px" onclick="openImportModal()"><i class="ti ti-file-import"></i> Importar Ficha</button>
-      <div class="divider" style="margin:8px 0"></div>
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Manual</div>
-      <div class="form-field"><label>Nome</label><input type="text" id="newName" placeholder="Ex: Goblin, Thorin..." onkeydown="if(event.key==='Enter')addCombatant()"></div>
-      <div class="form-field"><label>Tipo</label>
-        <div class="type-row">
-          <div class="type-btn sel player" id="tp_player" onclick="selType('player')">Jogador</div>
-          <div class="type-btn monster" id="tp_monster" onclick="selType('monster')">Monstro</div>
-          <div class="type-btn neutral" id="tp_neutral" onclick="selType('neutral')">NPC</div>
+      <div class="initiative-section">
+        <div class="init-label">Ordem de Iniciativa</div>
+        <div class="initiative-track" id="initiativeTrack">
+          <div class="no-combatants">Adicione combatentes para começar</div>
         </div>
       </div>
-      <div style="display:flex;gap:6px">
-        <div class="form-field" style="flex:1"><label>HP Máx</label><input type="number" id="newHpMax" placeholder="30" min="1"></div>
-        <div class="form-field" style="flex:1"><label>Init</label><input type="number" id="newInit" placeholder="12"></div>
+
+      <div class="round-bar">
+        <div class="round-badge" id="roundBadge">Rodada 1</div>
+        <div class="turn-info" id="turnInfo">Nenhum combate ativo</div>
+        <button class="btn sm" onclick="prevTurn()" id="btnPrev" disabled>
+          ← Voltar
+        </button>
+        <button
+          class="btn sm primary"
+          onclick="nextTurn()"
+          id="btnNext"
+          disabled
+        >
+          Próximo →
+        </button>
       </div>
-      <div style="display:flex;gap:6px">
-        <div class="form-field" style="flex:1"><label>CA</label><input type="number" id="newAC" placeholder="13" min="1"></div>
-        <div class="form-field" style="flex:1"><label>Qtd (grupo)</label><input type="number" id="newQty" value="1" min="1" max="30"></div>
+
+      <div class="dice-panel">
+        <div class="init-label" style="margin-bottom: 6px">
+          Rolador de Dados
+        </div>
+        <div class="dice-row">
+          <button class="die-btn" onclick="quickRoll(4)">d4</button>
+          <button class="die-btn" onclick="quickRoll(6)">d6</button>
+          <button class="die-btn" onclick="quickRoll(8)">d8</button>
+          <button class="die-btn" onclick="quickRoll(10)">d10</button>
+          <button class="die-btn" onclick="quickRoll(12)">d12</button>
+          <button class="die-btn" onclick="quickRoll(20)">d20</button>
+          <button class="die-btn" onclick="quickRoll(100)">d%</button>
+          <span style="color: var(--border)">|</span>
+          <input
+            class="dice-mini-input"
+            id="dQty"
+            type="number"
+            value="1"
+            min="1"
+            max="20"
+            title="Quantidade de dados"
+          />
+          <span
+            style="
+              font-family: 'Cinzel', serif;
+              font-size: 11px;
+              color: var(--muted);
+            "
+            >d</span
+          >
+          <select class="dice-side-select" id="dSide">
+            <option>4</option>
+            <option>6</option>
+            <option>8</option>
+            <option>10</option>
+            <option>12</option>
+            <option selected>20</option>
+            <option>100</option>
+          </select>
+          <span
+            style="
+              font-family: 'Cinzel', serif;
+              font-size: 11px;
+              color: var(--muted);
+            "
+            >+</span
+          >
+          <input
+            class="dice-mini-input"
+            id="dMod"
+            type="number"
+            value="0"
+            title="Modificador"
+          />
+          <button class="btn sm primary" onclick="customRoll()">Rolar</button>
+          <button
+            class="btn sm"
+            onclick="rollInitAll()"
+            title="Rola d20 de iniciativa para todos"
+          >
+            <i class="ti ti-bolt"></i> Init ×todos
+          </button>
+        </div>
+        <div class="dice-result-area" id="diceArea">
+          <span style="font-size: 12px; color: var(--muted); font-style: italic"
+            >Clique em um dado...</span
+          >
+        </div>
       </div>
-      <button class="btn primary" style="width:100%;margin-top:2px" onclick="addCombatant()">+ Adicionar</button>
-      <div class="divider"></div>
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Condições</div>
-      <div style="font-size:11px;color:var(--muted);font-style:italic;line-height:1.5">Clique numa condição no card para ativar/desativar.</div>
-    </div>
-  </div>
 
-  <div class="log-section" id="logSection" style="display:none">
-    <div id="logEntries"></div>
-  </div>
-</div>
+      <div class="main">
+        <div class="panel">
+          <div class="panel-title">Combatentes</div>
+          <div class="combatant-list" id="combatantList">
+            <div class="empty-state">
+              <div class="big">⚔</div>
+              Nenhum combatente ainda.<br />Adicione pelo painel à direita.
+            </div>
+          </div>
+        </div>
 
-<!-- MODAL DE EDIÇÃO -->
-<div class="modal-overlay" id="editModal" style="display:none">
-  <div class="modal">
-    <h3 id="editTitle">Editar Combatente</h3>
-    <div class="form-field"><label>Nome</label><input type="text" id="editName"></div>
-    <div class="form-field"><label>Tipo</label>
-      <div class="type-row">
-        <div class="type-btn" id="etp_player" onclick="selEditType('player')">Jogador</div>
-        <div class="type-btn" id="etp_monster" onclick="selEditType('monster')">Monstro</div>
-        <div class="type-btn" id="etp_neutral" onclick="selEditType('neutral')">NPC</div>
+        <div class="panel-right">
+          <div class="panel-title">Adicionar</div>
+          <button
+            class="btn success"
+            style="width: 100%; margin-bottom: 8px"
+            onclick="openImportModal()"
+          >
+            <i class="ti ti-file-import"></i> Importar Ficha
+          </button>
+          <div class="divider" style="margin: 8px 0"></div>
+          <div
+            style="
+              font-family: 'Cinzel', serif;
+              font-size: 9px;
+              letter-spacing: 1px;
+              color: var(--muted);
+              text-transform: uppercase;
+              margin-bottom: 8px;
+            "
+          >
+            Manual
+          </div>
+          <div class="form-field">
+            <label>Nome</label
+            ><input
+              type="text"
+              id="newName"
+              placeholder="Ex: Goblin, Thorin..."
+              onkeydown="if(event.key==='Enter')addCombatant()"
+            />
+          </div>
+          <div class="form-field">
+            <label>Tipo</label>
+            <div class="type-row">
+              <div
+                class="type-btn sel player"
+                id="tp_player"
+                onclick="selType('player')"
+              >
+                Jogador
+              </div>
+              <div
+                class="type-btn monster"
+                id="tp_monster"
+                onclick="selType('monster')"
+              >
+                Monstro
+              </div>
+              <div
+                class="type-btn neutral"
+                id="tp_neutral"
+                onclick="selType('neutral')"
+              >
+                NPC
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px">
+            <div class="form-field" style="flex: 1">
+              <label>HP Máx</label
+              ><input type="number" id="newHpMax" placeholder="30" min="1" />
+            </div>
+            <div class="form-field" style="flex: 1">
+              <label>Init</label
+              ><input type="number" id="newInit" placeholder="12" />
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px">
+            <div class="form-field" style="flex: 1">
+              <label>Defesa</label
+              ><input type="number" id="newAC" placeholder="13" min="1" />
+            </div>
+            <div class="form-field" style="flex: 1">
+              <label>Qtd (grupo)</label
+              ><input type="number" id="newQty" value="1" min="1" max="30" />
+            </div>
+          </div>
+          <button
+            class="btn primary"
+            style="width: 100%; margin-top: 2px"
+            onclick="addCombatant()"
+          >
+            + Adicionar
+          </button>
+          <div class="divider"></div>
+          <div
+            style="
+              font-family: 'Cinzel', serif;
+              font-size: 9px;
+              letter-spacing: 1px;
+              color: var(--muted);
+              text-transform: uppercase;
+              margin-bottom: 6px;
+            "
+          >
+            Condições
+          </div>
+          <div
+            style="
+              font-size: 11px;
+              color: var(--muted);
+              font-style: italic;
+              line-height: 1.5;
+            "
+          >
+            Clique numa condição no card para ativar/desativar.
+          </div>
+        </div>
+      </div>
+
+      <div class="log-section" id="logSection" style="display: none">
+        <div id="logEntries"></div>
       </div>
     </div>
-    <div style="display:flex;gap:8px">
-      <div class="form-field" style="flex:1"><label>HP Atual</label><input type="number" id="editHpCur" min="0"></div>
-      <div class="form-field" style="flex:1"><label>HP Máx</label><input type="number" id="editHpMax" min="1"></div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <div class="form-field" style="flex:1"><label>Iniciativa</label><input type="number" id="editInit"></div>
-      <div class="form-field" style="flex:1"><label>CA</label><input type="number" id="editAC" min="1"></div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeModal('editModal')">Cancelar</button>
-      <button class="btn primary" onclick="saveEdit()">Salvar</button>
-    </div>
-  </div>
-</div>
 
-<!-- MODAL DE IMPORTAÇÃO -->
-<div class="modal-overlay" id="importModal" style="display:none">
-  <div class="modal" style="max-width:520px; width:90%">
-    <h3><i class="ti ti-file-import" style="margin-right:6px"></i>Importar Ficha</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px" id="importModalDesc">Escolha o tipo de combatente para importar.</p>
-    
-    <div id="importModalContent"></div>
-    
-    <div class="modal-actions" style="margin-top:15px">
-      <button class="btn" id="btnBackImport" style="display:none" onclick="renderImportSelection()">← Voltar</button>
-      <button class="btn" onclick="closeModal('importModal')">Fechar</button>
+    <!-- MODAL DE EDIÇÃO -->
+    <div class="modal-overlay" id="editModal" style="display: none">
+      <div class="modal">
+        <h3 id="editTitle">Editar Combatente</h3>
+        <div class="form-field">
+          <label>Nome</label><input type="text" id="editName" />
+        </div>
+        <div class="form-field">
+          <label>Tipo</label>
+          <div class="type-row">
+            <div
+              class="type-btn"
+              id="etp_player"
+              onclick="selEditType('player')"
+            >
+              Jogador
+            </div>
+            <div
+              class="type-btn"
+              id="etp_monster"
+              onclick="selEditType('monster')"
+            >
+              Monstro
+            </div>
+            <div
+              class="type-btn"
+              id="etp_neutral"
+              onclick="selEditType('neutral')"
+            >
+              NPC
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <div class="form-field" style="flex: 1">
+            <label>HP Atual</label
+            ><input type="number" id="editHpCur" min="0" />
+          </div>
+          <div class="form-field" style="flex: 1">
+            <label>HP Máx</label><input type="number" id="editHpMax" min="1" />
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <div class="form-field" style="flex: 1">
+            <label>Iniciativa</label><input type="number" id="editInit" />
+          </div>
+          <div class="form-field" style="flex: 1">
+            <label>CA</label><input type="number" id="editAC" min="1" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" onclick="closeModal('editModal')">
+            Cancelar
+          </button>
+          <button class="btn primary" onclick="saveEdit()">Salvar</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- MODAL DE RESET -->
-<div class="modal-overlay" id="resetModal" style="display:none">
-  <div class="modal" style="max-width:400px; width:90%; text-align:center;">
-    <h3 style="font-family:'Cinzel',serif; color:var(--gold); margin-bottom:10px;">Resetar Combate</h3>
-    <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">Tem certeza de que deseja resetar o combate? Todos os combatentes e históricos de ações atuais serão removidos.</p>
-    <div class="modal-actions" style="justify-content:center; gap:10px;">
-      <button class="btn" onclick="closeModal('resetModal')">Cancelar</button>
-      <button class="btn danger" onclick="resetCombat()">Sim, Resetar</button>
+    <!-- MODAL DE IMPORTAÇÃO -->
+    <div class="modal-overlay" id="importModal" style="display: none">
+      <div class="modal" style="max-width: 520px; width: 90%">
+        <h3>
+          <i class="ti ti-file-import" style="margin-right: 6px"></i>Importar
+          Ficha
+        </h3>
+        <p
+          style="font-size: 13px; color: var(--muted); margin-bottom: 14px"
+          id="importModalDesc"
+        >
+          Escolha o tipo de combatente para importar.
+        </p>
+
+        <div id="importModalContent"></div>
+
+        <div class="modal-actions" style="margin-top: 15px">
+          <button
+            class="btn"
+            id="btnBackImport"
+            style="display: none"
+            onclick="renderImportSelection()"
+          >
+            ← Voltar
+          </button>
+          <button class="btn" onclick="closeModal('importModal')">
+            Fechar
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<script src="../js/tracker.js"></script>
-</body>
+    <!-- MODAL DE RESET -->
+    <div class="modal-overlay" id="resetModal" style="display: none">
+      <div
+        class="modal"
+        style="max-width: 400px; width: 90%; text-align: center"
+      >
+        <h3
+          style="
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 10px;
+          "
+        >
+          Resetar Combate
+        </h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 20px">
+          Tem certeza de que deseja resetar o combate? Todos os combatentes e
+          históricos de ações atuais serão removidos.
+        </p>
+        <div class="modal-actions" style="justify-content: center; gap: 10px">
+          <button class="btn" onclick="closeModal('resetModal')">
+            Cancelar
+          </button>
+          <button class="btn danger" onclick="resetCombat()">
+            Sim, Resetar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/tracker.js"></script>
+  </body>
 </html>

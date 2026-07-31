@@ -1,0 +1,248 @@
+/* ── CORREÇÃO DE CONTRASTE NO TEMA CLARO ────────────────────────────────────── */
+body.light {
+  --gold: #8c6d1f; /* Dourado escuro visível no fundo claro */
+  --gold2: #6e5414; /* Dourado ainda mais escuro para títulos */
+  --accent: #9a761e; /* Cor de destaque ajustada */
+}
+
+/* Força a visibilidade dos textos amarelos/dourados no tema claro */
+body.light .header h1,
+body.light .preset-name,
+body.light .sec-title h2,
+body.light .modal h3 {
+  color: var(--gold2);
+}
+
+/* ── LAYOUT DE 3 COLUNAS DA CAMPANHA ────────────────────────────────────────── */
+.campanha-workspace {
+  display: grid;
+  grid-template-columns: 240px 1fr 240px;
+  gap: 16px;
+  align-items: stretch;
+  min-height: calc(100vh - 180px);
+}
+
+.campanha-sidebar-left,
+.campanha-sidebar-right {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.campanha-editor-main {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  flex-direction: column;
+
+  /* --- SOLUÇÃO PARA O SEU LAYOUT --- */
+  width: 100%; /* Ocupa exatamente 100% do espaço do container pai */
+  min-width: 0; /* TRAVA CRUCIAL: Impede que o Flexbox estique além do pai ao digitar */
+  box-sizing: border-box; /* Mantém o padding dentro do tamanho total */
+
+  overflow-wrap: anywhere; /* Quebra palavras longas ou links se necessário */
+}
+
+/* ── COMPORTAMENTO DO MENU HAMBÚRGUER (DESKTOP E MOBILE) ────────────────────── */
+.mob-menu-btn {
+  display: flex !important;
+}
+
+.mob-nav {
+  top: 100%;
+  right: 0;
+  left: auto;
+  width: 260px;
+  border-left: 1px solid var(--border);
+  border-radius: 0 0 0 8px;
+  box-shadow: -4px 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mob-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+/* ── CAMPANHAS: GRID LAYOUT ─────────────────────────────────────────────────── */
+.campanhas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* ── PRESET / CARD DE CAMPANHA ──────────────────────────────────────────────── */
+.preset-card {
+  transition: all 0.15s ease-in-out;
+  position: relative;
+}
+
+.preset-card:hover {
+  border-color: var(--gold) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.preset-card.selected {
+  background: var(--card2) !important;
+  box-shadow: 0 0 10px rgba(200, 168, 107, 0.15);
+}
+
+/* ── AJUSTES RESPONSIVOS ────────────────────────────────────────────────────── */
+@media (max-width: 950px) {
+  .campanha-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .campanhas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mob-nav {
+    width: 100%;
+    border-left: none;
+    border-radius: 0;
+  }
+}
+
+/* ── ESTILIZAÇÃO DAS LISTAS DE SELEÇÃO DE JOGADORES E MONSTROS ──────────────── */
+.selection-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  padding: 6px;
+  border-radius: 6px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selection-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "Crimson Text", serif;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.selection-item:hover {
+  border-color: var(--gold);
+  background: var(--card2);
+}
+
+.selection-item.selected {
+  border-color: var(--gold);
+  background: rgba(200, 168, 107, 0.15);
+}
+
+.selection-item .item-title {
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+body.light {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.mob-nav.open {
+  display: flex !important;
+}
+
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+.file-upload-label {
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.file-upload-label:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.file-upload-name {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.part-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.part-left input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  transition: all 0.15s ease-in-out;
+}
+
+.part-left input[type="checkbox"]:hover {
+  border-color: var(--gold);
+}
+
+.part-left input[type="checkbox"]:checked {
+  background-color: var(--gold);
+  border-color: var(--gold);
+}
+
+.part-left input[type="checkbox"]:checked::before {
+  content: "✔";
+  font-size: 11px;
+  color: var(--bg);
+  font-weight: bold;
+}

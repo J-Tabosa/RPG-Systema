@@ -88,12 +88,32 @@ let mudouSemSalvar = false;
 let editandoMonstroId = null;
 
 // Inicializa pastas e monstros do Local Storage
+// ── INICIALIZAÇÃO ─────────────────────────────────────────────────────────────
 async function inicializar(){
   carregarPastas();
   await carregarMonstros();
+
+  // ── CAPTURA O ID PASSADO NA URL SE EXISTIR ──────────────────────────────────
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetId = urlParams.get('id');
+
+  if (targetId) {
+    const monstroAlvo = monstros.find(m => m.id === targetId);
+    if (monstroAlvo) {
+      monsterSelecionadoId = targetId;
+      // Garante que a pasta ativa seja a pasta do monstro selecionado
+      pastaAtiva = monstroAlvo.folder || 'base';
+    }
+  }
+
   renderizarPastas();
   await renderizarListaMonstros();
   configurarFechamentoPopup();
+
+  // Se um monstro válido veio via URL, renderiza o visualizador dele imediatamente
+  if (monsterSelecionadoId) {
+    visualizarMonstro(monsterSelecionadoId);
+  }
 
   const folderInput = document.getElementById('newFolderName');
   if (folderInput) {

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Campanhas RPG</title>
+
+    <!-- CSS Base global e CSS específico de Campanhas -->
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/campanha.css" />
+  </head>
+  <body>
+    <!-- HEADER COMPLETO COM SUPORTE A TEMA (FICHA) E MENU MOBILE -->
+    <header class="header">
+      <div class="header-brand">
+        <i class="ti ti-dice-5-filled header-icon"></i>
+        <div>
+          <h1>RPG Systema</h1>
+          <div class="subtitle">Gerenciamento de Campanhas</div>
+        </div>
+      </div>
+
+      <!-- NAVEGAÇÃO DESKTOP -->
+      <div class="header-actions">
+        <a href="../index.html" class="nav-link"
+          ><i class="ti ti-users"></i> Inicio</a
+        >
+
+        <!-- SELETOR DE TEMAS COMPLETO DA FICHA -->
+        <div class="theme-menu-wrap" id="themeMenuWrap">
+          <button class="theme-menu-btn" onclick="toggleThemeMenu()">
+            <i class="ti ti-palette"></i> Tema
+          </button>
+          <div class="theme-dropdown" id="themeDropdown">
+            <div class="theme-dropdown-section">
+              <div class="theme-dropdown-label">Modo da Interface</div>
+              <div class="theme-toggle-row">
+                <button
+                  class="theme-toggle-opt"
+                  id="optDark"
+                  onclick="setTheme('dark')"
+                >
+                  🌙 Escuro
+                </button>
+                <button
+                  class="theme-toggle-opt"
+                  id="optLight"
+                  onclick="setTheme('light')"
+                >
+                  ☀️ Claro
+                </button>
+              </div>
+            </div>
+            <div class="theme-dropdown-section" id="accentSection">
+              <div class="theme-dropdown-label">
+                Cor de Destaque da Campanha
+              </div>
+              <div class="color-presets" id="accentPresets"></div>
+              <div class="color-row" style="margin-top: 8px">
+                <span class="color-row-label">Personalizada:</span>
+                <input
+                  type="color"
+                  id="customAccent"
+                  class="color-input"
+                  onchange="setCustomAccent(this.value)"
+                />
+              </div>
+            </div>
+            <div class="theme-dropdown-section">
+              <div class="theme-dropdown-label">Fundo do Card/Página</div>
+              <div class="color-presets" id="bgPresets"></div>
+              <div class="color-row" style="margin-top: 8px">
+                <span class="color-row-label">Cor Fundo:</span>
+                <input
+                  type="color"
+                  id="customBg"
+                  class="color-input"
+                  onchange="setCustomBg(this.value)"
+                />
+              </div>
+            </div>
+            <div class="theme-dropdown-section">
+              <div class="theme-dropdown-label">Fonte dos Campos</div>
+              <div class="color-row">
+                <span class="color-row-label">Cor da Fonte:</span>
+                <input
+                  type="color"
+                  id="customFieldFontColor"
+                  class="color-input"
+                  onchange="setCustomFieldFontColor(this.value)"
+                />
+              </div>
+            </div>
+            <button class="color-reset-btn" onclick="resetColors()">
+              Restaurar Padrões
+            </button>
+          </div>
+        </div>
+
+        <!-- BOTÃO HAMBÚRGUER -->
+        <button class="mob-menu-btn" onclick="toggleMobMenu()">
+          <i class="ti ti-menu-2"></i>
+        </button>
+      </div>
+
+      <!-- NAVEGAÇÃO MOBILE (RETRÁTIL) -->
+      <nav id="mobNav" class="mob-nav">
+        <a href="../pages/ficha.html" class="nav-link" onclick="closeMobMenu()"
+          ><i class="ti ti-users"></i> Fichas</a
+        >
+        <a
+          href="../pages/conteudo.html"
+          class="nav-link"
+          onclick="closeMobMenu()"
+          ><i class="ti ti-users"></i> Gestor</a
+        >
+        <a
+          href="../pages/monstros.html"
+          class="nav-link"
+          onclick="closeMobMenu()"
+          ><i class="ti ti-users"></i> Monstropedia</a
+        >
+        <a
+          href="../pages/tracker.html"
+          class="nav-link"
+          onclick="closeMobMenu()"
+          ><i class="ti ti-shield-swords"></i> Tracker</a
+        >
+      </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL (INJETADO PELO JS) -->
+    <main class="editor" style="padding: 20px 16px">
+      <div id="campanhaMainApp"></div>
+    </main>
+
+    <!-- MODAL DE CRIAR / EDITAR CAMPANHA -->
+    <div id="mCampanha" class="modal-overlay" style="display: none">
+      <div class="modal">
+        <h3 id="mCampTitle"><i class="ti ti-plus"></i> Nova Campanha</h3>
+        <input type="hidden" id="cEditId" />
+
+        <div class="form-field">
+          <label for="cNome" style="font-size: 13px">Nome da Campanha *</label>
+          <input
+            type="text"
+            id="cNome"
+            placeholder="Ex: A Sombra do Dragão Vermelho"
+            style="font-size: 14px"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="cDesc" style="font-size: 13px"
+            >Descrição / Anotações</label
+          >
+          <textarea
+            id="cDesc"
+            placeholder="Pequeno resumo do cenário, regras da casa ou premissa da aventura..."
+            style="font-size: 14px; min-height: 80px"
+          ></textarea>
+        </div>
+
+        <div class="form-field">
+          <label style="font-size: 13px">Imagem de Capa (Opcional)</label>
+          <div class="file-upload-wrapper">
+            <label for="cFotoInput" class="file-upload-label"
+              ><i class="ti ti-upload"></i> Escolher arquivo</label
+            >
+            <input
+              type="file"
+              id="cFotoInput"
+              accept="image/*"
+              style="display: none"
+              onchange="processarUploadFotoCampanha(event); document.getElementById('fileNameDisplay').textContent = this.files[0] ? this.files[0].name : 'Nenhum arquivo escolhido';"
+            />
+            <span id="fileNameDisplay" class="file-upload-name"
+              >Nenhum arquivo escolhido</span
+            >
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label style="font-size: 13px">Vincular Jogadores (Fichas)</label>
+          <div id="cParticipantesContainer" class="selection-list">
+            <!-- Renderizado via JS -->
+          </div>
+        </div>
+
+        <div
+          class="modal-actions"
+          style="
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 16px;
+          "
+        >
+          <button class="btn" onclick="fecharModal('mCampanha')">
+            Cancelar
+          </button>
+          <button class="btn primary" onclick="salvarCampanha()">
+            <i class="ti ti-check"></i> Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE IMPORTAR MONSTROS / NPCS DO BESTIÁRIO -->
+    <div id="mImportMonstro" class="modal-overlay" style="display: none">
+      <div class="modal">
+        <h3><i class="ti ti-skull"></i> Importar Ameaça do Bestiário</h3>
+
+        <div
+          id="mListaMonstrosImport"
+          class="selection-list"
+          style="max-height: 250px"
+        >
+          <!-- Renderizado via JS -->
+        </div>
+
+        <div
+          class="modal-actions"
+          style="display: flex; justify-content: flex-end; margin-top: 16px"
+        >
+          <button class="btn" onclick="fecharModal('mImportMonstro')">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMAÇÃO DE NAVEGAÇÃO -->
+    <div id="mNavConfirm" class="modal-overlay" style="display: none">
+      <div class="modal" style="max-width: 380px">
+        <h3><i class="ti ti-external-link"></i> Abrir Ficha</h3>
+        <p
+          id="mNavConfirmText"
+          style="margin: 12px 0; font-size: 14px; color: var(--text)"
+        >
+          Deseja ir para a página deste item?
+        </p>
+
+        <div
+          class="modal-actions"
+          style="display: flex; justify-content: flex-end; gap: 8px"
+        >
+          <button class="btn" onclick="fecharModal('mNavConfirm')">
+            Cancelar
+          </button>
+          <button id="mNavConfirmBtn" class="btn primary">
+            <i class="ti ti-arrow-right"></i> Ir para a Página
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/campanha.js"></script>
+  </body>
+</html>

@@ -30,6 +30,7 @@
     <a href="./pages/ficha.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-scroll"></i> Fichas de Personagem</a>
     <a href="./pages/gerador.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sparkles"></i> Gerador de Personagens</a>
     <a href="./pages/conteudo.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-database"></i> Gestor (Editor)</a>
+    <a href="./pages/campanha.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-map-2"></i> Gestor de Campanhas</a>
     <a href="./pages/tracker.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-sword"></i> Combat Tracker</a>
     <a href="./pages/monstros.html" class="nav-link" onclick="closeMobMenu()" style="text-decoration:none"><i class="ti ti-ghost"></i> Monstropedia</a>
   </nav>
@@ -67,7 +68,7 @@
           </div>
           <div class="role-card-body">
             <h3>MESTRE</h3>
-            <p>Controle combates com o Tracker, acesse o Gestor de Dados, utilize o Gerador de NPCs e consulte a Monstropedia.</p>
+            <p>Gerencie suas Campanhas, controle combates com o Tracker, acesse o Gestor de Dados e consulte a Monstropedia.</p>
             <span class="role-card-btn">Explorar Painel <i class="ti ti-arrow-right"></i></span>
           </div>
         </div>
@@ -111,6 +112,13 @@
           <p>O controle do mundo está em suas mãos. Acesse as ferramentas de campanha:</p>
         </div>
         <div class="modal-links-grid mestre">
+          <a href="./pages/campanha.html" class="modal-link-card">
+            <i class="ti ti-map-2"></i>
+            <div>
+              <h4>Gestor de Campanhas</h4>
+              <p>Crie e organize suas aventuras, vincule fichas de jogadores participantes, controle sessões e imagens de capa.</p>
+            </div>
+          </a>
           <a href="./pages/gerador.html" class="modal-link-card">
             <i class="ti ti-sparkles"></i>
             <div>
@@ -144,14 +152,14 @@
     </div>
   </div>
 
-  <!-- SOBRE O PROJETO (MOVIDO LOGO ABAIXO DOS CARDS) -->
+  <!-- SOBRE O PROJETO -->
   <section class="section about-section reveal">
     <div class="section-inner">
       <div class="about-grid">
         <div class="about-visual">
           <div class="about-icon-ring"><i class="ti ti-dragon"></i></div>
           <div class="about-stats">
-            <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Módulos</div></div>
+            <div class="stat-box"><div class="stat-num">6</div><div class="stat-lbl">Módulos</div></div>
             <div class="stat-box"><div class="stat-num">5e</div><div class="stat-lbl">Compatível</div></div>
             <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Fichas</div></div>
             <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Instalação</div></div>
@@ -168,7 +176,7 @@
     </div>
   </section>
 
-  <!-- CHANGELOG COM A ATUALIZAÇÃO v1.7 -->
+  <!-- CHANGELOG -->
   <section class="section reveal">
     <div class="section-inner">
       <div class="section-header">
@@ -191,8 +199,27 @@
 
         <div class="changelog" id="changelog">
 
-          <!-- UPDATE v1.7 -->
+          <!-- UPDATE v1.8 -->
           <div class="changelog-item open" data-type="new">
+            <div class="changelog-header" onclick="toggleLog(this)">
+              <span class="changelog-version">v1.8</span>
+              <span class="changelog-date">Jul 2026</span>
+              <span class="changelog-title">Gestor de Campanhas & Customizações de UI</span>
+              <span class="changelog-badge badge-new">Nova</span>
+              <i class="ti ti-chevron-down changelog-chevron"></i>
+            </div>
+            <div class="changelog-body">
+              <ul class="change-list">
+                <li><strong>Módulo Gestor de Campanhas</strong> — Adicionada a nova página <code>pages/campanha.html</code> para criação, edição e acompanhamento de aventuras do mestre</li>
+                <li><strong>Vínculo de Jogadores</strong> — Seleção de fichas ativas para compor o grupo da campanha com atalho rápido para visualização</li>
+                <li><strong>Upload de Capa &amp; Upload Stylist</strong> — Interface customizada para carregamento de fotos de capa sem dependência do botão nativo do sistema</li>
+                <li><strong>Customização Temática de Checkboxes</strong> — Reestilização de inputs de seleção sem a caixa branca nativa, adotando as variáveis de tema, cores de fundo e bordas douradas ativas</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- UPDATE v1.7 -->
+          <div class="changelog-item" data-type="new">
             <div class="changelog-header" onclick="toggleLog(this)">
               <span class="changelog-version">v1.7</span>
               <span class="changelog-date">Jul 2026</span>
@@ -360,6 +387,7 @@
         <a href="./pages/ficha.html">Criador de Fichas</a>
         <a href="./pages/gerador.html">Gerador de Personagens</a>
         <a href="./pages/conteudo.html">Gestor de Dados</a>
+        <a href="./pages/campanha.html">Gestor de Campanhas</a>
         <a href="./pages/tracker.html">Combat Tracker</a>
         <a href="./pages/monstros.html">Monstropedia</a>
       </div>
@@ -372,7 +400,7 @@
     </div>
     <div class="footer-divider"></div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 RPG System — Feito com ⚔ para a mesa</span>
+      <span class="footer-copy">© 2026 RPG System — Feito de player e mestre para mestres e players</span>
       <div class="footer-socials">
         <a href="https://github.com/J-Tabosa" target="_blank" class="social-btn" title="GitHub"><i class="ti ti-brand-github"></i></a>
         <a href="https://x.com/el_tabosa" target="_blank" class="social-btn" title="X (Twitter)"><i class="ti ti-brand-x"></i></a>
