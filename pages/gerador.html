@@ -44,26 +44,62 @@
         </select>
       </div>
 
+      <!-- Filtros com Dropdown Customizado (Estilo Select) -->
       <div class="filter-group">
         <label>Raça</label>
-        <select id="fRaca"><option value="">Aleatória</option></select>
+        <div class="custom-select-dropdown" id="dropdown_racas">
+          <div class="select-trigger" onclick="toggleDropdown('dropdown_racas')">
+            <span class="select-label">Todas Selecionadas</span>
+            <i class="ti ti-chevron-down"></i>
+          </div>
+          <div class="select-options-box" id="fRaca"></div>
+        </div>
       </div>
+
       <div class="filter-group">
         <label>Classe</label>
-        <select id="fClasse"><option value="">Aleatória</option></select>
+        <div class="custom-select-dropdown" id="dropdown_classes">
+          <div class="select-trigger" onclick="toggleDropdown('dropdown_classes')">
+            <span class="select-label">Todas Selecionadas</span>
+            <i class="ti ti-chevron-down"></i>
+          </div>
+          <div class="select-options-box" id="fClasse"></div>
+        </div>
       </div>
+
       <div class="filter-group">
-        <label>Profissão</label>
-        <select id="fProf"><option value="">Aleatória</option></select>
+        <label>Profissão / Antecedente</label>
+        <div class="custom-select-dropdown" id="dropdown_profissoes">
+          <div class="select-trigger" onclick="toggleDropdown('dropdown_profissoes')">
+            <span class="select-label">Todas Selecionadas</span>
+            <i class="ti ti-chevron-down"></i>
+          </div>
+          <div class="select-options-box" id="fProf"></div>
+        </div>
       </div>
+
       <div class="filter-group">
         <label>Personalidade</label>
-        <select id="fPers"><option value="">Aleatória</option></select>
+        <div class="custom-select-dropdown" id="dropdown_personalidades">
+          <div class="select-trigger" onclick="toggleDropdown('dropdown_personalidades')">
+            <span class="select-label">Todas Selecionadas</span>
+            <i class="ti ti-chevron-down"></i>
+          </div>
+          <div class="select-options-box" id="fPers"></div>
+        </div>
       </div>
+
       <div class="filter-group">
         <label>Estilo de Jogo</label>
-        <select id="fEstilo"><option value="">Aleatório</option></select>
+        <div class="custom-select-dropdown" id="dropdown_estilos">
+          <div class="select-trigger" onclick="toggleDropdown('dropdown_estilos')">
+            <span class="select-label">Todos Selecionados</span>
+            <i class="ti ti-chevron-down"></i>
+          </div>
+          <div class="select-options-box" id="fEstilo"></div>
+        </div>
       </div>
+
       <div class="filter-group">
         <label>Nível</label>
         <select id="fNivel">
@@ -74,6 +110,7 @@
           <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
         </select>
       </div>
+
       <div class="filter-group">
         <label>Alinhamento</label>
         <select id="fAlign">
@@ -83,6 +120,7 @@
           <option>Leal e Mau</option><option>Neutro e Mau</option><option>Caótico e Mau</option>
         </select>
       </div>
+
       <div class="divider"></div>
       <button class="btn primary gen-btn" onclick="gerar()"><i class="ti ti-dice-5"></i> Gerar Personagem</button>
       <button class="btn gen-btn" style="margin-top:6px" onclick="gerarAleatorio()"><i class="ti ti-refresh"></i> Totalmente Aleatório</button>

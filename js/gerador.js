@@ -30,7 +30,21 @@ function uid(){ return Date.now().toString(36) + Math.random().toString(36).slic
 function toast(msg){ const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2400); }
 function closeM(id){ const el = document.getElementById(id); if(el) el.style.display = 'none'; }
 
-// ── DB STATE & PRESETS FILTER ─────────────────────────────────────────────────
+// ── DROPDOWNS MANAGEMENT ──────────────────────────────────────────────────────
+function toggleDropdown(id) {
+  const target = document.getElementById(id);
+  const isOpen = target.classList.contains('open');
+  document.querySelectorAll('.custom-select-dropdown').forEach(d => d.classList.remove('open'));
+  if (!isOpen) target.classList.add('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.custom-select-dropdown')) {
+    document.querySelectorAll('.custom-select-dropdown').forEach(d => d.classList.remove('open'));
+  }
+});
+
+// ── DB STATE & PRESETS RESOLUTION ─────────────────────────────────────────────
 let baseDB = null;
 let DB = null;
 
@@ -49,10 +63,18 @@ async function carregarDB(){
 function reconstruirDB(){
   DB = JSON.parse(JSON.stringify(baseDB));
   
+  // Incorpora itens do modo personalizado do localStorage (Padrão)
   const custom = loadCustom();
   Object.keys(custom).forEach(cat => { 
     if(DB[cat]) {
-      DB[cat] = DB[cat].concat(custom[cat]); 
+      custom[cat].forEach(itemCustom => {
+        const idx = DB[cat].findIndex(i => i.id === itemCustom.id);
+        if(idx !== -1) {
+          DB[cat][idx] = Object.assign({}, DB[cat][idx], itemCustom);
+        } else {
+          DB[cat].push(itemCustom);
+        }
+      });
     } 
   });
   
@@ -60,6 +82,7 @@ function reconstruirDB(){
   popularSelects();
 }
 
+// OBTÉM OS ITENS REFLETINDO O PRESET ATIVO (INCLUINDO OVERRIDES E NOVOS ITENS DO PRESET)
 function getFilteredCat(cat){
   if(!DB || !DB[cat]) return [];
   
@@ -67,11 +90,28 @@ function getFilteredCat(cat){
   let presets = [];
   try { presets = JSON.parse(localStorage.getItem(SK_PRESETS)) || []; } catch(e){}
   
-  const currentPreset = presets.find(p => p.id === activeId);
-  if(currentPreset && currentPreset.blocked && currentPreset.blocked[cat]) {
-    return DB[cat].filter(item => !currentPreset.blocked[cat].includes(item.id));
+  const currentPreset = presets.find(p => p.id === activeId) || { blocked: {}, overrides: {}, customItems: {} };
+  const isDefault = activeId === 'default';
+
+  // 1. Mapeia a base aplicando overrides das edições do preset
+  let lista = DB[cat].map(itemBase => {
+    if (!isDefault && currentPreset.overrides?.[cat]?.[itemBase.id]) {
+      return { ...itemBase, ...currentPreset.overrides[cat][itemBase.id] };
+    }
+    return itemBase;
+  });
+
+  // 2. Adiciona os novos itens criados no preset
+  if (!isDefault && currentPreset.customItems?.[cat]) {
+    lista = lista.concat(currentPreset.customItems[cat]);
   }
-  return DB[cat];
+
+  // 3. Filtra itens bloqueados
+  if (currentPreset.blocked && currentPreset.blocked[cat]) {
+    lista = lista.filter(item => !currentPreset.blocked[cat].includes(item.id));
+  }
+
+  return lista;
 }
 
 function popularPresetsSelector(){
@@ -97,40 +137,91 @@ function popularPresetsSelector(){
 function alterarPresetAtivo(novoId) {
   localStorage.setItem(SK_ACTIVE_PRESET, novoId);
   popularSelects();
-  toast("Preset alterado! Filtros updated.");
+  toast("Preset alterado! Opções atualizadas.");
 }
 
-// ── POPULAR SELECTS DE FILTRO ─────────────────────────────────────────────────
+// ── POPULAR DROPDOWNS COM CHECKBOXES ──────────────────────────────────────────
 function popularSelects(){
-  const fill = (id, arr) => {
-    const el = document.getElementById(id); if(!el) return;
-    const antigoVal = el.value;
-    while(el.options.length > 1) el.remove(1);
-    arr.forEach(item => { const o = document.createElement('option'); o.value = item.id; o.textContent = item.nome; el.appendChild(o); });
-    if(antigoVal) el.value = antigoVal;
+  const fillDropdown = (containerId, dropdownWrapperId, arr) => {
+    const container = document.getElementById(containerId);
+    const wrapper = document.getElementById(dropdownWrapperId);
+    if(!container || !wrapper) return;
+    
+    const labelSpan = wrapper.querySelector('.select-label');
+    container.innerHTML = '';
+
+    if(!arr.length) {
+      container.innerHTML = '<div style="padding:8px;font-size:11px;color:var(--muted);font-style:italic">Nenhum disponível</div>';
+      if(labelSpan) labelSpan.textContent = 'Indisponível';
+      return;
+    }
+
+    arr.forEach(item => {
+      const itemEl = document.createElement('label');
+      itemEl.className = 'dropdown-item';
+      
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = item.id;
+      cb.dataset.nome = item.nome;
+
+      cb.addEventListener('change', () => {
+        itemEl.classList.toggle('checked', cb.checked);
+        atualizarLabelTrigger(container, labelSpan, arr.length);
+      });
+
+      itemEl.appendChild(cb);
+      itemEl.appendChild(document.createTextNode(item.nome));
+      container.appendChild(itemEl);
+    });
+
+    atualizarLabelTrigger(container, labelSpan, arr.length);
   };
-  fill('fRaca',       getFilteredCat('racas'));
-  fill('fClasse',     getFilteredCat('classes'));
-  fill('fProf',       getFilteredCat('profissoes'));
-  fill('fPers',       getFilteredCat('personalidades'));
-  fill('fEstilo',     getFilteredCat('estilos'));
+
+  fillDropdown('fRaca',   'dropdown_racas',          getFilteredCat('racas'));
+  fillDropdown('fClasse', 'dropdown_classes',        getFilteredCat('classes'));
+  fillDropdown('fProf',   'dropdown_profissoes',     getFilteredCat('profissoes'));
+  fillDropdown('fPers',   'dropdown_personalidades', getFilteredCat('personalidades'));
+  fillDropdown('fEstilo', 'dropdown_estilos',        getFilteredCat('estilos'));
 }
 
-// ── UTILS ─────────────────────────────────────────────────────────────────────
+function atualizarLabelTrigger(container, labelSpan, total) {
+  const checked = Array.from(container.querySelectorAll('input:checked'));
+  if (checked.length === 0) {
+    labelSpan.textContent = 'Todos (Aleatório)';
+  } else if (checked.length === total) {
+    labelSpan.textContent = 'Todos Selecionados';
+  } else if (checked.length === 1) {
+    labelSpan.textContent = checked[0].dataset.nome;
+  } else {
+    labelSpan.textContent = `${checked.length} selecionados`;
+  }
+}
+
+// ── UTILS DE GERAÇÃO ──────────────────────────────────────────────────────────
 function rand(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 function rollAttr(){ let r = Array.from({length:4}, () => Math.floor(Math.random() * 6) + 1); r.sort((a,b) => a - b); return r.slice(1).reduce((a,b) => a + b, 0); }
 function mod(v){ return Math.floor((v - 10) / 2); }
 function fmod(v){ const m = mod(v); return (m >= 0 ? '+' : '') + m; }
-function pickFrom(selectId, arr){
-  const v = document.getElementById(selectId).value;
-  return v ? arr.find(x => x.id === v) || rand(arr) : rand(arr);
+
+function pickFromDropdown(containerId, availableArr){
+  const container = document.getElementById(containerId);
+  if(!container) return rand(availableArr);
+
+  const selectedIds = Array.from(container.querySelectorAll('input:checked')).map(cb => cb.value);
+  
+  if(selectedIds.length > 0) {
+    const filteredSelection = availableArr.filter(x => selectedIds.includes(x.id));
+    if(filteredSelection.length > 0) return rand(filteredSelection);
+  }
+  return rand(availableArr);
 }
 
 // ── CURRENT NPC ───────────────────────────────────────────────────────────────
 let currentNPC = null;
 
 function gerar(){
-  if(!DB || !DB.racas.length){ toast('Banco de dados ainda carregando...'); return; }
+  if(!DB){ toast('Banco de dados ainda carregando...'); return; }
   
   const racasF = getFilteredCat('racas');
   const classesF = getFilteredCat('classes');
@@ -143,21 +234,32 @@ function gerar(){
     return;
   }
 
-  const raca   = pickFrom('fRaca',   racasF);
-  const classe = pickFrom('fClasse', classesF);
-  const prof   = pickFrom('fProf',   profsF);
-  const pers   = pickFrom('fPers',   persF);
-  const estilo = pickFrom('fEstilo', estilosF);
+  const raca   = pickFromDropdown('fRaca',   racasF);
+  const classe = pickFromDropdown('fClasse', classesF);
+  const prof   = pickFromDropdown('fProf',   profsF);
+  const pers   = pickFromDropdown('fPers',   persF);
+  const estilo = pickFromDropdown('fEstilo', estilosF);
   const nivel  = parseInt(document.getElementById('fNivel').value) || Math.floor(Math.random() * 10) + 1;
   const align  = document.getElementById('fAlign').value || rand(['Leal e Bom','Neutro e Bom','Caótico e Bom','Leal e Neutro','Neutro','Caótico e Neutro','Leal e Mau','Neutro e Mau','Caótico e Mau']);
+  
   _montarNPC(raca, classe, prof, pers, estilo, nivel, align);
 }
 
 function gerarAleatorio(){
-  if(!DB || !DB.racas.length){ toast('Banco de dados ainda carregando...'); return; }
+  if(!DB){ toast('Banco de dados ainda carregando...'); return; }
   
-  ['fRaca','fClasse','fProf','fPers','fEstilo','fNivel','fAlign'].forEach(id => document.getElementById(id).value = '');
-  
+  ['fNivel','fAlign'].forEach(id => document.getElementById(id).value = '');
+  ['fRaca','fClasse','fProf','fPers','fEstilo'].forEach(id => {
+    const container = document.getElementById(id);
+    if(container) {
+      container.querySelectorAll('input:checked').forEach(cb => {
+        cb.checked = false;
+        if(cb.parentElement) cb.parentElement.classList.remove('checked');
+      });
+    }
+  });
+  popularSelects(); // Atualiza os textos dos triggers
+
   const racasF = getFilteredCat('racas');
   const classesF = getFilteredCat('classes');
   const profsF = getFilteredCat('profissoes');
@@ -176,6 +278,7 @@ function gerarAleatorio(){
   const estilo = rand(estilosF);
   const nivel  = Math.floor(Math.random() * 10) + 1;
   const align  = rand(['Leal e Bom','Neutro e Bom','Caótico e Bom','Leal e Neutro','Neutro','Caótico e Neutro','Leal e Mau','Neutro e Mau','Caótico e Mau']);
+  
   _montarNPC(raca, classe, prof, pers, estilo, nivel, align);
 }
 
@@ -218,8 +321,6 @@ function renderNPC(n){
       <div class="actions-bar no-print">
         <button class="btn primary" onclick="abrirSalvar()"><i class="ti ti-device-floppy"></i> Salvar Ficha</button>
         <button class="btn"         onclick="window.print()"><i class="ti ti-printer"></i> Salvar PDF</button>
-        <button class="btn"         onclick="gerar()"><i class="ti ti-refresh"></i> Regerar</button>
-        <button class="btn"         onclick="gerarAleatorio()"><i class="ti ti-dice-5"></i> Novo Aleatório</button>
       </div>
 
       <div class="npc-header">
@@ -272,7 +373,7 @@ function renderNPC(n){
           </ul>
         </div>
         <div class="npc-sec">
-          <h3><i class="ti ti-briefcase"></i>Profissão — ${prof.nome}</h3>
+          <h3><i class="ti ti-briefcase"></i>Proficiência — ${prof.nome}</h3>
           <ul class="trait-list">
             <li>${prof.desc}</li>
             <li><strong>Perícias:</strong> ${Array.isArray(prof.pericias) ? prof.pericias.join(', ') : prof.pericias}</li>

@@ -29,6 +29,7 @@ function loadCustom(){
   } 
 }
 function saveCustom(obj){ localStorage.setItem(SK_CUSTOM, JSON.stringify(obj)); }
+
 function loadPresets(){ 
   try {
     return JSON.parse(localStorage.getItem(SK_PRESETS)) || [];
@@ -56,7 +57,7 @@ function fecharM(id){
 }
 
 // ── ESTADO GLOBAL ─────────────────────────────────────────────────────────────
-let DB = null; // Conteúdo Mesclado (Oficiais + Customizados)
+let DB = null; // Banco Global Base (Oficiais + Customizados Globais)
 let currentCategory = 'racas';
 let activeSubcategory = ''; // Filtro selecionado por pílula
 let presets = [];
@@ -122,7 +123,7 @@ async function inicializar(){
     // Marcar itens nativos
     DB[cat] = DB[cat].map(item => ({...item, _src:'base'}));
     
-    // Adicionar customizados injetando flag e substituindo caso possuam IDs idênticos (Edição de nativos)
+    // Adicionar customizados injetando flag no banco global
     if(custom[cat]) {
       custom[cat].forEach(cItem => {
         const idx = DB[cat].findIndex(bItem => bItem.id === cItem.id);
@@ -142,14 +143,24 @@ async function inicializar(){
     presets.push({
       id: 'default',
       nome: 'Padrão (Todo o Conteúdo)',
-      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] }
+      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] },
+      overrides: {},
+      customItems: {}
     });
     savePresets(presets);
   }
 
+  // Garantir que as estruturas do preset existam
   presets.forEach(p => {
     if(!p.blocked) p.blocked = { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] };
-    Object.keys(FORMS_CONFIG).forEach(c => { if(!p.blocked[c]) p.blocked[c] = []; });
+    if(!p.overrides) p.overrides = {};
+    if(!p.customItems) p.customItems = {};
+
+    Object.keys(FORMS_CONFIG).forEach(c => { 
+      if(!p.blocked[c]) p.blocked[c] = []; 
+      if(!p.overrides[c]) p.overrides[c] = {};
+      if(!p.customItems[c]) p.customItems[c] = [];
+    });
   });
 
   if(!presets.find(p => p.id === activePresetId)) {
@@ -166,7 +177,7 @@ async function inicializar(){
 // ── BARRA DE SUB-ABAS DE FILTRAGEM DINÂMICA (PÍLULAS) ─────────────────────────
 function renderizarSubcategoryNav(){
   const container = document.getElementById('subcatNav');
-  const arr = DB[currentCategory] || [];
+  const arr = obterItensComOverrides(currentCategory);
   
   // Extrai subcategorias únicas
   const subcategorias = [...new Set(arr.map(item => item.subcategoria).filter(Boolean))];
@@ -229,7 +240,9 @@ function renderizarPresets(){
 function selecionarPreset(id){
   activePresetId = id;
   setActivePresetId(id);
+  cancelarEdicaoItem();
   renderizarPresets();
+  renderizarSubcategoryNav();
   renderizarItens();
   toast('Preset de Campanha alterado!');
 }
@@ -257,15 +270,22 @@ function salvarPreset(){
     const p = presets.find(x => x.id === editingPresetId);
     if(p) p.nome = nome;
   } else {
-    presets.push({
+    const newPreset = {
       id: uid(),
       nome: nome,
-      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] }
-    });
+      blocked: { racas:[], classes:[], profissoes:[], personalidades:[], estilos:[] },
+      overrides: {},
+      customItems: {}
+    };
+    presets.push(newPreset);
+    activePresetId = newPreset.id;
+    setActivePresetId(activePresetId);
   }
   savePresets(presets);
   fecharM('mPreset');
   renderizarPresets();
+  renderizarSubcategoryNav();
+  renderizarItens();
   toast('Configuração salva com sucesso!');
 }
 
@@ -276,7 +296,9 @@ function duplicarPreset(id){
   const cópia = {
     id: uid(),
     nome: `${original.nome} (Cópia)`,
-    blocked: JSON.parse(JSON.stringify(original.blocked))
+    blocked: JSON.parse(JSON.stringify(original.blocked)),
+    overrides: JSON.parse(JSON.stringify(original.overrides || {})),
+    customItems: JSON.parse(JSON.stringify(original.customItems || {}))
   };
   
   presets.push(cópia);
@@ -287,7 +309,7 @@ function duplicarPreset(id){
 
 function deletarPreset(id){
   if(id === 'default') return;
-  if(!confirm('Tem certeza que deseja excluir esta configuração? Isso liberará os filtros associados a ela.')) return;
+  if(!confirm('Tem certeza que deseja excluir esta configuração?')) return;
 
   presets = presets.filter(p => p.id !== id);
   if(activePresetId === id) {
@@ -296,8 +318,31 @@ function deletarPreset(id){
   }
   savePresets(presets);
   renderizarPresets();
+  renderizarSubcategoryNav();
   renderizarItens();
   toast('Preset removido.');
+}
+
+// ── RESOLUÇÃO DE ITENS POR PRESET (ISOLAMENTO) ────────────────────────────────
+function obterItensComOverrides(cat){
+  const currentPreset = presets.find(p => p.id === activePresetId) || presets[0];
+  const isDefault = currentPreset.id === 'default';
+
+  // 1. Mapeia os itens base do personagens.json aplicando os overrides do preset
+  let listaResolvida = (DB[cat] || []).map(itemBase => {
+    if (!isDefault && currentPreset.overrides?.[cat]?.[itemBase.id]) {
+      return { ...itemBase, ...currentPreset.overrides[cat][itemBase.id], _src: 'preset_edited' };
+    }
+    return itemBase;
+  });
+
+  // 2. Adiciona os itens novos criados EXCLUSIVAMENTE neste preset
+  if (!isDefault && currentPreset.customItems?.[cat]) {
+    const criadosNoPreset = currentPreset.customItems[cat].map(i => ({ ...i, _src: 'preset_custom' }));
+    listaResolvida = listaResolvida.concat(criadosNoPreset);
+  }
+
+  return listaResolvida;
 }
 
 // ── RENDERIZAR ITENS & TOGGLES (PAINEL DIREITO) ───────────────────────────────
@@ -319,7 +364,7 @@ function switchMainTab(cat){
 }
 
 function obterItensVisiveis(){
-  const arr = DB[currentCategory] || [];
+  const arr = obterItensComOverrides(currentCategory);
   const query = document.getElementById('contentSearch').value.toLowerCase().trim();
   
   return arr.filter(item => {
@@ -343,7 +388,21 @@ function renderizarItens(){
 
   grid.innerHTML = filtrados.map(item => {
     const isBlocked = currentPreset.blocked[currentCategory].includes(item.id);
-    const isCustom = item._src === 'custom';
+    
+    // Configura os Badges visuais de origem do item
+    let badgeLabel = 'Oficial';
+    let badgeClass = 'base';
+    
+    if (item._src === 'custom') {
+      badgeLabel = 'Custom Global';
+      badgeClass = 'custom';
+    } else if (item._src === 'preset_edited') {
+      badgeLabel = 'Editado neste Preset';
+      badgeClass = 'custom';
+    } else if (item._src === 'preset_custom') {
+      badgeLabel = 'Novo neste Preset';
+      badgeClass = 'custom';
+    }
 
     return `
       <div class="item-row ${isBlocked ? 'disabled' : ''}" id="row_${item.id}" onclick="toggleAtivacaoItem('${currentCategory}', '${item.id}')">
@@ -354,7 +413,7 @@ function renderizarItens(){
           <div class="item-meta">
             <div class="item-title-line">
               <span class="item-title">${item.nome}</span>
-              <span class="src-badge ${isCustom ? 'custom' : 'base'}">${isCustom ? 'Custom' : 'Oficial'}</span>
+              <span class="src-badge ${badgeClass}">${badgeLabel}</span>
               ${item.subcategoria ? `<span class="src-badge subcat">${item.subcategoria}</span>` : ''}
             </div>
             <div class="item-summary" title="${item.desc || ''}">${item.desc || 'Sem descrição cadastrada.'}</div>
@@ -443,7 +502,7 @@ function alterarCamposForm(cat){
 
 // Coloca as informações de um item existente para edição no card lateral
 function carregarItemParaEdicao(cat, id){
-  const arr = DB[cat] || [];
+  const arr = obterItensComOverrides(cat);
   const item = arr.find(i => i.id === id);
   if(!item) return;
 
@@ -451,7 +510,7 @@ function carregarItemParaEdicao(cat, id){
   
   // Força select da sidebar a mostrar a categoria do item
   document.getElementById('addCat').value = cat;
-  document.getElementById('addCat').disabled = true; // Impede mudar de aba no formulário no meio da edição
+  document.getElementById('addCat').disabled = true;
   alterarCamposForm(cat);
 
   document.getElementById('formTitle').textContent = "Editar Item";
@@ -498,6 +557,8 @@ function cancelarEdicaoItem(){
 function salvarNovoConteudo(){
   const cat = document.getElementById('addCat').value;
   const config = FORMS_CONFIG[cat];
+  const currentPreset = presets.find(p => p.id === activePresetId) || presets[0];
+  const isDefault = currentPreset.id === 'default';
   
   // Se está editando mantém ID original, se não, gera novo UID
   const item = { id: editingItemId ? editingItemId : uid() };
@@ -525,57 +586,107 @@ function salvarNovoConteudo(){
     item[f.key] = val;
   }
 
-  // Grava localmente no armazenamento customizado
-  const custom = loadCustom();
-  if(editingItemId) {
-    const idx = custom[cat].findIndex(i => i.id === editingItemId);
-    if(idx > -1) custom[cat][idx] = item;
-    else custom[cat].push(item);
-  } else {
-    custom[cat].push(item);
-  }
-  saveCustom(custom);
+  if (isDefault) {
+    // -------------------------------------------------------------
+    // SALVA NO BANCO GLOBAL (Preset Padrão)
+    // -------------------------------------------------------------
+    const custom = loadCustom();
+    if(editingItemId) {
+      const idx = custom[cat].findIndex(i => i.id === editingItemId);
+      if(idx > -1) custom[cat][idx] = item;
+      else custom[cat].push(item);
+    } else {
+      custom[cat].push(item);
+    }
+    saveCustom(custom);
 
-  // Injeta / Atualiza em runtime no DB global em memória da página
-  item._src = 'custom';
-  const dbIdx = DB[cat].findIndex(i => i.id === item.id);
-  if(dbIdx > -1) {
-    DB[cat][dbIdx] = item;
+    item._src = 'custom';
+    const dbIdx = DB[cat].findIndex(i => i.id === item.id);
+    if(dbIdx > -1) {
+      DB[cat][dbIdx] = item;
+    } else {
+      DB[cat].push(item);
+    }
+    toast(editingItemId ? 'Item global atualizado!' : 'Item customizado global adicionado!');
+
   } else {
-    DB[cat].push(item);
+    // -------------------------------------------------------------
+    // SALVA APENAS NO PRESET ATIVO (Não afeta o Padrão nem os outros)
+    // -------------------------------------------------------------
+    if (!currentPreset.overrides) currentPreset.overrides = {};
+    if (!currentPreset.overrides[cat]) currentPreset.overrides[cat] = {};
+    if (!currentPreset.customItems) currentPreset.customItems = {};
+    if (!currentPreset.customItems[cat]) currentPreset.customItems[cat] = [];
+
+    if (editingItemId) {
+      const existeNoGlobal = DB[cat].some(i => i.id === editingItemId);
+      if (existeNoGlobal) {
+        // Se é um item do JSON base, guarda a alteração como Override
+        currentPreset.overrides[cat][editingItemId] = item;
+      } else {
+        // Se é um item exclusivo deste preset, atualiza a lista
+        const customIdx = currentPreset.customItems[cat].findIndex(i => i.id === editingItemId);
+        if (customIdx > -1) {
+          currentPreset.customItems[cat][customIdx] = item;
+        }
+      }
+    } else {
+      // Item totalmente novo exclusivo do preset
+      currentPreset.customItems[cat].push(item);
+    }
+
+    savePresets(presets);
+    toast(`Alteração salva exclusivamente no preset "${currentPreset.nome}"!`);
   }
 
-  toast(editingItemId ? 'Item updated!' : 'Item customizado adicionado!');
   cancelarEdicaoItem();
-  
   renderizarSubcategoryNav();
   renderizarItens();
   renderizarPresets();
 }
 
-// Exclusão unificada capaz de expurgar customizados ou apagar da memória itens nativos
+// Exclusão flexível: remove do Preset ativo ou remove Globalmente caso esteja no Preset Padrão
 function deletarItemGeral(cat, id){
-  if(!confirm('Deseja deletar permanentemente este item do sistema?')) return;
+  const currentPreset = presets.find(p => p.id === activePresetId) || presets[0];
+  const isDefault = currentPreset.id === 'default';
 
-  // 1. Apagar do storage local
-  const custom = loadCustom();
-  custom[cat] = custom[cat].filter(i => i.id !== id);
-  saveCustom(custom);
+  if (!isDefault) {
+    if(!confirm('Deseja remover esta customização do preset ativo?')) return;
 
-  // 2. Apagar da memória ativa
-  DB[cat] = DB[cat].filter(i => i.id !== id);
-
-  // 3. Limpar de travas ou bloqueios salvos em presets
-  presets.forEach(p => {
-    if(p.blocked && p.blocked[cat]) {
-      p.blocked[cat] = p.blocked[cat].filter(bid => bid !== id);
+    // Remove overrides ou itens exclusivos do preset
+    if (currentPreset.overrides?.[cat]?.[id]) {
+      delete currentPreset.overrides[cat][id];
     }
-  });
-  savePresets(presets);
+    if (currentPreset.customItems?.[cat]) {
+      currentPreset.customItems[cat] = currentPreset.customItems[cat].filter(i => i.id !== id);
+    }
+
+    savePresets(presets);
+    toast('Customização do preset removida (restaurado para o padrão).');
+
+  } else {
+    if(!confirm('Deseja deletar permanentemente este item do sistema global?')) return;
+
+    // 1. Apagar do storage local
+    const custom = loadCustom();
+    custom[cat] = custom[cat].filter(i => i.id !== id);
+    saveCustom(custom);
+
+    // 2. Apagar da memória ativa
+    DB[cat] = DB[cat].filter(i => i.id !== id);
+
+    // 3. Limpar de travas ou bloqueios salvos em presets
+    presets.forEach(p => {
+      if(p.blocked && p.blocked[cat]) {
+        p.blocked[cat] = p.blocked[cat].filter(bid => bid !== id);
+      }
+    });
+    savePresets(presets);
+    toast('Item removido com sucesso do banco global.');
+  }
 
   if(editingItemId === id) cancelarEdicaoItem();
 
-  toast('Item removido com sucesso.');
   renderizarSubcategoryNav();
   renderizarItens();
   renderizarPresets();
