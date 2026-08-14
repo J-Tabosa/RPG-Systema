@@ -189,11 +189,15 @@ let activeId = fichas.length ? fichas[0].id : null;
 let editingAttr = null,
   editingHabil = null,
   editingSpell = null,
-  editingEquip = null;
+  editingEquip = null,
+  deletingSpellIndex = null;
 let themeMenuOpen = false;
 let baseDB = null;
 let DB = null;
 let presetModalTargetFichaId = null;
+
+// Controle dos estados das pastas de magias (níveis 0 a 9)
+let openSpellFolders = { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true };
 
 // ── THEME (global claro/escuro) ───────────────────────────────────────────────
 let dark = localStorage.getItem("rpg_theme") !== "light";
@@ -254,7 +258,6 @@ async function carregarDB() {
 
   if (targetId && fichas.some((f) => f.id === targetId)) {
     activeId = targetId;
-    // Opcional: ajusta a pasta ativa de acordo com o tipo da ficha selecionada
     const fTarget = fichas.find((f) => f.id === targetId);
     if (fTarget) {
       activeFolder = fTarget.folder || folderFromType(fTarget.type);
@@ -410,7 +413,6 @@ function applyFichaColors() {
     bg = null;
   }
 
-  // Injeção da cor customizada dos rótulos dos campos e nomes de atributos
   let customFieldStyle = "";
   if (c.customFieldFontColor) {
     customFieldStyle = `
@@ -800,7 +802,7 @@ async function delFicha(id) {
   fichas = fichas.filter((x) => x.id !== id);
   save(fichas);
   await deleteImageFromDB(id);
-  await deleteImageFromDB(id + "_full"); // Remove também a imagem grande
+  await deleteImageFromDB(id + "_full");
   if (activeId === id) {
     activeId = fichas.length ? fichas[0].id : null;
   }
@@ -825,7 +827,6 @@ async function renderEditor() {
   const classesPermitidas = getFilteredCat("classes", f.presetId);
   const profsPermitidas = getFilteredCat("profissoes", f.presetId);
 
-  // Carrega as duas imagens assincronamente
   const characterImg = await loadImageFromDB(f.id);
   const fullBodyImg = await loadImageFromDB(f.id + "_full");
 
@@ -919,38 +920,77 @@ async function renderEditor() {
     )
     .join("");
 
-  const spellsHtml = (f.spells || [])
-    .map(
-      (sp, i) => `
-    <div class="spell-item" id="spitem_${i}">
-      <div class="spell-item-info">
-        <div class="spell-item-name" style="cursor:pointer" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">${
-        sp.name
-      } <span style="font-family:'Cinzel',serif;font-size:10px;color:var(--muted)">[Nv ${
-        sp.level
-      }]</span></div>
-        <div class="spell-item-meta">${[
-          sp.school,
-          sp.cast,
-          sp.range,
-          sp.aoe,
-          sp.duration,
-        ]
-          .filter(Boolean)
-          .join(" · ")}</div>
-        ${
-          sp.desc
-            ? `<div class="spell-item-desc">${sp.desc}</div><span class="expand-toggle" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">▸ detalhes</span>`
-            : ""
-        }
-      </div>
-      <div style="display:flex;gap:4px;flex-shrink:0">
-        <button class="btn xs print-hidden" onclick="editSpell(${i})"><i class="ti ti-edit"></i></button>
-        <button class="btn xs danger print-hidden" onclick="removeSpell(${i})"><i class="ti ti-trash"></i></button>
-      </div>
-    </div>`
-    )
-    .join("");
+  // ── AGRUPAMENTO DE MAGIAS EM PASTAS POR CÍRCULO / NÍVEL (0 a 9) ──────────────
+  const spellsByLevel = {};
+  for (let lvl = 0; lvl <= 9; lvl++) {
+    spellsByLevel[lvl] = [];
+  }
+  (f.spells || []).forEach((sp, index) => {
+    const lvl = sp.level !== undefined ? parseInt(sp.level) : 1;
+    const safeLvl = lvl >= 0 && lvl <= 9 ? lvl : 1;
+    spellsByLevel[safeLvl].push({ ...sp, originalIndex: index });
+  });
+
+  let spellsHtml = "";
+  if (!f.spells || f.spells.length === 0) {
+    spellsHtml = '<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma magia ainda.</div>';
+  } else {
+    spellsHtml = Array.from({ length: 10 }, (_, lvl) => {
+      const spellList = spellsByLevel[lvl];
+      if (spellList.length === 0) return "";
+
+      const isOpen = openSpellFolders[lvl] !== false;
+      const folderTitle = lvl === 0 ? "Nível 0 (Truques)" : `Nível ${lvl}`;
+
+      const itemsInside = spellList
+        .map((sp) => {
+          const i = sp.originalIndex;
+          return `
+          <div class="spell-item" id="spitem_${i}">
+            <div class="spell-item-info">
+              <div class="spell-item-name" style="cursor:pointer" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">
+                ${sp.name}
+              </div>
+              <div class="spell-item-meta">${[
+                sp.school,
+                sp.cast,
+                sp.range,
+                sp.aoe,
+                sp.duration,
+              ]
+                .filter(Boolean)
+                .join(" · ")}</div>
+              ${
+                sp.desc
+                  ? `<div class="spell-item-desc">${sp.desc}</div><span class="expand-toggle" onclick="document.getElementById('spitem_${i}').classList.toggle('expanded')">▸ detalhes</span>`
+                  : ""
+              }
+            </div>
+            <div style="display:flex;gap:4px;flex-shrink:0">
+              <button class="btn xs print-hidden" onclick="editSpell(${i})"><i class="ti ti-edit"></i></button>
+              <button class="btn xs danger print-hidden" onclick="askRemoveSpell(${i})"><i class="ti ti-trash"></i></button>
+            </div>
+          </div>`;
+        })
+        .join("");
+
+      return `
+        <div class="spell-folder-group ${isOpen ? "open" : ""}">
+          <div class="spell-folder-header" onclick="toggleSpellFolder(${lvl})">
+            <div class="spell-folder-title">
+              <i class="ti ${isOpen ? "ti-folder-open" : "ti-folder"} spell-folder-icon"></i>
+              <span>${folderTitle}</span>
+              <span class="spell-count-badge">${spellList.length}</span>
+            </div>
+            <i class="ti ${isOpen ? "ti-chevron-down" : "ti-chevron-right"} folder-arrow"></i>
+          </div>
+          <div class="spell-folder-content">
+            ${itemsInside}
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
 
   const habilHtml = (f.habilidades || [])
     .map((h, i) => {
@@ -1038,7 +1078,6 @@ async function renderEditor() {
     <!-- PÁGINA 1: Informações Principais, Atributos, Combate, Perícias e Mana -->
     <div class="pdf-page-block">
       <div class="sec">
-        <!-- Cabeçalho Principal -->
         <div class="character-header-grid-compact">
           <div class="avatar-compact-area print-hidden">
             <div class="avatar-compact-preview" id="editorAvatarPreview" onclick="document.getElementById('avatarFileInput').click()" title="Alterar Ícone">
@@ -1056,7 +1095,6 @@ async function renderEditor() {
             <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
           </div>
           
-          <!-- Preview do Ícone para Impressão PDF (Maior e com espaçamento) -->
           <div class="avatar-compact-preview print-only-avatar-compact" style="display:none;">
             ${
               characterImg
@@ -1111,7 +1149,7 @@ async function renderEditor() {
                 </select>
               </div>
               <div class="form-field" style="margin:0">
-                <label>Profissão</label> <!-- Rótulo simplificado para evitar quebra -->
+                <label>Profissão</label>
                 <select onchange="setField('background',this.value)" style="padding: 6px 10px;">
                   <option value="">Selecione uma Profissão...</option>
                   ${profsPermitidas
@@ -1175,7 +1213,6 @@ async function renderEditor() {
         </div>
       </div>
 
-      <!-- Mana reposicionado para a Página 1 (Espaço de sobra preenchido) -->
       <div class="sec">
         <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Mana</h2></div></div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:10px" class="print-hidden">Clique nos círculos para marcar uso. Defina o total por nível.</div>
@@ -1183,18 +1220,24 @@ async function renderEditor() {
       </div>
     </div>
 
+    <!-- SEÇÃO DE MAGIAS ORGANIZADAS POR PASTAS -->
     <div class="sec">
-        <div class="sec-head">
-          <div class="sec-title"><i class="ti ti-sparkles sec-icon"></i><h2>Magias Conhecidas</h2></div>
+      <div class="sec-head">
+        <div class="sec-title"><i class="ti ti-sparkles sec-icon"></i><h2>Magias Conhecidas</h2></div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button class="btn xs text print-hidden" onclick="toggleAllSpellFolders(true)" title="Expandir Todas">
+            <i class="ti ti-folder-open"></i>
+          </button>
+          <button class="btn xs text print-hidden" onclick="toggleAllSpellFolders(false)" title="Recolher Todas">
+            <i class="ti ti-folder"></i>
+          </button>
           <button class="btn xs primary" onclick="openAddSpell()"><i class="ti ti-plus"></i> Adicionar</button>
         </div>
-        ${
-          spellsHtml ||
-          '<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhuma magia ainda.</div>'
-        }
       </div>
+      ${spellsHtml}
+    </div>
 
-    <!-- PÁGINA 2: Poderes, Magias Conhecidas e Equipamentos -->
+    <!-- PÁGINA 2: Poderes e Equipamentos -->
     <div class="pdf-page-block pdf-page-break">
       <div class="sec">
         <div class="sec-head">
@@ -1232,12 +1275,10 @@ async function renderEditor() {
     <div class="pdf-page-block pdf-page-break">
       <div class="story-appearance-grid">
         
-        <!-- Bloco de Arte & Aparência Física -->
         <div class="sec visual-section" style="margin:0;">
           <div class="sec-head"><div class="sec-title"><i class="ti ti-photo sec-icon"></i><h2>Aparência &amp; Arte Corporal</h2></div></div>
           
           <div class="appearance-vertical-layout">
-            <!-- Bloco de Imagem Único (sem duplicação no PDF) -->
             <div class="full-body-wrapper">
               <div class="full-body-preview" id="editorFullBodyPreview">
                 ${
@@ -1266,10 +1307,8 @@ async function renderEditor() {
           </div>
         </div>
         
-        <!-- Coluna Direita: Personalidade + História -->
         <div class="text-sections-column">
           
-          <!-- Bloco de Personalidade -->
           <div class="sec" style="margin:0">
             <div class="sec-head"><div class="sec-title"><i class="ti ti-user sec-icon"></i><h2>Personalidade</h2></div></div>
             <div class="compact-fields-grid">
@@ -1288,7 +1327,6 @@ async function renderEditor() {
             </div>
           </div>
 
-          <!-- Bloco de História & Notas -->
           <div class="sec" style="margin:0; display:flex; flex-direction:column; gap:10px;">
             <div class="sec-head"><div class="sec-title"><i class="ti ti-book sec-icon"></i><h2>História &amp; Notas</h2></div></div>
             <div class="form-field" style="margin:0;"><label class="field-label">Backstory</label><textarea class="textarea-fixed history" onchange="setField('backstory',this.value)">${
@@ -1306,6 +1344,19 @@ async function renderEditor() {
     <div style="text-align:right;margin-bottom:14px" class="print-hidden">
       <button class="btn" onclick="window.print()" style="font-size:11px"><i class="ti ti-printer"></i> Salvar como PDF</button>
     </div>`;
+}
+
+// ── CONTROLADORES DAS PASTAS DE MAGIA ─────────────────────────────────────────
+function toggleSpellFolder(level) {
+  openSpellFolders[level] = !openSpellFolders[level];
+  renderEditor();
+}
+
+function toggleAllSpellFolders(openState) {
+  for (let i = 0; i <= 9; i++) {
+    openSpellFolders[i] = openState;
+  }
+  renderEditor();
 }
 
 // ── AVATAR COMPACT (UP/DEL) ──────────────────────────────────────────────────
@@ -1347,7 +1398,7 @@ function uploadFullBody(event) {
     const base64 = e.target.result;
     const f = getFicha();
     if (f) {
-      await saveImageToDB(f.id + "_full", base64); // Salva com sufixo especial
+      await saveImageToDB(f.id + "_full", base64);
       renderSidebar();
       renderEditor();
       toast("Arte corporal atualizada!");
@@ -1396,7 +1447,7 @@ function editAttr(id) {
   editingAttr = id;
   document.getElementById("mAttrTitle").textContent = "Editar Atributo";
   document.getElementById("aName").value = a.label;
-  document.getElementById("aAbr").value = a.val; // Corrige atribuição de valor anterior
+  document.getElementById("aAbr").value = a.abr;
   document.getElementById("aVal").value = a.val;
   document.getElementById("mAttr").style.display = "flex";
   setTimeout(() => document.getElementById("aName").focus(), 50);
@@ -1547,6 +1598,8 @@ function toggleSlot(si, di) {
   });
   renderEditor();
 }
+
+// ── MANIPULAÇÃO DE MAGIAS E MODAL DE CONFIRMAÇÃO DE EXCLUSÃO ───────────────────
 function openAddSpell() {
   editingSpell = null;
   document.getElementById("mSpellTitle").textContent = "Adicionar Magia";
@@ -1559,10 +1612,11 @@ function openAddSpell() {
     "spDuration",
     "spDesc",
   ].forEach((id) => (document.getElementById(id).value = ""));
-  document.getElementById("spLevel").value = 1;
+  document.getElementById("spLevel").value = 0; // Padrão Nível 0
   document.getElementById("mSpell").style.display = "flex";
   setTimeout(() => document.getElementById("spName").focus(), 50);
 }
+
 function editSpell(i) {
   const f = getFicha();
   if (!f) return;
@@ -1571,7 +1625,7 @@ function editSpell(i) {
   editingSpell = i;
   document.getElementById("mSpellTitle").textContent = "Editar Magia";
   document.getElementById("spName").value = sp.name;
-  document.getElementById("spLevel").value = sp.level;
+  document.getElementById("spLevel").value = sp.level !== undefined ? sp.level : 0;
   document.getElementById("spSchool").value = sp.school || "";
   document.getElementById("spCast").value = sp.cast || "";
   document.getElementById("spRange").value = sp.range || "";
@@ -1580,12 +1634,14 @@ function editSpell(i) {
   document.getElementById("spDesc").value = sp.desc || "";
   document.getElementById("mSpell").style.display = "flex";
 }
+
 function confirmSpell() {
   const name = document.getElementById("spName").value.trim();
   if (!name) return;
+  const spLevel = parseInt(document.getElementById("spLevel").value);
   const sp = {
     name,
-    level: parseInt(document.getElementById("spLevel").value) || 1,
+    level: isNaN(spLevel) ? 0 : Math.max(0, Math.min(9, spLevel)),
     school: document.getElementById("spSchool").value.trim(),
     cast: document.getElementById("spCast").value.trim(),
     range: document.getElementById("spRange").value.trim(),
@@ -1604,12 +1660,28 @@ function confirmSpell() {
   toast(editingSpell !== null ? "Magia atualizada!" : "Magia adicionada!");
   editingSpell = null;
 }
-function removeSpell(i) {
-  upd((f) => {
-    f.spells.splice(i, 1);
-  });
-  renderEditor();
+
+function askRemoveSpell(i) {
+  const f = getFicha();
+  if (!f || !f.spells[i]) return;
+  deletingSpellIndex = i;
+  document.getElementById("confirmSpellName").textContent = f.spells[i].name;
+  document.getElementById("mConfirmDeleteSpell").style.display = "flex";
 }
+
+function confirmDeleteSpell() {
+  if (deletingSpellIndex !== null) {
+    upd((f) => {
+      f.spells.splice(deletingSpellIndex, 1);
+    });
+    toast("Magia apagada com sucesso!");
+    deletingSpellIndex = null;
+    closeM("mConfirmDeleteSpell");
+    renderEditor();
+  }
+}
+
+// ── PODERES & EQUIPAMENTOS ───────────────────────────────────────────────────
 function openAddHabil() {
   editingHabil = null;
   document.getElementById("mHabilTitle").textContent = "Adicionar Poder";
@@ -1817,15 +1889,22 @@ function importarFicha(event) {
 }
 
 // ── MODAL CLOSE ───────────────────────────────────────────────────────────────
-["mPreset", "mAttr", "mHabil", "mSpell", "mEquip", "mSkill", "mCombat"].forEach(
-  (id) => {
-    if (document.getElementById(id)) {
-      document.getElementById(id).addEventListener("click", function (e) {
-        if (e.target === this) closeM(id);
-      });
-    }
+[
+  "mPreset",
+  "mAttr",
+  "mHabil",
+  "mSpell",
+  "mEquip",
+  "mSkill",
+  "mCombat",
+  "mConfirmDeleteSpell"
+].forEach((id) => {
+  if (document.getElementById(id)) {
+    document.getElementById(id).addEventListener("click", function (e) {
+      if (e.target === this) closeM(id);
+    });
   }
-);
+});
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape")
     [
@@ -1836,6 +1915,7 @@ document.addEventListener("keydown", (e) => {
       "mEquip",
       "mSkill",
       "mCombat",
+      "mConfirmDeleteSpell"
     ].forEach(closeM);
   if ((e.ctrlKey || e.metaKey) && e.key === "n") {
     e.preventDefault();

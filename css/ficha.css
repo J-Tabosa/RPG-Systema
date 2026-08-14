@@ -350,3 +350,66 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── PASTAS DE MAGIA ─────────────────────────────────────────────────────────── */
+.spell-folder-group {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card2);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.spell-folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--card);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.spell-folder-header:hover {
+  background: rgba(200, 168, 107, 0.08);
+}
+
+.spell-folder-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.spell-folder-icon {
+  font-size: 15px;
+  color: var(--gold);
+}
+
+.spell-count-badge {
+  font-size: 10px;
+  background: var(--border);
+  color: var(--text);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.folder-arrow {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.spell-folder-content {
+  display: none;
+  padding: 8px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.spell-folder-group.open .spell-folder-content {
+  display: flex;
+}
