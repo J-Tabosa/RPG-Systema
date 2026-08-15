@@ -175,33 +175,45 @@ body {
   gap: 12px;
 }
 
+/* ── AJUSTE DE ADAPTAÇÃO DINÂMICA DA ARTE CORPORAL ───────────────────────── */
 .full-body-wrapper {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
 }
 
 .full-body-preview {
-  width: 100%;
-  aspect-ratio: 3 / 4; /* Força a proporção "em pé" (vertical de retrato) */
-  max-height: 400px;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  max-height: 500px; /* Limite de altura máxima para imagens verticais muito longas não quebrarem a página */
+  border: 1px solid var(--border);
   border-radius: 6px;
-  border: 2px dashed var(--border);
   background: var(--card2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .full-body-img-render {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Garante o preenchimento sem distorcer */
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain; /* Garante que a imagem mantenha suas proporções originais */
 }
 
 .upload-placeholder {
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  color: var(--muted);
+  gap: 8px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
 }
 
 .upload-placeholder i {
@@ -460,4 +472,43 @@ body {
 .editor-dynamic-sections {
   display: flex;
   flex-direction: column;
+}
+
+/* ── ARTE CORPORAL E DESCRIÇÃO LADO A LADO ────────────────────────────────── */
+.appearance-horizontal-layout {
+  display: flex;
+  flex-direction: row; /* Coloca os elementos lado a lado */
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.appearance-horizontal-layout .full-body-wrapper {
+  flex: 0 0 auto; /* Mantém o tamanho adaptável da imagem */
+  max-width: 45%;  /* Ocupa até 45% da largura da seção */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.appearance-horizontal-layout .desc-visual-field {
+  flex: 1; /* Ocupa todo o espaço restante do lado direito */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.appearance-horizontal-layout .desc-visual-field textarea {
+  min-height: 220px; /* Garante altura suficiente para a descrição */
+}
+
+/* Responsividade: Volta a ficar um embaixo do outro em telas menores (celular/tablet) */
+@media (max-width: 768px) {
+  .appearance-horizontal-layout {
+    flex-direction: column;
+  }
+  .appearance-horizontal-layout .full-body-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
 }

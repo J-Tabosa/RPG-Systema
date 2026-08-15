@@ -871,26 +871,30 @@ async function renderEditor() {
     </div>`;
 
   // Seção: Aparência
-  sectionMap["aparencia"] = `
-    <div class="sec visual-section">
-      <div class="sec-head"><div class="sec-title"><i class="ti ti-photo sec-icon"></i><h2>Aparência &amp; Arte Corporal</h2></div></div>
-      <div class="appearance-vertical-layout">
-        <div class="full-body-wrapper">
-          <div class="full-body-preview" id="editorFullBodyPreview">
-            ${fullBodyImg ? `<img src="${fullBodyImg}" class="full-body-img-render">` : '<div class="upload-placeholder"><i class="ti ti-photo"></i><div>Adicione a Arte de Corpo Inteiro</div></div>'}
-          </div>
-          <div class="full-body-actions print-hidden" style="display:flex; gap:6px; margin-top:8px; justify-content:center;">
-            <button class="btn xs" onclick="document.getElementById('fullBodyFileInput').click()"><i class="ti ti-upload"></i> Subir Arte</button>
-            ${fullBodyImg ? `<button class="btn xs danger" onclick="removeFullBody()"><i class="ti ti-trash"></i></button>` : ""}
-          </div>
-          <input type="file" id="fullBodyFileInput" accept="image/*" style="display:none;" onchange="uploadFullBody(event)">
-        </div>
-        <div class="form-field desc-visual-field">
-          <label class="field-label">Descrição Visual Detalhada</label>
-          <textarea class="textarea-fixed" onchange="setField('appearanceDesc',this.value)">${f.appearanceDesc || ""}</textarea>
-        </div>
+// Seção: Aparência
+sectionMap["aparencia"] = `
+<div class="sec visual-section">
+  <div class="sec-head">
+    <div class="sec-title"><i class="ti ti-photo sec-icon"></i><h2>Aparência &amp; Arte Corporal</h2></div>
+  </div>
+  <div class="appearance-horizontal-layout">
+    <div class="full-body-wrapper">
+      <div class="full-body-preview" id="editorFullBodyPreview">
+        ${fullBodyImg ? `<img src="${fullBodyImg}" class="full-body-img-render">` : '<div class="upload-placeholder"><i class="ti ti-photo" style="font-size:32px;"></i><div>Adicione a Arte de Corpo Inteiro</div></div>'}
       </div>
-    </div>`;
+      <div class="full-body-actions print-hidden" style="display:flex; gap:6px; margin-top:8px; justify-content:center;">
+        <button class="btn xs" onclick="document.getElementById('fullBodyFileInput').click()"><i class="ti ti-upload"></i> Subir Arte</button>
+        ${fullBodyImg ? `<button class="btn xs danger" onclick="removeFullBody()"><i class="ti ti-trash"></i></button>` : ""}
+      </div>
+      <input type="file" id="fullBodyFileInput" accept="image/*" style="display:none;" onchange="uploadFullBody(event)">
+    </div>
+    
+    <div class="form-field desc-visual-field">
+      <label class="field-label">Descrição Visual Detalhada</label>
+      <textarea class="textarea-fixed" onchange="setField('appearanceDesc',this.value)">${f.appearanceDesc || ""}</textarea>
+    </div>
+  </div>
+</div>`;
 
   // Seção: Personalidade, História e Notas
   sectionMap["personalidade"] = `
