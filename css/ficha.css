@@ -413,3 +413,51 @@ body {
 .spell-folder-group.open .spell-folder-content {
   display: flex;
 }
+/* ── GRUPOS DE PODERES ────────────────────────────────────────────────── */
+.powers-group-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  margin: 12px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.powers-group-title:first-child {
+  margin-top: 0;
+}
+
+/* ── MODAL E CONTROLES DE REORDENAÇÃO DE SEÇÕES ───────────────────────────── */
+.section-reorder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.section-reorder-title {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-reorder-btns {
+  display: flex;
+  gap: 4px;
+}
+
+/* Transições suaves ao reordenar seções */
+.editor-dynamic-sections {
+  display: flex;
+  flex-direction: column;
+}

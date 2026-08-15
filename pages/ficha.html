@@ -96,6 +96,7 @@
   </div>
 </div>
 
+<!-- MODAL PRESET -->
 <div class="modal-overlay" id="mPreset" style="display:none"><div class="modal">
   <h3 id="mPresetTitle">Configuração da Campanha</h3>
   <div class="form-field">
@@ -108,6 +109,7 @@
   </div>
 </div></div>
 
+<!-- MODAL ATRIBUTO -->
 <div class="modal-overlay" id="mAttr" style="display:none"><div class="modal">
   <h3 id="mAttrTitle">Adicionar Atributo</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="aName" placeholder="Ex: Força, Poder..."></div>
@@ -116,9 +118,18 @@
   <div class="modal-actions"><button class="btn" onclick="closeM('mAttr')">Cancelar</button><button class="btn primary" onclick="confirmAttr()">Salvar</button></div>
 </div></div>
 
+<!-- MODAL PODERES (ATUALIZADO COM TIPO DE PODER) -->
 <div class="modal-overlay" id="mHabil" style="display:none"><div class="modal" style="max-width:480px">
   <h3 id="mHabilTitle">Adicionar Poder</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="hName" placeholder="Ex: Ataque Furtivo..."></div>
+  <div class="form-field">
+    <label>Tipo de Poder</label>
+    <select id="hCategory">
+      <option value="classe">Poder de Classe</option>
+      <option value="raca">Poder de Raça</option>
+      <option value="adicional">Poder Adicional</option>
+    </select>
+  </div>
   <div style="display:flex;gap:8px">
     <div class="form-field" style="flex:1"><label>Usos (0=ilimitado)</label><input type="number" id="hUses" value="1" min="0" max="99"></div>
     <div class="form-field" style="flex:1"><label>Nível Desbloqueio</label><input type="number" id="hLevel" value="1" min="1" max="20"></div>
@@ -127,11 +138,12 @@
   <div class="modal-actions"><button class="btn" onclick="closeM('mHabil')">Cancelar</button><button class="btn primary" onclick="confirmHabil()">Salvar</button></div>
 </div></div>
 
+<!-- MODAL MAGIA -->
 <div class="modal-overlay" id="mSpell" style="display:none"><div class="modal" style="max-width:480px">
   <h3 id="mSpellTitle">Adicionar Magia</h3>
   <div style="display:flex;gap:8px">
     <div class="form-field" style="flex:1"><label>Nome</label><input type="text" id="spName"></div>
-    <div class="form-field" style="width:72px"><label>Nível</label><input type="number" id="spLevel" value="1" min="0" max="9"></div>
+    <div class="form-field" style="width:84px"><label>Nível (0-9)</label><input type="number" id="spLevel" value="0" min="0" max="9"></div>
   </div>
   <div style="display:flex;gap:8px">
     <div class="form-field" style="flex:1"><label>Escola</label><input type="text" id="spSchool" placeholder="Evocação..."></div>
@@ -146,6 +158,7 @@
   <div class="modal-actions"><button class="btn" onclick="closeM('mSpell')">Cancelar</button><button class="btn primary" onclick="confirmSpell()">Salvar</button></div>
 </div></div>
 
+<!-- MODAL EQUIPAMENTO -->
 <div class="modal-overlay" id="mEquip" style="display:none"><div class="modal" style="max-width:480px">
   <h3 id="mEquipTitle">Adicionar Item</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="eqName"></div>
@@ -160,13 +173,15 @@
   <div class="modal-actions"><button class="btn" onclick="closeM('mEquip')">Cancelar</button><button class="btn primary" onclick="confirmEquip()">Salvar</button></div>
 </div></div>
 
+<!-- MODAL SKILL -->
 <div class="modal-overlay" id="mSkill" style="display:none"><div class="modal">
-  <h3>Adicionar Habilidade</h3>
+  <h3>Adicionar Habilidade / Perícia</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="skName"></div>
   <div class="form-field"><label>Atributo Base</label><select id="skAttr"></select></div>
   <div class="modal-actions"><button class="btn" onclick="closeM('mSkill')">Cancelar</button><button class="btn primary" onclick="confirmSkill()">Adicionar</button></div>
 </div></div>
 
+<!-- MODAL COMBATE -->
 <div class="modal-overlay" id="mCombat" style="display:none"><div class="modal">
   <h3>Adicionar Estatística</h3>
   <div class="form-field"><label>Nome</label><input type="text" id="cbName"></div>
@@ -174,7 +189,7 @@
   <div class="modal-actions"><button class="btn" onclick="closeM('mCombat')">Cancelar</button><button class="btn primary" onclick="confirmCombat()">Adicionar</button></div>
 </div></div>
 
-<!-- Modal de Confirmação para Deletar Magia -->
+<!-- MODAL CONFIRMAÇÃO DE DELEÇÃO DE MAGIA -->
 <div class="modal-overlay" id="mConfirmDeleteSpell" style="display:none">
   <div class="modal" style="max-width:380px">
     <h3>Confirmar Exclusão</h3>
@@ -188,27 +203,17 @@
   </div>
 </div>
 
-<!-- Modal de Adicionar/Editar Magia atualizado com min="0" no input de Nível -->
-<div class="modal-overlay" id="mSpell" style="display:none">
-  <div class="modal" style="max-width:480px">
-    <h3 id="mSpellTitle">Adicionar Magia</h3>
-    <div style="display:flex;gap:8px">
-      <div class="form-field" style="flex:1"><label>Nome</label><input type="text" id="spName"></div>
-      <div class="form-field" style="width:84px"><label>Nível (0-9)</label><input type="number" id="spLevel" value="0" min="0" max="9"></div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <div class="form-field" style="flex:1"><label>Escola</label><input type="text" id="spSchool" placeholder="Evocação..."></div>
-      <div class="form-field" style="flex:1"><label>Conjuração</label><input type="text" id="spCast" placeholder="1 ação..."></div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <div class="form-field" style="flex:1"><label>Alcance</label><input type="text" id="spRange" placeholder="18m..."></div>
-      <div class="form-field" style="flex:1"><label>Área de Efeito</label><input type="text" id="spAoE" placeholder="Cone de 4.5m..."></div>
-    </div>
-    <div class="form-field"><label>Duração</label><input type="text" id="spDuration" placeholder="Instantâneo..."></div>
-    <div class="form-field"><label>Descrição</label><textarea id="spDesc" style="min-height:80px"></textarea></div>
+<!-- NOVO: MODAL DE REORDENAÇÃO DE CAMPOS -->
+<div class="modal-overlay" id="mReorder" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <h3>Organizar Campos da Ficha</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">
+      Ajuste a ordem em que os campos aparecem na tela (o cabeçalho permanece no topo).
+    </p>
+    <div id="reorderList" style="max-height:300px; overflow-y:auto; margin-bottom:12px;"></div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeM('mSpell')">Cancelar</button>
-      <button class="btn primary" onclick="confirmSpell()">Salvar</button>
+      <button class="btn text" onclick="resetSectionOrder()">Restaurar Padrão</button>
+      <button class="btn primary" onclick="closeM('mReorder')">Concluir</button>
     </div>
   </div>
 </div>
