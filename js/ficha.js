@@ -726,7 +726,7 @@ async function renderEditor() {
       </div>
     </div>`;
 
-  // Seção: Mana (Pontos/Slots)
+  // Seção: Mana (Pontos/Slots) - Preenchimento da direita para a esquerda
   sectionMap["mana"] = `
     <div class="sec">
       <div class="sec-head"><div class="sec-title"><i class="ti ti-wand sec-icon"></i><h2>Mana / Espaços de Magia</h2></div></div>
@@ -735,7 +735,10 @@ async function renderEditor() {
         <div class="spell-level-row">
           <span class="slot-lbl">Círculo ${sl.level}</span>
           <input class="slot-num" type="number" value="${sl.total}" min="0" max="9" onchange="setSlotTotal(${i},this.value)">
-          <div class="spell-dots">${Array.from({ length: sl.total }, (_, k) => `<div class="spell-dot ${k < sl.used ? "used" : "avail"}" onclick="toggleSlot(${i},${k})"></div>`).join("")}</div>
+          <div class="spell-dots">${Array.from({ length: sl.total }, (_, k) => {
+            const isUsed = k >= (sl.total - sl.used);
+            return `<div class="spell-dot ${isUsed ? "used" : "avail"}" onclick="toggleSlot(${i},${k})"></div>`;
+          }).join("")}</div>
         </div>`).join("")}
     </div>`;
 
@@ -801,7 +804,7 @@ async function renderEditor() {
       ${spellsHtml}
     </div>`;
 
-  // Seção: PODERES (SEPARADOS EM PODERES DE CLASSE, RAÇA E ADICIONAIS)
+  // Seção: PODERES (SEPARADOS EM PODERES DE CLASSE, SUBCLASSE, RAÇA E ADICIONAIS)
   const renderPowerCategory = (catType, title, icon) => {
     const powers = (f.habilidades || [])
       .map((h, i) => ({ ...h, originalIndex: i }))
@@ -838,6 +841,7 @@ async function renderEditor() {
         <button class="btn xs primary" onclick="openAddHabil()"><i class="ti ti-plus"></i> Adicionar Poder</button>
       </div>
       ${renderPowerCategory("classe", "Poderes de Classe", "ti-shield")}
+      ${renderPowerCategory("subclasse", "Poderes de Subclasse", "ti-git-branch")}
       ${renderPowerCategory("raca", "Poderes de Raça", "ti-dna")}
       ${renderPowerCategory("adicional", "Poderes Adicionais", "ti-star")}
     </div>`;
@@ -1168,7 +1172,12 @@ function setSlotTotal(idx, v) {
 function toggleSlot(si, di) {
   upd((f) => {
     const sl = f.spellSlots[si];
-    sl.used = di < sl.used ? di : di + 1;
+    const clickedFromRightIndex = sl.total - di;
+    if (sl.used === clickedFromRightIndex) {
+      sl.used = clickedFromRightIndex - 1;
+    } else {
+      sl.used = clickedFromRightIndex;
+    }
   });
   renderEditor();
 }
