@@ -6,7 +6,8 @@
     busca: '',
     filtro: 'todos',
     itens: [],
-    magias: []
+    magias: [],
+    categorias: []
   };
 
   function escaparHTML(valor = '') {
@@ -81,7 +82,7 @@
       .catalog-pick-source{font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
       .catalog-picker-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:38px 12px}
       .catalog-ficha-nav{display:inline-flex}
-      @media(max-width:760px){.catalog-picker-list{grid-template-columns:1fr}.catalog-picker-toolbar{grid-template-columns:1fr}.catalog-picker-modal{width:96vw}.catalog-origin-chip{display:none}}
+      @media(max-width:760px){.catalog-picker-list{grid-template-columns:1fr}.catalog-picker-toolbar{grid-template-columns:1fr}.catalog-picker-modal{width:96vw}.catalog-origin-chip{display:none}.catalog-import-btn{white-space:normal;max-width:100%;line-height:1.15}}
     `;
     document.head.appendChild(style);
   }
@@ -126,12 +127,14 @@
   async function carregarCatalogos() {
     if (!garantirCatalogo()) return;
     try {
-      const [itens, magias] = await Promise.all([
+      const [itens, magias, categorias] = await Promise.all([
         RPGCatalogo.getItens(),
-        RPGCatalogo.getMagias()
+        RPGCatalogo.getMagias(),
+        RPGCatalogo.getItemCategories()
       ]);
       state.itens = itens;
       state.magias = magias;
+      state.categorias = categorias;
     } catch (erro) {
       console.error('Erro ao carregar glossários na ficha:', erro);
       avisar('Erro ao carregar os glossários.');
@@ -152,6 +155,8 @@
   }
 
   function labelCategoriaItem(cat) {
+    const registro = state.categorias.find(c => c.id === cat);
+    if (registro) return registro.plural || registro.label || cat;
     return ({
       arma: 'Armas', armadura: 'Armaduras', equipamento: 'Equipamentos',
       utilizavel: 'Objetos utilizáveis', magico: 'Itens mágicos'
@@ -397,6 +402,7 @@
   }
 
   function injetarNavegacao() {
+    if (window.RPGNavigation) return;
     const headerActions = document.querySelector('.header-actions');
     const themeWrap = document.getElementById('themeMenuWrap');
     if (headerActions && themeWrap && !headerActions.querySelector('[data-catalog-nav]')) {

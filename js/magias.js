@@ -1,5 +1,7 @@
 let MAGIAS = [];
+let ESCOLAS = [];
 let magiaEditandoId = null;
+let magiaEditandoBase = false;
 let dark = localStorage.getItem('rpg_theme') !== 'light';
 
 const SCHOOL_COLORS = {
@@ -35,11 +37,21 @@ function nivelLabel(nivel) { return Number(nivel) === 0 ? 'Truque' : `${nivel}º
 function areaLabel(forma) {
   return { nenhuma: 'Sem área', esfera: 'Esfera', cone: 'Cone', cubo: 'Cubo', cilindro: 'Cilindro', linha: 'Linha', emanacao: 'Emanação', quadrado: 'Quadrado' }[forma] || forma || 'Sem área';
 }
-function schoolColor(escola) { return SCHOOL_COLORS[escola] || '#9d76cf'; }
+function schoolColor(escola) {
+  return ESCOLAS.find(e => e.label === escola)?.color || SCHOOL_COLORS[escola] || '#9d76cf';
+}
+function schoolIcon(escola) {
+  return ESCOLAS.find(e => e.label === escola)?.icon || 'ti-wand';
+}
 
 async function carregarMagias() {
   try {
-    MAGIAS = await RPGCatalogo.getMagias();
+    const [magias, escolas] = await Promise.all([
+      RPGCatalogo.getMagias(),
+      RPGCatalogo.getSpellSchools()
+    ]);
+    MAGIAS = magias;
+    ESCOLAS = escolas;
     preencherEscolas();
     atualizarEstatisticas();
     filtrarMagias();
@@ -51,10 +63,23 @@ async function carregarMagias() {
 
 function preencherEscolas() {
   const select = document.getElementById('schoolFilter');
-  const atual = select.value;
-  const escolas = [...new Set(MAGIAS.map(m => m.escola).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
-  select.innerHTML = '<option value="todos">Todas</option>' + escolas.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
-  if ([...select.options].some(o => o.value === atual)) select.value = atual;
+  const editor = document.getElementById('spEdEscola');
+  const atual = select?.value || 'todos';
+  const labels = [...new Set([
+    ...ESCOLAS.map(e => e.label),
+    ...MAGIAS.map(m => m.escola).filter(Boolean)
+  ])].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+  if (select) {
+    select.innerHTML = '<option value="todos">Todas</option>' + labels.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
+    if ([...select.options].some(o => o.value === atual)) select.value = atual;
+  }
+
+  if (editor) {
+    const atualEditor = editor.value;
+    editor.innerHTML = labels.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
+    if ([...editor.options].some(o => o.value === atualEditor)) editor.value = atualEditor;
+  }
 }
 
 function atualizarEstatisticas() {
@@ -112,7 +137,11 @@ function renderizarMagias(lista) {
     const area = RPGCatalogo.formatArea(magia.area);
     const concentration = magia.duracao?.concentracao ? '<span class="catalog-pill accent"><i class="ti ti-focus-2"></i> Concentração</span>' : '';
     const ritual = magia.ritual ? '<span class="catalog-pill"><i class="ti ti-book"></i> Ritual</span>' : '';
-    const source = magia.custom ? '<span class="catalog-origin custom">Personalizada</span>' : '<span class="catalog-origin">Base</span>';
+    const source = magia.baseOverride
+      ? '<span class="catalog-origin custom">Base editada</span>'
+      : magia.custom
+        ? '<span class="catalog-origin custom">Personalizada</span>'
+        : '<span class="catalog-origin">Base</span>';
     return `
       <article class="spell-card" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
         <div class="spell-card-head">
@@ -157,11 +186,11 @@ function abrirDetalhes(id) {
 
   content.innerHTML = `
     <div class="item-detail-hero spell-detail-hero" style="--rarity-color:${cor}">
-      <div class="item-detail-icon"><i class="ti ti-sparkles"></i></div>
+      <div class="item-detail-icon"><i class="ti ${schoolIcon(magia.escola)}"></i></div>
       <div class="item-detail-heading">
         <h2 id="modalSpellName">${escaparHTML(magia.nome)}</h2>
         <div class="item-detail-subtitle">${escaparHTML(nivelLabel(magia.nivel))} · ${escaparHTML(magia.escola || 'Sem escola')} · ${magia.ritual ? 'Ritual' : 'Não ritual'}</div>
-        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.custom ? 'Personalizada' : 'Base do sistema'}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
+        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.baseOverride ? 'Base editada' : (magia.custom ? 'Personalizada' : 'Base do sistema')}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
       </div>
     </div>
     <div class="item-detail-body">
@@ -192,7 +221,11 @@ function abrirDetalhes(id) {
       ${magia.escalonamento ? `<section class="detail-section"><h3><i class="ti ti-trending-up"></i> Em níveis superiores</h3><p>${escaparHTML(magia.escalonamento)}</p></section>` : ''}
       <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Origem e classes</h3><p><strong>${escaparHTML(magia.origem || '—')}</strong><br>${escaparHTML((magia.classes || []).join(', ') || 'Classes não especificadas')}</p></section>
       <div class="catalog-detail-actions no-print">
-        ${magia.custom ? `<button class="btn" onclick="editarMagia('${escaparHTML(magia.id)}')"><i class="ti ti-edit"></i> Editar</button><button class="btn danger" onclick="excluirMagia('${escaparHTML(magia.id)}')"><i class="ti ti-trash"></i> Excluir</button>` : '<span class="catalog-readonly"><i class="ti ti-lock"></i> Registro-base protegido contra edição</span>'}
+        <button class="btn" onclick="editarMagia('${escaparHTML(magia.id)}')"><i class="ti ti-edit"></i> Editar</button>
+        ${magia.baseOverride
+          ? `<button class="btn danger" onclick="excluirMagia('${escaparHTML(magia.id)}')"><i class="ti ti-restore"></i> Restaurar original</button>`
+          : (magia.custom ? `<button class="btn danger" onclick="excluirMagia('${escaparHTML(magia.id)}')"><i class="ti ti-trash"></i> Excluir</button>` : '')
+        }
       </div>
     </div>`;
 
@@ -211,11 +244,13 @@ function setValue(id, value) { const el = document.getElementById(id); if (el) e
 function setChecked(id, value) { const el = document.getElementById(id); if (el) el.checked = Boolean(value); }
 
 function abrirEditorMagia(magia = null) {
-  magiaEditandoId = magia?.custom ? magia.id : null;
+  magiaEditandoId = magia?.id || null;
+  magiaEditandoBase = Boolean(magia && !magia.custom);
   document.getElementById('spellEditorTitle').textContent = magia ? 'Editar Magia' : 'Nova Magia';
   setValue('spEdNome', magia?.nome || '');
   setValue('spEdNivel', magia?.nivel ?? 0);
-  setValue('spEdEscola', magia?.escola || 'Evocação');
+  preencherEscolas();
+  setValue('spEdEscola', magia?.escola || ESCOLAS[0]?.label || 'Evocação');
   setValue('spEdClasses', (magia?.classes || []).join(', '));
   setValue('spEdOrigem', magia?.origem || 'Personalizado');
   setValue('spEdTags', (magia?.tags || []).join(', '));
@@ -268,7 +303,7 @@ function abrirEditorMagia(magia = null) {
 
 function editarMagia(id) {
   const magia = MAGIAS.find(m => m.id === id);
-  if (!magia?.custom) return;
+  if (!magia) return;
   fecharDetalhes();
   abrirEditorMagia(magia);
 }
@@ -277,6 +312,7 @@ function fecharEditorMagia() {
   document.getElementById('spellEditorModal').style.display = 'none';
   document.body.style.overflow = '';
   magiaEditandoId = null;
+  magiaEditandoBase = false;
 }
 function fecharEditorNoFundo(event) { if (event.target.id === 'spellEditorModal') fecharEditorMagia(); }
 
@@ -378,6 +414,8 @@ function lerMagiaEditor() {
 async function salvarMagiaEditor() {
   const magia = lerMagiaEditor();
   if (!magia.nome) { document.getElementById('spEdNome').focus(); return; }
+  const anterior = MAGIAS.find(m => m.id === magiaEditandoId);
+  magia.baseOverride = magiaEditandoBase || Boolean(anterior?.baseOverride);
   RPGCatalogo.saveSpell(magia);
   fecharEditorMagia();
   await carregarMagias();
@@ -386,7 +424,11 @@ async function salvarMagiaEditor() {
 async function excluirMagia(id) {
   const magia = MAGIAS.find(m => m.id === id);
   if (!magia?.custom) return;
-  if (!confirm(`Excluir “${magia.nome}” do glossário?`)) return;
+  const restaurar = Boolean(magia.baseOverride);
+  const mensagem = restaurar
+    ? `Restaurar “${magia.nome}” para a versão original do sistema?`
+    : `Excluir “${magia.nome}” do glossário?`;
+  if (!confirm(mensagem)) return;
   RPGCatalogo.removeSpell(id);
   fecharDetalhes();
   await carregarMagias();

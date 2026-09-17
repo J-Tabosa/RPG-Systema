@@ -1,4 +1,5 @@
 let ITENS = [];
+let CATEGORIAS = [];
 let itemEditandoId = null;
 let modoMestre = localStorage.getItem('rpg_items_master_mode') === 'true';
 let dark = localStorage.getItem('rpg_theme') !== 'light';
@@ -84,7 +85,13 @@ function alternarModoMestre(ativo) {
 
 async function carregarItens() {
   try {
-    ITENS = await RPGCatalogo.getItens();
+    const [itens, categorias] = await Promise.all([
+      RPGCatalogo.getItens(),
+      RPGCatalogo.getItemCategories()
+    ]);
+    ITENS = itens;
+    CATEGORIAS = categorias;
+    preencherCategorias();
     atualizarEstatisticas();
     filtrarItens();
   } catch (error) {
@@ -103,6 +110,42 @@ function selecionarCategoria(categoria) {
   document.getElementById('categoryFilter').value = categoria;
   filtrarItens();
 }
+function preencherCategorias() {
+  const extras = [...new Set(ITENS.map(i => i.categoria).filter(Boolean))]
+    .filter(id => !CATEGORIAS.some(c => c.id === id))
+    .map(id => ({ id, label: CATEGORY_LABELS[id] || id, plural: CATEGORY_LABELS[id] || id, icon: CATEGORY_ICONS[id] || 'ti-box' }));
+  const todas = [...CATEGORIAS, ...extras];
+
+  todas.forEach(cat => {
+    CATEGORY_LABELS[cat.id] = cat.label || cat.id;
+    CATEGORY_ICONS[cat.id] = cat.icon || 'ti-box';
+  });
+
+  const filter = document.getElementById('categoryFilter');
+  if (filter) {
+    const atual = filter.value || 'todos';
+    filter.innerHTML = '<option value="todos">Todas</option>' + todas.map(cat =>
+      `<option value="${escaparHTML(cat.id)}">${escaparHTML(cat.plural || cat.label || cat.id)}</option>`
+    ).join('');
+    if ([...filter.options].some(o => o.value === atual)) filter.value = atual;
+  }
+
+  const editor = document.getElementById('edCategoria');
+  if (editor) {
+    const atual = editor.value;
+    editor.innerHTML = todas.map(cat =>
+      `<option value="${escaparHTML(cat.id)}">${escaparHTML(cat.label || cat.id)}</option>`
+    ).join('');
+    if ([...editor.options].some(o => o.value === atual)) editor.value = atual;
+  }
+
+  const strip = document.querySelector('.catalog-category-strip');
+  if (strip) {
+    strip.innerHTML = '<button onclick="selecionarCategoria(\'todos\')"><i class="ti ti-layout-grid"></i> Todos</button>' +
+      todas.map(cat => `<button onclick="selecionarCategoria('${escaparHTML(cat.id)}')"><i class="ti ${escaparHTML(cat.icon || 'ti-box')}"></i> ${escaparHTML(cat.plural || cat.label || cat.id)}</button>`).join('');
+  }
+}
+
 
 function filtrarItens() {
   const busca = normalizarTexto(document.getElementById('itemSearch')?.value || '');

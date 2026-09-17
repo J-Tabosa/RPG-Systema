@@ -1,12 +1,37 @@
 (() => {
   const ITEM_KEY = 'rpg_catalog_items_custom_v1';
   const SPELL_KEY = 'rpg_catalog_spells_custom_v1';
+  const SPELL_SCHOOL_KEY = 'rpg_catalog_spell_schools_v1';
+  const ITEM_CATEGORY_KEY = 'rpg_catalog_item_categories_v1';
+
   const scriptUrl = document.currentScript?.src || window.location.href;
   const itemUrl = new URL('../data/itens.json', scriptUrl).href;
   const spellUrl = new URL('../data/magias.json', scriptUrl).href;
 
+  const BASE_SCHOOLS = [
+    { id:'abjuracao', label:'Abjuração', icon:'ti-shield', color:'#6f8fb3' },
+    { id:'adivinhacao', label:'Adivinhação', icon:'ti-eye', color:'#c6a15b' },
+    { id:'conjuracao', label:'Conjuração', icon:'ti-portal', color:'#65a67a' },
+    { id:'encantamento', label:'Encantamento', icon:'ti-heart', color:'#c978b9' },
+    { id:'evocacao', label:'Evocação', icon:'ti-flame', color:'#d46b55' },
+    { id:'ilusao', label:'Ilusão', icon:'ti-mask', color:'#8f78c9' },
+    { id:'necromancia', label:'Necromancia', icon:'ti-skull', color:'#758b68' },
+    { id:'transmutacao', label:'Transmutação', icon:'ti-transform', color:'#c18b54' }
+  ];
+
+  const BASE_ITEM_CATEGORIES = [
+    { id:'arma', label:'Arma', plural:'Armas', icon:'ti-sword' },
+    { id:'armadura', label:'Armadura', plural:'Armaduras', icon:'ti-shield' },
+    { id:'equipamento', label:'Equipamento', plural:'Equipamentos', icon:'ti-tool' },
+    { id:'utilizavel', label:'Utilizável', plural:'Utilizáveis', icon:'ti-flask' },
+    { id:'magico', label:'Item mágico', plural:'Itens mágicos', icon:'ti-wand' }
+  ];
+
   const clone = value => JSON.parse(JSON.stringify(value));
   const uid = prefix => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  const slug = value => String(value || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
   function readLocal(key) {
     try {
@@ -30,8 +55,25 @@
 
   function mergeCatalog(base, custom) {
     const map = new Map();
-    base.forEach(entry => map.set(entry.id, { ...clone(entry), custom: false }));
-    custom.forEach(entry => map.set(entry.id, { ...clone(entry), custom: true }));
+    const baseIds = new Set(base.map(entry => entry.id));
+    base.forEach(entry => map.set(entry.id, { ...clone(entry), custom: false, baseOverride: false }));
+    custom.forEach(entry => map.set(entry.id, {
+      ...clone(entry),
+      custom: true,
+      baseOverride: baseIds.has(entry.id) || Boolean(entry.baseOverride)
+    }));
+    return [...map.values()];
+  }
+
+  function mergeTaxonomy(base, custom) {
+    const map = new Map();
+    const baseIds = new Set(base.map(entry => entry.id));
+    base.forEach(entry => map.set(entry.id, { ...clone(entry), custom:false, baseOverride:false }));
+    custom.forEach(entry => map.set(entry.id, {
+      ...clone(entry),
+      custom:true,
+      baseOverride:baseIds.has(entry.id) || Boolean(entry.baseOverride)
+    }));
     return [...map.values()];
   }
 
@@ -43,6 +85,16 @@
   async function getMagias() {
     const [base, custom] = await Promise.all([readBase(spellUrl), Promise.resolve(readLocal(SPELL_KEY))]);
     return mergeCatalog(base, custom);
+  }
+
+  async function getSpellSchools() {
+    return mergeTaxonomy(BASE_SCHOOLS, readLocal(SPELL_SCHOOL_KEY))
+      .sort((a,b) => a.label.localeCompare(b.label, 'pt-BR'));
+  }
+
+  async function getItemCategories() {
+    return mergeTaxonomy(BASE_ITEM_CATEGORIES, readLocal(ITEM_CATEGORY_KEY))
+      .sort((a,b) => (a.plural || a.label).localeCompare((b.plural || b.label), 'pt-BR'));
   }
 
   function saveCustom(key, prefix, entry) {
@@ -61,6 +113,14 @@
     return clone(normalized);
   }
 
+  function saveTaxonomy(key, prefix, entry) {
+    const normalized = clone(entry);
+    normalized.label = String(normalized.label || '').trim();
+    if (!normalized.label) throw new Error('Nome obrigatório.');
+    normalized.id = normalized.id || slug(normalized.label) || uid(prefix);
+    return saveCustom(key, prefix, normalized);
+  }
+
   function removeCustom(key, id) {
     const list = readLocal(key);
     const next = list.filter(item => item.id !== id);
@@ -69,21 +129,15 @@
     return true;
   }
 
-  function saveItem(entry) {
-    return saveCustom(ITEM_KEY, 'item', entry);
-  }
+  function saveItem(entry) { return saveCustom(ITEM_KEY, 'item', entry); }
+  function saveSpell(entry) { return saveCustom(SPELL_KEY, 'magia', entry); }
+  function saveSpellSchool(entry) { return saveTaxonomy(SPELL_SCHOOL_KEY, 'escola', entry); }
+  function saveItemCategory(entry) { return saveTaxonomy(ITEM_CATEGORY_KEY, 'categoria', entry); }
 
-  function saveSpell(entry) {
-    return saveCustom(SPELL_KEY, 'magia', entry);
-  }
-
-  function removeItem(id) {
-    return removeCustom(ITEM_KEY, id);
-  }
-
-  function removeSpell(id) {
-    return removeCustom(SPELL_KEY, id);
-  }
+  function removeItem(id) { return removeCustom(ITEM_KEY, id); }
+  function removeSpell(id) { return removeCustom(SPELL_KEY, id); }
+  function removeSpellSchool(id) { return removeCustom(SPELL_SCHOOL_KEY, id); }
+  function removeItemCategory(id) { return removeCustom(ITEM_CATEGORY_KEY, id); }
 
   function formatRange(range = {}) {
     if (!range || range.tipo === 'pessoal') return 'Pessoal';
@@ -138,15 +192,21 @@
     clone,
     getItens,
     getMagias,
+    getSpellSchools,
+    getItemCategories,
     saveItem,
     saveSpell,
+    saveSpellSchool,
+    saveItemCategory,
     removeItem,
     removeSpell,
+    removeSpellSchool,
+    removeItemCategory,
     formatRange,
     formatArea,
     formatCasting,
     formatDuration,
     formatComponents,
-    keys: { ITEM_KEY, SPELL_KEY }
+    keys: { ITEM_KEY, SPELL_KEY, SPELL_SCHOOL_KEY, ITEM_CATEGORY_KEY }
   };
 })();

@@ -1,0 +1,159 @@
+.spell-view-toggle{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:3px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:6px;
+}
+.spell-view-toggle .btn{border-color:transparent;background:transparent}
+.spell-view-toggle .btn.active{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(200,168,107,.1);
+}
+
+.spells-list{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.spell-list-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:60px minmax(240px,1.65fr) minmax(120px,.65fr) minmax(150px,.85fr) minmax(150px,.9fr) minmax(130px,.72fr) 20px;
+  gap:12px;
+  align-items:center;
+  min-height:94px;
+  padding:11px 12px;
+  background:linear-gradient(180deg,var(--card),var(--surface));
+  border:1px solid var(--border);
+  border-left:3px solid var(--spell-color,var(--gold));
+  border-radius:8px;
+  cursor:pointer;
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.spell-list-row:hover{
+  transform:translateY(-1px);
+  border-color:var(--gold);
+  background:var(--card2);
+}
+.spell-list-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.spell-list-visual{
+  position:relative;
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--spell-color,var(--gold));
+  border-radius:10px;
+  color:var(--spell-color,var(--gold));
+  background:linear-gradient(145deg,var(--card2),var(--surface));
+}
+.spell-list-visual i{font-size:27px}
+.spell-list-visual span{
+  position:absolute;
+  right:-5px;
+  bottom:-5px;
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--spell-color,var(--gold));
+  border-radius:50%;
+  background:var(--card);
+  color:var(--spell-color,var(--gold));
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  font-weight:700;
+}
+
+.spell-list-main{min-width:0}
+.spell-list-title{display:flex;align-items:center;gap:7px;min-width:0;margin-bottom:3px;flex-wrap:wrap}
+.spell-list-main h3{
+  margin:0;
+  color:var(--gold2);
+  font-size:13px;
+  letter-spacing:.45px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.spell-school-chip{
+  border:1px solid var(--spell-color,var(--gold));
+  color:var(--spell-color,var(--gold));
+  border-radius:999px;
+  padding:1px 6px;
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.35px;
+  white-space:nowrap;
+}
+.spell-list-main p{
+  margin:0 0 5px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.25;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+.spell-list-tags{display:flex;gap:4px;flex-wrap:wrap}
+.spell-list-tags .item-tag,.spell-list-tags .catalog-pill{font-size:8px;padding:1px 5px}
+
+.spell-list-col{min-width:0;display:flex;flex-direction:column;gap:2px}
+.spell-list-col small{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.9px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.spell-list-col strong{
+  color:var(--text);
+  font-size:11px;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.spell-list-col span{
+  color:var(--muted);
+  font-size:10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.spell-list-arrow{color:var(--muted);font-size:17px;transition:transform .12s ease,color .12s ease}
+.spell-list-row:hover .spell-list-arrow{transform:translateX(2px);color:var(--gold)}
+
+@media(max-width:1120px){
+  .spell-list-row{
+    grid-template-columns:56px minmax(230px,1.6fr) minmax(115px,.65fr) minmax(145px,.85fr) minmax(145px,.85fr) 20px;
+  }
+  .spell-list-source{display:none}
+}
+
+@media(max-width:760px){
+  .spell-view-toggle{order:8}
+  .spell-view-toggle .btn span{display:none}
+  .spell-view-toggle .btn{width:34px;height:30px;padding:0}
+  .spell-list-row{
+    grid-template-columns:52px minmax(0,1fr) 18px;
+    gap:9px;
+    min-height:82px;
+    padding:10px;
+  }
+  .spell-list-visual{width:46px;height:46px}
+  .spell-list-visual i{font-size:24px}
+  .spell-list-main{grid-column:2}
+  .spell-list-arrow{grid-column:3;grid-row:1}
+  .spell-list-col{display:none}
+  .spell-list-main p{-webkit-line-clamp:1}
+  .spell-list-title{gap:5px}
+  .spell-school-chip{font-size:7px}
+}

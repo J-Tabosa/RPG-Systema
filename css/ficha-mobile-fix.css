@@ -1,0 +1,140 @@
+@media (max-width: 640px){
+  html,body,#app,.workspace,.editor,.editor-dynamic-sections,.sec{
+    max-width:100%;
+    min-width:0;
+  }
+
+  body{overflow-x:hidden}
+
+  .workspace{
+    width:100%;
+    overflow-x:hidden;
+  }
+
+  .editor{
+    width:100%;
+    padding:12px 10px;
+    overflow-x:hidden;
+  }
+
+  .sec{
+    width:100%;
+    padding:11px 10px;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .sec-title{
+    flex:1 1 170px;
+    min-width:0;
+  }
+
+  .sec-title h2{
+    white-space:normal;
+    overflow-wrap:anywhere;
+    line-height:1.25;
+  }
+
+  .sec-head > div:last-child{
+    max-width:100%;
+    min-width:0;
+    flex:1 1 100%;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    flex-wrap:wrap !important;
+    gap:6px !important;
+  }
+
+  .sec-head > .btn{
+    flex:0 1 auto;
+  }
+
+  .sec-head .btn{
+    max-width:100%;
+  }
+
+  .catalog-import-btn{
+    flex:1 1 170px;
+    min-width:0;
+    white-space:normal;
+    line-height:1.15;
+  }
+
+  .spell-folder-group,
+  .spell-folder-header,
+  .spell-folder-content,
+  .spell-item,
+  .habil-item,
+  .equip-item{
+    min-width:0;
+    max-width:100%;
+  }
+
+  .spell-folder-header{
+    gap:8px;
+  }
+
+  .spell-folder-title{
+    min-width:0;
+    flex:1;
+  }
+
+  .spell-item,
+  .equip-item{
+    flex-wrap:wrap;
+  }
+
+  .spell-item-info,
+  .equip-main{
+    min-width:0;
+    flex:1 1 220px;
+  }
+
+  .spell-item-name,
+  .spell-item-meta,
+  .equip-name,
+  .equip-meta{
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+  .habil-head{
+    flex-wrap:wrap;
+  }
+
+  .habil-name{
+    min-width:0;
+    flex:1 1 160px;
+    overflow-wrap:anywhere;
+  }
+
+  .habil-badges{
+    max-width:100%;
+  }
+
+  .character-header-grid-compact{
+    max-width:100%;
+    min-width:0;
+    flex-wrap:wrap;
+  }
+
+  .character-header-grid-compact > *{
+    min-width:0;
+  }
+
+  .meta-grid{
+    min-width:0;
+    max-width:100%;
+  }
+
+  input,select,textarea,button{
+    max-width:100%;
+  }
+}
