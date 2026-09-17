@@ -15,10 +15,9 @@ function toggleTheme() {
   applyTheme();
 }
 
-// Inicializa o tema ao carregar
 applyTheme();
 
-// ── MOBILE MENU (Navegação Responsiva) ───────────────────────────────────────
+// ── MOBILE MENU ──────────────────────────────────────────────────────────────
 function toggleMobMenu() {
   document.getElementById('mobNav').classList.toggle('open');
 }
@@ -27,7 +26,6 @@ function closeMobMenu() {
   document.getElementById('mobNav').classList.remove('open');
 }
 
-// Fecha o menu móvel ao clicar fora dele
 document.addEventListener('click', e => {
   const nav = document.getElementById('mobNav');
   if (nav && nav.classList.contains('open') && !nav.contains(e.target) && !e.target.closest('.mob-menu-btn')) {
@@ -35,65 +33,92 @@ document.addEventListener('click', e => {
   }
 });
 
-// ── GLOSSÁRIO DE ITENS MÁGICOS ──────────────────────────────────────────────
-function adicionarAtalhosItensMagicos() {
+// ── GLOSSÁRIOS ───────────────────────────────────────────────────────────────
+function adicionarAtalhosGlossarios() {
   const desktopNav = document.querySelector('.nav-links');
-  if (desktopNav && !desktopNav.querySelector('[data-magic-items-link]')) {
+  if (desktopNav && !desktopNav.querySelector('[data-items-glossary-link]')) {
     desktopNav.insertAdjacentHTML('beforeend', `
-      <a href="./pages/itens.html" class="nav-link" data-magic-items-link style="text-decoration:none">
-        <i class="ti ti-gem"></i> Itens
+      <a href="./pages/itens.html" class="nav-link" data-items-glossary-link style="text-decoration:none">
+        <i class="ti ti-backpack"></i> Itens
+      </a>
+      <a href="./pages/magias.html" class="nav-link" data-spells-glossary-link style="text-decoration:none">
+        <i class="ti ti-sparkles"></i> Magias
       </a>
     `);
   }
 
   const mobileNav = document.getElementById('mobNav');
-  if (mobileNav && !mobileNav.querySelector('[data-magic-items-link]')) {
+  if (mobileNav && !mobileNav.querySelector('[data-items-glossary-link]')) {
     mobileNav.insertAdjacentHTML('beforeend', `
-      <a href="./pages/itens.html" class="nav-link" data-magic-items-link onclick="closeMobMenu()" style="text-decoration:none">
-        <i class="ti ti-gem"></i> Glossário de Itens Mágicos
+      <a href="./pages/itens.html" class="nav-link" data-items-glossary-link onclick="closeMobMenu()" style="text-decoration:none">
+        <i class="ti ti-backpack"></i> Glossário de Itens
+      </a>
+      <a href="./pages/magias.html" class="nav-link" data-spells-glossary-link onclick="closeMobMenu()" style="text-decoration:none">
+        <i class="ti ti-sparkles"></i> Glossário de Magias
+      </a>
+    `);
+  }
+
+  const playerGrid = document.querySelector('#modalPlayerContent .modal-links-grid');
+  if (playerGrid && !playerGrid.querySelector('[data-player-glossaries-card]')) {
+    playerGrid.insertAdjacentHTML('beforeend', `
+      <a href="./pages/itens.html" class="modal-link-card" data-player-glossaries-card>
+        <i class="ti ti-backpack"></i>
+        <div>
+          <h4>Glossário de Itens</h4>
+          <p>Consulte armas, armaduras, equipamentos, objetos utilizáveis e itens mágicos que podem ser importados para suas fichas.</p>
+        </div>
+      </a>
+      <a href="./pages/magias.html" class="modal-link-card" data-player-glossaries-card>
+        <i class="ti ti-sparkles"></i>
+        <div>
+          <h4>Glossário de Magias</h4>
+          <p>Consulte e crie magias com alcance, componentes, resolução e área de efeito estruturada, prontas para importar para a ficha.</p>
+        </div>
       </a>
     `);
   }
 
   const masterGrid = document.querySelector('.modal-links-grid.mestre');
-  if (masterGrid && !masterGrid.querySelector('[data-magic-items-card]')) {
+  if (masterGrid && !masterGrid.querySelector('[data-master-glossaries-card]')) {
     masterGrid.insertAdjacentHTML('beforeend', `
-      <a href="./pages/itens.html" class="modal-link-card" data-magic-items-card>
-        <i class="ti ti-gem"></i>
+      <a href="./pages/itens.html" class="modal-link-card" data-master-glossaries-card>
+        <i class="ti ti-backpack"></i>
         <div>
-          <h4>Glossário de Itens Mágicos</h4>
-          <p>Consulte relíquias, artefatos e objetos únicos da campanha, com filtros e informações reservadas ao mestre.</p>
+          <h4>Glossário de Itens</h4>
+          <p>Gerencie o acervo de armas, armaduras, equipamentos, consumíveis, itens mágicos e registros personalizados da campanha.</p>
+        </div>
+      </a>
+      <a href="./pages/magias.html" class="modal-link-card" data-master-glossaries-card>
+        <i class="ti ti-sparkles"></i>
+        <div>
+          <h4>Glossário de Magias</h4>
+          <p>Monte magias com dados mecânicos e geométricos separados, preparados para fichas e para uma futura projeção em mapa tático.</p>
         </div>
       </a>
     `);
   }
 
   const moduleCount = document.querySelector('.about-stats .stat-box .stat-num');
-  if (moduleCount && moduleCount.textContent.trim() === '6') {
-    moduleCount.textContent = '7';
-  }
+  if (moduleCount) moduleCount.textContent = '8';
 }
 
-// ── CHANGELOG TOGGLE (Expandir/Recolher Versões) ─────────────────────────────
+// ── CHANGELOG TOGGLE ─────────────────────────────────────────────────────────
 function toggleLog(header) {
   const item = header.parentElement;
   item.classList.toggle('open');
 }
 
-// ── CHANGELOG FILTER (Filtro por Categoria) ──────────────────────────────────
+// ── CHANGELOG FILTER ─────────────────────────────────────────────────────────
 function filterLogs(type, btn) {
-  // Remove classe ativa de todos os botões de filtro
   document.querySelectorAll('.update-filter-btn').forEach(b => b.classList.remove('active'));
-  // Ativa o botão clicado
   btn.classList.add('active');
-  
-  // Mostra ou oculta os itens de acordo com o tipo correspondente
   document.querySelectorAll('.changelog-item').forEach(item => {
     item.style.display = (type === 'all' || item.dataset.type === type) ? '' : 'none';
   });
 }
 
-// ── SCROLL REVEAL (Exposição ao Rolar a Página) ──────────────────────────────
+// ── SCROLL REVEAL ────────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -105,9 +130,8 @@ const observer = new IntersectionObserver(entries => {
   threshold: 0.08
 });
 
-// Vincula o observador aos elementos com a classe "reveal" após o carregamento
 document.addEventListener('DOMContentLoaded', () => {
-  adicionarAtalhosItensMagicos();
+  adicionarAtalhosGlossarios();
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
@@ -126,17 +150,16 @@ function openRoleModal(role) {
   }
 
   modal.classList.add('open');
-  document.body.style.overflow = 'hidden'; // Impede scroll atrás do modal
+  document.body.style.overflow = 'hidden';
 }
 
 function closeRoleModal() {
   const modal = document.getElementById('roleModal');
   modal.classList.remove('open');
-  document.body.style.overflow = ''; // Restaura scroll
+  document.body.style.overflow = '';
 }
 
 function closeRoleModalOnBackdrop(event) {
-  // Fecha o modal caso clique na área desfocada externa ao container principal
   if (event.target.id === 'roleModal') {
     closeRoleModal();
   }

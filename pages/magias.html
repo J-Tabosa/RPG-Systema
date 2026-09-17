@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Glossário de Magias — RPG System</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/magias.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+<div id="app">
+  <div class="header no-print">
+    <div class="header-brand">
+      <i class="ti ti-sparkles header-icon"></i>
+      <div>
+        <h1>Glossário de Magias</h1>
+        <div class="subtitle">Biblioteca estruturada para fichas e futuras simulações de batalha</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="itens.html" class="nav-link"><i class="ti ti-backpack"></i> Itens</a>
+      <a href="monstros.html" class="nav-link"><i class="ti ti-skull"></i> Monstros</a>
+      <a href="magias.html" class="nav-link active"><i class="ti ti-sparkles"></i> Magias</a>
+      <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+    </div>
+
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="itens.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-backpack"></i> Glossário de Itens</a>
+      <a href="monstros.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-skull"></i> Monstros</a>
+      <a href="magias.html" class="nav-link active" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Glossário de Magias</a>
+    </nav>
+  </div>
+
+  <main class="magic-items-page spells-page">
+    <section class="items-hero spells-hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><i class="ti ti-wand"></i> Grimório do Sistema</div>
+        <h2>Glossário de Magias</h2>
+        <p>Cada magia guarda seus dados narrativos e também sua geometria de combate: alcance, origem, forma, raio, comprimento, largura e altura. A estrutura já está pronta para uma futura projeção em mapa tático.</p>
+      </div>
+      <div class="hero-stats" aria-label="Resumo do glossário">
+        <div class="hero-stat"><span class="hero-stat-value" id="statTotal">0</span><span class="hero-stat-label">Magias</span></div>
+        <div class="hero-stat"><span class="hero-stat-value" id="statAreas">0</span><span class="hero-stat-label">Com área</span></div>
+        <div class="hero-stat"><span class="hero-stat-value" id="statCustom">0</span><span class="hero-stat-label">Personalizadas</span></div>
+      </div>
+    </section>
+
+    <section class="items-toolbar no-print">
+      <div class="search-box items-search">
+        <i class="ti ti-search"></i>
+        <input type="search" id="spellSearch" placeholder="Buscar magia, escola, classe, efeito..." autocomplete="off" oninput="filtrarMagias()">
+      </div>
+      <div class="filter-group"><label>Nível</label><select id="levelFilter" onchange="filtrarMagias()"><option value="todos">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option></select></div>
+      <div class="filter-group"><label>Escola</label><select id="schoolFilter" onchange="filtrarMagias()"><option value="todos">Todas</option></select></div>
+      <div class="filter-group"><label>Área</label><select id="areaFilter" onchange="filtrarMagias()"><option value="todos">Todas</option><option value="nenhuma">Sem área</option><option value="esfera">Esfera</option><option value="cone">Cone</option><option value="cubo">Cubo</option><option value="cilindro">Cilindro</option><option value="linha">Linha</option><option value="emanacao">Emanação</option><option value="quadrado">Quadrado</option></select></div>
+      <button class="btn sm" onclick="limparFiltros()"><i class="ti ti-filter-off"></i> Limpar</button>
+      <button class="btn sm primary" onclick="abrirEditorMagia()"><i class="ti ti-plus"></i> Nova Magia</button>
+    </section>
+
+    <section class="spell-geometry-note no-print">
+      <i class="ti ti-ruler-measure"></i>
+      <div><strong>Dados preparados para mapa tático.</strong><span> A interface ainda não desenha a área no campo de batalha, mas os valores geométricos já são armazenados separadamente para essa expansão.</span></div>
+    </section>
+
+    <div class="results-row"><div><span id="resultCount">0</span> magia(s) encontrada(s)</div><div id="activeFilterText">Exibindo todo o grimório</div></div>
+    <section class="spells-grid" id="spellsGrid" aria-live="polite"></section>
+    <div class="empty-state items-empty" id="spellsEmpty" style="display:none"><div class="big"><i class="ti ti-wand-off"></i></div><h3>Nenhuma magia encontrada</h3><p>Altere os filtros ou cadastre uma magia personalizada.</p></div>
+  </main>
+</div>
+
+<div class="modal-overlay item-modal-overlay" id="spellModal" style="display:none" onclick="fecharDetalhesNoFundo(event)">
+  <article class="modal item-modal spell-detail-modal" role="dialog" aria-modal="true" aria-labelledby="modalSpellName">
+    <button class="modal-close" onclick="fecharDetalhes()" aria-label="Fechar"><i class="ti ti-x"></i></button>
+    <div id="spellModalContent"></div>
+  </article>
+</div>
+
+<div class="modal-overlay" id="spellEditorModal" style="display:none" onclick="fecharEditorNoFundo(event)">
+  <div class="modal catalog-editor-modal spell-editor-modal">
+    <div class="catalog-editor-head">
+      <div><div class="eyebrow">Construtor de Magia</div><h3 id="spellEditorTitle">Nova Magia</h3></div>
+      <button class="modal-close static" onclick="fecharEditorMagia()"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="catalog-section-label">Identificação</div>
+    <div class="catalog-form-grid">
+      <div class="form-field span-2"><label>Nome</label><input id="spEdNome" type="text" placeholder="Ex: Lança de Tempestade"></div>
+      <div class="form-field"><label>Nível</label><select id="spEdNivel"><option value="0">0 — Truque</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option></select></div>
+      <div class="form-field"><label>Escola</label><select id="spEdEscola"><option>Abjuração</option><option>Adivinhação</option><option>Conjuração</option><option>Encantamento</option><option>Evocação</option><option>Ilusão</option><option>Necromancia</option><option>Transmutação</option><option>Universal</option></select></div>
+      <div class="form-field"><label>Classes</label><input id="spEdClasses" type="text" placeholder="Mago, Feiticeiro"></div>
+      <div class="form-field"><label>Origem</label><input id="spEdOrigem" type="text" value="Personalizado"></div>
+      <div class="form-field"><label>Tags</label><input id="spEdTags" type="text" placeholder="fogo, controle, área"></div>
+      <label class="catalog-check"><input id="spEdRitual" type="checkbox"> Pode ser conjurada como ritual</label>
+    </div>
+
+    <div class="catalog-section-label spell-form-section">Conjuração e alcance</div>
+    <div class="catalog-form-grid">
+      <div class="form-field"><label>Tempo — valor</label><input id="spEdCastValor" type="number" min="0" value="1"></div>
+      <div class="form-field"><label>Tempo — unidade</label><select id="spEdCastUnidade"><option value="acao">Ação</option><option value="bonus">Ação bônus</option><option value="reacao">Reação</option><option value="minuto">Minuto</option><option value="hora">Hora</option></select></div>
+      <div class="form-field span-2"><label>Gatilho da reação / observação</label><input id="spEdGatilho" type="text" placeholder="Opcional"></div>
+      <div class="form-field"><label>Tipo de alcance</label><select id="spEdRangeTipo" onchange="atualizarEstadoAlcance()"><option value="distancia">Distância</option><option value="pessoal">Pessoal</option><option value="toque">Toque</option><option value="visao">Visão</option><option value="ilimitado">Ilimitado</option><option value="especial">Especial</option></select></div>
+      <div class="form-field"><label>Distância</label><input id="spEdRangeDist" type="number" min="0" step="0.5" value="0"></div>
+      <div class="form-field"><label>Unidade</label><select id="spEdRangeUnit"><option value="m">metros</option><option value="quadrados">quadrados</option><option value="km">quilômetros</option></select></div>
+      <div class="form-field"><label>Alvo</label><input id="spEdAlvo" type="text" placeholder="Uma criatura / ponto / objeto..."></div>
+    </div>
+
+    <div class="catalog-section-label spell-form-section">Duração e componentes</div>
+    <div class="catalog-form-grid">
+      <div class="form-field"><label>Tipo de duração</label><select id="spEdDurTipo"><option value="instantanea">Instantânea</option><option value="rodadas">Rodadas</option><option value="minutos">Minutos</option><option value="horas">Horas</option><option value="dias">Dias</option><option value="ate-dissipada">Até ser dissipada</option><option value="especial">Especial</option></select></div>
+      <div class="form-field"><label>Valor</label><input id="spEdDurValor" type="number" min="0" value="0"></div>
+      <div class="form-field"><label>Unidade</label><input id="spEdDurUnit" type="text" value="rodada"></div>
+      <label class="catalog-check"><input id="spEdConcentracao" type="checkbox"> Concentração</label>
+      <label class="catalog-check"><input id="spEdV" type="checkbox" checked> Componente verbal (V)</label>
+      <label class="catalog-check"><input id="spEdS" type="checkbox" checked> Componente somático (S)</label>
+      <label class="catalog-check"><input id="spEdM" type="checkbox" onchange="atualizarEstadoMaterial()"> Componente material (M)</label>
+      <label class="catalog-check"><input id="spEdConsumido" type="checkbox"> Material é consumido</label>
+      <div class="form-field span-2"><label>Material</label><input id="spEdMaterial" type="text" placeholder="Descrição do componente material"></div>
+      <div class="form-field"><label>Custo do material</label><input id="spEdMaterialCusto" type="text" placeholder="Ex: 100 PO"></div>
+    </div>
+
+    <div class="catalog-section-label spell-form-section">Resolução</div>
+    <div class="catalog-form-grid">
+      <div class="form-field"><label>Tipo</label><select id="spEdResolucao"><option value="ataque">Ataque mágico</option><option value="salvaguarda">Salvaguarda</option><option value="automatico">Automático</option><option value="cura">Cura</option><option value="efeito">Efeito / utilidade</option></select></div>
+      <div class="form-field"><label>Atributo da salvaguarda</label><select id="spEdAtributo"><option value="">—</option><option>Força</option><option>Destreza</option><option>Constituição</option><option>Inteligência</option><option>Sabedoria</option><option>Carisma</option></select></div>
+      <div class="form-field"><label>Tipo de ataque</label><select id="spEdAtaque"><option value="">—</option><option value="corpo-a-corpo">Corpo a corpo</option><option value="distancia">À distância</option></select></div>
+      <div class="form-field"><label>Dano</label><input id="spEdDano" type="text" placeholder="Ex: 8d6"></div>
+      <div class="form-field"><label>Tipo de dano</label><input id="spEdTipoDano" type="text" placeholder="fogo, força..."></div>
+      <div class="form-field"><label>Cura</label><input id="spEdCura" type="text" placeholder="Ex: 1d8 + modificador"></div>
+      <div class="form-field span-2"><label>Efeito mecânico adicional</label><textarea id="spEdEfeito" rows="2"></textarea></div>
+    </div>
+
+    <div class="catalog-section-label spell-form-section">Geometria da área de efeito</div>
+    <div class="spell-geometry-editor">
+      <div class="catalog-form-grid">
+        <div class="form-field"><label>Forma</label><select id="spEdAreaForma" onchange="atualizarCamposGeometria()"><option value="nenhuma">Sem área</option><option value="esfera">Esfera</option><option value="cone">Cone</option><option value="cubo">Cubo</option><option value="cilindro">Cilindro</option><option value="linha">Linha</option><option value="emanacao">Emanação</option><option value="quadrado">Quadrado</option></select></div>
+        <div class="form-field"><label>Origem</label><select id="spEdAreaOrigem"><option value="ponto">Ponto escolhido</option><option value="conjurador">Conjurador</option><option value="alvo">Alvo</option></select></div>
+        <div class="form-field"><label>Raio</label><input id="spEdRaio" type="number" min="0" step="0.5" value="0"></div>
+        <div class="form-field"><label>Comprimento</label><input id="spEdComprimento" type="number" min="0" step="0.5" value="0"></div>
+        <div class="form-field"><label>Largura</label><input id="spEdLargura" type="number" min="0" step="0.5" value="0"></div>
+        <div class="form-field"><label>Altura</label><input id="spEdAltura" type="number" min="0" step="0.5" value="0"></div>
+        <div class="form-field"><label>Unidade geométrica</label><select id="spEdAreaUnit"><option value="m">metros</option><option value="quadrados">quadrados</option></select></div>
+      </div>
+      <div class="geometry-preview" id="geometryPreview"></div>
+    </div>
+
+    <div class="catalog-section-label spell-form-section">Texto da magia</div>
+    <div class="catalog-form-grid">
+      <div class="form-field span-2"><label>Descrição</label><textarea id="spEdDescricao" rows="4"></textarea></div>
+      <div class="form-field span-2"><label>Em níveis superiores / escalonamento</label><textarea id="spEdEscala" rows="2"></textarea></div>
+    </div>
+
+    <div class="modal-actions"><button class="btn" onclick="fecharEditorMagia()">Cancelar</button><button class="btn primary" onclick="salvarMagiaEditor()"><i class="ti ti-device-floppy"></i> Salvar Magia</button></div>
+  </div>
+</div>
+
+<script src="../js/catalogo.js"></script>
+<script src="../js/magias.js"></script>
+</body>
+</html>
