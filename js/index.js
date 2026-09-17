@@ -35,6 +35,40 @@ document.addEventListener('click', e => {
   }
 });
 
+// ── GLOSSÁRIO DE ITENS MÁGICOS ──────────────────────────────────────────────
+function adicionarAtalhosItensMagicos() {
+  const desktopNav = document.querySelector('.nav-links');
+  if (desktopNav && !desktopNav.querySelector('[data-magic-items-link]')) {
+    desktopNav.insertAdjacentHTML('beforeend', `
+      <a href="./pages/itens.html" class="nav-link" data-magic-items-link style="text-decoration:none">
+        <i class="ti ti-gem"></i> Itens
+      </a>
+    `);
+  }
+
+  const mobileNav = document.getElementById('mobNav');
+  if (mobileNav && !mobileNav.querySelector('[data-magic-items-link]')) {
+    mobileNav.insertAdjacentHTML('beforeend', `
+      <a href="./pages/itens.html" class="nav-link" data-magic-items-link onclick="closeMobMenu()" style="text-decoration:none">
+        <i class="ti ti-gem"></i> Glossário de Itens Mágicos
+      </a>
+    `);
+  }
+
+  const masterGrid = document.querySelector('.modal-links-grid.mestre');
+  if (masterGrid && !masterGrid.querySelector('[data-magic-items-card]')) {
+    masterGrid.insertAdjacentHTML('beforeend', `
+      <a href="./pages/itens.html" class="modal-link-card" data-magic-items-card>
+        <i class="ti ti-gem"></i>
+        <div>
+          <h4>Glossário de Itens Mágicos</h4>
+          <p>Consulte relíquias, artefatos e objetos únicos da campanha, com filtros e informações reservadas ao mestre.</p>
+        </div>
+      </a>
+    `);
+  }
+}
+
 // ── CHANGELOG TOGGLE (Expandir/Recolher Versões) ─────────────────────────────
 function toggleLog(header) {
   const item = header.parentElement;
@@ -68,6 +102,7 @@ const observer = new IntersectionObserver(entries => {
 
 // Vincula o observador aos elementos com a classe "reveal" após o carregamento
 document.addEventListener('DOMContentLoaded', () => {
+  adicionarAtalhosItensMagicos();
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
 
