@@ -186,7 +186,7 @@ function abrirDetalhes(id) {
 
   content.innerHTML = `
     <div class="item-detail-hero spell-detail-hero" style="--rarity-color:${cor}">
-      <div class="item-detail-icon"><i class="ti ti-sparkles"></i></div>
+      <div class="item-detail-icon"><i class="ti ${schoolIcon(magia.escola)}"></i></div>
       <div class="item-detail-heading">
         <h2 id="modalSpellName">${escaparHTML(magia.nome)}</h2>
         <div class="item-detail-subtitle">${escaparHTML(nivelLabel(magia.nivel))} · ${escaparHTML(magia.escola || 'Sem escola')} · ${magia.ritual ? 'Ritual' : 'Não ritual'}</div>
