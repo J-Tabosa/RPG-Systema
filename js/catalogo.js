@@ -46,11 +46,21 @@
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  async function readBase(url) {
+  function unwrapCollection(data, collectionKey = '') {
+    if (Array.isArray(data)) return data;
+    if (collectionKey && Array.isArray(data?.[collectionKey])) return data[collectionKey];
+    if (Array.isArray(data?.spells)) return data.spells;
+    if (Array.isArray(data?.magias)) return data.magias;
+    if (Array.isArray(data?.items)) return data.items;
+    if (Array.isArray(data?.itens)) return data.itens;
+    return [];
+  }
+
+  async function readBase(url, collectionKey = '') {
     const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`Falha ao carregar catálogo (${response.status}).`);
     const data = await response.json();
-    return Array.isArray(data) ? data : [];
+    return unwrapCollection(data, collectionKey);
   }
 
   function mergeCatalog(base, custom) {
@@ -78,12 +88,12 @@
   }
 
   async function getItens() {
-    const [base, custom] = await Promise.all([readBase(itemUrl), Promise.resolve(readLocal(ITEM_KEY))]);
+    const [base, custom] = await Promise.all([readBase(itemUrl, 'items'), Promise.resolve(readLocal(ITEM_KEY))]);
     return mergeCatalog(base, custom);
   }
 
   async function getMagias() {
-    const [base, custom] = await Promise.all([readBase(spellUrl), Promise.resolve(readLocal(SPELL_KEY))]);
+    const [base, custom] = await Promise.all([readBase(spellUrl, 'spells'), Promise.resolve(readLocal(SPELL_KEY))]);
     return mergeCatalog(base, custom);
   }
 
@@ -131,6 +141,73 @@
 
   function saveItem(entry) { return saveCustom(ITEM_KEY, 'item', entry); }
   function saveSpell(entry) { return saveCustom(SPELL_KEY, 'magia', entry); }
+
+  function normalizeImportedSpells(payload) {
+    const source = Array.isArray(payload)
+      ? payload
+      : Array.isArray(payload?.spells)
+        ? payload.spells
+        : Array.isArray(payload?.magias)
+          ? payload.magias
+          : [];
+
+    return source
+      .filter(entry => entry && typeof entry === 'object' && String(entry.nome || '').trim())
+      .map(entry => {
+        const normalized = clone(entry);
+        normalized.nome = String(normalized.nome).trim();
+        normalized.id = normalized.id || slug(normalized.nome) || uid('magia');
+        normalized.nivel = Math.max(0, Math.min(9, Number(normalized.nivel) || 0));
+        normalized.classes = Array.isArray(normalized.classes)
+          ? [...new Set(normalized.classes.map(v => String(v).trim()).filter(Boolean))]
+          : [];
+        normalized.tags = Array.isArray(normalized.tags)
+          ? [...new Set(normalized.tags.map(v => String(v).trim()).filter(Boolean))]
+          : [];
+        return normalized;
+      });
+  }
+
+  function importSpells(payload) {
+    const incoming = normalizeImportedSpells(payload);
+    if (!incoming.length) return { imported: 0, updated: 0, total: 0 };
+
+    const list = readLocal(SPELL_KEY);
+    const byId = new Map(list.map((entry, index) => [entry.id, index]));
+    const byName = new Map(list.map((entry, index) => [slug(entry.nome), index]));
+    const now = new Date().toISOString();
+    let imported = 0;
+    let updated = 0;
+
+    incoming.forEach(entry => {
+      const existingIndex = byId.has(entry.id)
+        ? byId.get(entry.id)
+        : byName.get(slug(entry.nome));
+
+      const previous = existingIndex === undefined ? null : list[existingIndex];
+      const normalized = {
+        ...(previous ? clone(previous) : {}),
+        ...clone(entry),
+        custom: true,
+        criadoEm: previous?.criadoEm || entry.criadoEm || now,
+        atualizadoEm: now
+      };
+
+      if (existingIndex === undefined) {
+        list.push(normalized);
+        const newIndex = list.length - 1;
+        byId.set(normalized.id, newIndex);
+        byName.set(slug(normalized.nome), newIndex);
+        imported++;
+      } else {
+        list[existingIndex] = normalized;
+        updated++;
+      }
+    });
+
+    writeLocal(SPELL_KEY, list);
+    return { imported, updated, total: incoming.length };
+  }
   function saveSpellSchool(entry) { return saveTaxonomy(SPELL_SCHOOL_KEY, 'escola', entry); }
   function saveItemCategory(entry) { return saveTaxonomy(ITEM_CATEGORY_KEY, 'categoria', entry); }
 
@@ -196,6 +273,7 @@
     getItemCategories,
     saveItem,
     saveSpell,
+    importSpells,
     saveSpellSchool,
     saveItemCategory,
     removeItem,
