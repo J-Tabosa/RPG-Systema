@@ -19,7 +19,8 @@
       "Magias de Paladino",
       "Magias de Clérigo",
       "Magias de Bardo"
-    ]
+    ],
+    "resumosRevisados": 116
   },
   "importacao": {
     "chavePrimaria": "id",
@@ -869,7 +870,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "resumo": "Utilidade: cria uma mão espectral para manipular objetos à distância."
       },
       "conjuracao": {
         "valor": 1,
@@ -903,7 +904,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "efeito": "Utilidade: cria uma mão espectral para manipular objetos à distância."
       },
       "area": {
         "forma": "nenhuma",
@@ -915,8 +916,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Utilidade: tranca magicamente uma entrada ou recipiente.",
-      "tags": []
+      "descricao": "Utilidade: cria uma mão espectral para manipular objetos à distância.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "mensagem",
@@ -1122,7 +1125,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de concussão em alvo."
+        "resumo": "Proteção: concede resistência a dano de armas por uma rodada."
       },
       "conjuracao": {
         "valor": 1,
@@ -1156,7 +1159,7 @@
         "dano": "",
         "tipoDano": "concussão",
         "cura": "",
-        "efeito": "Dano de concussão em alvo."
+        "efeito": "Proteção: concede resistência a dano de armas por uma rodada."
       },
       "area": {
         "forma": "nenhuma",
@@ -1168,9 +1171,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de concussão em alvo.",
+      "descricao": "Proteção: concede resistência a dano de armas por uma rodada.",
       "tags": [
-        "concussão"
+        "concussão",
+        "proteção"
       ]
     },
     {
@@ -1500,7 +1504,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "resumo": "Utilidade: cria pequenos efeitos sobrenaturais e sensoriais."
       },
       "conjuracao": {
         "valor": 1,
@@ -1534,7 +1538,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "efeito": "Utilidade: cria pequenos efeitos sobrenaturais e sensoriais."
       },
       "area": {
         "forma": "nenhuma",
@@ -1546,8 +1550,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Utilidade: tranca magicamente uma entrada ou recipiente.",
-      "tags": []
+      "descricao": "Utilidade: cria pequenos efeitos sobrenaturais e sensoriais.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "toque-arrepiante",
@@ -2572,7 +2578,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: cega."
+        "resumo": "Invocação: convoca um familiar para exploração, comunicação e auxílio."
       },
       "conjuracao": {
         "valor": 1,
@@ -2606,7 +2612,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: cega."
+        "efeito": "Invocação: convoca um familiar para exploração, comunicação e auxílio."
       },
       "area": {
         "forma": "nenhuma",
@@ -2618,9 +2624,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: cega.",
+      "descricao": "Invocação: convoca um familiar para exploração, comunicação e auxílio.",
       "tags": [
-        "controle",
+        "invocação",
         "ritual"
       ]
     },
@@ -3023,7 +3029,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Pela duração, você sabe se existe uma aberração, celestial, corruptor, elemental, fada ou morto-vivo, a até 9 metros de você, assim como onde a..."
+        "resumo": "Detecção: localiza certos tipos de criaturas e locais consagrados ou profanados."
       },
       "conjuracao": {
         "valor": 1,
@@ -3057,7 +3063,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Pela duração, você sabe se existe uma aberração, celestial, corruptor, elemental, fada ou morto-vivo, a até 9 metros de você, assim como onde a..."
+        "efeito": "Detecção: localiza certos tipos de criaturas e locais consagrados ou profanados."
       },
       "area": {
         "forma": "nenhuma",
@@ -3069,7 +3075,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Pela duração, você sabe se existe uma aberração, celestial, corruptor, elemental, fada ou morto-vivo, a até 9 metros de você, assim como onde a...",
+      "descricao": "Detecção: localiza certos tipos de criaturas e locais consagrados ou profanados.",
       "tags": [
         "concentração"
       ]
@@ -3151,7 +3157,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: derruba."
+        "resumo": "Utilidade: cria um disco flutuante que transporta carga e segue o conjurador."
       },
       "conjuracao": {
         "valor": 1,
@@ -3185,7 +3191,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: derruba."
+        "efeito": "Utilidade: cria um disco flutuante que transporta carga e segue o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -3197,9 +3203,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: derruba.",
+      "descricao": "Utilidade: cria um disco flutuante que transporta carga e segue o conjurador.",
       "tags": [
-        "controle",
+        "utilidade",
         "ritual"
       ]
     },
@@ -3278,7 +3284,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Controle de alvo: força um inimigo a focar o conjurador e dificulta afastamento."
       },
       "conjuracao": {
         "valor": 1,
@@ -3312,7 +3318,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Controle de alvo: força um inimigo a focar o conjurador e dificulta afastamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -3324,8 +3330,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Controle de alvo: força um inimigo a focar o conjurador e dificulta afastamento.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -3408,7 +3415,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Percepção aprimorada: concede visão verdadeira."
+        "resumo": "Ilusão: oculta uma mensagem escrita de leitores não autorizados."
       },
       "conjuracao": {
         "valor": 1,
@@ -3442,7 +3449,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Percepção aprimorada: concede visão verdadeira."
+        "efeito": "Ilusão: oculta uma mensagem escrita de leitores não autorizados."
       },
       "area": {
         "forma": "nenhuma",
@@ -3454,8 +3461,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Percepção aprimorada: concede visão verdadeira.",
+      "descricao": "Ilusão: oculta uma mensagem escrita de leitores não autorizados.",
       "tags": [
+        "ilusão",
         "ritual"
       ]
     },
@@ -3471,7 +3479,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Proteção reativa: concede +5 de CA e bloqueia Mísseis Mágicos."
       },
       "conjuracao": {
         "valor": 1,
@@ -3505,7 +3513,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Proteção reativa: concede +5 de CA e bloqueia Mísseis Mágicos."
       },
       "area": {
         "forma": "nenhuma",
@@ -3517,8 +3525,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
-      "tags": []
+      "descricao": "Proteção reativa: concede +5 de CA e bloqueia Mísseis Mágicos.",
+      "tags": [
+        "proteção"
+      ]
     },
     {
       "id": "escudo-da-fe",
@@ -3725,7 +3735,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Suporte em área: revela alvos e concede vantagem nos ataques contra eles."
       },
       "conjuracao": {
         "valor": 1,
@@ -3759,7 +3769,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Suporte em área: revela alvos e concede vantagem nos ataques contra eles."
       },
       "area": {
         "forma": "cubo",
@@ -3771,7 +3781,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Suporte em área: revela alvos e concede vantagem nos ataques contra eles.",
       "tags": [
         "área",
         "concentração"
@@ -4745,7 +4755,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Proteção: dificulta ataques e efeitos mentais de certos tipos de criatura."
       },
       "conjuracao": {
         "valor": 1,
@@ -4779,7 +4789,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Proteção: dificulta ataques e efeitos mentais de certos tipos de criatura."
       },
       "area": {
         "forma": "nenhuma",
@@ -4791,8 +4801,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Proteção: dificulta ataques e efeitos mentais de certos tipos de criatura.",
       "tags": [
+        "proteção",
         "concentração"
       ]
     },
@@ -4874,7 +4885,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Quando você ou uma criatura a até 18 metros cair Escolha até cinco criaturas caindo, dentro do alcance."
+        "resumo": "Proteção/mobilidade: reduz a velocidade de queda de até cinco criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -4908,7 +4919,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Quando você ou uma criatura a até 18 metros cair Escolha até cinco criaturas caindo, dentro do alcance."
+        "efeito": "Proteção/mobilidade: reduz a velocidade de queda de até cinco criaturas."
       },
       "area": {
         "forma": "nenhuma",
@@ -4920,8 +4931,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Quando você ou uma criatura a até 18 metros cair Escolha até cinco criaturas caindo, dentro do alcance.",
-      "tags": []
+      "descricao": "Proteção/mobilidade: reduz a velocidade de queda de até cinco criaturas.",
+      "tags": [
+        "proteção",
+        "mobilidade"
+      ]
     },
     {
       "id": "raio-adoecente",
@@ -5126,7 +5140,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Mobilidade: permite usar Disparada como ação bônus repetidamente."
       },
       "conjuracao": {
         "valor": 1,
@@ -5160,7 +5174,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Mobilidade: permite usar Disparada como ação bônus repetidamente."
       },
       "area": {
         "forma": "nenhuma",
@@ -5172,8 +5186,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Mobilidade: permite usar Disparada como ação bônus repetidamente.",
       "tags": [
+        "mobilidade",
         "concentração"
       ]
     },
@@ -5820,7 +5835,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Sua magia inspira seus aliados com vigor e determinação."
+        "resumo": "Suporte: aumenta pontos de vida atuais e máximos de até três criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -5854,7 +5869,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Sua magia inspira seus aliados com vigor e determinação."
+        "efeito": "Suporte: aumenta pontos de vida atuais e máximos de até três criaturas."
       },
       "area": {
         "forma": "nenhuma",
@@ -5866,7 +5881,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Sua magia inspira seus aliados com vigor e determinação.",
+      "descricao": "Suporte: aumenta pontos de vida atuais e máximos de até três criaturas.",
       "tags": []
     },
     {
@@ -6136,7 +6151,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "resumo": "Utilidade: abre fechaduras, trancas e objetos selados."
       },
       "conjuracao": {
         "valor": 1,
@@ -6170,7 +6185,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "efeito": "Utilidade: abre fechaduras, trancas e objetos selados."
       },
       "area": {
         "forma": "nenhuma",
@@ -6182,8 +6197,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Utilidade: tranca magicamente uma entrada ou recipiente.",
-      "tags": []
+      "descricao": "Utilidade: abre fechaduras, trancas e objetos selados.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "augurio",
@@ -6629,7 +6646,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cura e recuperação de pontos de vida."
+        "resumo": "Invocação: convoca uma montaria espiritual leal e vinculada ao conjurador."
       },
       "conjuracao": {
         "valor": 10,
@@ -6663,7 +6680,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "pontos de vida",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação: convoca uma montaria espiritual leal e vinculada ao conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -6675,9 +6692,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação: convoca uma montaria espiritual leal e vinculada ao conjurador.",
       "tags": [
-        "cura"
+        "invocação"
       ]
     },
     {
@@ -7980,7 +7997,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Percepção aprimorada: concede visão verdadeira."
+        "resumo": "Defesa: deixa o conjurador obscurecido e dificulta ataques contra ele."
       },
       "conjuracao": {
         "valor": 1,
@@ -8014,7 +8031,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Percepção aprimorada: concede visão verdadeira."
+        "efeito": "Defesa: deixa o conjurador obscurecido e dificulta ataques contra ele."
       },
       "area": {
         "forma": "nenhuma",
@@ -8026,7 +8043,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Percepção aprimorada: concede visão verdadeira.",
+      "descricao": "Defesa: deixa o conjurador obscurecido e dificulta ataques contra ele.",
       "tags": [
         "concentração"
       ]
@@ -8300,7 +8317,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Até a magia acabar, uma criatura voluntária que você tocar, recebe a habilidade de se mover para cima, para baixo e através de superfícies..."
+        "resumo": "Mobilidade: concede deslocamento de escalada e aderência a superfícies."
       },
       "conjuracao": {
         "valor": 1,
@@ -8334,7 +8351,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Até a magia acabar, uma criatura voluntária que você tocar, recebe a habilidade de se mover para cima, para baixo e através de superfícies..."
+        "efeito": "Mobilidade: concede deslocamento de escalada e aderência a superfícies."
       },
       "area": {
         "forma": "nenhuma",
@@ -8346,8 +8363,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Até a magia acabar, uma criatura voluntária que você tocar, recebe a habilidade de se mover para cima, para baixo e através de superfícies...",
+      "descricao": "Mobilidade: concede deslocamento de escalada e aderência a superfícies.",
       "tags": [
+        "mobilidade",
         "concentração"
       ]
     },
@@ -8363,7 +8381,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Toca uma criatura voluntária."
+        "resumo": "Proteção: impede que a CA do alvo fique abaixo de 16."
       },
       "conjuracao": {
         "valor": 1,
@@ -8397,7 +8415,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toca uma criatura voluntária."
+        "efeito": "Proteção: impede que a CA do alvo fique abaixo de 16."
       },
       "area": {
         "forma": "nenhuma",
@@ -8409,8 +8427,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toca uma criatura voluntária.",
+      "descricao": "Proteção: impede que a CA do alvo fique abaixo de 16.",
       "tags": [
+        "proteção",
         "concentração"
       ]
     },
@@ -8428,7 +8447,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de veneno em alvo."
+        "resumo": "Proteção: neutraliza veneno e concede resistência a dano de veneno."
       },
       "conjuracao": {
         "valor": 1,
@@ -8462,7 +8481,7 @@
         "dano": "",
         "tipoDano": "veneno",
         "cura": "",
-        "efeito": "Dano de veneno em alvo."
+        "efeito": "Proteção: neutraliza veneno e concede resistência a dano de veneno."
       },
       "area": {
         "forma": "nenhuma",
@@ -8474,9 +8493,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de veneno em alvo.",
+      "descricao": "Proteção: neutraliza veneno e concede resistência a dano de veneno.",
       "tags": [
-        "veneno"
+        "veneno",
+        "proteção"
       ]
     },
     {
@@ -8554,7 +8574,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Um raio negro de energia enervante parte do seu dedo em direção de uma criatura, dentro do alcance."
+        "resumo": "Debuff: reduz o dano de ataques com armas baseados em Força."
       },
       "conjuracao": {
         "valor": 1,
@@ -8588,7 +8608,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Um raio negro de energia enervante parte do seu dedo em direção de uma criatura, dentro do alcance."
+        "efeito": "Debuff: reduz o dano de ataques com armas baseados em Força."
       },
       "area": {
         "forma": "nenhuma",
@@ -8600,7 +8620,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Um raio negro de energia enervante parte do seu dedo em direção de uma criatura, dentro do alcance.",
+      "descricao": "Debuff: reduz o dano de ataques com armas baseados em Força.",
       "tags": [
         "concentração"
       ]
@@ -8682,7 +8702,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Percepção aprimorada: concede visão verdadeira."
+        "resumo": "Defesa ilusória: cria duplicatas que desviam ataques."
       },
       "conjuracao": {
         "valor": 1,
@@ -8716,7 +8736,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Percepção aprimorada: concede visão verdadeira."
+        "efeito": "Defesa ilusória: cria duplicatas que desviam ataques."
       },
       "area": {
         "forma": "nenhuma",
@@ -8728,7 +8748,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Percepção aprimorada: concede visão verdadeira.",
+      "descricao": "Defesa ilusória: cria duplicatas que desviam ataques.",
       "tags": []
     },
     {
@@ -8743,7 +8763,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Toca um corpo ou outros restos mortais."
+        "resumo": "Utilidade: preserva cadáver e impede que seja transformado em morto-vivo."
       },
       "conjuracao": {
         "valor": 1,
@@ -8777,7 +8797,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toca um corpo ou outros restos mortais."
+        "efeito": "Utilidade: preserva cadáver e impede que seja transformado em morto-vivo."
       },
       "area": {
         "forma": "nenhuma",
@@ -8789,8 +8809,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toca um corpo ou outros restos mortais.",
+      "descricao": "Utilidade: preserva cadáver e impede que seja transformado em morto-vivo.",
       "tags": [
+        "utilidade",
+        "transformação",
         "ritual"
       ]
     },
@@ -8936,7 +8958,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Dano de trovejante em área (esfera)."
+        "resumo": "Controle de área: suprime todo som e impede componentes verbais."
       },
       "conjuracao": {
         "valor": 1,
@@ -8970,7 +8992,7 @@
         "dano": "",
         "tipoDano": "trovejante",
         "cura": "",
-        "efeito": "Dano de trovejante em área (esfera)."
+        "efeito": "Controle de área: suprime todo som e impede componentes verbais."
       },
       "area": {
         "forma": "esfera",
@@ -8982,10 +9004,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de trovejante em área (esfera).",
+      "descricao": "Controle de área: suprime todo som e impede componentes verbais.",
       "tags": [
         "trovejante",
         "área",
+        "controle",
         "ritual",
         "concentração"
       ]
@@ -9068,7 +9091,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de fogo (2d4) em área (cubo); impede/restringe."
+        "resumo": "Controle de área: cria teias que dificultam movimento e podem restringir criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -9102,7 +9125,7 @@
         "dano": "2d4",
         "tipoDano": "fogo",
         "cura": "",
-        "efeito": "Dano de fogo (2d4) em área (cubo); impede/restringe."
+        "efeito": "Controle de área: cria teias que dificultam movimento e podem restringir criaturas."
       },
       "area": {
         "forma": "cubo",
@@ -9114,10 +9137,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de fogo (2d4) em área (cubo); impede/restringe.",
+      "descricao": "Controle de área: cria teias que dificultam movimento e podem restringir criaturas.",
       "tags": [
         "fogo",
         "área",
+        "controle",
         "concentração"
       ]
     },
@@ -9254,7 +9278,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Pela duração, você vê criaturas e objetos invisíveis como se eles fossem visíveis e você pode ver no Plano Etéreo."
+        "resumo": "Percepção: permite enxergar criaturas invisíveis e o Plano Etéreo."
       },
       "conjuracao": {
         "valor": 1,
@@ -9288,7 +9312,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Pela duração, você vê criaturas e objetos invisíveis como se eles fossem visíveis e você pode ver no Plano Etéreo."
+        "efeito": "Percepção: permite enxergar criaturas invisíveis e o Plano Etéreo."
       },
       "area": {
         "forma": "nenhuma",
@@ -9300,8 +9324,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Pela duração, você vê criaturas e objetos invisíveis como se eles fossem visíveis e você pode ver no Plano Etéreo.",
-      "tags": []
+      "descricao": "Percepção: permite enxergar criaturas invisíveis e o Plano Etéreo.",
+      "tags": [
+        "percepção"
+      ]
     },
     {
       "id": "vinculo-protetor",
@@ -9568,7 +9594,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Concede a habilidade de se mover através de qualquer superfície líquida – como água, ácido, lama, neve, areia movediça ou lava – como se ela fosse..."
+        "resumo": "Mobilidade: permite caminhar sobre superfícies líquidas."
       },
       "conjuracao": {
         "valor": 1,
@@ -9602,7 +9628,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede a habilidade de se mover através de qualquer superfície líquida – como água, ácido, lama, neve, areia movediça ou lava – como se ela fosse..."
+        "efeito": "Mobilidade: permite caminhar sobre superfícies líquidas."
       },
       "area": {
         "forma": "nenhuma",
@@ -9614,8 +9640,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede a habilidade de se mover através de qualquer superfície líquida – como água, ácido, lama, neve, areia movediça ou lava – como se ela fosse...",
+      "descricao": "Mobilidade: permite caminhar sobre superfícies líquidas.",
       "tags": [
+        "mobilidade",
         "ritual"
       ]
     },
@@ -9631,7 +9658,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Necromancia: anima e controla esqueletos ou zumbis."
       },
       "conjuracao": {
         "valor": 1,
@@ -9665,7 +9692,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Necromancia: anima e controla esqueletos ou zumbis."
       },
       "area": {
         "forma": "nenhuma",
@@ -9677,8 +9704,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
-      "tags": []
+      "descricao": "Necromancia: anima e controla esqueletos ou zumbis.",
+      "tags": [
+        "necromancia"
+      ]
     },
     {
       "id": "arma-elemental",
@@ -9753,7 +9782,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Cura sustentada em área: permite curar uma criatura na aura a cada turno."
       },
       "conjuracao": {
         "valor": 1,
@@ -9787,7 +9816,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Cura sustentada em área: permite curar uma criatura na aura a cada turno."
       },
       "area": {
         "forma": "emanacao",
@@ -9799,9 +9828,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Cura sustentada em área: permite curar uma criatura na aura a cada turno.",
       "tags": [
         "área",
+        "cura",
         "concentração"
       ]
     },
@@ -9883,7 +9913,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "resumo": "Proteção em área: restringe e dificulta a ação de tipos específicos de criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -9917,7 +9947,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "efeito": "Proteção em área: restringe e dificulta a ação de tipos específicos de criaturas."
       },
       "area": {
         "forma": "cilindro",
@@ -9929,10 +9959,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Teletransporte e reposicionamento de criaturas ou objetos.",
+      "descricao": "Proteção em área: restringe e dificulta a ação de tipos específicos de criaturas.",
       "tags": [
         "área",
-        "teletransporte"
+        "proteção"
       ]
     },
     {
@@ -9949,7 +9979,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Adivinhação: cria um sensor remoto para ver ou ouvir um local distante."
       },
       "conjuracao": {
         "valor": 10,
@@ -9983,7 +10013,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Adivinhação: cria um sensor remoto para ver ou ouvir um local distante."
       },
       "area": {
         "forma": "nenhuma",
@@ -9995,8 +10025,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Adivinhação: cria um sensor remoto para ver ou ouvir um local distante.",
       "tags": [
+        "adivinhação",
         "concentração"
       ]
     },
@@ -10456,7 +10487,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Escolha uma criatura, objeto ou efeito mágico dentro do alcance."
+        "resumo": "Dissipação: encerra magias e efeitos mágicos em criatura, objeto ou área."
       },
       "conjuracao": {
         "valor": 1,
@@ -10490,7 +10521,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma criatura, objeto ou efeito mágico dentro do alcance."
+        "efeito": "Dissipação: encerra magias e efeitos mágicos em criatura, objeto ou área."
       },
       "area": {
         "forma": "nenhuma",
@@ -10502,8 +10533,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Escolha uma criatura, objeto ou efeito mágico dentro do alcance.",
-      "tags": []
+      "descricao": "Dissipação: encerra magias e efeitos mágicos em criatura, objeto ou área.",
+      "tags": [
+        "dissipação"
+      ]
     },
     {
       "id": "enviar-mensagem",
@@ -11028,7 +11061,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de trovejante em alvo."
+        "resumo": "Ilusão: cria uma imagem visual, sonora, olfativa e térmica convincente."
       },
       "conjuracao": {
         "valor": 1,
@@ -11062,7 +11095,7 @@
         "dano": "",
         "tipoDano": "trovejante",
         "cura": "",
-        "efeito": "Dano de trovejante em alvo."
+        "efeito": "Ilusão: cria uma imagem visual, sonora, olfativa e térmica convincente."
       },
       "area": {
         "forma": "nenhuma",
@@ -11074,9 +11107,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de trovejante em alvo.",
+      "descricao": "Ilusão: cria uma imagem visual, sonora, olfativa e térmica convincente.",
       "tags": [
         "trovejante",
+        "ilusão",
         "concentração"
       ]
     },
@@ -11545,7 +11579,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: derruba."
+        "resumo": "Controle de área: obscurece, cria terreno difícil e pode derrubar criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -11579,7 +11613,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: derruba."
+        "efeito": "Controle de área: obscurece, cria terreno difícil e pode derrubar criaturas."
       },
       "area": {
         "forma": "nenhuma",
@@ -11591,7 +11625,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: derruba.",
+      "descricao": "Controle de área: obscurece, cria terreno difícil e pode derrubar criaturas.",
       "tags": [
         "controle",
         "concentração"
@@ -11803,7 +11837,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Um domo de energia imóvel, de 3 metros de raio, aparece do nada, ao seu redor e acima de você e permanece parado pela duração."
+        "resumo": "Proteção/abrigo: cria um domo seguro e imóvel ao redor do grupo."
       },
       "conjuracao": {
         "valor": 1,
@@ -11837,7 +11871,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Um domo de energia imóvel, de 3 metros de raio, aparece do nada, ao seu redor e acima de você e permanece parado pela duração."
+        "efeito": "Proteção/abrigo: cria um domo seguro e imóvel ao redor do grupo."
       },
       "area": {
         "forma": "nenhuma",
@@ -11849,8 +11883,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Um domo de energia imóvel, de 3 metros de raio, aparece do nada, ao seu redor e acima de você e permanece parado pela duração.",
+      "descricao": "Proteção/abrigo: cria um domo seguro e imóvel ao redor do grupo.",
       "tags": [
+        "proteção",
         "ritual"
       ]
     },
@@ -11866,7 +11901,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Role um d20 no final de cada um dos seus turnos pela duração da magia."
+        "resumo": "Defesa/mobilidade: alterna o conjurador entre os Planos Material e Etéreo."
       },
       "conjuracao": {
         "valor": 1,
@@ -11900,7 +11935,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Role um d20 no final de cada um dos seus turnos pela duração da magia."
+        "efeito": "Defesa/mobilidade: alterna o conjurador entre os Planos Material e Etéreo."
       },
       "area": {
         "forma": "nenhuma",
@@ -11912,8 +11947,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Role um d20 no final de cada um dos seus turnos pela duração da magia.",
-      "tags": []
+      "descricao": "Defesa/mobilidade: alterna o conjurador entre os Planos Material e Etéreo.",
+      "tags": [
+        "mobilidade"
+      ]
     },
     {
       "id": "protecao-contra-energia",
@@ -11930,7 +11967,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Pela duração, a criatura voluntária que você tocar terá resistência a um tipo de dano de sua escolha: ácido, elétrico, fogo, frio ou trovejante."
+        "resumo": "Proteção: concede resistência a um tipo de dano elemental."
       },
       "conjuracao": {
         "valor": 1,
@@ -11964,7 +12001,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Pela duração, a criatura voluntária que você tocar terá resistência a um tipo de dano de sua escolha: ácido, elétrico, fogo, frio ou trovejante."
+        "efeito": "Proteção: concede resistência a um tipo de dano elemental."
       },
       "area": {
         "forma": "nenhuma",
@@ -11976,8 +12013,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Pela duração, a criatura voluntária que você tocar terá resistência a um tipo de dano de sua escolha: ácido, elétrico, fogo, frio ou trovejante.",
+      "descricao": "Proteção: concede resistência a um tipo de dano elemental.",
       "tags": [
+        "proteção",
         "concentração"
       ]
     },
@@ -12122,7 +12160,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Concede a até dez criaturas voluntária que você possa ver, dentro do alcance, a habilidade de respirar embaixo d’água até a magia acabar."
+        "resumo": "Utilidade: permite que até dez criaturas respirem debaixo d’água."
       },
       "conjuracao": {
         "valor": 1,
@@ -12156,7 +12194,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede a até dez criaturas voluntária que você possa ver, dentro do alcance, a habilidade de respirar embaixo d’água até a magia acabar."
+        "efeito": "Utilidade: permite que até dez criaturas respirem debaixo d’água."
       },
       "area": {
         "forma": "nenhuma",
@@ -12168,8 +12206,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede a até dez criaturas voluntária que você possa ver, dentro do alcance, a habilidade de respirar embaixo d’água até a magia acabar.",
+      "descricao": "Utilidade: permite que até dez criaturas respirem debaixo d’água.",
       "tags": [
+        "utilidade",
         "ritual"
       ]
     },
@@ -12566,7 +12605,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Sua magia e uma oferenda colocam você em contato com um deus ou servo divino."
+        "resumo": "Adivinhação: recebe um presságio divino sobre um curso de ação."
       },
       "conjuracao": {
         "valor": 1,
@@ -12600,7 +12639,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Sua magia e uma oferenda colocam você em contato com um deus ou servo divino."
+        "efeito": "Adivinhação: recebe um presságio divino sobre um curso de ação."
       },
       "area": {
         "forma": "nenhuma",
@@ -12612,8 +12651,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Sua magia e uma oferenda colocam você em contato com um deus ou servo divino.",
+      "descricao": "Adivinhação: recebe um presságio divino sobre um curso de ação.",
       "tags": [
+        "adivinhação",
         "ritual"
       ]
     },
@@ -12628,7 +12668,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Esconde um baú, e todo o seu conteúdo, no Plano Etéreo."
+        "resumo": "Utilidade: esconde um baú no Plano Etéreo e permite recuperá-lo."
       },
       "conjuracao": {
         "valor": 1,
@@ -12662,7 +12702,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Esconde um baú, e todo o seu conteúdo, no Plano Etéreo."
+        "efeito": "Utilidade: esconde um baú no Plano Etéreo e permite recuperá-lo."
       },
       "area": {
         "forma": "nenhuma",
@@ -12674,8 +12714,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Esconde um baú, e todo o seu conteúdo, no Plano Etéreo.",
-      "tags": []
+      "descricao": "Utilidade: esconde um baú no Plano Etéreo e permite recuperá-lo.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "assassino-fantasmagorico",
@@ -12883,7 +12925,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Tenta enviar uma criatura que você pode ver dentro do alcance, para outro plano de existência."
+        "resumo": "Controle: envia temporariamente uma criatura para outro plano."
       },
       "conjuracao": {
         "valor": 1,
@@ -12917,7 +12959,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Tenta enviar uma criatura que você pode ver dentro do alcance, para outro plano de existência."
+        "efeito": "Controle: envia temporariamente uma criatura para outro plano."
       },
       "area": {
         "forma": "nenhuma",
@@ -12929,8 +12971,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Tenta enviar uma criatura que você pode ver dentro do alcance, para outro plano de existência.",
+      "descricao": "Controle: envia temporariamente uma criatura para outro plano.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -13072,7 +13115,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Ataca e embaralha as mentes das criaturas, gerando delírios e provocando ações descontroladas."
+        "resumo": "Controle de grupo: causa comportamento imprevisível e ações descontroladas."
       },
       "conjuracao": {
         "valor": 1,
@@ -13106,7 +13149,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Ataca e embaralha as mentes das criaturas, gerando delírios e provocando ações descontroladas."
+        "efeito": "Controle de grupo: causa comportamento imprevisível e ações descontroladas."
       },
       "area": {
         "forma": "nenhuma",
@@ -13118,8 +13161,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Ataca e embaralha as mentes das criaturas, gerando delírios e provocando ações descontroladas.",
+      "descricao": "Controle de grupo: causa comportamento imprevisível e ações descontroladas.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -13581,7 +13625,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Converte matéria-prima em produtos do mesmo material."
+        "resumo": "Utilidade: converte matéria-prima em objetos manufaturados."
       },
       "conjuracao": {
         "valor": 10,
@@ -13615,7 +13659,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Converte matéria-prima em produtos do mesmo material."
+        "efeito": "Utilidade: converte matéria-prima em objetos manufaturados."
       },
       "area": {
         "forma": "nenhuma",
@@ -13627,8 +13671,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Converte matéria-prima em produtos do mesmo material.",
-      "tags": []
+      "descricao": "Utilidade: converte matéria-prima em objetos manufaturados.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "guardiao-da-fe",
@@ -14028,7 +14074,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Toca um objeto de pedra de tamanho Médio ou menor, ou uma seção de rocha com não mais de 1,5 metro em qualquer dimensão e modela-a em qualquer..."
+        "resumo": "Utilidade: remodela pedra em uma forma escolhida."
       },
       "conjuracao": {
         "valor": 1,
@@ -14062,7 +14108,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toca um objeto de pedra de tamanho Médio ou menor, ou uma seção de rocha com não mais de 1,5 metro em qualquer dimensão e modela-a em qualquer..."
+        "efeito": "Utilidade: remodela pedra em uma forma escolhida."
       },
       "area": {
         "forma": "nenhuma",
@@ -14074,8 +14120,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toca um objeto de pedra de tamanho Médio ou menor, ou uma seção de rocha com não mais de 1,5 metro em qualquer dimensão e modela-a em qualquer...",
-      "tags": []
+      "descricao": "Utilidade: remodela pedra em uma forma escolhida.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "movimentacao-livre",
@@ -14091,7 +14139,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de terreno: cria terreno difícil."
+        "resumo": "Mobilidade: ignora terreno difícil e várias restrições de movimento."
       },
       "conjuracao": {
         "valor": 1,
@@ -14125,7 +14173,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de terreno: cria terreno difícil."
+        "efeito": "Mobilidade: ignora terreno difícil e várias restrições de movimento."
       },
       "area": {
         "forma": "nenhuma",
@@ -14137,9 +14185,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de terreno: cria terreno difícil.",
+      "descricao": "Mobilidade: ignora terreno difícil e várias restrições de movimento.",
       "tags": [
-        "controle"
+        "mobilidade"
       ]
     },
     {
@@ -14155,7 +14203,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de fogo (5d8) em alvo."
+        "resumo": "Dano e controle de área: cria uma muralha de fogo persistente."
       },
       "conjuracao": {
         "valor": 1,
@@ -14189,7 +14237,7 @@
         "dano": "5d8",
         "tipoDano": "fogo",
         "cura": "",
-        "efeito": "Dano de fogo (5d8) em alvo."
+        "efeito": "Dano e controle de área: cria uma muralha de fogo persistente."
       },
       "area": {
         "forma": "nenhuma",
@@ -14201,9 +14249,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de fogo (5d8) em alvo.",
+      "descricao": "Dano e controle de área: cria uma muralha de fogo persistente.",
       "tags": [
         "fogo",
+        "controle",
         "concentração"
       ]
     },
@@ -14218,7 +14267,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Exploração: cria um sensor mágico invisível móvel."
       },
       "conjuracao": {
         "valor": 1,
@@ -14252,7 +14301,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Exploração: cria um sensor mágico invisível móvel."
       },
       "area": {
         "forma": "nenhuma",
@@ -14264,7 +14313,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Exploração: cria um sensor mágico invisível móvel.",
       "tags": [
         "concentração"
       ]
@@ -14283,7 +14332,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de concussão em alvo."
+        "resumo": "Proteção: concede resistência a dano físico não mágico."
       },
       "conjuracao": {
         "valor": 1,
@@ -14317,7 +14366,7 @@
         "dano": "",
         "tipoDano": "concussão",
         "cura": "",
-        "efeito": "Dano de concussão em alvo."
+        "efeito": "Proteção: concede resistência a dano físico não mágico."
       },
       "area": {
         "forma": "nenhuma",
@@ -14329,9 +14378,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de concussão em alvo.",
+      "descricao": "Proteção: concede resistência a dano físico não mágico.",
       "tags": [
         "concussão",
+        "proteção",
         "concentração"
       ]
     },
@@ -14349,7 +14399,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de energia (4d6) em alvo."
+        "resumo": "Teletransporte: move o conjurador e uma criatura para um ponto dentro do alcance."
       },
       "conjuracao": {
         "valor": 1,
@@ -14383,7 +14433,7 @@
         "dano": "4d6",
         "tipoDano": "energia",
         "cura": "",
-        "efeito": "Dano de energia (4d6) em alvo."
+        "efeito": "Teletransporte: move o conjurador e uma criatura para um ponto dentro do alcance."
       },
       "area": {
         "forma": "nenhuma",
@@ -14395,9 +14445,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de energia (4d6) em alvo.",
+      "descricao": "Teletransporte: move o conjurador e uma criatura para um ponto dentro do alcance.",
       "tags": [
-        "energia"
+        "energia",
+        "teletransporte"
       ]
     },
     {
@@ -14412,7 +14463,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Toca uma criatura e concede a ela uma certa proteção contra a morte."
+        "resumo": "Proteção: evita uma queda a 0 PV e protege contra morte instantânea."
       },
       "conjuracao": {
         "valor": 1,
@@ -14446,7 +14497,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toca uma criatura e concede a ela uma certa proteção contra a morte."
+        "efeito": "Proteção: evita uma queda a 0 PV e protege contra morte instantânea."
       },
       "area": {
         "forma": "nenhuma",
@@ -14458,7 +14509,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toca uma criatura e concede a ela uma certa proteção contra a morte.",
+      "descricao": "Proteção: evita uma queda a 0 PV e protege contra morte instantânea.",
       "tags": [
         "proteção"
       ]
@@ -14474,7 +14525,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "resumo": "Proteção de área: bloqueia som, visão e teletransporte em uma zona privada."
       },
       "conjuracao": {
         "valor": 10,
@@ -14508,7 +14559,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "efeito": "Proteção de área: bloqueia som, visão e teletransporte em uma zona privada."
       },
       "area": {
         "forma": "nenhuma",
@@ -14520,9 +14571,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Teletransporte e reposicionamento de criaturas ou objetos.",
+      "descricao": "Proteção de área: bloqueia som, visão e teletransporte em uma zona privada.",
       "tags": [
-        "teletransporte"
+        "teletransporte",
+        "proteção"
       ]
     },
     {
@@ -14733,7 +14785,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Controle: puxa uma criatura em direção a uma vinha conjurada."
       },
       "conjuracao": {
         "valor": 1,
@@ -14767,7 +14819,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Controle: puxa uma criatura em direção a uma vinha conjurada."
       },
       "area": {
         "forma": "nenhuma",
@@ -14779,8 +14831,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Controle: puxa uma criatura em direção a uma vinha conjurada.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -14795,7 +14848,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Combate à distância: fornece munição mágica e ataques extras com ação bônus."
       },
       "conjuracao": {
         "valor": 1,
@@ -14829,7 +14882,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Combate à distância: fornece munição mágica e ataques extras com ação bônus."
       },
       "area": {
         "forma": "nenhuma",
@@ -14841,7 +14894,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Combate à distância: fornece munição mágica e ataques extras com ação bônus.",
       "tags": [
         "concentração"
       ]
@@ -14989,7 +15042,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Adquire a habilidade de entrar em uma árvore e se mover de dentro dela para dentro de outra árvore de mesmo tipo à até 150 metros."
+        "resumo": "Mobilidade: teletransporta entre árvores do mesmo tipo."
       },
       "conjuracao": {
         "valor": 1,
@@ -15023,7 +15076,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Adquire a habilidade de entrar em uma árvore e se mover de dentro dela para dentro de outra árvore de mesmo tipo à até 150 metros."
+        "efeito": "Mobilidade: teletransporta entre árvores do mesmo tipo."
       },
       "area": {
         "forma": "nenhuma",
@@ -15035,8 +15088,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Adquire a habilidade de entrar em uma árvore e se mover de dentro dela para dentro de outra árvore de mesmo tipo à até 150 metros.",
+      "descricao": "Mobilidade: teletransporta entre árvores do mesmo tipo.",
       "tags": [
+        "mobilidade",
         "concentração"
       ]
     },
@@ -15242,7 +15296,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Contata sua divindade ou um representante divino e faz até três perguntas que podem ser respondidas com um sim ou não."
+        "resumo": "Adivinhação: faz até três perguntas a uma entidade divina."
       },
       "conjuracao": {
         "valor": 1,
@@ -15276,7 +15330,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Contata sua divindade ou um representante divino e faz até três perguntas que podem ser respondidas com um sim ou não."
+        "efeito": "Adivinhação: faz até três perguntas a uma entidade divina."
       },
       "area": {
         "forma": "nenhuma",
@@ -15288,8 +15342,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Contata sua divindade ou um representante divino e faz até três perguntas que podem ser respondidas com um sim ou não.",
+      "descricao": "Adivinhação: faz até três perguntas a uma entidade divina.",
       "tags": [
+        "adivinhação",
         "ritual"
       ]
     },
@@ -15305,7 +15360,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Você, momentaneamente, se torna uno com a natureza e ganha conhecimento do território ao seu redor."
+        "resumo": "Adivinhação: revela informações sobre terreno, criaturas e estruturas próximas."
       },
       "conjuracao": {
         "valor": 1,
@@ -15339,7 +15394,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você, momentaneamente, se torna uno com a natureza e ganha conhecimento do território ao seu redor."
+        "efeito": "Adivinhação: revela informações sobre terreno, criaturas e estruturas próximas."
       },
       "area": {
         "forma": "nenhuma",
@@ -15351,8 +15406,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Você, momentaneamente, se torna uno com a natureza e ganha conhecimento do território ao seu redor.",
+      "descricao": "Adivinhação: revela informações sobre terreno, criaturas e estruturas próximas.",
       "tags": [
+        "adivinhação",
         "ritual"
       ]
     },
@@ -15433,7 +15489,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Nomeie ou descreva uma pessoa, local ou objeto."
+        "resumo": "Adivinhação: revela conhecimento e lendas sobre pessoa, local ou objeto."
       },
       "conjuracao": {
         "valor": 10,
@@ -15467,7 +15523,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Nomeie ou descreva uma pessoa, local ou objeto."
+        "efeito": "Adivinhação: revela conhecimento e lendas sobre pessoa, local ou objeto."
       },
       "area": {
         "forma": "nenhuma",
@@ -15479,8 +15535,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Nomeie ou descreva uma pessoa, local ou objeto.",
-      "tags": []
+      "descricao": "Adivinhação: revela conhecimento e lendas sobre pessoa, local ou objeto.",
+      "tags": [
+        "adivinhação"
+      ]
     },
     {
       "id": "conjurar-elemental",
@@ -15619,7 +15677,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de visão em área: cria escuridão mágica."
+        "resumo": "Proteção/controle de área: consagra uma região com efeito sagrado duradouro."
       },
       "conjuracao": {
         "valor": 24,
@@ -15653,7 +15711,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de visão em área: cria escuridão mágica."
+        "efeito": "Proteção/controle de área: consagra uma região com efeito sagrado duradouro."
       },
       "area": {
         "forma": "nenhuma",
@@ -15665,9 +15723,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de visão em área: cria escuridão mágica.",
+      "descricao": "Proteção/controle de área: consagra uma região com efeito sagrado duradouro.",
       "tags": [
-        "controle"
+        "controle",
+        "proteção"
       ]
     },
     {
@@ -15746,7 +15805,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Puxa mechas de matéria sombria da Umbra para criar objetos inanimados de matéria vegetal dentro do alcance: bens finos, cordas, madeira ou algo..."
+        "resumo": "Conjuração: cria temporariamente um objeto inanimado."
       },
       "conjuracao": {
         "valor": 1,
@@ -15780,7 +15839,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Puxa mechas de matéria sombria da Umbra para criar objetos inanimados de matéria vegetal dentro do alcance: bens finos, cordas, madeira ou algo..."
+        "efeito": "Conjuração: cria temporariamente um objeto inanimado."
       },
       "area": {
         "forma": "cubo",
@@ -15792,7 +15851,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Puxa mechas de matéria sombria da Umbra para criar objetos inanimados de matéria vegetal dentro do alcance: bens finos, cordas, madeira ou algo...",
+      "descricao": "Conjuração: cria temporariamente um objeto inanimado.",
       "tags": [
         "área"
       ]
@@ -15808,7 +15867,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Uma passagem aparece em um ponto, à sua escolha, que você possa ver em uma superfície de madeira, gesso ou rocha (como um muro, um teto ou um..."
+        "resumo": "Utilidade: abre uma passagem temporária através de uma superfície sólida."
       },
       "conjuracao": {
         "valor": 1,
@@ -15842,7 +15901,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Uma passagem aparece em um ponto, à sua escolha, que você possa ver em uma superfície de madeira, gesso ou rocha (como um muro, um teto ou um..."
+        "efeito": "Utilidade: abre uma passagem temporária através de uma superfície sólida."
       },
       "area": {
         "forma": "nenhuma",
@@ -15854,8 +15913,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Uma passagem aparece em um ponto, à sua escolha, que você possa ver em uma superfície de madeira, gesso ou rocha (como um muro, um teto ou um...",
-      "tags": []
+      "descricao": "Utilidade: abre uma passagem temporária através de uma superfície sólida.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "cupula-antivida",
@@ -15868,7 +15929,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Uma barreira cintilante se estende de você até 3 metros de raio, e se move com você, permanecendo centrada em você e restringindo criaturas..."
+        "resumo": "Proteção em área: impede criaturas vivas de atravessarem a barreira."
       },
       "conjuracao": {
         "valor": 1,
@@ -15902,7 +15963,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Uma barreira cintilante se estende de você até 3 metros de raio, e se move com você, permanecendo centrada em você e restringindo criaturas..."
+        "efeito": "Proteção em área: impede criaturas vivas de atravessarem a barreira."
       },
       "area": {
         "forma": "emanacao",
@@ -15914,9 +15975,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Uma barreira cintilante se estende de você até 3 metros de raio, e se move com você, permanecendo centrada em você e restringindo criaturas...",
+      "descricao": "Proteção em área: impede criaturas vivas de atravessarem a barreira.",
       "tags": [
         "área",
+        "proteção",
         "concentração"
       ]
     },
@@ -16187,7 +16249,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Proteção/banimento: protege contra entidades sobrenaturais e pode expulsá-las."
       },
       "conjuracao": {
         "valor": 1,
@@ -16221,7 +16283,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Proteção/banimento: protege contra entidades sobrenaturais e pode expulsá-las."
       },
       "area": {
         "forma": "nenhuma",
@@ -16233,8 +16295,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Proteção/banimento: protege contra entidades sobrenaturais e pode expulsá-las.",
       "tags": [
+        "proteção",
         "concentração"
       ]
     },
@@ -16636,7 +16699,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Proteção/controle de área: cria uma barreira invisível de força."
       },
       "conjuracao": {
         "valor": 1,
@@ -16670,7 +16733,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Proteção/controle de área: cria uma barreira invisível de força."
       },
       "area": {
         "forma": "nenhuma",
@@ -16682,8 +16745,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Proteção/controle de área: cria uma barreira invisível de força.",
       "tags": [
+        "controle",
+        "proteção",
         "concentração"
       ]
     },
@@ -16700,7 +16765,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Uma muralha não-mágica de rocha sólida surge do nada num ponto, à sua escolha, dentro do alcance."
+        "resumo": "Controle de terreno: cria uma muralha sólida de pedra."
       },
       "conjuracao": {
         "valor": 1,
@@ -16734,7 +16799,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Uma muralha não-mágica de rocha sólida surge do nada num ponto, à sua escolha, dentro do alcance."
+        "efeito": "Controle de terreno: cria uma muralha sólida de pedra."
       },
       "area": {
         "forma": "nenhuma",
@@ -16746,8 +16811,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Uma muralha não-mágica de rocha sólida surge do nada num ponto, à sua escolha, dentro do alcance.",
+      "descricao": "Controle de terreno: cria uma muralha sólida de pedra.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -17017,7 +17083,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Toca um humanoide morto ou um pedaço de um humanoide morto."
+        "resumo": "Ressurreição: traz um humanoide morto de volta em um novo corpo."
       },
       "conjuracao": {
         "valor": 1,
@@ -17051,7 +17117,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toca um humanoide morto ou um pedaço de um humanoide morto."
+        "efeito": "Ressurreição: traz um humanoide morto de volta em um novo corpo."
       },
       "area": {
         "forma": "nenhuma",
@@ -17063,8 +17129,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toca um humanoide morto ou um pedaço de um humanoide morto.",
-      "tags": []
+      "descricao": "Ressurreição: traz um humanoide morto de volta em um novo corpo.",
+      "tags": [
+        "ressurreição"
+      ]
     },
     {
       "id": "restauracao-maior",
@@ -17079,7 +17147,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Imbui uma criatura que você toca, com energia positiva para desfazer um efeito debilitante."
+        "resumo": "Restauração: remove efeitos debilitantes, maldições e reduções severas."
       },
       "conjuracao": {
         "valor": 1,
@@ -17113,7 +17181,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Imbui uma criatura que você toca, com energia positiva para desfazer um efeito debilitante."
+        "efeito": "Restauração: remove efeitos debilitantes, maldições e reduções severas."
       },
       "area": {
         "forma": "nenhuma",
@@ -17125,7 +17193,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Imbui uma criatura que você toca, com energia positiva para desfazer um efeito debilitante.",
+      "descricao": "Restauração: remove efeitos debilitantes, maldições e reduções severas.",
       "tags": []
     },
     {
@@ -17399,7 +17467,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Adivinhação: observa remotamente uma criatura ou local conhecido."
       },
       "conjuracao": {
         "valor": 10,
@@ -17433,7 +17501,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Adivinhação: observa remotamente uma criatura ou local conhecido."
       },
       "area": {
         "forma": "nenhuma",
@@ -17445,8 +17513,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Adivinhação: observa remotamente uma criatura ou local conhecido.",
       "tags": [
+        "adivinhação",
         "concentração"
       ]
     },
@@ -17461,7 +17530,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Comunicação mágica à distância ou por telepatia."
+        "resumo": "Invocação social: pede auxílio ou serviço a uma entidade extraplanar."
       },
       "conjuracao": {
         "valor": 10,
@@ -17495,7 +17564,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Comunicação mágica à distância ou por telepatia."
+        "efeito": "Invocação social: pede auxílio ou serviço a uma entidade extraplanar."
       },
       "area": {
         "forma": "nenhuma",
@@ -17507,8 +17576,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Comunicação mágica à distância ou por telepatia.",
-      "tags": []
+      "descricao": "Invocação social: pede auxílio ou serviço a uma entidade extraplanar.",
+      "tags": [
+        "invocação"
+      ]
     },
     {
       "id": "ataque-visual",
@@ -17650,7 +17721,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de cortante (6d10) em alvo."
+        "resumo": "Dano e controle de área: cria uma barreira de lâminas giratórias."
       },
       "conjuracao": {
         "valor": 1,
@@ -17684,7 +17755,7 @@
         "dano": "6d10",
         "tipoDano": "cortante",
         "cura": "",
-        "efeito": "Dano de cortante (6d10) em alvo."
+        "efeito": "Dano e controle de área: cria uma barreira de lâminas giratórias."
       },
       "area": {
         "forma": "nenhuma",
@@ -17696,9 +17767,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de cortante (6d10) em alvo.",
+      "descricao": "Dano e controle de área: cria uma barreira de lâminas giratórias.",
       "tags": [
         "cortante",
+        "controle",
         "concentração"
       ]
     },
@@ -17713,7 +17785,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de concussão em alvo."
+        "resumo": "Mobilidade: transforma o grupo em forma de nuvem para voo rápido."
       },
       "conjuracao": {
         "valor": 1,
@@ -17747,7 +17819,7 @@
         "dano": "",
         "tipoDano": "concussão",
         "cura": "",
-        "efeito": "Dano de concussão em alvo."
+        "efeito": "Mobilidade: transforma o grupo em forma de nuvem para voo rápido."
       },
       "area": {
         "forma": "nenhuma",
@@ -17759,9 +17831,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de concussão em alvo.",
+      "descricao": "Mobilidade: transforma o grupo em forma de nuvem para voo rápido.",
       "tags": [
-        "concussão"
+        "concussão",
+        "mobilidade",
+        "transformação"
       ]
     },
     {
@@ -18093,7 +18167,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Necromancia: cria mortos-vivos poderosos sob comando."
       },
       "conjuracao": {
         "valor": 1,
@@ -18127,7 +18201,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Necromancia: cria mortos-vivos poderosos sob comando."
       },
       "area": {
         "forma": "nenhuma",
@@ -18139,8 +18213,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
-      "tags": []
+      "descricao": "Necromancia: cria mortos-vivos poderosos sob comando.",
+      "tags": [
+        "necromancia"
+      ]
     },
     {
       "id": "cura-completa",
@@ -18217,7 +18293,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "resumo": "Controle de alvo: força uma criatura a dançar e prejudica suas ações."
       },
       "conjuracao": {
         "valor": 1,
@@ -18251,7 +18327,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Suporte: concede bônus ou vantagem a testes/ataques."
+        "efeito": "Controle de alvo: força uma criatura a dançar e prejudica suas ações."
       },
       "area": {
         "forma": "nenhuma",
@@ -18263,8 +18339,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Suporte: concede bônus ou vantagem a testes/ataques.",
+      "descricao": "Controle de alvo: força uma criatura a dançar e prejudica suas ações.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -18406,7 +18483,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Permite que você encontre a rota física mais curta e direta para um local específico estático, que você seja familiar, no mesmo plano de existência."
+        "resumo": "Navegação: revela a rota física mais direta até um destino conhecido."
       },
       "conjuracao": {
         "valor": 1,
@@ -18440,7 +18517,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Permite que você encontre a rota física mais curta e direta para um local específico estático, que você seja familiar, no mesmo plano de existência."
+        "efeito": "Navegação: revela a rota física mais direta até um destino conhecido."
       },
       "area": {
         "forma": "nenhuma",
@@ -18452,7 +18529,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Permite que você encontre a rota física mais curta e direta para um local específico estático, que você seja familiar, no mesmo plano de existência.",
+      "descricao": "Navegação: revela a rota física mais direta até um destino conhecido.",
       "tags": [
         "concentração"
       ]
@@ -18532,7 +18609,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Uma barreira imóvel, levemente cintilante, surge do nada num raio de 3 metros centrado em você e permanece pela duração."
+        "resumo": "Proteção em área: bloqueia magias de níveis inferiores."
       },
       "conjuracao": {
         "valor": 1,
@@ -18566,7 +18643,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Uma barreira imóvel, levemente cintilante, surge do nada num raio de 3 metros centrado em você e permanece pela duração."
+        "efeito": "Proteção em área: bloqueia magias de níveis inferiores."
       },
       "area": {
         "forma": "emanacao",
@@ -18578,9 +18655,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Uma barreira imóvel, levemente cintilante, surge do nada num raio de 3 metros centrado em você e permanece pela duração.",
+      "descricao": "Proteção em área: bloqueia magias de níveis inferiores.",
       "tags": [
         "área",
+        "proteção",
         "concentração"
       ]
     },
@@ -18658,7 +18736,7 @@
       ],
       "ritual": true,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Utilidade: marca um objeto para poder invocá-lo instantaneamente."
       },
       "conjuracao": {
         "valor": 1,
@@ -18692,7 +18770,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Utilidade: marca um objeto para poder invocá-lo instantaneamente."
       },
       "area": {
         "forma": "nenhuma",
@@ -18704,8 +18782,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Utilidade: marca um objeto para poder invocá-lo instantaneamente.",
       "tags": [
+        "invocação",
+        "utilidade",
         "ritual"
       ]
     },
@@ -18722,7 +18802,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Escolha uma área de terreno não maior que 12 metros de lado, dentro do alcance."
+        "resumo": "Controle de terreno: remodela uma grande área de terra."
       },
       "conjuracao": {
         "valor": 1,
@@ -18756,7 +18836,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma área de terreno não maior que 12 metros de lado, dentro do alcance."
+        "efeito": "Controle de terreno: remodela uma grande área de terra."
       },
       "area": {
         "forma": "quadrado",
@@ -18768,9 +18848,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Escolha uma área de terreno não maior que 12 metros de lado, dentro do alcance.",
+      "descricao": "Controle de terreno: remodela uma grande área de terra.",
       "tags": [
         "área",
+        "controle",
         "concentração"
       ]
     },
@@ -19232,7 +19313,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Seu corpo entra em um estado catatônico, enquanto sua alma o abandona e entra num recipiente que você usa como componente material da magia."
+        "resumo": "Necromancia: transfere a alma para um recipiente e permite possuir outro corpo."
       },
       "conjuracao": {
         "valor": 1,
@@ -19266,7 +19347,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Seu corpo entra em um estado catatônico, enquanto sua alma o abandona e entra num recipiente que você usa como componente material da magia."
+        "efeito": "Necromancia: transfere a alma para um recipiente e permite possuir outro corpo."
       },
       "area": {
         "forma": "nenhuma",
@@ -19278,8 +19359,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Seu corpo entra em um estado catatônico, enquanto sua alma o abandona e entra num recipiente que você usa como componente material da magia.",
-      "tags": []
+      "descricao": "Necromancia: transfere a alma para um recipiente e permite possuir outro corpo.",
+      "tags": [
+        "necromancia"
+      ]
     },
     {
       "id": "sugestao-em-massa",
@@ -19357,7 +19440,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cria uma ligação mágica entre uma planta inanimada Grande ou maior, dentro do alcance, e outra planta a qualquer distância, no mesmo plano de..."
+        "resumo": "Teletransporte: cria passagem instantânea entre duas árvores."
       },
       "conjuracao": {
         "valor": 1,
@@ -19391,7 +19474,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cria uma ligação mágica entre uma planta inanimada Grande ou maior, dentro do alcance, e outra planta a qualquer distância, no mesmo plano de..."
+        "efeito": "Teletransporte: cria passagem instantânea entre duas árvores."
       },
       "area": {
         "forma": "nenhuma",
@@ -19403,8 +19486,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cria uma ligação mágica entre uma planta inanimada Grande ou maior, dentro do alcance, e outra planta a qualquer distância, no mesmo plano de...",
-      "tags": []
+      "descricao": "Teletransporte: cria passagem instantânea entre duas árvores.",
+      "tags": [
+        "teletransporte"
+      ]
     },
     {
       "id": "visao-da-verdade",
@@ -19482,7 +19567,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Um feixe de luz amarelada é disparado da ponta do seu dedo, então se condensa e aguarda no ponto escolhido, dentro do alcance, como uma conta..."
+        "resumo": "Dano de fogo em área atrasado/controlável, com explosão crescente."
       },
       "conjuracao": {
         "valor": 1,
@@ -19516,7 +19601,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Um feixe de luz amarelada é disparado da ponta do seu dedo, então se condensa e aguarda no ponto escolhido, dentro do alcance, como uma conta..."
+        "efeito": "Dano de fogo em área atrasado/controlável, com explosão crescente."
       },
       "area": {
         "forma": "nenhuma",
@@ -19528,7 +19613,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Um feixe de luz amarelada é disparado da ponta do seu dedo, então se condensa e aguarda no ponto escolhido, dentro do alcance, como uma conta...",
+      "descricao": "Dano de fogo em área atrasado/controlável, com explosão crescente.",
       "tags": [
         "concentração"
       ]
@@ -19675,7 +19760,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de energia em alvo."
+        "resumo": "Mobilidade planar: entra no Plano Etéreo."
       },
       "conjuracao": {
         "valor": 1,
@@ -19709,7 +19794,7 @@
         "dano": "",
         "tipoDano": "energia",
         "cura": "",
-        "efeito": "Dano de energia em alvo."
+        "efeito": "Mobilidade planar: entra no Plano Etéreo."
       },
       "area": {
         "forma": "nenhuma",
@@ -19721,9 +19806,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de energia em alvo.",
+      "descricao": "Mobilidade planar: entra no Plano Etéreo.",
       "tags": [
-        "energia"
+        "energia",
+        "mobilidade"
       ]
     },
     {
@@ -19739,7 +19825,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Inverte a gravidade num cilindro de 15 metros de raio por 30 metros de altura, centrado num ponto dentro do alcance."
+        "resumo": "Controle de área: inverte a gravidade em um grande cilindro."
       },
       "conjuracao": {
         "valor": 1,
@@ -19773,7 +19859,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Inverte a gravidade num cilindro de 15 metros de raio por 30 metros de altura, centrado num ponto dentro do alcance."
+        "efeito": "Controle de área: inverte a gravidade em um grande cilindro."
       },
       "area": {
         "forma": "cilindro",
@@ -19785,9 +19871,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Inverte a gravidade num cilindro de 15 metros de raio por 30 metros de altura, centrado num ponto dentro do alcance.",
+      "descricao": "Controle de área: inverte a gravidade em um grande cilindro.",
       "tags": [
         "área",
+        "controle",
         "concentração"
       ]
     },
@@ -19802,7 +19889,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Proteção/contenção: coloca uma criatura ou objeto em estado de isolamento mágico."
       },
       "conjuracao": {
         "valor": 1,
@@ -19836,7 +19923,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Proteção/contenção: coloca uma criatura ou objeto em estado de isolamento mágico."
       },
       "area": {
         "forma": "nenhuma",
@@ -19848,8 +19935,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
-      "tags": []
+      "descricao": "Proteção/contenção: coloca uma criatura ou objeto em estado de isolamento mágico.",
+      "tags": [
+        "proteção"
+      ]
     },
     {
       "id": "mansao-magnifica-de-mordenkainen",
@@ -19863,7 +19952,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Utilidade/abrigo: cria uma mansão extradimensional segura e equipada."
       },
       "conjuracao": {
         "valor": 1,
@@ -19897,7 +19986,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Utilidade/abrigo: cria uma mansão extradimensional segura e equipada."
       },
       "area": {
         "forma": "nenhuma",
@@ -19909,8 +19998,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
-      "tags": []
+      "descricao": "Utilidade/abrigo: cria uma mansão extradimensional segura e equipada.",
+      "tags": [
+        "utilidade"
+      ]
     },
     {
       "id": "miragem",
@@ -19925,7 +20016,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Percepção aprimorada: concede visão verdadeira."
+        "resumo": "Ilusão de terreno em larga escala, alterando aparência e sensação da área."
       },
       "conjuracao": {
         "valor": 10,
@@ -19959,7 +20050,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Percepção aprimorada: concede visão verdadeira."
+        "efeito": "Ilusão de terreno em larga escala, alterando aparência e sensação da área."
       },
       "area": {
         "forma": "nenhuma",
@@ -19971,8 +20062,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Percepção aprimorada: concede visão verdadeira.",
-      "tags": []
+      "descricao": "Ilusão de terreno em larga escala, alterando aparência e sensação da área.",
+      "tags": [
+        "ilusão"
+      ]
     },
     {
       "id": "palavra-divina",
@@ -19985,7 +20078,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Profere uma palavra divina, imbuída com o poder que moldou o mundo na aurora da criação."
+        "resumo": "Controle em área: afeta criaturas conforme seus PV e pode bani-las."
       },
       "conjuracao": {
         "valor": 1,
@@ -20019,7 +20112,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Profere uma palavra divina, imbuída com o poder que moldou o mundo na aurora da criação."
+        "efeito": "Controle em área: afeta criaturas conforme seus PV e pode bani-las."
       },
       "area": {
         "forma": "nenhuma",
@@ -20031,8 +20124,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Profere uma palavra divina, imbuída com o poder que moldou o mundo na aurora da criação.",
-      "tags": []
+      "descricao": "Controle em área: afeta criaturas conforme seus PV e pode bani-las.",
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "prisao-de-energia",
@@ -20047,7 +20142,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Controle de alvo: aprisiona uma criatura em uma barreira de força."
       },
       "conjuracao": {
         "valor": 1,
@@ -20081,7 +20176,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Controle de alvo: aprisiona uma criatura em uma barreira de força."
       },
       "area": {
         "forma": "nenhuma",
@@ -20093,8 +20188,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
-      "tags": []
+      "descricao": "Controle de alvo: aprisiona uma criatura em uma barreira de força.",
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "projetar-imagem",
@@ -20108,7 +20205,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: cega."
+        "resumo": "Ilusão: cria uma duplicata ilusória remota do conjurador."
       },
       "conjuracao": {
         "valor": 1,
@@ -20142,7 +20239,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: cega."
+        "efeito": "Ilusão: cria uma duplicata ilusória remota do conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -20154,9 +20251,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: cega.",
+      "descricao": "Ilusão: cria uma duplicata ilusória remota do conjurador.",
       "tags": [
-        "controle",
+        "ilusão",
         "concentração"
       ]
     },
@@ -20241,7 +20338,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cura e recuperação de pontos de vida."
+        "resumo": "Cura contínua: restaura PV e regenera membros perdidos."
       },
       "conjuracao": {
         "valor": 1,
@@ -20275,7 +20372,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "4d8 + 15",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Cura contínua: restaura PV e regenera membros perdidos."
       },
       "area": {
         "forma": "nenhuma",
@@ -20287,7 +20384,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Cura contínua: restaura PV e regenera membros perdidos.",
       "tags": [
         "cura"
       ]
@@ -20431,7 +20528,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cura e recuperação de pontos de vida."
+        "resumo": "Criação: produz uma duplicata parcialmente real de uma criatura."
       },
       "conjuracao": {
         "valor": 12,
@@ -20465,7 +20562,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "pontos de vida",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Criação: produz uma duplicata parcialmente real de uma criatura."
       },
       "area": {
         "forma": "nenhuma",
@@ -20477,10 +20574,8 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cura e recuperação de pontos de vida.",
-      "tags": [
-        "cura"
-      ]
+      "descricao": "Criação: produz uma duplicata parcialmente real de uma criatura.",
+      "tags": []
     },
     {
       "id": "teletransporte",
@@ -20495,7 +20590,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de energia (3d10) em área (cubo)."
+        "resumo": "Teletransporte de grupo ou objeto para um destino conhecido."
       },
       "conjuracao": {
         "valor": 1,
@@ -20529,7 +20624,7 @@
         "dano": "3d10",
         "tipoDano": "energia",
         "cura": "",
-        "efeito": "Dano de energia (3d10) em área (cubo)."
+        "efeito": "Teletransporte de grupo ou objeto para um destino conhecido."
       },
       "area": {
         "forma": "cubo",
@@ -20541,10 +20636,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de energia (3d10) em área (cubo).",
+      "descricao": "Teletransporte de grupo ou objeto para um destino conhecido.",
       "tags": [
         "energia",
-        "área"
+        "área",
+        "teletransporte"
       ]
     },
     {
@@ -20689,7 +20785,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: amedronta."
+        "resumo": "Controle social de longa duração: atrai ou repele criaturas de um alvo ou área."
       },
       "conjuracao": {
         "valor": 1,
@@ -20723,7 +20819,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: amedronta."
+        "efeito": "Controle social de longa duração: atrai ou repele criaturas de um alvo ou área."
       },
       "area": {
         "forma": "nenhuma",
@@ -20735,7 +20831,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: amedronta.",
+      "descricao": "Controle social de longa duração: atrai ou repele criaturas de um alvo ou área.",
       "tags": [
         "controle"
       ]
@@ -20751,7 +20847,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: cega."
+        "resumo": "Proteção em grupo: concede defesa e pode cegar atacantes."
       },
       "conjuracao": {
         "valor": 1,
@@ -20785,7 +20881,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: cega."
+        "efeito": "Proteção em grupo: concede defesa e pode cegar atacantes."
       },
       "area": {
         "forma": "nenhuma",
@@ -20797,9 +20893,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: cega.",
+      "descricao": "Proteção em grupo: concede defesa e pode cegar atacantes.",
       "tags": [
-        "controle",
+        "proteção",
         "concentração"
       ]
     },
@@ -20815,7 +20911,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Concede ou manipula invisibilidade."
+        "resumo": "Supressão mágica em área: neutraliza magias e efeitos mágicos."
       },
       "conjuracao": {
         "valor": 1,
@@ -20849,7 +20945,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Concede ou manipula invisibilidade."
+        "efeito": "Supressão mágica em área: neutraliza magias e efeitos mágicos."
       },
       "area": {
         "forma": "emanacao",
@@ -20861,7 +20957,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Concede ou manipula invisibilidade.",
+      "descricao": "Supressão mágica em área: neutraliza magias e efeitos mágicos.",
       "tags": [
         "área",
         "concentração"
@@ -20878,7 +20974,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Produz uma duplicata inerte de uma criatura viva como uma garantia contra a morte."
+        "resumo": "Ressurreição preventiva: cria um corpo reserva para a alma após a morte."
       },
       "conjuracao": {
         "valor": 1,
@@ -20912,7 +21008,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Produz uma duplicata inerte de uma criatura viva como uma garantia contra a morte."
+        "efeito": "Ressurreição preventiva: cria um corpo reserva para a alma após a morte."
       },
       "area": {
         "forma": "nenhuma",
@@ -20924,8 +21020,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Produz uma duplicata inerte de uma criatura viva como uma garantia contra a morte.",
-      "tags": []
+      "descricao": "Ressurreição preventiva: cria um corpo reserva para a alma após a morte.",
+      "tags": [
+        "ressurreição"
+      ]
     },
     {
       "id": "controlar-o-clima",
@@ -20940,7 +21038,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Toma controle do clima numa área de 7,5 quilômetros de você pela duração."
+        "resumo": "Controle ambiental: altera o clima de uma grande região."
       },
       "conjuracao": {
         "valor": 10,
@@ -20974,7 +21072,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Toma controle do clima numa área de 7,5 quilômetros de você pela duração."
+        "efeito": "Controle ambiental: altera o clima de uma grande região."
       },
       "area": {
         "forma": "nenhuma",
@@ -20986,7 +21084,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Toma controle do clima numa área de 7,5 quilômetros de você pela duração.",
+      "descricao": "Controle ambiental: altera o clima de uma grande região.",
       "tags": [
         "controle",
         "concentração"
@@ -21198,7 +21296,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Sua magia transforma você em bestas."
+        "resumo": "Transformação em grupo: converte criaturas voluntárias em bestas."
       },
       "conjuracao": {
         "valor": 1,
@@ -21232,7 +21330,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Sua magia transforma você em bestas."
+        "efeito": "Transformação em grupo: converte criaturas voluntárias em bestas."
       },
       "area": {
         "forma": "nenhuma",
@@ -21244,8 +21342,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Sua magia transforma você em bestas.",
+      "descricao": "Transformação em grupo: converte criaturas voluntárias em bestas.",
       "tags": [
+        "transformação",
         "concentração"
       ]
     },
@@ -21260,7 +21359,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Bane uma criatura que você possa ver, dentro do alcance, para um semiplano labiríntico."
+        "resumo": "Controle: bane temporariamente uma criatura para um labirinto extraplanar."
       },
       "conjuracao": {
         "valor": 1,
@@ -21294,7 +21393,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Bane uma criatura que você possa ver, dentro do alcance, para um semiplano labiríntico."
+        "efeito": "Controle: bane temporariamente uma criatura para um labirinto extraplanar."
       },
       "area": {
         "forma": "nenhuma",
@@ -21306,8 +21405,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Bane uma criatura que você possa ver, dentro do alcance, para um semiplano labiríntico.",
+      "descricao": "Controle: bane temporariamente uma criatura para um labirinto extraplanar.",
       "tags": [
+        "controle",
         "concentração"
       ]
     },
@@ -21323,7 +21423,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de psíquico em alvo."
+        "resumo": "Proteção mental: concede imunidade a dano psíquico, adivinhação e controle mental."
       },
       "conjuracao": {
         "valor": 1,
@@ -21357,7 +21457,7 @@
         "dano": "",
         "tipoDano": "psíquico",
         "cura": "",
-        "efeito": "Dano de psíquico em alvo."
+        "efeito": "Proteção mental: concede imunidade a dano psíquico, adivinhação e controle mental."
       },
       "area": {
         "forma": "nenhuma",
@@ -21369,9 +21469,12 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de psíquico em alvo.",
+      "descricao": "Proteção mental: concede imunidade a dano psíquico, adivinhação e controle mental.",
       "tags": [
-        "psíquico"
+        "psíquico",
+        "controle",
+        "proteção",
+        "adivinhação"
       ]
     },
     {
@@ -21386,7 +21489,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Até o fim da magia, quando você realizar um teste de Carisma, você pode substituir o número rolado por você por um 15."
+        "resumo": "Suporte social: garante resultados mínimos elevados em testes de Carisma."
       },
       "conjuracao": {
         "valor": 1,
@@ -21420,7 +21523,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Até o fim da magia, quando você realizar um teste de Carisma, você pode substituir o número rolado por você por um 15."
+        "efeito": "Suporte social: garante resultados mínimos elevados em testes de Carisma."
       },
       "area": {
         "forma": "nenhuma",
@@ -21432,7 +21535,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Até o fim da magia, quando você realizar um teste de Carisma, você pode substituir o número rolado por você por um 15.",
+      "descricao": "Suporte social: garante resultados mínimos elevados em testes de Carisma.",
       "tags": []
     },
     {
@@ -21513,7 +21616,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Pronuncia uma palavra de poder que pode oprimir a mente de uma criatura que você possa ver, dentro do alcance, deixando-a estupefata."
+        "resumo": "Controle de alvo: atordoa uma criatura com uma palavra de poder."
       },
       "conjuracao": {
         "valor": 1,
@@ -21547,7 +21650,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Pronuncia uma palavra de poder que pode oprimir a mente de uma criatura que você possa ver, dentro do alcance, deixando-a estupefata."
+        "efeito": "Controle de alvo: atordoa uma criatura com uma palavra de poder."
       },
       "area": {
         "forma": "nenhuma",
@@ -21559,8 +21662,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Pronuncia uma palavra de poder que pode oprimir a mente de uma criatura que você possa ver, dentro do alcance, deixando-a estupefata.",
-      "tags": []
+      "descricao": "Controle de alvo: atordoa uma criatura com uma palavra de poder.",
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "semiplano",
@@ -21574,7 +21679,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cria uma porta umbral em uma superfície sólida e lisa que você possa ver, dentro do alcance."
+        "resumo": "Criação planar: abre acesso a um semiplano extradimensional."
       },
       "conjuracao": {
         "valor": 1,
@@ -21608,7 +21713,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cria uma porta umbral em uma superfície sólida e lisa que você possa ver, dentro do alcance."
+        "efeito": "Criação planar: abre acesso a um semiplano extradimensional."
       },
       "area": {
         "forma": "nenhuma",
@@ -21620,7 +21725,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cria uma porta umbral em uma superfície sólida e lisa que você possa ver, dentro do alcance.",
+      "descricao": "Criação planar: abre acesso a um semiplano extradimensional.",
       "tags": []
     },
     {
@@ -21696,7 +21801,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de concussão (5d6) em alvo; derruba."
+        "resumo": "Controle e destruição de área: provoca tremores, fissuras e colapsos."
       },
       "conjuracao": {
         "valor": 1,
@@ -21730,7 +21835,7 @@
         "dano": "5d6",
         "tipoDano": "concussão",
         "cura": "",
-        "efeito": "Dano de concussão (5d6) em alvo; derruba."
+        "efeito": "Controle e destruição de área: provoca tremores, fissuras e colapsos."
       },
       "area": {
         "forma": "nenhuma",
@@ -21742,9 +21847,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de concussão (5d6) em alvo; derruba.",
+      "descricao": "Controle e destruição de área: provoca tremores, fissuras e colapsos.",
       "tags": [
         "concussão",
+        "controle",
         "concentração"
       ]
     },
@@ -21759,7 +21865,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de concussão (6d10) em alvo; derruba."
+        "resumo": "Dano e controle de área: cria uma muralha de água que arrasta criaturas."
       },
       "conjuracao": {
         "valor": 1,
@@ -21793,7 +21899,7 @@
         "dano": "6d10",
         "tipoDano": "concussão",
         "cura": "",
-        "efeito": "Dano de concussão (6d10) em alvo; derruba."
+        "efeito": "Dano e controle de área: cria uma muralha de água que arrasta criaturas."
       },
       "area": {
         "forma": "nenhuma",
@@ -21805,9 +21911,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de concussão (6d10) em alvo; derruba.",
+      "descricao": "Dano e controle de área: cria uma muralha de água que arrasta criaturas.",
       "tags": [
         "concussão",
+        "controle",
         "concentração"
       ]
     },
@@ -21823,7 +21930,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: derruba."
+        "resumo": "Transformação: assume formas de diferentes criaturas mantendo capacidades mentais."
       },
       "conjuracao": {
         "valor": 1,
@@ -21857,7 +21964,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: derruba."
+        "efeito": "Transformação: assume formas de diferentes criaturas mantendo capacidades mentais."
       },
       "area": {
         "forma": "nenhuma",
@@ -21869,9 +21976,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: derruba.",
+      "descricao": "Transformação: assume formas de diferentes criaturas mantendo capacidades mentais.",
       "tags": [
-        "controle",
+        "transformação",
         "concentração"
       ]
     },
@@ -21887,7 +21994,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "resumo": "Controle permanente: aprisiona uma criatura por meio mágico."
       },
       "conjuracao": {
         "valor": 1,
@@ -21921,7 +22028,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Teletransporte e reposicionamento de criaturas ou objetos."
+        "efeito": "Controle permanente: aprisiona uma criatura por meio mágico."
       },
       "area": {
         "forma": "nenhuma",
@@ -21933,9 +22040,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Teletransporte e reposicionamento de criaturas ou objetos.",
+      "descricao": "Controle permanente: aprisiona uma criatura por meio mágico.",
       "tags": [
-        "teletransporte"
+        "controle"
       ]
     },
     {
@@ -22077,7 +22184,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de necrótico (1d10) em alvo."
+        "resumo": "Utilidade suprema: replica magias ou altera a realidade conforme o desejo."
       },
       "conjuracao": {
         "valor": 1,
@@ -22111,7 +22218,7 @@
         "dano": "1d10",
         "tipoDano": "necrótico",
         "cura": "pontos de vida",
-        "efeito": "Dano de necrótico (1d10) em alvo."
+        "efeito": "Utilidade suprema: replica magias ou altera a realidade conforme o desejo."
       },
       "area": {
         "forma": "nenhuma",
@@ -22123,9 +22230,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de necrótico (1d10) em alvo.",
+      "descricao": "Utilidade suprema: replica magias ou altera a realidade conforme o desejo.",
       "tags": [
-        "necrótico"
+        "necrótico",
+        "utilidade"
       ]
     },
     {
@@ -22139,7 +22247,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de psíquico (4d10) em alvo; amedronta."
+        "resumo": "Ilusão/controle: cria terrores letais na mente dos alvos."
       },
       "conjuracao": {
         "valor": 1,
@@ -22173,7 +22281,7 @@
         "dano": "4d10",
         "tipoDano": "psíquico",
         "cura": "",
-        "efeito": "Dano de psíquico (4d10) em alvo; amedronta."
+        "efeito": "Ilusão/controle: cria terrores letais na mente dos alvos."
       },
       "area": {
         "forma": "nenhuma",
@@ -22185,9 +22293,11 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de psíquico (4d10) em alvo; amedronta.",
+      "descricao": "Ilusão/controle: cria terrores letais na mente dos alvos.",
       "tags": [
         "psíquico",
+        "controle",
+        "ilusão",
         "concentração"
       ]
     },
@@ -22204,7 +22314,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Escolha uma criatura ou objeto não-mágico que você possa ver, dentro do alcance."
+        "resumo": "Transformação extrema: converte criatura ou objeto em outra forma."
       },
       "conjuracao": {
         "valor": 1,
@@ -22238,7 +22348,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma criatura ou objeto não-mágico que você possa ver, dentro do alcance."
+        "efeito": "Transformação extrema: converte criatura ou objeto em outra forma."
       },
       "area": {
         "forma": "nenhuma",
@@ -22250,8 +22360,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Escolha uma criatura ou objeto não-mágico que você possa ver, dentro do alcance.",
+      "descricao": "Transformação extrema: converte criatura ou objeto em outra forma.",
       "tags": [
+        "transformação",
         "concentração"
       ]
     },
@@ -22266,7 +22377,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de ácido e elétrico (10d6) em alvo; cega."
+        "resumo": "Barreira de área: cria uma muralha multicolorida com múltiplos efeitos perigosos."
       },
       "conjuracao": {
         "valor": 1,
@@ -22300,7 +22411,7 @@
         "dano": "10d6",
         "tipoDano": "ácido / elétrico / fogo / frio / energia / veneno",
         "cura": "",
-        "efeito": "Dano de ácido e elétrico (10d6) em alvo; cega."
+        "efeito": "Barreira de área: cria uma muralha multicolorida com múltiplos efeitos perigosos."
       },
       "area": {
         "forma": "nenhuma",
@@ -22312,7 +22423,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de ácido e elétrico (10d6) em alvo; cega.",
+      "descricao": "Barreira de área: cria uma muralha multicolorida com múltiplos efeitos perigosos.",
       "tags": [
         "ácido",
         "elétrico",
@@ -22333,7 +22444,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Cura e recuperação de pontos de vida."
+        "resumo": "Cura completa de alvo: restaura PV e remove condições debilitantes."
       },
       "conjuracao": {
         "valor": 1,
@@ -22367,7 +22478,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "pontos de vida",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Cura completa de alvo: restaura PV e remove condições debilitantes."
       },
       "area": {
         "forma": "nenhuma",
@@ -22379,7 +22490,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Cura completa de alvo: restaura PV e remove condições debilitantes.",
       "tags": [
         "cura"
       ]
@@ -22398,7 +22509,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Profere uma palavra de poder que pode compelir uma criatura que você possa ver, dentro do alcance, a morrer instantaneamente."
+        "resumo": "Execução: mata instantaneamente uma criatura abaixo do limite de PV."
       },
       "conjuracao": {
         "valor": 1,
@@ -22432,7 +22543,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Profere uma palavra de poder que pode compelir uma criatura que você possa ver, dentro do alcance, a morrer instantaneamente."
+        "efeito": "Execução: mata instantaneamente uma criatura abaixo do limite de PV."
       },
       "area": {
         "forma": "nenhuma",
@@ -22444,7 +22555,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Profere uma palavra de poder que pode compelir uma criatura que você possa ver, dentro do alcance, a morrer instantaneamente.",
+      "descricao": "Execução: mata instantaneamente uma criatura abaixo do limite de PV.",
       "tags": []
     },
     {
@@ -22459,7 +22570,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Você, por um breve momento, para o fluxo do tempo pra tudo, menos pra você."
+        "resumo": "Controle temporal: concede turnos extras enquanto o restante do mundo fica parado."
       },
       "conjuracao": {
         "valor": 1,
@@ -22493,7 +22604,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você, por um breve momento, para o fluxo do tempo pra tudo, menos pra você."
+        "efeito": "Controle temporal: concede turnos extras enquanto o restante do mundo fica parado."
       },
       "area": {
         "forma": "nenhuma",
@@ -22505,8 +22616,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Você, por um breve momento, para o fluxo do tempo pra tudo, menos pra você.",
-      "tags": []
+      "descricao": "Controle temporal: concede turnos extras enquanto o restante do mundo fica parado.",
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "portal",
@@ -22521,7 +22634,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Utilidade: abre ou destranca fechaduras e barreiras."
+        "resumo": "Viagem planar: abre um portal entre planos ou para um destino extraplanar."
       },
       "conjuracao": {
         "valor": 1,
@@ -22555,7 +22668,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Utilidade: abre ou destranca fechaduras e barreiras."
+        "efeito": "Viagem planar: abre um portal entre planos ou para um destino extraplanar."
       },
       "area": {
         "forma": "nenhuma",
@@ -22567,7 +22680,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Utilidade: abre ou destranca fechaduras e barreiras.",
+      "descricao": "Viagem planar: abre um portal entre planos ou para um destino extraplanar.",
       "tags": [
         "concentração"
       ]
@@ -22585,7 +22698,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Controle de alvo: inconsciente."
+        "resumo": "Viagem planar: projeta o grupo em forma astral para outros planos."
       },
       "conjuracao": {
         "valor": 1,
@@ -22619,7 +22732,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Controle de alvo: inconsciente."
+        "efeito": "Viagem planar: projeta o grupo em forma astral para outros planos."
       },
       "area": {
         "forma": "nenhuma",
@@ -22631,10 +22744,8 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Controle de alvo: inconsciente.",
-      "tags": [
-        "controle"
-      ]
+      "descricao": "Viagem planar: projeta o grupo em forma astral para outros planos.",
+      "tags": []
     },
     {
       "id": "ressurreicao-verdadeira",
@@ -22713,7 +22824,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "resumo": "Percepção defensiva: prevê perigos e concede vantagem defensiva contra ataques."
       },
       "conjuracao": {
         "valor": 1,
@@ -22747,7 +22858,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Utilidade: tranca magicamente uma entrada ou recipiente."
+        "efeito": "Percepção defensiva: prevê perigos e concede vantagem defensiva contra ataques."
       },
       "area": {
         "forma": "nenhuma",
@@ -22759,8 +22870,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Utilidade: tranca magicamente uma entrada ou recipiente.",
-      "tags": []
+      "descricao": "Percepção defensiva: prevê perigos e concede vantagem defensiva contra ataques.",
+      "tags": [
+        "percepção"
+      ]
     },
     {
       "id": "tempestade-da-vinganca",
@@ -22773,7 +22886,7 @@
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de ácido e concussão (2d6) em alvo; ensurdece."
+        "resumo": "Dano e controle climático em enorme área, com efeitos crescentes por rodada."
       },
       "conjuracao": {
         "valor": 1,
@@ -22807,7 +22920,7 @@
         "dano": "2d6",
         "tipoDano": "ácido / concussão / elétrico / frio / trovejante",
         "cura": "pontos de vida",
-        "efeito": "Dano de ácido e concussão (2d6) em alvo; ensurdece."
+        "efeito": "Dano e controle climático em enorme área, com efeitos crescentes por rodada."
       },
       "area": {
         "forma": "nenhuma",
@@ -22819,13 +22932,14 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de ácido e concussão (2d6) em alvo; ensurdece.",
+      "descricao": "Dano e controle climático em enorme área, com efeitos crescentes por rodada.",
       "tags": [
         "ácido",
         "concussão",
         "elétrico",
         "frio",
         "trovejante",
+        "controle",
         "concentração"
       ]
     }
