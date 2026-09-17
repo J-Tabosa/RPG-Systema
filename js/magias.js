@@ -137,7 +137,11 @@ function renderizarMagias(lista) {
     const area = RPGCatalogo.formatArea(magia.area);
     const concentration = magia.duracao?.concentracao ? '<span class="catalog-pill accent"><i class="ti ti-focus-2"></i> Concentração</span>' : '';
     const ritual = magia.ritual ? '<span class="catalog-pill"><i class="ti ti-book"></i> Ritual</span>' : '';
-    const source = magia.custom ? '<span class="catalog-origin custom">Personalizada</span>' : '<span class="catalog-origin">Base</span>';
+    const source = magia.baseOverride
+      ? '<span class="catalog-origin custom">Base editada</span>'
+      : magia.custom
+        ? '<span class="catalog-origin custom">Personalizada</span>'
+        : '<span class="catalog-origin">Base</span>';
     return `
       <article class="spell-card" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
         <div class="spell-card-head">
@@ -186,7 +190,7 @@ function abrirDetalhes(id) {
       <div class="item-detail-heading">
         <h2 id="modalSpellName">${escaparHTML(magia.nome)}</h2>
         <div class="item-detail-subtitle">${escaparHTML(nivelLabel(magia.nivel))} · ${escaparHTML(magia.escola || 'Sem escola')} · ${magia.ritual ? 'Ritual' : 'Não ritual'}</div>
-        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.custom ? 'Personalizada' : 'Base do sistema'}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
+        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.baseOverride ? 'Base editada' : (magia.custom ? 'Personalizada' : 'Base do sistema')}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
       </div>
     </div>
     <div class="item-detail-body">
