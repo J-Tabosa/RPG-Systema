@@ -3,31 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Glossário de Itens Mágicos — RPG System</title>
+  <title>Glossário de Itens — RPG System</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/itens.css">
+  <link rel="stylesheet" href="../css/catalogo.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
 <body>
 <div id="app">
-
   <div class="header no-print">
     <div class="header-brand">
-      <i class="ti ti-gem header-icon"></i>
+      <i class="ti ti-backpack header-icon"></i>
       <div>
-        <h1>Itens Mágicos</h1>
-        <div class="subtitle">Glossário de Relíquias, Artefatos e Tesouros</div>
+        <h1>Glossário de Itens</h1>
+        <div class="subtitle">Armas, armaduras, equipamentos, utilizáveis e itens mágicos</div>
       </div>
     </div>
 
     <div class="header-actions">
       <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
       <a href="ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
-      <a href="gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
-      <a href="conteudo.html" class="nav-link"><i class="ti ti-database"></i> Conteúdo</a>
-      <a href="tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="magias.html" class="nav-link"><i class="ti ti-sparkles"></i> Magias</a>
       <a href="monstros.html" class="nav-link"><i class="ti ti-skull"></i> Monstros</a>
-      <a href="itens.html" class="nav-link active"><i class="ti ti-gem"></i> Itens</a>
+      <a href="itens.html" class="nav-link active"><i class="ti ti-backpack"></i> Itens</a>
       <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
       <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
     </div>
@@ -35,48 +33,50 @@
     <nav class="mob-nav" id="mobNav">
       <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
       <a href="ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
-      <a href="gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador</a>
-      <a href="conteudo.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-database"></i> Conteúdo</a>
-      <a href="tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="magias.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Glossário de Magias</a>
       <a href="monstros.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-skull"></i> Monstros</a>
-      <a href="itens.html" class="nav-link active" onclick="closeMobMenu()"><i class="ti ti-gem"></i> Itens Mágicos</a>
+      <a href="itens.html" class="nav-link active" onclick="closeMobMenu()"><i class="ti ti-backpack"></i> Glossário de Itens</a>
     </nav>
   </div>
 
   <main class="magic-items-page">
     <section class="items-hero">
       <div class="hero-copy">
-        <div class="eyebrow"><i class="ti ti-stars"></i> Arquivo Arcano</div>
-        <h2>Glossário de Itens Mágicos</h2>
-        <p>Consulte relíquias, armas, objetos amaldiçoados e artefatos únicos da campanha. Use os filtros para encontrar rapidamente o que precisa durante a sessão.</p>
+        <div class="eyebrow"><i class="ti ti-books"></i> Acervo do Sistema</div>
+        <h2>Glossário Geral de Itens</h2>
+        <p>Cadastre e consulte qualquer objeto utilizado na mesa. A base inicial traz exemplos de D&amp;D 5e e pode ser ampliada sem alterar o código. Os registros também podem ser importados diretamente para a ficha do personagem.</p>
       </div>
 
       <div class="hero-stats" aria-label="Resumo do glossário">
-        <div class="hero-stat">
-          <span class="hero-stat-value" id="statTotal">0</span>
-          <span class="hero-stat-label">Itens</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-value" id="statArtefatos">0</span>
-          <span class="hero-stat-label">Artefatos</span>
-        </div>
-        <div class="hero-stat master-stat">
-          <span class="hero-stat-value"><i class="ti ti-eye-off"></i></span>
-          <span class="hero-stat-label">Segredos protegidos</span>
-        </div>
+        <div class="hero-stat"><span class="hero-stat-value" id="statTotal">0</span><span class="hero-stat-label">Itens</span></div>
+        <div class="hero-stat"><span class="hero-stat-value" id="statCategorias">0</span><span class="hero-stat-label">Categorias</span></div>
+        <div class="hero-stat"><span class="hero-stat-value" id="statCustom">0</span><span class="hero-stat-label">Personalizados</span></div>
       </div>
     </section>
 
     <section class="items-toolbar no-print">
       <div class="search-box items-search">
         <i class="ti ti-search"></i>
-        <input type="search" id="itemSearch" placeholder="Buscar por nome, efeito, origem..." autocomplete="off" oninput="filtrarItens()">
+        <input type="search" id="itemSearch" placeholder="Buscar por nome, categoria, efeito, propriedade..." autocomplete="off" oninput="filtrarItens()">
+      </div>
+
+      <div class="filter-group">
+        <label for="categoryFilter">Categoria</label>
+        <select id="categoryFilter" onchange="filtrarItens()">
+          <option value="todos">Todas</option>
+          <option value="arma">Armas</option>
+          <option value="armadura">Armaduras</option>
+          <option value="equipamento">Equipamentos</option>
+          <option value="utilizavel">Utilizáveis</option>
+          <option value="magico">Itens mágicos</option>
+        </select>
       </div>
 
       <div class="filter-group">
         <label for="rarityFilter">Raridade</label>
         <select id="rarityFilter" onchange="filtrarItens()">
           <option value="todos">Todas</option>
+          <option value="sem-raridade">Sem raridade</option>
           <option value="comum">Comum</option>
           <option value="incomum">Incomum</option>
           <option value="raro">Raro</option>
@@ -86,33 +86,23 @@
         </select>
       </div>
 
-      <div class="filter-group">
-        <label for="typeFilter">Tipo</label>
-        <select id="typeFilter" onchange="filtrarItens()">
-          <option value="todos">Todos</option>
-        </select>
-      </div>
-
       <button class="btn sm" onclick="limparFiltros()"><i class="ti ti-filter-off"></i> Limpar</button>
+      <button class="btn sm primary" onclick="abrirEditorItem()"><i class="ti ti-plus"></i> Novo Item</button>
 
-      <label class="master-toggle" title="Mostra informações destinadas ao mestre. Esta opção apenas oculta visualmente o conteúdo.">
+      <label class="master-toggle" title="Revela informações reservadas ao mestre em itens que possuam segredos.">
         <input type="checkbox" id="masterMode" onchange="alternarModoMestre(this.checked)">
         <span class="toggle-track"><span class="toggle-knob"></span></span>
-        <span class="toggle-copy">
-          <strong>Modo Mestre</strong>
-          <small>Revelar spoilers</small>
-        </span>
+        <span class="toggle-copy"><strong>Modo Mestre</strong><small>Revelar segredos</small></span>
       </label>
     </section>
 
-    <section class="rarity-legend no-print" aria-label="Legenda de raridades">
-      <span class="legend-title">Raridades</span>
-      <span class="rarity-chip rarity-comum">Comum</span>
-      <span class="rarity-chip rarity-incomum">Incomum</span>
-      <span class="rarity-chip rarity-raro">Raro</span>
-      <span class="rarity-chip rarity-muito-raro">Muito raro</span>
-      <span class="rarity-chip rarity-lendario">Lendário</span>
-      <span class="rarity-chip rarity-artefato">Artefato</span>
+    <section class="catalog-category-strip no-print" aria-label="Categorias do glossário">
+      <button onclick="selecionarCategoria('todos')"><i class="ti ti-layout-grid"></i> Todos</button>
+      <button onclick="selecionarCategoria('arma')"><i class="ti ti-sword"></i> Armas</button>
+      <button onclick="selecionarCategoria('armadura')"><i class="ti ti-shield"></i> Armaduras</button>
+      <button onclick="selecionarCategoria('equipamento')"><i class="ti ti-tool"></i> Equipamentos</button>
+      <button onclick="selecionarCategoria('utilizavel')"><i class="ti ti-flask"></i> Utilizáveis</button>
+      <button onclick="selecionarCategoria('magico')"><i class="ti ti-wand"></i> Mágicos</button>
     </section>
 
     <div class="results-row">
@@ -121,11 +111,10 @@
     </div>
 
     <section class="items-grid" id="itemsGrid" aria-live="polite"></section>
-
     <div class="empty-state items-empty" id="itemsEmpty" style="display:none">
-      <div class="big"><i class="ti ti-gem"></i></div>
+      <div class="big"><i class="ti ti-backpack"></i></div>
       <h3>Nenhum item encontrado</h3>
-      <p>Tente alterar os filtros ou buscar por outro termo.</p>
+      <p>Altere os filtros ou cadastre um novo registro.</p>
     </div>
   </main>
 </div>
@@ -137,6 +126,38 @@
   </article>
 </div>
 
+<div class="modal-overlay" id="itemEditorModal" style="display:none" onclick="fecharEditorNoFundo(event)">
+  <div class="modal catalog-editor-modal">
+    <div class="catalog-editor-head">
+      <div><div class="eyebrow">Registro do Acervo</div><h3 id="itemEditorTitle">Novo Item</h3></div>
+      <button class="modal-close static" onclick="fecharEditorItem()"><i class="ti ti-x"></i></button>
+    </div>
+
+    <div class="catalog-form-grid">
+      <div class="form-field span-2"><label>Nome</label><input id="edNome" type="text" placeholder="Ex: Espada do Eclipse"></div>
+      <div class="form-field"><label>Categoria</label>
+        <select id="edCategoria" onchange="atualizarCamposCategoria()">
+          <option value="arma">Arma</option><option value="armadura">Armadura</option><option value="equipamento">Equipamento</option><option value="utilizavel">Utilizável</option><option value="magico">Item mágico</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Subcategoria</label><input id="edSubcategoria" type="text" placeholder="Ex: Arma marcial"></div>
+      <div class="form-field"><label>Peso (kg)</label><input id="edPeso" type="number" min="0" step="0.1" value="0"></div>
+      <div class="form-field"><label>Custo / valor</label><input id="edCusto" type="text" placeholder="Ex: 15 PO"></div>
+      <div class="form-field"><label>Origem</label><input id="edOrigem" type="text" value="Personalizado"></div>
+      <div class="form-field"><label>Tags</label><input id="edTags" type="text" placeholder="leve, fogo, exploração"></div>
+      <div class="form-field span-2"><label>Descrição</label><textarea id="edDescricao" rows="3"></textarea></div>
+    </div>
+
+    <div id="itemSpecificFields" class="catalog-specific-fields"></div>
+
+    <div class="modal-actions">
+      <button class="btn" onclick="fecharEditorItem()">Cancelar</button>
+      <button class="btn primary" onclick="salvarItemEditor()"><i class="ti ti-device-floppy"></i> Salvar Item</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/catalogo.js"></script>
 <script src="../js/itens.js"></script>
 </body>
 </html>
