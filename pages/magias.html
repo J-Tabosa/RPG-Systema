@@ -45,7 +45,7 @@
       <div class="hero-copy">
         <div class="eyebrow"><i class="ti ti-wand"></i> Grimório do Sistema</div>
         <h2>Glossário de Magias</h2>
-        <p>Cada magia guarda seus dados narrativos e também sua geometria de combate: alcance, origem, forma, raio, comprimento, largura e altura. A estrutura já está pronta para uma futura projeção em mapa tático.</p>
+        <p>Biblioteca consolidada por nível e classe, com o efeito principal de cada magia e dados estruturados de conjuração, alcance e área. O catálogo aceita novos pacotes JSON para expansão futura.</p>
       </div>
       <div class="hero-stats" aria-label="Resumo do glossário">
         <div class="hero-stat"><span class="hero-stat-value" id="statTotal">0</span><span class="hero-stat-label">Magias</span></div>
@@ -61,8 +61,11 @@
       </div>
       <div class="filter-group"><label>Nível</label><select id="levelFilter" onchange="filtrarMagias()"><option value="todos">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option></select></div>
       <div class="filter-group"><label>Escola</label><select id="schoolFilter" onchange="filtrarMagias()"><option value="todos">Todas</option></select></div>
+      <div class="filter-group"><label>Classe</label><select id="classFilter" onchange="filtrarMagias()"><option value="todas">Todas</option><option value="Mago">Mago</option><option value="Feiticeiro">Feiticeiro</option><option value="Druida">Druida</option><option value="Bruxo">Bruxo</option><option value="Patrulheiro">Patrulheiro</option><option value="Paladino">Paladino</option><option value="Clérigo">Clérigo</option><option value="Bardo">Bardo</option></select></div>
       <div class="filter-group"><label>Área</label><select id="areaFilter" onchange="filtrarMagias()"><option value="todos">Todas</option><option value="nenhuma">Sem área</option><option value="esfera">Esfera</option><option value="cone">Cone</option><option value="cubo">Cubo</option><option value="cilindro">Cilindro</option><option value="linha">Linha</option><option value="emanacao">Emanação</option><option value="quadrado">Quadrado</option></select></div>
       <button class="btn sm" onclick="limparFiltros()"><i class="ti ti-filter-off"></i> Limpar</button>
+      <button class="btn sm" onclick="abrirImportadorMagias()"><i class="ti ti-file-import"></i> Importar JSON</button>
+      <input type="file" id="spellImportInput" accept=".json,application/json" hidden onchange="importarMagiasJSON(event)">
       <button class="btn sm primary" onclick="abrirEditorMagia()"><i class="ti ti-plus"></i> Nova Magia</button>
     </section>
 
