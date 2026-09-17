@@ -82,7 +82,7 @@
       .catalog-pick-source{font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
       .catalog-picker-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:38px 12px}
       .catalog-ficha-nav{display:inline-flex}
-      @media(max-width:760px){.catalog-picker-list{grid-template-columns:1fr}.catalog-picker-toolbar{grid-template-columns:1fr}.catalog-picker-modal{width:96vw}.catalog-origin-chip{display:none}}
+      @media(max-width:760px){.catalog-picker-list{grid-template-columns:1fr}.catalog-picker-toolbar{grid-template-columns:1fr}.catalog-picker-modal{width:96vw}.catalog-origin-chip{display:none}.catalog-import-btn{white-space:normal;max-width:100%;line-height:1.15}}
     `;
     document.head.appendChild(style);
   }
