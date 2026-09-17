@@ -138,7 +138,7 @@ async function importarMagiasJSON(event) {
 
   try {
     const payload = JSON.parse(await arquivo.text());
-    const resultado = RPGCatalogo.importSpells(payload);
+    const resultado = await RPGCatalogo.importSpells(payload);
     if (!resultado.total) {
       alert('O JSON não contém magias válidas. Use um array, spells[] ou magias[].');
       return;
