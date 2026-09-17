@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Glossário de Itens Mágicos — RPG System</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/itens.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+<div id="app">
+
+  <div class="header no-print">
+    <div class="header-brand">
+      <i class="ti ti-treasure header-icon"></i>
+      <div>
+        <h1>Itens Mágicos</h1>
+        <div class="subtitle">Glossário de Relíquias, Artefatos e Tesouros</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a href="../index.html" class="nav-link"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html" class="nav-link"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html" class="nav-link"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html" class="nav-link"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html" class="nav-link"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="monstros.html" class="nav-link"><i class="ti ti-skull"></i> Monstros</a>
+      <a href="itens.html" class="nav-link active"><i class="ti ti-treasure"></i> Itens</a>
+      <button class="theme-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">☀</button>
+      <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobMenu()" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+    </div>
+
+    <nav class="mob-nav" id="mobNav">
+      <a href="../index.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-home"></i> Início</a>
+      <a href="ficha.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-scroll"></i> Fichas</a>
+      <a href="gerador.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sparkles"></i> Gerador</a>
+      <a href="conteudo.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-database"></i> Conteúdo</a>
+      <a href="tracker.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-sword"></i> Tracker</a>
+      <a href="monstros.html" class="nav-link" onclick="closeMobMenu()"><i class="ti ti-skull"></i> Monstros</a>
+      <a href="itens.html" class="nav-link active" onclick="closeMobMenu()"><i class="ti ti-treasure"></i> Itens Mágicos</a>
+    </nav>
+  </div>
+
+  <main class="magic-items-page">
+    <section class="items-hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><i class="ti ti-stars"></i> Arquivo Arcano</div>
+        <h2>Glossário de Itens Mágicos</h2>
+        <p>Consulte relíquias, armas, objetos amaldiçoados e artefatos únicos da campanha. Use os filtros para encontrar rapidamente o que precisa durante a sessão.</p>
+      </div>
+
+      <div class="hero-stats" aria-label="Resumo do glossário">
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="statTotal">0</span>
+          <span class="hero-stat-label">Itens</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="statArtefatos">0</span>
+          <span class="hero-stat-label">Artefatos</span>
+        </div>
+        <div class="hero-stat master-stat">
+          <span class="hero-stat-value"><i class="ti ti-eye-off"></i></span>
+          <span class="hero-stat-label">Segredos protegidos</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="items-toolbar no-print">
+      <div class="search-box items-search">
+        <i class="ti ti-search"></i>
+        <input type="search" id="itemSearch" placeholder="Buscar por nome, efeito, origem..." autocomplete="off" oninput="filtrarItens()">
+      </div>
+
+      <div class="filter-group">
+        <label for="rarityFilter">Raridade</label>
+        <select id="rarityFilter" onchange="filtrarItens()">
+          <option value="todos">Todas</option>
+          <option value="comum">Comum</option>
+          <option value="incomum">Incomum</option>
+          <option value="raro">Raro</option>
+          <option value="muito-raro">Muito raro</option>
+          <option value="lendario">Lendário</option>
+          <option value="artefato">Artefato</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="typeFilter">Tipo</label>
+        <select id="typeFilter" onchange="filtrarItens()">
+          <option value="todos">Todos</option>
+        </select>
+      </div>
+
+      <button class="btn sm" onclick="limparFiltros()"><i class="ti ti-filter-off"></i> Limpar</button>
+
+      <label class="master-toggle" title="Mostra informações destinadas ao mestre. Esta opção apenas oculta visualmente o conteúdo.">
+        <input type="checkbox" id="masterMode" onchange="alternarModoMestre(this.checked)">
+        <span class="toggle-track"><span class="toggle-knob"></span></span>
+        <span class="toggle-copy">
+          <strong>Modo Mestre</strong>
+          <small>Revelar spoilers</small>
+        </span>
+      </label>
+    </section>
+
+    <section class="rarity-legend no-print" aria-label="Legenda de raridades">
+      <span class="legend-title">Raridades</span>
+      <span class="rarity-chip rarity-comum">Comum</span>
+      <span class="rarity-chip rarity-incomum">Incomum</span>
+      <span class="rarity-chip rarity-raro">Raro</span>
+      <span class="rarity-chip rarity-muito-raro">Muito raro</span>
+      <span class="rarity-chip rarity-lendario">Lendário</span>
+      <span class="rarity-chip rarity-artefato">Artefato</span>
+    </section>
+
+    <div class="results-row">
+      <div><span id="resultCount">0</span> item(ns) encontrado(s)</div>
+      <div id="activeFilterText">Exibindo todo o acervo</div>
+    </div>
+
+    <section class="items-grid" id="itemsGrid" aria-live="polite"></section>
+
+    <div class="empty-state items-empty" id="itemsEmpty" style="display:none">
+      <div class="big"><i class="ti ti-treasure-off"></i></div>
+      <h3>Nenhum item encontrado</h3>
+      <p>Tente alterar os filtros ou buscar por outro termo.</p>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay item-modal-overlay" id="itemModal" style="display:none" onclick="fecharModalNoFundo(event)">
+  <article class="modal item-modal" role="dialog" aria-modal="true" aria-labelledby="modalItemName">
+    <button class="modal-close" onclick="fecharDetalhes()" aria-label="Fechar detalhes"><i class="ti ti-x"></i></button>
+    <div id="itemModalContent"></div>
+  </article>
+</div>
+
+<script src="../js/itens.js"></script>
+</body>
+</html>
