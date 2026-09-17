@@ -67,6 +67,11 @@ function adicionarAtalhosItensMagicos() {
       </a>
     `);
   }
+
+  const moduleCount = document.querySelector('.about-stats .stat-box .stat-num');
+  if (moduleCount && moduleCount.textContent.trim() === '6') {
+    moduleCount.textContent = '7';
+  }
 }
 
 // ── CHANGELOG TOGGLE (Expandir/Recolher Versões) ─────────────────────────────
