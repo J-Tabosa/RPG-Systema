@@ -168,27 +168,36 @@
       });
   }
 
-  function importSpells(payload) {
+  async function importSpells(payload) {
     const incoming = normalizeImportedSpells(payload);
     if (!incoming.length) return { imported: 0, updated: 0, total: 0 };
 
-    const list = readLocal(SPELL_KEY);
-    const byId = new Map(list.map((entry, index) => [entry.id, index]));
-    const byName = new Map(list.map((entry, index) => [slug(entry.nome), index]));
+    const [base, list] = await Promise.all([
+      readBase(spellUrl, 'spells'),
+      Promise.resolve(readLocal(SPELL_KEY))
+    ]);
+    const baseById = new Map(base.map(entry => [entry.id, entry]));
+    const baseByName = new Map(base.map(entry => [slug(entry.nome), entry]));
+    const localById = new Map(list.map((entry, index) => [entry.id, index]));
+    const localByName = new Map(list.map((entry, index) => [slug(entry.nome), index]));
     const now = new Date().toISOString();
     let imported = 0;
     let updated = 0;
 
     incoming.forEach(entry => {
-      const existingIndex = byId.has(entry.id)
-        ? byId.get(entry.id)
-        : byName.get(slug(entry.nome));
+      const baseMatch = baseById.get(entry.id) || baseByName.get(slug(entry.nome));
+      if (baseMatch) entry.id = baseMatch.id;
+
+      const existingIndex = localById.has(entry.id)
+        ? localById.get(entry.id)
+        : localByName.get(slug(entry.nome));
 
       const previous = existingIndex === undefined ? null : list[existingIndex];
       const normalized = {
         ...(previous ? clone(previous) : {}),
         ...clone(entry),
         custom: true,
+        baseOverride: Boolean(baseMatch || previous?.baseOverride),
         criadoEm: previous?.criadoEm || entry.criadoEm || now,
         atualizadoEm: now
       };
@@ -196,8 +205,8 @@
       if (existingIndex === undefined) {
         list.push(normalized);
         const newIndex = list.length - 1;
-        byId.set(normalized.id, newIndex);
-        byName.set(slug(normalized.nome), newIndex);
+        localById.set(normalized.id, newIndex);
+        localByName.set(slug(normalized.nome), newIndex);
         imported++;
       } else {
         list[existingIndex] = normalized;
@@ -208,6 +217,7 @@
     writeLocal(SPELL_KEY, list);
     return { imported, updated, total: incoming.length };
   }
+
   function saveSpellSchool(entry) { return saveTaxonomy(SPELL_SCHOOL_KEY, 'escola', entry); }
   function saveItemCategory(entry) { return saveTaxonomy(ITEM_CATEGORY_KEY, 'categoria', entry); }
 
