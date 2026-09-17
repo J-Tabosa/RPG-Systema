@@ -1,0 +1,178 @@
+.app-header-contextual .header-actions{gap:8px}
+.app-header-contextual .header-brand{min-width:0}
+.app-header-contextual .header-brand > div{min-width:0}
+.app-header-contextual .header-brand h1,
+.app-header-contextual .header-brand .subtitle{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.app-menu-btn,.app-menu-close{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:6px;
+  min-height:36px;
+  padding:7px 11px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  transition:all .15s ease;
+}
+.app-menu-btn i,.app-menu-close i{font-size:18px}
+.app-menu-btn:hover,.app-menu-close:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(200,168,107,.08);
+}
+
+.app-drawer-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  backdrop-filter:blur(2px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:1198;
+}
+.app-drawer-backdrop.open{opacity:1;pointer-events:auto}
+
+.app-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  width:min(360px,92vw);
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+  background:var(--surface);
+  border-left:1px solid var(--gold);
+  box-shadow:-18px 0 46px rgba(0,0,0,.38);
+  transform:translateX(105%);
+  transition:transform .23s ease;
+  z-index:1199;
+}
+.app-drawer.open{transform:translateX(0)}
+body.app-menu-open{overflow:hidden}
+
+.app-drawer-head{
+  min-height:78px;
+  padding:15px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(200,168,107,.08),transparent);
+}
+.app-drawer-role{display:flex;align-items:center;gap:11px;min-width:0}
+.app-role-icon{
+  width:42px;height:42px;flex:0 0 42px;
+  display:grid;place-items:center;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  color:var(--gold);
+  background:rgba(200,168,107,.08);
+}
+.app-role-icon i{font-size:22px}
+.app-drawer-role small{
+  display:block;
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.app-drawer-role h2{
+  margin:0;
+  font-size:15px;
+  letter-spacing:1px;
+  color:var(--gold2);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.app-menu-close{width:36px;height:36px;padding:0;flex:0 0 36px}
+
+.app-drawer-links{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  padding:13px;
+  overflow-y:auto;
+  flex:1;
+}
+.app-drawer-link{
+  min-height:46px;
+  display:grid;
+  grid-template-columns:25px 1fr auto;
+  align-items:center;
+  gap:9px;
+  padding:9px 11px;
+  border:1px solid transparent;
+  border-radius:7px;
+  color:var(--text);
+  text-decoration:none;
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.65px;
+  text-transform:uppercase;
+  transition:all .15s ease;
+}
+.app-drawer-link > i:first-child{font-size:18px;color:var(--muted);transition:color .15s ease}
+.app-drawer-link:hover{
+  border-color:var(--border);
+  background:var(--card);
+  color:var(--gold2);
+}
+.app-drawer-link:hover > i:first-child{color:var(--gold)}
+.app-drawer-link.active{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(200,168,107,.09);
+}
+.app-drawer-link.active > i:first-child{color:var(--gold)}
+.app-current-dot{font-size:12px;color:var(--gold)}
+
+.app-drawer-empty{
+  margin:8px 0;
+  border:1px dashed var(--border);
+  border-radius:8px;
+  padding:20px 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:7px;
+  color:var(--muted);
+}
+.app-drawer-empty > i{font-size:28px;color:var(--gold)}
+.app-drawer-empty strong{font-family:'Cinzel',serif;color:var(--gold2);font-size:11px}
+.app-drawer-empty span{font-size:13px;line-height:1.4}
+
+.app-drawer-foot{
+  border-top:1px solid var(--border);
+  padding:12px 16px 15px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.35;
+}
+.app-drawer-foot strong{color:var(--gold)}
+
+@media(max-width:760px){
+  .app-menu-btn span{display:none}
+  .app-menu-btn{width:38px;height:38px;padding:0;flex:0 0 38px}
+  .app-header-contextual{padding-left:12px;padding-right:12px}
+  .app-header-contextual .header-brand{flex:1}
+  .app-header-contextual .header-brand h1{font-size:15px;letter-spacing:1px}
+  .app-header-contextual .header-brand .subtitle{font-size:11px}
+}
+
+@media print{
+  .app-menu-btn,#appDrawerRoot{display:none!important}
+}
