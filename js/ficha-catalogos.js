@@ -6,7 +6,8 @@
     busca: '',
     filtro: 'todos',
     itens: [],
-    magias: []
+    magias: [],
+    categorias: []
   };
 
   function escaparHTML(valor = '') {
@@ -126,12 +127,14 @@
   async function carregarCatalogos() {
     if (!garantirCatalogo()) return;
     try {
-      const [itens, magias] = await Promise.all([
+      const [itens, magias, categorias] = await Promise.all([
         RPGCatalogo.getItens(),
-        RPGCatalogo.getMagias()
+        RPGCatalogo.getMagias(),
+        RPGCatalogo.getItemCategories()
       ]);
       state.itens = itens;
       state.magias = magias;
+      state.categorias = categorias;
     } catch (erro) {
       console.error('Erro ao carregar glossários na ficha:', erro);
       avisar('Erro ao carregar os glossários.');
@@ -152,6 +155,8 @@
   }
 
   function labelCategoriaItem(cat) {
+    const registro = state.categorias.find(c => c.id === cat);
+    if (registro) return registro.plural || registro.label || cat;
     return ({
       arma: 'Armas', armadura: 'Armaduras', equipamento: 'Equipamentos',
       utilizavel: 'Objetos utilizáveis', magico: 'Itens mágicos'
@@ -397,6 +402,7 @@
   }
 
   function injetarNavegacao() {
+    if (window.RPGNavigation) return;
     const headerActions = document.querySelector('.header-actions');
     const themeWrap = document.getElementById('themeMenuWrap');
     if (headerActions && themeWrap && !headerActions.querySelector('[data-catalog-nav]')) {
