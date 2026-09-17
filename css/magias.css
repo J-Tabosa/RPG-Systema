@@ -1,0 +1,48 @@
+@import url('./itens.css');
+@import url('./catalogo.css');
+
+.spells-hero::before{content:'✧';}
+.spell-geometry-note{
+  display:flex;align-items:flex-start;gap:10px;margin-top:12px;padding:10px 12px;border:1px dashed var(--gold);
+  border-radius:7px;background:rgba(200,168,107,.05);color:var(--muted);font-size:12px;line-height:1.4
+}
+.spell-geometry-note>i{color:var(--gold);font-size:18px;margin-top:1px}
+.spell-geometry-note strong{color:var(--gold2)}
+.spells-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.spell-card{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:310px;
+  background:linear-gradient(180deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:9px;
+  cursor:pointer;transition:.15s ease
+}
+.spell-card:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 10px 26px rgba(0,0,0,.2)}
+.spell-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--spell-color,var(--gold))}
+.spell-card-head{display:flex;gap:11px;align-items:flex-start;padding:16px 16px 10px}
+.spell-level-icon{
+  width:45px;height:45px;flex:0 0 45px;display:grid;place-items:center;border:1px solid var(--spell-color,var(--gold));
+  border-radius:50%;color:var(--spell-color,var(--gold));font-family:'Cinzel',serif;font-weight:700;font-size:14px;background:var(--card2)
+}
+.spell-card-title{min-width:0;flex:1}.spell-card-title h3{font-size:14px;color:var(--text);margin-bottom:4px}.spell-card-title p{font-size:12px;color:var(--muted)}
+.spell-card-body{padding:0 16px 15px;display:flex;flex-direction:column;flex:1}
+.spell-card-description{color:var(--muted);font-size:14px;line-height:1.45;margin:4px 0 11px}
+.spell-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:11px}
+.spell-meta-grid>div{padding:7px 8px;border:1px solid var(--border);border-radius:5px;background:var(--card2)}
+.spell-meta-grid span{display:block;color:var(--muted);font-family:'Cinzel',serif;font-size:7px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px}
+.spell-meta-grid strong{display:block;color:var(--text);font-size:11px;line-height:1.25;overflow-wrap:anywhere}
+.spell-card-footer{margin-top:auto;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.spell-card-footer .item-card-link{margin-left:auto}
+.spell-area-badge{display:inline-flex;align-items:center;gap:5px;color:#9d76cf;font-size:10px}
+.spell-no-area{color:var(--muted)}
+.spell-detail-modal{max-width:900px}
+.spell-detail-hero{--rarity-color:#9d76cf}
+.spell-detail-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spell-components{display:flex;gap:5px;flex-wrap:wrap}
+.component-chip{display:inline-grid;place-items:center;min-width:28px;height:28px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font-family:'Cinzel',serif;font-size:9px}
+.spell-geometry-box{padding:12px;border:1px dashed #9d76cf;border-radius:7px;background:rgba(157,118,207,.06)}
+.spell-geometry-box h4{display:flex;align-items:center;gap:6px;margin:0 0 7px;color:#b998df;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.8px;text-transform:uppercase}
+.spell-editor-modal{max-width:900px}
+.spell-form-section{margin-top:17px}
+.spell-geometry-editor{padding:12px;border:1px dashed #9d76cf;border-radius:7px;background:rgba(157,118,207,.05)}
+.geometry-preview{margin-top:10px;padding:9px 10px;border:1px solid var(--border);border-radius:5px;color:var(--muted);font-size:12px;background:var(--card)}
+.geometry-preview strong{color:#b998df}
+
+@media(max-width:700px){.spell-detail-columns,.spell-meta-grid{grid-template-columns:1fr}.spells-grid{grid-template-columns:1fr}}
