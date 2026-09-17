@@ -31,9 +31,13 @@
     return JSON.parse(JSON.stringify(valor));
   }
 
+  function avisar(mensagem) {
+    if (typeof toast === 'function') toast(mensagem);
+  }
+
   function garantirCatalogo() {
     if (!window.RPGCatalogo) {
-      toast?.('Não foi possível carregar o catálogo do sistema.');
+      avisar('Não foi possível carregar o catálogo do sistema.');
       return false;
     }
     return true;
@@ -45,6 +49,12 @@
     } catch (_) {
       return null;
     }
+  }
+
+  function persistirFichas() {
+    try {
+      if (typeof save === 'function' && typeof fichas !== 'undefined') save(fichas);
+    } catch (_) {}
   }
 
   function injetarEstilos() {
@@ -124,7 +134,7 @@
       state.magias = magias;
     } catch (erro) {
       console.error('Erro ao carregar glossários na ficha:', erro);
-      toast?.('Erro ao carregar os glossários.');
+      avisar('Erro ao carregar os glossários.');
     }
   }
 
@@ -151,7 +161,7 @@
   async function abrirImportadorCatalogo(tipo) {
     const ficha = getFichaSegura();
     if (!ficha) {
-      toast?.('Selecione ou crie uma ficha antes de importar.');
+      avisar('Selecione ou crie uma ficha antes de importar.');
       return;
     }
     state.tipo = tipo;
@@ -281,7 +291,7 @@
           const eq = f.equipment.find(x => x.catalogId === id);
           if (eq) eq.qty = (parseInt(eq.qty) || 1) + 1;
         });
-        toast?.(`${item.nome}: quantidade aumentada.`);
+        avisar(`${item.nome}: quantidade aumentada.`);
       } else {
         const novo = {
           name: item.nome,
@@ -297,7 +307,7 @@
           if (!f.equipment) f.equipment = [];
           f.equipment.push(novo);
         });
-        toast?.(`${item.nome} importado para a ficha!`);
+        avisar(`${item.nome} importado para a ficha!`);
       }
     } else {
       const magia = state.magias.find(x => x.id === id);
@@ -312,14 +322,16 @@
         duration: RPGCatalogo.formatDuration(magia.duracao),
         desc: magia.descricao || '',
         catalogId: magia.id,
-        structured: clone(magia)
+        structured: clone(magia),
+        geometry: clone(magia.area || { forma: 'nenhuma' }),
+        rangeData: clone(magia.alcance || {})
       };
       upd(f => {
         if (!f.spells) f.spells = [];
         f.spells.push(nova);
         f.spells.sort((a, b) => (Number(a.level) || 0) - (Number(b.level) || 0));
       });
-      toast?.(`${magia.nome} importada para a ficha!`);
+      avisar(`${magia.nome} importada para a ficha!`);
     }
 
     await chamarRenderEditor();
@@ -340,10 +352,10 @@
       const titulo = sec.querySelector('.sec-title h2');
       const head = sec.querySelector('.sec-head');
       if (!titulo || !head) return;
+      const actions = head.children.length > 1 ? head.children[head.children.length - 1] : null;
 
-      if (titulo.textContent.trim() === 'Magias Conhecidas') {
-        const actions = head.querySelector('div:last-child');
-        if (actions && !actions.querySelector('[data-import-spell]')) {
+      if (titulo.textContent.trim() === 'Magias Conhecidas' && actions) {
+        if (!actions.querySelector('[data-import-spell]')) {
           const btn = document.createElement('button');
           btn.className = 'btn xs catalog-import-btn print-hidden';
           btn.dataset.importSpell = '1';
@@ -353,9 +365,8 @@
         }
       }
 
-      if (titulo.textContent.trim() === 'Equipamentos & Itens') {
-        const actions = head.querySelector('div:last-child');
-        if (actions && !actions.querySelector('[data-import-item]')) {
+      if (titulo.textContent.trim() === 'Equipamentos & Itens' && actions) {
+        if (!actions.querySelector('[data-import-item]')) {
           const btn = document.createElement('button');
           btn.className = 'btn xs catalog-import-btn print-hidden';
           btn.dataset.importItem = '1';
@@ -418,6 +429,65 @@
     renderEditor = wrapped;
   }
 
+  function envolverEdicaoMagia() {
+    if (typeof confirmSpell !== 'function' || confirmSpell.__catalogWrapped) return;
+    const original = confirmSpell;
+    const wrapped = function(...args) {
+      const fichaAntes = getFichaSegura();
+      const indice = typeof editingSpell !== 'undefined' ? editingSpell : null;
+      const anterior = indice !== null && fichaAntes?.spells?.[indice] ? clone(fichaAntes.spells[indice]) : null;
+      const nomeNovo = document.getElementById('spName')?.value.trim() || '';
+      const nivelNovo = Number(document.getElementById('spLevel')?.value || 0);
+      const escolaNova = document.getElementById('spSchool')?.value.trim() || '';
+      const result = original.apply(this, args);
+
+      if (anterior?.catalogId) {
+        const fichaDepois = getFichaSegura();
+        const candidato = fichaDepois?.spells?.find(sp =>
+          !sp.catalogId && sp.name === nomeNovo && Number(sp.level || 0) === nivelNovo && (sp.school || '') === escolaNova
+        );
+        if (candidato) {
+          candidato.catalogId = anterior.catalogId;
+          candidato.structured = clone(anterior.structured || anterior.catalogData || {});
+          candidato.geometry = clone(anterior.geometry || anterior.structured?.area || { forma: 'nenhuma' });
+          candidato.rangeData = clone(anterior.rangeData || anterior.structured?.alcance || {});
+          persistirFichas();
+          chamarRenderEditor();
+        }
+      }
+      return result;
+    };
+    wrapped.__catalogWrapped = true;
+    confirmSpell = wrapped;
+  }
+
+  function envolverEdicaoEquipamento() {
+    if (typeof confirmEquip !== 'function' || confirmEquip.__catalogWrapped) return;
+    const original = confirmEquip;
+    const wrapped = function(...args) {
+      const fichaAntes = getFichaSegura();
+      const indice = typeof editingEquip !== 'undefined' ? editingEquip : null;
+      const anterior = indice !== null && fichaAntes?.equipment?.[indice] ? clone(fichaAntes.equipment[indice]) : null;
+      const nomeNovo = document.getElementById('eqName')?.value.trim() || '';
+      const result = original.apply(this, args);
+
+      if (anterior?.catalogId) {
+        const fichaDepois = getFichaSegura();
+        const candidato = fichaDepois?.equipment?.find(eq => !eq.catalogId && eq.name === nomeNovo);
+        if (candidato) {
+          candidato.catalogId = anterior.catalogId;
+          candidato.catalogCategory = anterior.catalogCategory;
+          candidato.catalogData = clone(anterior.catalogData || {});
+          persistirFichas();
+          chamarRenderEditor();
+        }
+      }
+      return result;
+    };
+    wrapped.__catalogWrapped = true;
+    confirmEquip = wrapped;
+  }
+
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && document.getElementById('mCatalogImport')?.style.display !== 'none') {
       fecharImportadorCatalogo();
@@ -433,6 +503,8 @@
     criarModal();
     injetarNavegacao();
     envolverRenderEditor();
+    envolverEdicaoMagia();
+    envolverEdicaoEquipamento();
     carregarCatalogos();
     setTimeout(injetarBotoes, 0);
   }
