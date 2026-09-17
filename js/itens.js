@@ -1,285 +1,229 @@
-// ── DADOS DO GLOSSÁRIO ───────────────────────────────────────────────────────
-// Para cadastrar novos itens, adicione novos objetos neste array seguindo o
-// mesmo formato do item abaixo. Os filtros e os cards são gerados automaticamente.
-const ITENS_MAGICOS = [
-  {
-    id: 'sino-do-ultimo-cortejo',
-    nome: 'Sino do Último Cortejo',
-    tipo: 'Item maravilhoso',
-    raridade: 'artefato',
-    raridadeLabel: 'Artefato',
-    afinacao: 'Não requer sintonização',
-    estado: 'Dormente',
-    icone: 'ti-bell',
-    resumo: 'Um pequeno sino de bolso de bronze escurecido, sem badalo, marcado pelo tempo e aparentemente incapaz de produzir qualquer som.',
-    descricao: 'À primeira vista, trata-se apenas de um sino funerário antigo e inutilizável. O metal é escuro, frio ao toque e não há badalo em seu interior. Quando agitado, nada acontece.',
-    origemPublica: 'A procedência do objeto é desconhecida. Não há assinatura de ferreiro, brasão, runa ou marca aparente que identifique quem o criou.',
-    quote: 'Uma badalada para sua chegada. Uma badalada para sua morte.',
-    tags: ['Funeral', 'Morte', 'Relíquia', 'Campanha'],
-    mestre: {
-      aviso: 'O sino parece não mágico enquanto permanece dormente.',
-      identificacao: 'Detectar Magia e Identificar não revelam seu verdadeiro propósito enquanto o item estiver dormente.',
-      proposito: 'O sino foi criado para anunciar e permitir o funeral de alguém que enganou a própria morte. Na campanha, ele funciona como a chave narrativa destinada a tornar Ivan BlackThorn mortal.',
-      manifestacao: 'Quando Ivan se manifesta em sua forma verdadeira, o sino toca sozinho. Apesar de caber em uma mão, a badalada ecoa como o sino colossal de uma torre ou catedral.',
-      origem: 'Séculos atrás, o objeto teria sido forjado por um sineiro funerário e ocultista ligado a uma antiga ordem responsável por enterrar aqueles que tentavam escapar da morte.',
-      introducao: 'O item pode chegar ao grupo pelas mãos de uma pessoa extremamente suspeita, encontrada no meio da rua, sem contexto confiável e sem explicar por completo o que está entregando.'
-    }
-  }
-];
-
-const RARITY_COLORS = {
-  'comum': '#a9a29a',
-  'incomum': '#55a56f',
-  'raro': '#5f8ed8',
-  'muito-raro': '#a979db',
-  'lendario': '#d68b3f',
-  'artefato': '#d65b57'
-};
-
+let ITENS = [];
+let itemEditandoId = null;
 let modoMestre = localStorage.getItem('rpg_items_master_mode') === 'true';
 let dark = localStorage.getItem('rpg_theme') !== 'light';
 
-// ── TEMA ─────────────────────────────────────────────────────────────────────
+const CATEGORY_LABELS = {
+  arma: 'Arma', armadura: 'Armadura', equipamento: 'Equipamento',
+  utilizavel: 'Utilizável', magico: 'Item mágico'
+};
+
+const CATEGORY_ICONS = {
+  arma: 'ti-sword', armadura: 'ti-shield', equipamento: 'ti-tool',
+  utilizavel: 'ti-flask', magico: 'ti-wand'
+};
+
+const RARITY_LABELS = {
+  comum: 'Comum', incomum: 'Incomum', raro: 'Raro',
+  'muito-raro': 'Muito raro', lendario: 'Lendário', artefato: 'Artefato'
+};
+
+const RARITY_COLORS = {
+  comum: '#a9a29a', incomum: '#55a56f', raro: '#5f8ed8',
+  'muito-raro': '#a979db', lendario: '#d68b3f', artefato: '#d65b57'
+};
+
 function applyTheme() {
   document.body.classList.toggle('light', !dark);
-  const themeBtn = document.getElementById('themeBtn');
-  if (themeBtn) themeBtn.textContent = dark ? '☀' : '🌙';
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = dark ? '☀' : '🌙';
 }
-
 function toggleTheme() {
   dark = !dark;
   localStorage.setItem('rpg_theme', dark ? 'dark' : 'light');
   applyTheme();
 }
-
-// ── MENU MOBILE ───────────────────────────────────────────────────────────────
-function toggleMobMenu() {
-  const nav = document.getElementById('mobNav');
-  if (nav) nav.classList.toggle('open');
-}
-
-function closeMobMenu() {
-  const nav = document.getElementById('mobNav');
-  if (nav) nav.classList.remove('open');
-}
+function toggleMobMenu() { document.getElementById('mobNav')?.classList.toggle('open'); }
+function closeMobMenu() { document.getElementById('mobNav')?.classList.remove('open'); }
 
 document.addEventListener('click', event => {
   const nav = document.getElementById('mobNav');
-  if (nav && nav.classList.contains('open') && !nav.contains(event.target) && !event.target.closest('.mob-menu-btn')) {
-    closeMobMenu();
-  }
+  if (nav?.classList.contains('open') && !nav.contains(event.target) && !event.target.closest('.mob-menu-btn')) closeMobMenu();
 });
 
-// ── UTILITÁRIOS ───────────────────────────────────────────────────────────────
 function normalizarTexto(valor = '') {
-  return String(valor)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
+  return String(valor).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
-
 function escaparHTML(valor = '') {
-  return String(valor)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
+  return String(valor).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+}
+function prettyKey(key = '') {
+  return key.replace(/([A-Z])/g, ' $1').replaceAll('-', ' ').replace(/^./, c => c.toUpperCase());
+}
+function valorLegivel(value) {
+  if (value === null || value === undefined || value === '') return '—';
+  if (typeof value === 'boolean') return value ? 'Sim' : 'Não';
+  if (Array.isArray(value)) return value.join(', ');
+  return String(value);
+}
+function corItem(item) {
+  if (item.raridade && RARITY_COLORS[item.raridade]) return RARITY_COLORS[item.raridade];
+  const category = { arma: '#cf7a58', armadura: '#6f8fb3', equipamento: '#b6a16d', utilizavel: '#63a78f', magico: '#9d76cf' };
+  return category[item.categoria] || 'var(--gold)';
 }
 
-function corRaridade(raridade) {
-  return RARITY_COLORS[raridade] || 'var(--gold)';
+function resumoMecanica(item) {
+  const m = item.mecanica || {};
+  if (item.categoria === 'arma') return [m.dano && `${m.dano} ${m.tipoDano || ''}`.trim(), m.alcance].filter(Boolean).join(' · ');
+  if (item.categoria === 'armadura') {
+    const dex = m.bonusDestreza ? (m.limiteDestreza == null ? ' + DES' : ` + DES (máx. ${m.limiteDestreza})`) : '';
+    return m.caBase ? `CA ${m.caBase}${dex}` : '';
+  }
+  if (item.categoria === 'utilizavel') return [m.usos != null && `${m.usos} uso(s)`, m.dano && `${m.dano} ${m.tipoDano || ''}`.trim(), m.duracao].filter(Boolean).join(' · ');
+  if (item.categoria === 'magico') return [item.raridade && RARITY_LABELS[item.raridade], item.sintonizacao ? 'Requer sintonização' : 'Sem sintonização'].filter(Boolean).join(' · ');
+  return m.capacidade || m.efeito || '';
 }
 
-function preencherFiltroTipos() {
-  const select = document.getElementById('typeFilter');
-  if (!select) return;
-
-  const tipos = [...new Set(ITENS_MAGICOS.map(item => item.tipo))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
-  tipos.forEach(tipo => {
-    const option = document.createElement('option');
-    option.value = normalizarTexto(tipo).replaceAll(' ', '-');
-    option.textContent = tipo;
-    select.appendChild(option);
-  });
-}
-
-function atualizarEstatisticas() {
-  const total = ITENS_MAGICOS.length;
-  const artefatos = ITENS_MAGICOS.filter(item => item.raridade === 'artefato').length;
-
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statArtefatos').textContent = artefatos;
-}
-
-// ── MODO MESTRE ───────────────────────────────────────────────────────────────
 function alternarModoMestre(ativo) {
   modoMestre = Boolean(ativo);
   localStorage.setItem('rpg_items_master_mode', String(modoMestre));
   document.body.classList.toggle('master-mode', modoMestre);
-
   const modal = document.getElementById('itemModal');
-  if (modal && modal.style.display !== 'none' && modal.dataset.itemId) {
-    abrirDetalhes(modal.dataset.itemId, true);
+  if (modal?.dataset.itemId && modal.style.display !== 'none') abrirDetalhes(modal.dataset.itemId, true);
+}
+
+async function carregarItens() {
+  try {
+    ITENS = await RPGCatalogo.getItens();
+    atualizarEstatisticas();
+    filtrarItens();
+  } catch (error) {
+    console.error(error);
+    document.getElementById('itemsGrid').innerHTML = `<div class="catalog-error">Não foi possível carregar o catálogo de itens.</div>`;
   }
 }
 
-// ── FILTROS ──────────────────────────────────────────────────────────────────
+function atualizarEstatisticas() {
+  document.getElementById('statTotal').textContent = ITENS.length;
+  document.getElementById('statCategorias').textContent = new Set(ITENS.map(i => i.categoria)).size;
+  document.getElementById('statCustom').textContent = ITENS.filter(i => i.custom).length;
+}
+
+function selecionarCategoria(categoria) {
+  document.getElementById('categoryFilter').value = categoria;
+  filtrarItens();
+}
+
 function filtrarItens() {
   const busca = normalizarTexto(document.getElementById('itemSearch')?.value || '');
+  const categoria = document.getElementById('categoryFilter')?.value || 'todos';
   const raridade = document.getElementById('rarityFilter')?.value || 'todos';
-  const tipo = document.getElementById('typeFilter')?.value || 'todos';
 
-  const filtrados = ITENS_MAGICOS.filter(item => {
-    const textoItem = normalizarTexto([
-      item.nome,
-      item.tipo,
-      item.raridadeLabel,
-      item.resumo,
-      item.descricao,
-      item.origemPublica,
-      ...(item.tags || [])
+  const filtrados = ITENS.filter(item => {
+    const texto = normalizarTexto([
+      item.nome, item.categoria, item.subcategoria, item.origem, item.descricao,
+      ...(item.tags || []), JSON.stringify(item.mecanica || {})
     ].join(' '));
-
-    const passaBusca = !busca || textoItem.includes(busca);
-    const passaRaridade = raridade === 'todos' || item.raridade === raridade;
-    const tipoItem = normalizarTexto(item.tipo).replaceAll(' ', '-');
-    const passaTipo = tipo === 'todos' || tipoItem === tipo;
-
-    return passaBusca && passaRaridade && passaTipo;
+    const okBusca = !busca || texto.includes(busca);
+    const okCat = categoria === 'todos' || item.categoria === categoria;
+    const itemRarity = item.raridade || 'sem-raridade';
+    const okRare = raridade === 'todos' || itemRarity === raridade;
+    return okBusca && okCat && okRare;
   });
 
   renderizarItens(filtrados);
-  atualizarResumoFiltros(filtrados.length, busca, raridade, tipo);
+  document.getElementById('resultCount').textContent = filtrados.length;
+  const filtros = [];
+  if (busca) filtros.push(`busca: “${busca}”`);
+  if (categoria !== 'todos') filtros.push(CATEGORY_LABELS[categoria]);
+  if (raridade !== 'todos') filtros.push(raridade === 'sem-raridade' ? 'sem raridade' : RARITY_LABELS[raridade]);
+  document.getElementById('activeFilterText').textContent = filtros.length ? filtros.join(' · ') : 'Exibindo todo o acervo';
 }
 
 function limparFiltros() {
   document.getElementById('itemSearch').value = '';
+  document.getElementById('categoryFilter').value = 'todos';
   document.getElementById('rarityFilter').value = 'todos';
-  document.getElementById('typeFilter').value = 'todos';
   filtrarItens();
 }
 
-function atualizarResumoFiltros(total, busca, raridade, tipo) {
-  document.getElementById('resultCount').textContent = total;
-  const partes = [];
-
-  if (busca) partes.push(`busca: “${busca}”`);
-  if (raridade !== 'todos') partes.push(`raridade: ${raridade.replaceAll('-', ' ')}`);
-  if (tipo !== 'todos') partes.push(`tipo: ${tipo.replaceAll('-', ' ')}`);
-
-  document.getElementById('activeFilterText').textContent = partes.length
-    ? partes.join(' · ')
-    : 'Exibindo todo o acervo';
-}
-
-// ── RENDERIZAÇÃO DOS CARDS ──────────────────────────────────────────────────
 function renderizarItens(lista) {
   const grid = document.getElementById('itemsGrid');
   const empty = document.getElementById('itemsEmpty');
-
   if (!lista.length) {
     grid.innerHTML = '';
     empty.style.display = '';
     return;
   }
-
   empty.style.display = 'none';
   grid.innerHTML = lista.map(item => {
-    const cor = corRaridade(item.raridade);
-    const tags = (item.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('');
-
+    const cor = corItem(item);
+    const tags = (item.tags || []).slice(0, 4).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('');
+    const rare = item.raridade ? `<span class="rarity-chip rarity-${escaparHTML(item.raridade)}">${escaparHTML(RARITY_LABELS[item.raridade] || item.raridade)}</span>` : '';
+    const source = item.custom ? '<span class="catalog-origin custom">Personalizado</span>' : '<span class="catalog-origin">Base</span>';
     return `
       <article class="magic-item-card" style="--rarity-color:${cor}" onclick="abrirDetalhes('${escaparHTML(item.id)}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(item.id)}')}">
         <div class="item-card-head">
-          <div class="item-icon-wrap"><i class="ti ${escaparHTML(item.icone)}"></i></div>
+          <div class="item-icon-wrap"><i class="ti ${CATEGORY_ICONS[item.categoria] || 'ti-box'}"></i></div>
           <div class="item-card-title">
             <h3>${escaparHTML(item.nome)}</h3>
-            <p>${escaparHTML(item.tipo)} · ${escaparHTML(item.estado)}</p>
+            <p>${escaparHTML(CATEGORY_LABELS[item.categoria] || item.categoria)} · ${escaparHTML(item.subcategoria || 'Sem subcategoria')}</p>
           </div>
-          <span class="rarity-chip rarity-${escaparHTML(item.raridade)}">${escaparHTML(item.raridadeLabel)}</span>
+          ${rare}
         </div>
-
         <div class="item-card-body">
-          <p class="item-summary">${escaparHTML(item.resumo)}</p>
+          <p class="item-summary">${escaparHTML(item.descricao || 'Sem descrição.')}</p>
+          ${resumoMecanica(item) ? `<div class="catalog-mechanic-line"><i class="ti ti-dice"></i>${escaparHTML(resumoMecanica(item))}</div>` : ''}
           <div class="item-tags">${tags}</div>
           <div class="item-card-footer">
-            <span><i class="ti ti-link"></i> ${escaparHTML(item.afinacao)}</span>
+            <span>${source}</span>
             <span class="item-card-link">Ver registro <i class="ti ti-arrow-right"></i></span>
           </div>
         </div>
-
-        <div class="master-preview">
-          <strong><i class="ti ti-eye"></i> Nota do Mestre</strong>
-          ${escaparHTML(item.mestre?.aviso || 'Este item possui informações ocultas para o mestre.')}
-        </div>
-      </article>
-    `;
+        ${item.mestre ? `<div class="master-preview"><strong><i class="ti ti-eye"></i> Nota do Mestre</strong>${escaparHTML(item.mestre.aviso || 'Há informações ocultas neste registro.')}</div>` : ''}
+      </article>`;
   }).join('');
 }
 
-// ── DETALHES ─────────────────────────────────────────────────────────────────
-function abrirDetalhes(id, manterScroll = false) {
-  const item = ITENS_MAGICOS.find(registro => registro.id === id);
-  if (!item) return;
+function renderMecanica(mecanica = {}) {
+  const entries = Object.entries(mecanica).filter(([, value]) => value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && !value.length));
+  if (!entries.length) return '<p>Nenhuma regra mecânica adicional registrada.</p>';
+  return `<div class="catalog-kv-grid">${entries.map(([key, value]) => `<div><span>${escaparHTML(prettyKey(key))}</span><strong>${escaparHTML(valorLegivel(value))}</strong></div>`).join('')}</div>`;
+}
 
+function abrirDetalhes(id, manterScroll = false) {
+  const item = ITENS.find(registro => registro.id === id);
+  if (!item) return;
   const modal = document.getElementById('itemModal');
   const content = document.getElementById('itemModalContent');
-  const cor = corRaridade(item.raridade);
+  const cor = corItem(item);
   const tags = (item.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('');
+  const rare = item.raridade ? `<span class="rarity-chip rarity-${escaparHTML(item.raridade)}">${escaparHTML(RARITY_LABELS[item.raridade] || item.raridade)}</span>` : '';
 
   content.innerHTML = `
     <div class="item-detail-hero" style="--rarity-color:${cor}">
-      <div class="item-detail-icon"><i class="ti ${escaparHTML(item.icone)}"></i></div>
+      <div class="item-detail-icon"><i class="ti ${CATEGORY_ICONS[item.categoria] || 'ti-box'}"></i></div>
       <div class="item-detail-heading">
         <h2 id="modalItemName">${escaparHTML(item.nome)}</h2>
-        <div class="item-detail-subtitle">${escaparHTML(item.tipo)} · ${escaparHTML(item.estado)} · ${escaparHTML(item.afinacao)}</div>
-        <div class="item-detail-meta">
-          <span class="rarity-chip rarity-${escaparHTML(item.raridade)}">${escaparHTML(item.raridadeLabel)}</span>
-          ${tags}
-        </div>
+        <div class="item-detail-subtitle">${escaparHTML(CATEGORY_LABELS[item.categoria] || item.categoria)} · ${escaparHTML(item.subcategoria || 'Sem subcategoria')}</div>
+        <div class="item-detail-meta">${rare}${tags}<span class="catalog-origin ${item.custom ? 'custom' : ''}">${item.custom ? 'Personalizado' : 'Base do sistema'}</span></div>
       </div>
     </div>
-
     <div class="item-detail-body">
-      <blockquote class="item-quote">“${escaparHTML(item.quote)}”</blockquote>
-
-      <section class="detail-section">
-        <h3><i class="ti ti-eye"></i> Aparência</h3>
-        <p>${escaparHTML(item.descricao)}</p>
+      ${item.citacao ? `<blockquote class="item-quote">“${escaparHTML(item.citacao)}”</blockquote>` : ''}
+      <section class="detail-section"><h3><i class="ti ti-notes"></i> Descrição</h3><p>${escaparHTML(item.descricao || 'Sem descrição.')}</p></section>
+      <section class="detail-section"><h3><i class="ti ti-settings"></i> Propriedades</h3>${renderMecanica(item.mecanica)}</section>
+      <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Registro</h3>
+        <div class="catalog-kv-grid">
+          <div><span>Origem</span><strong>${escaparHTML(item.origem || '—')}</strong></div>
+          <div><span>Peso</span><strong>${Number(item.pesoKg) ? `${item.pesoKg} kg` : '—'}</strong></div>
+          <div><span>Custo</span><strong>${escaparHTML(item.custo || '—')}</strong></div>
+          ${item.categoria === 'magico' ? `<div><span>Sintonização</span><strong>${item.sintonizacao ? 'Requerida' : 'Não requerida'}</strong></div>` : ''}
+        </div>
       </section>
-
-      <section class="detail-section">
-        <h3><i class="ti ti-history"></i> Registro conhecido</h3>
-        <p>${escaparHTML(item.origemPublica)}</p>
-      </section>
-
-      <div class="master-locked">
-        <i class="ti ti-lock"></i>
-        <span>Existem informações ocultas neste registro. Ative o <strong>Modo Mestre</strong> no topo da página para revelá-las.</span>
+      ${item.mestre ? `
+        <div class="master-locked"><i class="ti ti-lock"></i><span>Há informações reservadas ao mestre. Ative o <strong>Modo Mestre</strong> para revelá-las.</span></div>
+        <section class="detail-section master-secret"><h3><i class="ti ti-eye-off"></i> Segredo do Mestre</h3><ul>
+          ${Object.entries(item.mestre).filter(([key]) => key !== 'aviso').map(([key, value]) => `<li><strong>${escaparHTML(prettyKey(key))}:</strong> ${escaparHTML(value)}</li>`).join('')}
+        </ul></section>` : ''}
+      <div class="catalog-detail-actions no-print">
+        ${item.custom ? `<button class="btn" onclick="editarItem('${escaparHTML(item.id)}')"><i class="ti ti-edit"></i> Editar</button><button class="btn danger" onclick="excluirItem('${escaparHTML(item.id)}')"><i class="ti ti-trash"></i> Excluir</button>` : '<span class="catalog-readonly"><i class="ti ti-lock"></i> Registro-base protegido contra edição</span>'}
       </div>
-
-      <section class="detail-section master-secret">
-        <h3><i class="ti ti-eye-off"></i> Segredo do Mestre</h3>
-        <ul>
-          <li><strong>Identificação:</strong> ${escaparHTML(item.mestre?.identificacao || '—')}</li>
-          <li><strong>Propósito:</strong> ${escaparHTML(item.mestre?.proposito || '—')}</li>
-          <li><strong>Manifestação:</strong> ${escaparHTML(item.mestre?.manifestacao || '—')}</li>
-          <li><strong>Origem:</strong> ${escaparHTML(item.mestre?.origem || '—')}</li>
-          <li><strong>Introdução sugerida:</strong> ${escaparHTML(item.mestre?.introducao || '—')}</li>
-        </ul>
-      </section>
-    </div>
-  `;
+    </div>`;
 
   modal.dataset.itemId = item.id;
   modal.style.display = 'flex';
-
-  if (!manterScroll) {
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => modal.querySelector('.modal-close')?.focus(), 0);
-  }
+  if (!manterScroll) document.body.style.overflow = 'hidden';
 }
 
 function fecharDetalhes() {
@@ -288,27 +232,143 @@ function fecharDetalhes() {
   modal.dataset.itemId = '';
   document.body.style.overflow = '';
 }
+function fecharModalNoFundo(event) { if (event.target.id === 'itemModal') fecharDetalhes(); }
 
-function fecharModalNoFundo(event) {
-  if (event.target.id === 'itemModal') fecharDetalhes();
+function abrirEditorItem(item = null) {
+  itemEditandoId = item?.custom ? item.id : null;
+  document.getElementById('itemEditorTitle').textContent = item ? 'Editar Item' : 'Novo Item';
+  document.getElementById('edNome').value = item?.nome || '';
+  document.getElementById('edCategoria').value = item?.categoria || 'equipamento';
+  document.getElementById('edSubcategoria').value = item?.subcategoria || '';
+  document.getElementById('edPeso').value = item?.pesoKg || 0;
+  document.getElementById('edCusto').value = item?.custo || '';
+  document.getElementById('edOrigem').value = item?.origem || 'Personalizado';
+  document.getElementById('edTags').value = (item?.tags || []).join(', ');
+  document.getElementById('edDescricao').value = item?.descricao || '';
+  atualizarCamposCategoria(item);
+  document.getElementById('itemEditorModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function editarItem(id) {
+  const item = ITENS.find(i => i.id === id);
+  if (!item?.custom) return;
+  fecharDetalhes();
+  abrirEditorItem(item);
+}
+
+function fecharEditorItem() {
+  document.getElementById('itemEditorModal').style.display = 'none';
+  document.body.style.overflow = '';
+  itemEditandoId = null;
+}
+function fecharEditorNoFundo(event) { if (event.target.id === 'itemEditorModal') fecharEditorItem(); }
+
+function atualizarCamposCategoria(item = null) {
+  const categoria = document.getElementById('edCategoria').value;
+  const m = item?.mecanica || {};
+  const box = document.getElementById('itemSpecificFields');
+
+  if (categoria === 'arma') {
+    box.innerHTML = `<div class="catalog-section-label">Dados da arma</div><div class="catalog-form-grid">
+      <div class="form-field"><label>Dano</label><input id="edDano" value="${escaparHTML(m.dano || '')}" placeholder="1d8"></div>
+      <div class="form-field"><label>Tipo de dano</label><input id="edTipoDano" value="${escaparHTML(m.tipoDano || '')}" placeholder="cortante"></div>
+      <div class="form-field"><label>Alcance</label><input id="edAlcance" value="${escaparHTML(m.alcance || '')}" placeholder="corpo a corpo / 24 m"></div>
+      <div class="form-field"><label>Propriedades</label><input id="edPropriedades" value="${escaparHTML((m.propriedades || []).join(', '))}" placeholder="leve, acuidade"></div>
+    </div>`;
+  } else if (categoria === 'armadura') {
+    box.innerHTML = `<div class="catalog-section-label">Dados da armadura</div><div class="catalog-form-grid">
+      <div class="form-field"><label>CA base</label><input id="edCaBase" type="number" value="${m.caBase || 10}"></div>
+      <div class="form-field"><label>Limite de DES</label><input id="edLimiteDes" type="number" value="${m.limiteDestreza ?? ''}" placeholder="vazio = sem limite"></div>
+      <label class="catalog-check"><input id="edBonusDes" type="checkbox" ${m.bonusDestreza ? 'checked' : ''}> Soma Destreza</label>
+      <label class="catalog-check"><input id="edFurtividade" type="checkbox" ${m.desvantagemFurtividade ? 'checked' : ''}> Desvantagem em Furtividade</label>
+      <div class="form-field"><label>Força mínima</label><input id="edForcaMin" type="number" value="${m.forcaMinima || ''}" placeholder="opcional"></div>
+    </div>`;
+  } else if (categoria === 'utilizavel') {
+    box.innerHTML = `<div class="catalog-section-label">Uso do objeto</div><div class="catalog-form-grid">
+      <div class="form-field"><label>Usos / cargas</label><input id="edUsos" type="number" min="0" value="${m.usos ?? 1}"></div>
+      <div class="form-field"><label>Duração</label><input id="edDuracao" value="${escaparHTML(m.duracao || '')}" placeholder="1 hora"></div>
+      <div class="form-field span-2"><label>Efeito</label><textarea id="edEfeito" rows="2">${escaparHTML(m.efeito || '')}</textarea></div>
+    </div>`;
+  } else if (categoria === 'magico') {
+    box.innerHTML = `<div class="catalog-section-label">Dados mágicos</div><div class="catalog-form-grid">
+      <div class="form-field"><label>Raridade</label><select id="edRaridade"><option value="comum">Comum</option><option value="incomum">Incomum</option><option value="raro">Raro</option><option value="muito-raro">Muito raro</option><option value="lendario">Lendário</option><option value="artefato">Artefato</option></select></div>
+      <label class="catalog-check"><input id="edSintonizacao" type="checkbox" ${item?.sintonizacao ? 'checked' : ''}> Requer sintonização</label>
+      <div class="form-field span-2"><label>Efeito mecânico</label><textarea id="edEfeito" rows="2">${escaparHTML(m.efeito || '')}</textarea></div>
+    </div>`;
+    document.getElementById('edRaridade').value = item?.raridade || 'incomum';
+  } else {
+    box.innerHTML = `<div class="catalog-section-label">Dados do equipamento</div><div class="catalog-form-grid"><div class="form-field span-2"><label>Efeito / capacidade / observações</label><textarea id="edEfeito" rows="2">${escaparHTML(m.efeito || m.capacidade || '')}</textarea></div></div>`;
+  }
+}
+
+function lerMecanicaEditor(categoria) {
+  if (categoria === 'arma') return {
+    dano: document.getElementById('edDano').value.trim(),
+    tipoDano: document.getElementById('edTipoDano').value.trim(),
+    alcance: document.getElementById('edAlcance').value.trim(),
+    propriedades: document.getElementById('edPropriedades').value.split(',').map(v => v.trim()).filter(Boolean)
+  };
+  if (categoria === 'armadura') return {
+    caBase: Number(document.getElementById('edCaBase').value) || 10,
+    bonusDestreza: document.getElementById('edBonusDes').checked,
+    limiteDestreza: document.getElementById('edLimiteDes').value === '' ? null : Number(document.getElementById('edLimiteDes').value),
+    forcaMinima: document.getElementById('edForcaMin').value === '' ? null : Number(document.getElementById('edForcaMin').value),
+    desvantagemFurtividade: document.getElementById('edFurtividade').checked
+  };
+  if (categoria === 'utilizavel') return {
+    usos: Number(document.getElementById('edUsos').value) || 0,
+    duracao: document.getElementById('edDuracao').value.trim(),
+    efeito: document.getElementById('edEfeito').value.trim()
+  };
+  return { efeito: document.getElementById('edEfeito')?.value.trim() || '' };
+}
+
+async function salvarItemEditor() {
+  const nome = document.getElementById('edNome').value.trim();
+  if (!nome) { document.getElementById('edNome').focus(); return; }
+  const categoria = document.getElementById('edCategoria').value;
+  const antigo = ITENS.find(i => i.id === itemEditandoId);
+  const item = {
+    id: antigo?.id,
+    nome,
+    categoria,
+    subcategoria: document.getElementById('edSubcategoria').value.trim(),
+    origem: document.getElementById('edOrigem').value.trim() || 'Personalizado',
+    pesoKg: Number(document.getElementById('edPeso').value) || 0,
+    custo: document.getElementById('edCusto').value.trim(),
+    descricao: document.getElementById('edDescricao').value.trim(),
+    tags: document.getElementById('edTags').value.split(',').map(v => v.trim()).filter(Boolean),
+    mecanica: lerMecanicaEditor(categoria)
+  };
+  if (categoria === 'magico') {
+    item.raridade = document.getElementById('edRaridade').value;
+    item.sintonizacao = document.getElementById('edSintonizacao').checked;
+  }
+  RPGCatalogo.saveItem(item);
+  fecharEditorItem();
+  await carregarItens();
+}
+
+async function excluirItem(id) {
+  const item = ITENS.find(i => i.id === id);
+  if (!item?.custom) return;
+  if (!confirm(`Excluir “${item.nome}” do glossário?`)) return;
+  RPGCatalogo.removeItem(id);
+  fecharDetalhes();
+  await carregarItens();
 }
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
-    const modal = document.getElementById('itemModal');
-    if (modal && modal.style.display !== 'none') fecharDetalhes();
+    if (document.getElementById('itemEditorModal')?.style.display !== 'none') fecharEditorItem();
+    else if (document.getElementById('itemModal')?.style.display !== 'none') fecharDetalhes();
   }
 });
 
-// ── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   applyTheme();
-  preencherFiltroTipos();
-  atualizarEstatisticas();
-
-  const masterModeInput = document.getElementById('masterMode');
-  masterModeInput.checked = modoMestre;
+  document.getElementById('masterMode').checked = modoMestre;
   document.body.classList.toggle('master-mode', modoMestre);
-
-  filtrarItens();
+  carregarItens();
 });
