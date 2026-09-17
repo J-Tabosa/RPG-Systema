@@ -92,6 +92,7 @@ function filtrarMagias() {
   const busca = normalizarTexto(document.getElementById('spellSearch')?.value || '');
   const nivel = document.getElementById('levelFilter')?.value || 'todos';
   const escola = document.getElementById('schoolFilter')?.value || 'todos';
+  const classe = document.getElementById('classFilter')?.value || 'todas';
   const area = document.getElementById('areaFilter')?.value || 'todos';
 
   const filtradas = MAGIAS.filter(magia => {
@@ -102,6 +103,7 @@ function filtrarMagias() {
     return (!busca || texto.includes(busca)) &&
       (nivel === 'todos' || Number(magia.nivel) === Number(nivel)) &&
       (escola === 'todos' || magia.escola === escola) &&
+      (classe === 'todas' || (magia.classes || []).includes(classe)) &&
       (area === 'todos' || (magia.area?.forma || 'nenhuma') === area);
   });
 
@@ -111,6 +113,7 @@ function filtrarMagias() {
   if (busca) filtros.push(`busca: “${busca}”`);
   if (nivel !== 'todos') filtros.push(Number(nivel) === 0 ? 'truques' : `nível ${nivel}`);
   if (escola !== 'todos') filtros.push(escola);
+  if (classe !== 'todas') filtros.push(classe);
   if (area !== 'todos') filtros.push(areaLabel(area));
   document.getElementById('activeFilterText').textContent = filtros.length ? filtros.join(' · ') : 'Exibindo todo o grimório';
 }
@@ -119,8 +122,35 @@ function limparFiltros() {
   document.getElementById('spellSearch').value = '';
   document.getElementById('levelFilter').value = 'todos';
   document.getElementById('schoolFilter').value = 'todos';
+  document.getElementById('classFilter').value = 'todas';
   document.getElementById('areaFilter').value = 'todos';
   filtrarMagias();
+}
+
+function abrirImportadorMagias() {
+  document.getElementById('spellImportInput')?.click();
+}
+
+async function importarMagiasJSON(event) {
+  const input = event?.target;
+  const arquivo = input?.files?.[0];
+  if (!arquivo) return;
+
+  try {
+    const payload = JSON.parse(await arquivo.text());
+    const resultado = RPGCatalogo.importSpells(payload);
+    if (!resultado.total) {
+      alert('O JSON não contém magias válidas. Use um array, spells[] ou magias[].');
+      return;
+    }
+    await carregarMagias();
+    alert(`Importação concluída: ${resultado.imported} nova(s) e ${resultado.updated} atualizada(s).`);
+  } catch (error) {
+    console.error('Erro ao importar magias:', error);
+    alert('Não foi possível importar o JSON de magias. Verifique a estrutura do arquivo.');
+  } finally {
+    if (input) input.value = '';
+  }
 }
 
 function renderizarMagias(lista) {
