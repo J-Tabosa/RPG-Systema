@@ -17,7 +17,7 @@
       <i class="ti ti-sparkles header-icon"></i>
       <div>
         <h1>Glossário de Magias</h1>
-        <div class="subtitle">Biblioteca estruturada para fichas e futuras simulações de batalha</div>
+        <div class="subtitle">Biblioteca completa de magias para consulta e integração com fichas</div>
       </div>
     </div>
 
@@ -69,11 +69,6 @@
       <button class="btn sm" onclick="abrirImportadorMagias()"><i class="ti ti-file-import"></i> Importar JSON</button>
       <input type="file" id="spellImportInput" accept=".json,application/json" hidden onchange="importarMagiasJSON(event)">
       <button class="btn sm primary" onclick="abrirEditorMagia()"><i class="ti ti-plus"></i> Nova Magia</button>
-    </section>
-
-    <section class="spell-geometry-note no-print">
-      <i class="ti ti-ruler-measure"></i>
-      <div><strong>Dados preparados para mapa tático.</strong><span> A interface ainda não desenha a área no campo de batalha, mas os valores geométricos já são armazenados separadamente para essa expansão.</span></div>
     </section>
 
     <div class="results-row"><div><span id="resultCount">0</span> magia(s) encontrada(s)</div><div id="activeFilterText">Exibindo todo o grimório</div></div>
@@ -143,7 +138,7 @@
       <div class="form-field span-2"><label>Efeito mecânico adicional</label><textarea id="spEdEfeito" rows="2"></textarea></div>
     </div>
 
-    <div class="catalog-section-label spell-form-section">Geometria da área de efeito</div>
+    <div class="catalog-section-label spell-form-section">Área de efeito</div>
     <div class="spell-geometry-editor">
       <div class="catalog-form-grid">
         <div class="form-field"><label>Forma</label><select id="spEdAreaForma" onchange="atualizarCamposGeometria()"><option value="nenhuma">Sem área</option><option value="esfera">Esfera</option><option value="cone">Cone</option><option value="cubo">Cubo</option><option value="cilindro">Cilindro</option><option value="linha">Linha</option><option value="emanacao">Emanação</option><option value="quadrado">Quadrado</option></select></div>
@@ -159,8 +154,9 @@
 
     <div class="catalog-section-label spell-form-section">Texto da magia</div>
     <div class="catalog-form-grid">
-      <div class="form-field span-2"><label>Descrição</label><textarea id="spEdDescricao" rows="4"></textarea></div>
-      <div class="form-field span-2"><label>Em níveis superiores / escalonamento</label><textarea id="spEdEscala" rows="2"></textarea></div>
+      <div class="form-field span-2"><label>Resumo para o card</label><textarea id="spEdDescricao" rows="2"></textarea></div>
+      <div class="form-field span-2"><label>Descrição completa / regras</label><textarea id="spEdDescricaoCompleta" rows="8"></textarea></div>
+      <div class="form-field span-2"><label>Em níveis superiores / escalonamento</label><textarea id="spEdEscala" rows="3"></textarea></div>
     </div>
 
     <div class="modal-actions"><button class="btn" onclick="fecharEditorMagia()">Cancelar</button><button class="btn primary" onclick="salvarMagiaEditor()"><i class="ti ti-device-floppy"></i> Salvar Magia</button></div>
