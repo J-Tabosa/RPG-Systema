@@ -116,7 +116,7 @@ function filtrarMagias() {
   const filtradas = MAGIAS.filter(magia => {
     const fontes = magia.fontes || (magia.origem ? [magia.origem] : []);
     const texto = normalizarTexto([
-      magia.nome, magia.escola, magia.origem, ...(fontes || []), magia.descricao, magia.escalonamento, magia.alvo,
+      magia.nome, magia.escola, magia.origem, ...(fontes || []), magia.descricao, magia.descricaoCompleta, magia.escalonamento, magia.alvo,
       ...(magia.classes || []), ...(magia.tags || []), JSON.stringify(magia.resolucao || {})
     ].join(' '));
     return (!busca || texto.includes(busca)) &&
@@ -249,6 +249,8 @@ function abrirDetalhes(id) {
   const cor = schoolColor(magia.escola);
   const area = RPGCatalogo.formatArea(magia.area);
   const res = magia.resolucao || {};
+  const fonteLabel = (magia.fontes || []).join(' · ') || magia.origem || 'Base';
+  const regrasCompletas = magia.descricaoCompleta || magia.descricao || 'Sem descrição.';
 
   content.innerHTML = `
     <div class="item-detail-hero spell-detail-hero" style="--rarity-color:${cor}">
@@ -256,7 +258,7 @@ function abrirDetalhes(id) {
       <div class="item-detail-heading">
         <h2 id="modalSpellName">${escaparHTML(magia.nome)}</h2>
         <div class="item-detail-subtitle">${escaparHTML(nivelLabel(magia.nivel))} · ${escaparHTML(magia.escola || 'Sem escola')} · ${magia.ritual ? 'Ritual' : 'Não ritual'}</div>
-        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.baseOverride ? 'Base editada' : (magia.custom ? 'Personalizada' : 'Base do sistema')}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
+        <div class="item-detail-meta"><span class="catalog-origin ${magia.custom ? 'custom' : ''}">${magia.baseOverride ? 'Base editada' : (magia.custom ? 'Personalizada' : escaparHTML(fonteLabel))}</span>${(magia.tags || []).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
       </div>
     </div>
     <div class="item-detail-body">
@@ -266,6 +268,7 @@ function abrirDetalhes(id) {
           <div><span>Alcance</span><strong>${escaparHTML(RPGCatalogo.formatRange(magia.alcance))}</strong></div>
           <div><span>Alvo</span><strong>${escaparHTML(magia.alvo || '—')}</strong></div>
           <div><span>Duração</span><strong>${escaparHTML(RPGCatalogo.formatDuration(magia.duracao))}</strong></div>
+          <div><span>Área</span><strong>${escaparHTML(area)}</strong></div>
         </div></section>
         <section class="detail-section"><h3><i class="ti ti-components"></i> Componentes</h3><div class="spell-components">${componentChips(magia.componentes)}</div>
           ${magia.componentes?.material ? `<p style="margin-top:8px">${escaparHTML(magia.componentes.materialTexto || 'Material não especificado.')}${magia.componentes.custo ? ` · ${escaparHTML(magia.componentes.custo)}` : ''}${magia.componentes.consumido ? ' · consumido' : ''}</p>` : ''}
@@ -277,13 +280,7 @@ function abrirDetalhes(id) {
         <div><span>Dano</span><strong>${escaparHTML([res.dano, res.tipoDano].filter(Boolean).join(' ') || '—')}</strong></div>
         <div><span>Cura</span><strong>${escaparHTML(res.cura || '—')}</strong></div>
       </div>${res.efeito ? `<p style="margin-top:8px">${escaparHTML(res.efeito)}</p>` : ''}</section>
-      <section class="detail-section spell-geometry-box"><h4><i class="ti ti-ruler-measure"></i> Geometria pronta para mapa tático</h4><div class="catalog-kv-grid">
-        <div><span>Forma</span><strong>${escaparHTML(areaLabel(magia.area?.forma))}</strong></div>
-        <div><span>Origem</span><strong>${escaparHTML(magia.area?.origem || '—')}</strong></div>
-        <div><span>Dimensões</span><strong>${escaparHTML(area)}</strong></div>
-        <div><span>Unidade</span><strong>${escaparHTML(magia.area?.unidade || 'm')}</strong></div>
-      </div></section>
-      <section class="detail-section"><h3><i class="ti ti-notes"></i> Descrição</h3><p>${escaparHTML(magia.descricao || 'Sem descrição.')}</p></section>
+      <section class="detail-section spell-rules-section"><h3><i class="ti ti-notes"></i> Regras da magia</h3><p class="spell-rules-text">${escaparHTML(regrasCompletas)}</p></section>
       ${magia.escalonamento ? `<section class="detail-section"><h3><i class="ti ti-trending-up"></i> Em níveis superiores</h3><p>${escaparHTML(magia.escalonamento)}</p></section>` : ''}
       <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Origem e classes</h3><p><strong>${escaparHTML((magia.fontes || []).join(' · ') || magia.origem || '—')}</strong><br>${escaparHTML((magia.classes || []).join(', ') || 'Classes não especificadas')}</p></section>
       <div class="catalog-detail-actions no-print">
@@ -359,6 +356,7 @@ function abrirEditorMagia(magia = null) {
   setValue('spEdAreaUnit', magia?.area?.unidade || 'm');
 
   setValue('spEdDescricao', magia?.descricao || '');
+  setValue('spEdDescricaoCompleta', magia?.descricaoCompleta || magia?.descricao || '');
   setValue('spEdEscala', magia?.escalonamento || '');
   atualizarEstadoAlcance();
   atualizarEstadoMaterial();
@@ -420,10 +418,10 @@ function atualizarPreviewGeometria() {
   if (!preview) return;
   const area = areaDoEditor();
   if (area.forma === 'nenhuma') {
-    preview.innerHTML = '<strong>Sem área geométrica.</strong> A magia poderá atuar em alvo único, múltiplos alvos ou efeito narrativo.';
+    preview.innerHTML = '<strong>Sem área de efeito configurada.</strong> A magia pode atuar em alvo único, múltiplos alvos ou ter um efeito sem área.';
     return;
   }
-  preview.innerHTML = `<strong>${escaparHTML(areaLabel(area.forma))}:</strong> ${escaparHTML(RPGCatalogo.formatArea(area))} · origem: ${escaparHTML(area.origem)}. Estes números poderão ser convertidos em células/pixels pelo futuro campo de batalha.`;
+  preview.innerHTML = `<strong>${escaparHTML(areaLabel(area.forma))}:</strong> ${escaparHTML(RPGCatalogo.formatArea(area))} · origem: ${escaparHTML(area.origem)}.`;
 }
 
 function lerMagiaEditor() {
@@ -473,6 +471,7 @@ function lerMagiaEditor() {
     area: areaDoEditor(),
     escalonamento: document.getElementById('spEdEscala').value.trim(),
     descricao: document.getElementById('spEdDescricao').value.trim(),
+    descricaoCompleta: document.getElementById('spEdDescricaoCompleta').value.trim(),
     tags: document.getElementById('spEdTags').value.split(',').map(v => v.trim()).filter(Boolean)
   };
 }
