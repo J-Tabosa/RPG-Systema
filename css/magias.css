@@ -16,12 +16,12 @@
 }
 .spell-card:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 10px 26px rgba(0,0,0,.2)}
 .spell-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--spell-color,var(--gold))}
-.spell-card-head{display:flex;gap:11px;align-items:flex-start;padding:16px 16px 10px}
+.spell-card-head{display:flex;gap:14px;align-items:flex-start;padding:18px 16px 13px}
 .spell-level-icon{
   width:45px;height:45px;flex:0 0 45px;display:grid;place-items:center;border:1px solid var(--spell-color,var(--gold));
   border-radius:50%;color:var(--spell-color,var(--gold));font-family:'Cinzel',serif;font-weight:700;font-size:14px;background:var(--card2)
 }
-.spell-card-title{min-width:0;flex:1}.spell-card-title h3{font-size:14px;color:var(--text);margin-bottom:4px}.spell-card-title p{font-size:12px;color:var(--muted)}
+.spell-card-title{min-width:0;flex:1}.spell-card-title h3{font-size:14px;color:var(--text);margin-bottom:8px;line-height:1.3}.spell-card-title p{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4}
 .spell-card-body{padding:0 16px 15px;display:flex;flex-direction:column;flex:1}
 .spell-card-description{color:var(--muted);font-size:14px;line-height:1.45;margin:4px 0 11px}
 .spell-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:11px}
