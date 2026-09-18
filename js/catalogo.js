@@ -142,6 +142,45 @@
   function saveItem(entry) { return saveCustom(ITEM_KEY, 'item', entry); }
   function saveSpell(entry) { return saveCustom(SPELL_KEY, 'magia', entry); }
 
+  function spellSources(entry = {}) {
+    if (Array.isArray(entry.fontes) && entry.fontes.length) {
+      return [...new Set(entry.fontes.map(v => String(v).trim()).filter(Boolean))];
+    }
+    if (entry.origem) {
+      return String(entry.origem)
+        .split('·')
+        .map(v => v.trim())
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  function spellIdentity(entry = {}) {
+    const nome = slug(entry.nome || '');
+    const nivel = Math.max(0, Math.min(9, Number(entry.nivel) || 0));
+    const fonte = slug(spellSources(entry)[0] || '');
+    return `${nome}|${nivel}|${fonte}`;
+  }
+
+  function spellNameLevelIdentity(entry = {}) {
+    const nome = slug(entry.nome || '');
+    const nivel = Math.max(0, Math.min(9, Number(entry.nivel) || 0));
+    return `${nome}|${nivel}`;
+  }
+
+  function uniqueIndex(entries, keyFn, valueFn = value => value) {
+    const map = new Map();
+    const duplicated = new Set();
+    entries.forEach((entry, index) => {
+      const key = keyFn(entry);
+      if (!key) return;
+      if (map.has(key)) duplicated.add(key);
+      else map.set(key, valueFn(entry, index));
+    });
+    duplicated.forEach(key => map.delete(key));
+    return map;
+  }
+
   function normalizeImportedSpells(payload) {
     const source = Array.isArray(payload)
       ? payload
@@ -156,18 +195,25 @@
       .map(entry => {
         const normalized = clone(entry);
         normalized.nome = String(normalized.nome).trim();
-        normalized.id = normalized.id || slug(normalized.nome) || uid('magia');
         normalized.nivel = Math.max(0, Math.min(9, Number(normalized.nivel) || 0));
         normalized.classes = Array.isArray(normalized.classes)
           ? [...new Set(normalized.classes.map(v => String(v).trim()).filter(Boolean))]
           : [];
         normalized.fontes = Array.isArray(normalized.fontes)
           ? [...new Set(normalized.fontes.map(v => String(v).trim()).filter(Boolean))]
-          : (normalized.origem ? [String(normalized.origem).trim()] : ['Importado']);
+          : (normalized.origem ? spellSources(normalized) : ['Importado']);
         normalized.origem = normalized.origem || normalized.fontes.join(' · ');
         normalized.tags = Array.isArray(normalized.tags)
           ? [...new Set(normalized.tags.map(v => String(v).trim()).filter(Boolean))]
           : [];
+
+        if (!normalized.id) {
+          const baseId = slug(normalized.nome) || uid('magia');
+          const fonteId = slug(normalized.fontes[0] || '');
+          normalized.id = fonteId
+            ? `${baseId}-${fonteId}-n${normalized.nivel}`
+            : `${baseId}-n${normalized.nivel}`;
+        }
         return normalized;
       });
   }
@@ -180,21 +226,33 @@
       readBase(spellUrl, 'spells'),
       Promise.resolve(readLocal(SPELL_KEY))
     ]);
+
     const baseById = new Map(base.map(entry => [entry.id, entry]));
-    const baseByName = new Map(base.map(entry => [slug(entry.nome), entry]));
+    const baseByIdentity = uniqueIndex(base, spellIdentity);
+    const baseByNameLevel = uniqueIndex(base, spellNameLevelIdentity);
     const localById = new Map(list.map((entry, index) => [entry.id, index]));
-    const localByName = new Map(list.map((entry, index) => [slug(entry.nome), index]));
+    const localByIdentity = uniqueIndex(list, spellIdentity, (_entry, index) => index);
+    const localByNameLevel = uniqueIndex(list, spellNameLevelIdentity, (_entry, index) => index);
+
     const now = new Date().toISOString();
     let imported = 0;
     let updated = 0;
 
     incoming.forEach(entry => {
-      const baseMatch = baseById.get(entry.id) || baseByName.get(slug(entry.nome));
+      const identity = spellIdentity(entry);
+      const nameLevelIdentity = spellNameLevelIdentity(entry);
+      const baseMatch =
+        baseByIdentity.get(identity) ||
+        baseById.get(entry.id) ||
+        baseByNameLevel.get(nameLevelIdentity);
+
       if (baseMatch) entry.id = baseMatch.id;
 
       const existingIndex = localById.has(entry.id)
         ? localById.get(entry.id)
-        : localByName.get(slug(entry.nome));
+        : localByIdentity.has(identity)
+          ? localByIdentity.get(identity)
+          : localByNameLevel.get(nameLevelIdentity);
 
       const previous = existingIndex === undefined ? null : list[existingIndex];
       const normalized = {
@@ -210,10 +268,14 @@
         list.push(normalized);
         const newIndex = list.length - 1;
         localById.set(normalized.id, newIndex);
-        localByName.set(slug(normalized.nome), newIndex);
+        localByIdentity.set(spellIdentity(normalized), newIndex);
+        localByNameLevel.set(spellNameLevelIdentity(normalized), newIndex);
         imported++;
       } else {
         list[existingIndex] = normalized;
+        localById.set(normalized.id, existingIndex);
+        localByIdentity.set(spellIdentity(normalized), existingIndex);
+        localByNameLevel.set(spellNameLevelIdentity(normalized), existingIndex);
         updated++;
       }
     });
