@@ -206,6 +206,9 @@
         normalized.tags = Array.isArray(normalized.tags)
           ? [...new Set(normalized.tags.map(v => String(v).trim()).filter(Boolean))]
           : [];
+        normalized.descricao = String(normalized.descricao || '').trim();
+        normalized.descricaoCompleta = String(normalized.descricaoCompleta || normalized.descricao || '').trim();
+        normalized.escalonamento = String(normalized.escalonamento || '').trim();
 
         if (!normalized.id) {
           const baseId = slug(normalized.nome) || uid('magia');
@@ -293,7 +296,7 @@
   function removeItemCategory(id) { return removeCustom(ITEM_CATEGORY_KEY, id); }
 
   function formatRange(range = {}) {
-    if (!range || range.tipo === 'pessoal') return 'Pessoal';
+    if (!range || range.tipo === 'pessoal') return range?.detalhe ? `Pessoal (${range.detalhe})` : 'Pessoal';
     if (range.tipo === 'toque') return 'Toque';
     if (range.tipo === 'visao') return 'Visão';
     if (range.tipo === 'ilimitado') return 'Ilimitado';
