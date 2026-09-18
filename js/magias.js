@@ -115,11 +115,8 @@ function filtrarMagias() {
 
   const filtradas = MAGIAS.filter(magia => {
     const fontes = magia.fontes || (magia.origem ? [magia.origem] : []);
-    const texto = normalizarTexto([
-      magia.nome, magia.escola, magia.origem, ...(fontes || []), magia.descricao, magia.descricaoCompleta, magia.escalonamento, magia.alvo,
-      ...(magia.classes || []), ...(magia.tags || []), JSON.stringify(magia.resolucao || {})
-    ].join(' '));
-    return (!busca || texto.includes(busca)) &&
+    const nome = normalizarTexto(magia.nome || '');
+    return (!busca || nome.includes(busca)) &&
       (nivel === 'todos' || Number(magia.nivel) === Number(nivel)) &&
       (escola === 'todos' || magia.escola === escola) &&
       (classe === 'todas' || (magia.classes || []).includes(classe)) &&
