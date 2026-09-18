@@ -161,6 +161,10 @@
         normalized.classes = Array.isArray(normalized.classes)
           ? [...new Set(normalized.classes.map(v => String(v).trim()).filter(Boolean))]
           : [];
+        normalized.fontes = Array.isArray(normalized.fontes)
+          ? [...new Set(normalized.fontes.map(v => String(v).trim()).filter(Boolean))]
+          : (normalized.origem ? [String(normalized.origem).trim()] : ['Importado']);
+        normalized.origem = normalized.origem || normalized.fontes.join(' · ');
         normalized.tags = Array.isArray(normalized.tags)
           ? [...new Set(normalized.tags.map(v => String(v).trim()).filter(Boolean))]
           : [];
