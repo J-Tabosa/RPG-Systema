@@ -64,17 +64,33 @@ async function carregarMagias() {
 function preencherEscolas() {
   const select = document.getElementById('schoolFilter');
   const editor = document.getElementById('spEdEscola');
+  const classSelect = document.getElementById('classFilter');
+  const sourceSelect = document.getElementById('sourceFilter');
   const atual = select?.value || 'todos';
+  const classeAtual = classSelect?.value || 'todas';
+  const fonteAtual = sourceSelect?.value || 'todas';
+
   const labels = [...new Set([
     ...ESCOLAS.map(e => e.label),
     ...MAGIAS.map(m => m.escola).filter(Boolean)
   ])].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  const classes = [...new Set(MAGIAS.flatMap(m => m.classes || []).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  const fontes = [...new Set(MAGIAS.flatMap(m => m.fontes || (m.origem ? [m.origem] : [])).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'pt-BR'));
 
   if (select) {
     select.innerHTML = '<option value="todos">Todas</option>' + labels.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
     if ([...select.options].some(o => o.value === atual)) select.value = atual;
   }
-
+  if (classSelect) {
+    classSelect.innerHTML = '<option value="todas">Todas</option>' + classes.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
+    if ([...classSelect.options].some(o => o.value === classeAtual)) classSelect.value = classeAtual;
+  }
+  if (sourceSelect) {
+    sourceSelect.innerHTML = '<option value="todas">Todas</option>' + fontes.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
+    if ([...sourceSelect.options].some(o => o.value === fonteAtual)) sourceSelect.value = fonteAtual;
+  }
   if (editor) {
     const atualEditor = editor.value;
     editor.innerHTML = labels.map(e => `<option value="${escaparHTML(e)}">${escaparHTML(e)}</option>`).join('');
@@ -93,18 +109,32 @@ function filtrarMagias() {
   const nivel = document.getElementById('levelFilter')?.value || 'todos';
   const escola = document.getElementById('schoolFilter')?.value || 'todos';
   const classe = document.getElementById('classFilter')?.value || 'todas';
+  const fonte = document.getElementById('sourceFilter')?.value || 'todas';
+  const ordem = document.getElementById('sortFilter')?.value || 'nivel';
   const area = document.getElementById('areaFilter')?.value || 'todos';
 
   const filtradas = MAGIAS.filter(magia => {
+    const fontes = magia.fontes || (magia.origem ? [magia.origem] : []);
     const texto = normalizarTexto([
-      magia.nome, magia.escola, magia.origem, magia.descricao, magia.escalonamento, magia.alvo,
+      magia.nome, magia.escola, magia.origem, ...(fontes || []), magia.descricao, magia.escalonamento, magia.alvo,
       ...(magia.classes || []), ...(magia.tags || []), JSON.stringify(magia.resolucao || {})
     ].join(' '));
     return (!busca || texto.includes(busca)) &&
       (nivel === 'todos' || Number(magia.nivel) === Number(nivel)) &&
       (escola === 'todos' || magia.escola === escola) &&
       (classe === 'todas' || (magia.classes || []).includes(classe)) &&
+      (fonte === 'todas' || fontes.includes(fonte)) &&
       (area === 'todos' || (magia.area?.forma || 'nenhuma') === area);
+  });
+
+  filtradas.sort((a, b) => {
+    if (ordem === 'nome') return String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR');
+    if (ordem === 'escola') {
+      return String(a.escola || '').localeCompare(String(b.escola || ''), 'pt-BR') ||
+        String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR');
+    }
+    return (Number(a.nivel) || 0) - (Number(b.nivel) || 0) ||
+      String(a.nome || '').localeCompare(String(b.nome || ''), 'pt-BR');
   });
 
   renderizarMagias(filtradas);
@@ -114,8 +144,11 @@ function filtrarMagias() {
   if (nivel !== 'todos') filtros.push(Number(nivel) === 0 ? 'truques' : `nível ${nivel}`);
   if (escola !== 'todos') filtros.push(escola);
   if (classe !== 'todas') filtros.push(classe);
+  if (fonte !== 'todas') filtros.push(`fonte: ${fonte}`);
   if (area !== 'todos') filtros.push(areaLabel(area));
-  document.getElementById('activeFilterText').textContent = filtros.length ? filtros.join(' · ') : 'Exibindo todo o grimório';
+  const ordemLabel = { nivel: 'nível', escola: 'escola', nome: 'A–Z' }[ordem] || ordem;
+  document.getElementById('activeFilterText').textContent =
+    (filtros.length ? filtros.join(' · ') : 'Exibindo todo o grimório') + ` · ordem: ${ordemLabel}`;
 }
 
 function limparFiltros() {
@@ -123,6 +156,8 @@ function limparFiltros() {
   document.getElementById('levelFilter').value = 'todos';
   document.getElementById('schoolFilter').value = 'todos';
   document.getElementById('classFilter').value = 'todas';
+  document.getElementById('sourceFilter').value = 'todas';
+  document.getElementById('sortFilter').value = 'nivel';
   document.getElementById('areaFilter').value = 'todos';
   filtrarMagias();
 }
@@ -167,11 +202,12 @@ function renderizarMagias(lista) {
     const area = RPGCatalogo.formatArea(magia.area);
     const concentration = magia.duracao?.concentracao ? '<span class="catalog-pill accent"><i class="ti ti-focus-2"></i> Concentração</span>' : '';
     const ritual = magia.ritual ? '<span class="catalog-pill"><i class="ti ti-book"></i> Ritual</span>' : '';
+    const sourceLabel = (magia.fontes || []).join(' · ') || magia.origem || 'Base';
     const source = magia.baseOverride
       ? '<span class="catalog-origin custom">Base editada</span>'
       : magia.custom
         ? '<span class="catalog-origin custom">Personalizada</span>'
-        : '<span class="catalog-origin">Base</span>';
+        : `<span class="catalog-origin">${escaparHTML(sourceLabel)}</span>`;
     return `
       <article class="spell-card" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
         <div class="spell-card-head">
@@ -249,7 +285,7 @@ function abrirDetalhes(id) {
       </div></section>
       <section class="detail-section"><h3><i class="ti ti-notes"></i> Descrição</h3><p>${escaparHTML(magia.descricao || 'Sem descrição.')}</p></section>
       ${magia.escalonamento ? `<section class="detail-section"><h3><i class="ti ti-trending-up"></i> Em níveis superiores</h3><p>${escaparHTML(magia.escalonamento)}</p></section>` : ''}
-      <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Origem e classes</h3><p><strong>${escaparHTML(magia.origem || '—')}</strong><br>${escaparHTML((magia.classes || []).join(', ') || 'Classes não especificadas')}</p></section>
+      <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Origem e classes</h3><p><strong>${escaparHTML((magia.fontes || []).join(' · ') || magia.origem || '—')}</strong><br>${escaparHTML((magia.classes || []).join(', ') || 'Classes não especificadas')}</p></section>
       <div class="catalog-detail-actions no-print">
         <button class="btn" onclick="editarMagia('${escaparHTML(magia.id)}')"><i class="ti ti-edit"></i> Editar</button>
         ${magia.baseOverride
