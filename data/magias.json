@@ -5,7 +5,7 @@
     "nome": "Glossário de Magias",
     "sistema": "D&D 5e",
     "idioma": "pt-BR",
-    "totalMagias": 610,
+    "totalMagias": 611,
     "ordenacao": [
       "nivel",
       "nome"
@@ -16,21 +16,20 @@
       "Tasha",
       "Valda"
     ],
-    "resumosRevisados": 116,
     "ordenacaoPadrao": "nivel"
   },
   "importacao": {
     "chavePrimaria": "id",
     "deduplicacao": [
       "id",
-      "nome normalizado"
+      "nome normalizado + nível + fonte"
     ],
     "formatosAceitos": [
       "array",
       "spells[]",
       "magias[]"
     ],
-    "conflito": "mesmo id ou nome normalizado cria uma sobreposição local",
+    "conflito": "mesmo id substitui a versão correspondente; homônimos de nível ou fonte diferentes são preservados",
     "camposFonte": [
       "fontes",
       "origem"
@@ -3944,6 +3943,75 @@
       ],
       "fontes": [
         "PHB"
+      ]
+    },
+    {
+      "id": "relampago-valda",
+      "nome": "Relâmpago",
+      "nivel": 0,
+      "escola": "Evocação",
+      "origem": "Valda",
+      "fontes": [
+        "Valda"
+      ],
+      "classes": [
+        "Bruxo",
+        "Feiticeiro",
+        "Mago",
+        "Mago de Guerra",
+        "Necromante"
+      ],
+      "ritual": false,
+      "efeitoPrincipal": {
+        "resumo": "Descarga elétrica curta ao redor do conjurador; 1d6 elétrico em criaturas próximas."
+      },
+      "conjuracao": {
+        "valor": 1,
+        "unidade": "acao",
+        "gatilho": ""
+      },
+      "alcance": {
+        "tipo": "pessoal",
+        "distancia": 0,
+        "unidade": "m"
+      },
+      "alvo": "Todas as outras criaturas a até 1,5 m do conjurador",
+      "duracao": {
+        "tipo": "instantanea",
+        "valor": 0,
+        "unidade": "rodada",
+        "concentracao": false
+      },
+      "componentes": {
+        "verbal": true,
+        "somatico": true,
+        "material": true,
+        "materialTexto": "dois pedaços de fio de cobre"
+      },
+      "resolucao": {
+        "tipo": "salvaguarda",
+        "atributo": "Destreza",
+        "ataque": "",
+        "dano": "1d6",
+        "tipoDano": "elétrico",
+        "cura": "",
+        "efeito": "Cada criatura afetada realiza salvaguarda de Destreza; em falha sofre 1d6 de dano elétrico."
+      },
+      "area": {
+        "forma": "emanacao",
+        "origem": "conjurador",
+        "raio": 1.5,
+        "comprimento": 0,
+        "largura": 0,
+        "altura": 0,
+        "unidade": "m"
+      },
+      "escalonamento": "O dano aumenta para 2d6 no 5º nível, 3d6 no 11º e 4d6 no 17º.",
+      "descricao": "Dano elétrico (1d6) em pequena área ao redor do conjurador.",
+      "tags": [
+        "elétrico",
+        "área",
+        "truque"
       ]
     },
     {
@@ -21941,19 +22009,19 @@
     {
       "id": "relampago",
       "nome": "Relâmpago",
-      "nivel": 0,
+      "nivel": 3,
       "escola": "Evocação",
-      "origem": "PHB · Valda",
+      "origem": "PHB",
+      "fontes": [
+        "PHB"
+      ],
       "classes": [
-        "Bruxo",
-        "Feiticeiro",
         "Mago",
-        "Mago de Guerra",
-        "Necromante"
+        "Feiticeiro"
       ],
       "ritual": false,
       "efeitoPrincipal": {
-        "resumo": "Dano de elétrico (8d6) em área (linha); pode incendiar objetos."
+        "resumo": "Dano elétrico (8d6) em linha; pode incendiar objetos."
       },
       "conjuracao": {
         "valor": 1,
@@ -21961,11 +22029,11 @@
         "gatilho": ""
       },
       "alcance": {
-        "tipo": "distancia",
-        "distancia": 1.52,
+        "tipo": "pessoal",
+        "distancia": 0,
         "unidade": "m"
       },
-      "alvo": "",
+      "alvo": "Linha de 30 m por 1,5 m originada do conjurador",
       "duracao": {
         "tipo": "instantanea",
         "valor": 0,
@@ -21976,34 +22044,32 @@
         "verbal": true,
         "somatico": true,
         "material": true,
-        "materialTexto": "dois pedaços de fio de cobre"
+        "materialTexto": "um pouco de pelo e uma haste de âmbar, cristal ou vidro"
       },
       "resolucao": {
-        "tipo": "efeito",
-        "atributo": "",
+        "tipo": "salvaguarda",
+        "atributo": "Destreza",
         "ataque": "",
-        "dano": "",
-        "tipoDano": "",
+        "dano": "8d6",
+        "tipoDano": "elétrico",
         "cura": "",
-        "efeito": "Dano de elétrico (1d6) em alvo."
+        "efeito": "Dano elétrico em todas as criaturas na linha; metade do dano em sucesso."
       },
       "area": {
-        "forma": "nenhuma",
-        "origem": "ponto",
+        "forma": "linha",
+        "origem": "conjurador",
         "raio": 0,
-        "comprimento": 0,
-        "largura": 0,
+        "comprimento": 30,
+        "largura": 1.5,
         "altura": 0,
         "unidade": "m"
       },
-      "escalonamento": "",
-      "descricao": "Dano de elétrico (1d6) em alvo.",
+      "escalonamento": "O dano aumenta em 1d6 para cada nível do espaço acima do 3º.",
+      "descricao": "Dano elétrico (8d6) em linha; pode incendiar objetos.",
       "tags": [
-        "elétrico"
-      ],
-      "fontes": [
-        "PHB",
-        "Valda"
+        "elétrico",
+        "área",
+        "linha"
       ]
     },
     {
@@ -39369,6 +39435,7 @@
         "raio-de-gelo",
         "rajada-de-veneno",
         "rajada-mistica",
+        "relampago-valda",
         "resistencia",
         "rompante-de-espadas",
         "selvageria-primitiva",
@@ -39379,8 +39446,7 @@
         "toque-chocante",
         "trair",
         "truque-de-cartas",
-        "zombaria-viciosa",
-        "relampago"
+        "zombaria-viciosa"
       ],
       "1": [
         "absorver-elementos",
@@ -39655,6 +39721,7 @@
         "polibraquia",
         "prisao-de-garra-de-gelo",
         "protecao-contra-energia",
+        "relampago",
         "remover-maldicao",
         "respirar-na-agua",
         "revivificar",
@@ -39971,6 +40038,7 @@
         "raio-de-fogo",
         "raio-de-gelo",
         "rajada-de-veneno",
+        "relampago-valda",
         "rompante-de-espadas",
         "soar-os-mortos",
         "tiro-escondido",
@@ -40344,6 +40412,7 @@
         "raio-de-fogo",
         "raio-de-gelo",
         "rajada-de-veneno",
+        "relampago-valda",
         "rompante-de-espadas",
         "tiro-escondido",
         "toque-arrepiante",
@@ -40568,6 +40637,7 @@
         "protecao-contra-laminas",
         "rajada-de-veneno",
         "rajada-mistica",
+        "relampago-valda",
         "rompante-de-espadas",
         "soar-os-mortos",
         "tiro-escondido",
@@ -40624,7 +40694,6 @@
         "padrao-hipnotico",
         "polibraquia",
         "prisao-de-garra-de-gelo",
-        "relampago",
         "remover-maldicao",
         "toque-vampirico",
         "voo",
@@ -40879,9 +40948,9 @@
         "momento-de-pensar",
         "passo-rapido",
         "pulso-sonico",
+        "relampago-valda",
         "trair",
         "truque-de-cartas",
-        "relampago",
         "dire-charm"
       ],
       "Druida": [
@@ -41267,6 +41336,7 @@
         "lamina-caustica",
         "olho-de-anubis",
         "pequeno-roubo-de-vida",
+        "relampago-valda",
         "trair",
         "anomalia-arcana",
         "caveira-gritante-de-gahoul",
@@ -41287,7 +41357,6 @@
         "maldicao-das-laminas",
         "maldicao-do-olho-de-rubi",
         "nevoa-morta",
-        "relampago",
         "seance",
         "aviso-direto",
         "falsa-visao",
@@ -41866,6 +41935,7 @@
         "passo-rapido",
         "pequeno-roubo-de-vida",
         "pulso-sonico",
+        "relampago-valda",
         "tiro-escondido",
         "trair",
         "truque-de-cartas",
@@ -41936,7 +42006,6 @@
         "nevoa-morta",
         "polibraquia",
         "prisao-de-garra-de-gelo",
-        "relampago",
         "seance",
         "serpente",
         "aviso-direto",
@@ -42183,6 +42252,7 @@
         "raio-de-fogo",
         "raio-de-gelo",
         "rajada-mistica",
+        "relampago-valda",
         "toque-chocante",
         "auxilio-divino",
         "bala-cromatica",
