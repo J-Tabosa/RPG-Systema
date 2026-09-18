@@ -372,7 +372,7 @@
         "Mago de Guerra"
       ],
       "ritual": false,
-      "descricao": "Você convoca um campo de força translúcido, mas visível, que brota da manopla preparada.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -403,7 +403,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você convoca um campo de força translúcido, mas visível, que brota da manopla preparada."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -415,9 +415,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "força"
-      ]
+      "tags": []
     },
     {
       "id": "chama-sagrada",
@@ -945,7 +943,7 @@
         "Mago de Guerra"
       ],
       "ritual": false,
-      "descricao": "347",
+      "descricao": "Dano de força (1d6) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -976,7 +974,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "347"
+        "efeito": "Dano de força (1d6) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -988,7 +986,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "força"
+      ]
     },
     {
       "id": "dardo-de-forca",
@@ -2881,7 +2881,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Você escolhe uma porção de detritos ou pedra que você possa ver, dentro do alcance, e que caiba num cubo de 1,5 metros.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -2912,7 +2912,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você escolhe uma porção de detritos ou pedra que você possa ver, dentro do alcance, e que caiba num cubo de 1,5 metros."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -2924,7 +2924,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "momento-de-pensar",
@@ -2942,7 +2944,7 @@
         "Mago de Guerra"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Quando você lança este feitiço, você para brevemente o tempo para todos, menos para você.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -2973,7 +2975,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Quando você lança este feitiço, você para brevemente o tempo para todos, menos para você."
       },
       "area": {
         "forma": "nenhuma",
@@ -2985,9 +2987,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "olho-de-anubis",
@@ -3374,7 +3374,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (1d4) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -3405,7 +3405,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (1d4) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -3418,7 +3418,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -3634,7 +3634,7 @@
         "Mago de Guerra"
       ],
       "ritual": false,
-      "descricao": "354",
+      "descricao": "Dano de trovejante (1d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -3665,7 +3665,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "354"
+        "efeito": "Dano de trovejante (1d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -3677,7 +3677,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "trovejante"
+      ]
     },
     {
       "id": "raio-de-fogo",
@@ -4146,7 +4148,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (2d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -4177,7 +4179,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (2d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -4190,7 +4192,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -4275,7 +4277,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Como parte da ação usada para lançar este feitiço, você deve fazer um ataque com uma arma à distância, caso contrário o feitiço falha.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -4306,7 +4308,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Como parte da ação usada para lançar este feitiço, você deve fazer um ataque com uma arma à distância, caso contrário o feitiço falha."
       },
       "area": {
         "forma": "nenhuma",
@@ -4473,7 +4475,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Você sutilmente torce os dedos e o destino parece seguir o exemplo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -4504,7 +4506,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Você sutilmente torce os dedos e o destino parece seguir o exemplo."
       },
       "area": {
         "forma": "nenhuma",
@@ -4725,7 +4727,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "Escolha uma criatura voluntária que você possa ver dentro do adicional.",
+      "descricao": "Escolha uma criatura voluntária que você possa ver dentro do alcance.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -4756,7 +4758,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma criatura voluntária que você possa ver dentro do adicional."
+        "efeito": "Escolha uma criatura voluntária que você possa ver dentro do alcance."
       },
       "area": {
         "forma": "nenhuma",
@@ -4785,7 +4787,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Este feitiço acelera ou desacelera um ataque no instante anterior ao ataque, diminuindo ou multiplicando sua força.",
+      "descricao": "Dano de força (1d6) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "reacao",
@@ -4816,7 +4818,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Este feitiço acelera ou desacelera um ataque no instante anterior ao ataque, diminuindo ou multiplicando sua força."
+        "efeito": "Dano de força (1d6) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -5796,7 +5798,7 @@
       "origem": "Valda",
       "classes": [],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Dano de radiante (3d6) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -5827,7 +5829,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Dano de radiante (3d6) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -5839,7 +5841,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "radiante"
+      ]
     },
     {
       "id": "bracos-de-hadar",
@@ -6048,7 +6052,7 @@
         "Patrulheiro"
       ],
       "ritual": true,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -6079,7 +6083,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -6092,7 +6096,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "controle"
       ]
     },
     {
@@ -6874,7 +6878,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (3d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -6905,7 +6909,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (3d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -6918,7 +6922,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -8200,7 +8204,7 @@
         "Bruxo"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Dano de concussão (1d6) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -8231,7 +8235,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Dano de concussão (1d6) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -8243,7 +8247,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "concussão"
+      ]
     },
     {
       "id": "golpe-constritor",
@@ -8653,7 +8659,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (1d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -8684,7 +8690,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (1d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -8697,7 +8703,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -8840,7 +8846,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Dano de concussão (4d4) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -8871,7 +8877,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Dano de concussão (4d4) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -8883,7 +8889,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "concussão"
+      ]
     },
     {
       "id": "leque-cromatico",
@@ -9474,7 +9482,7 @@
         "Mártir"
       ],
       "ritual": true,
-      "descricao": "Ao construir uma pira e queimar o cadáver de um animal, você corteja o favor dos deuses.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 10,
         "unidade": "minuto",
@@ -9505,7 +9513,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Ao construir uma pira e queimar o cadáver de um animal, você corteja o favor dos deuses."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -9801,7 +9809,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Dano de cortante (2d8) em alvo.",
+      "descricao": "Dano de cortante (2d8) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -9832,7 +9840,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Dano de cortante (2d8) em alvo."
+        "efeito": "Dano de cortante (2d8) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -9845,7 +9853,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cortante"
+        "cortante",
+        "área"
       ]
     },
     {
@@ -10514,7 +10523,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Cura 4d6 pontos de vida, mas reduz temporariamente o máximo de PV do alvo pela mesma quantidade.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -10545,7 +10554,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Cura 4d6 pontos de vida, mas reduz temporariamente o máximo de PV do alvo pela mesma quantidade."
       },
       "area": {
         "forma": "nenhuma",
@@ -11351,7 +11360,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Você provoca um tremor no solo num raio de 3 metros.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -11382,7 +11391,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você provoca um tremor no solo num raio de 3 metros."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -11394,7 +11403,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "vento-sussurrando",
@@ -11413,7 +11424,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Você aponta o dedo em uma direção e sussurra uma mensagem de vinte e cinco palavras ou menos, enquanto especifica até seis criaturas como alvos.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -11444,7 +11455,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Você aponta o dedo em uma direção e sussurra uma mensagem de vinte e cinco palavras ou menos, enquanto especifica até seis criaturas como alvos."
       },
       "area": {
         "forma": "nenhuma",
@@ -11915,7 +11926,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Alveje uma criatura voluntária que você possa ver dentro do velocidade de voo temporária ou concedida magicamente).",
+      "descricao": "Alveje uma criatura voluntária que você possa ver dentro do alcance que tenha velocidade de voo (incluindo aquelas com velocidade de voo temporária ou concedida magicamente).",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -11946,7 +11957,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Alveje uma criatura voluntária que você possa ver dentro do velocidade de voo temporária ou concedida magicamente)."
+        "efeito": "Alveje uma criatura voluntária que você possa ver dentro do alcance que tenha velocidade de voo (incluindo aquelas com velocidade de voo temporária ou concedida magicamente)."
       },
       "area": {
         "forma": "nenhuma",
@@ -13072,7 +13083,7 @@
         "Necromante"
       ],
       "ritual": true,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Este feitiço cria uma força invisível e disforme que realiza tarefas intelectuais sob seu comando até o fim do feitiço.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -13103,7 +13114,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Este feitiço cria uma força invisível e disforme que realiza tarefas intelectuais sob seu comando até o fim do feitiço."
       },
       "area": {
         "forma": "nenhuma",
@@ -13116,7 +13127,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "força"
       ]
     },
     {
@@ -13979,7 +13990,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -14010,7 +14021,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -14022,9 +14033,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "esquentar-metal",
@@ -14239,7 +14248,7 @@
         "Bruxa"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -14270,7 +14279,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -14282,9 +14291,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "halo-de-chama",
@@ -14301,7 +14308,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "Efeito mágico de utilidade.",
+      "descricao": "Dano de fogo (4d6) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -14332,7 +14339,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Efeito mágico de utilidade."
+        "efeito": "Dano de fogo (4d6) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -14344,7 +14351,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "fogo",
+        "área"
+      ]
     },
     {
       "id": "imobilizar-pessoa",
@@ -14499,7 +14509,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -14530,7 +14540,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -14542,9 +14552,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "lamina-flamejante",
@@ -15869,7 +15877,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Escolha uma área de chamas que você possa ver e que ca iba num cubo de 1,5 metros, dentro do alcance.",
+      "descricao": "Escolha uma área de chamas que você possa ver e iba num cubo de 1,5 metros, dentro do alcance.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -15900,7 +15908,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma área de chamas que você possa ver e que ca iba num cubo de 1,5 metros, dentro do alcance."
+        "efeito": "Escolha uma área de chamas que você possa ver e iba num cubo de 1,5 metros, dentro do alcance."
       },
       "area": {
         "forma": "nenhuma",
@@ -15931,7 +15939,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "351",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -15962,7 +15970,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "351"
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -17164,7 +17172,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Um vento forte (30 quilômetros por hora) sopra a sua volta num raio de 3 metros e se move com você, permanecendo centrado em você.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -17195,7 +17203,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Um vento forte (30 quilômetros por hora) sopra a sua volta num raio de 3 metros e se move com você, permanecendo centrado em você."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -17207,7 +17215,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "ver-o-invisivel",
@@ -18210,7 +18220,7 @@
         "Mártir"
       ],
       "ritual": false,
-      "descricao": "Você lança uma partícula de cólera divina em um ponto que possa ver dentro do alcance.",
+      "descricao": "Dano de necrótico (7d6) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -18241,7 +18251,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você lança uma partícula de cólera divina em um ponto que possa ver dentro do alcance."
+        "efeito": "Dano de necrótico (7d6) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -18253,7 +18263,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "necrótico",
+        "área"
+      ]
     },
     {
       "id": "conjura-bola-de-canhao",
@@ -18269,7 +18282,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Dano de concussão (4d10) em área.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -18300,7 +18313,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Dano de concussão (4d10) em área."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -18312,10 +18325,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "concussão",
-        "área"
-      ]
+      "tags": []
     },
     {
       "id": "conjurar-animais",
@@ -19114,7 +19124,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Escolha um ponto que você possa ver no solo, dentro do alcance.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -19145,7 +19155,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha um ponto que você possa ver no solo, dentro do alcance."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -19157,7 +19167,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "escaramuca",
@@ -19173,7 +19185,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Você aumenta a mobilidade de uma criatura voluntária que você toca, permitindo que ela se mova facilmente através das formações inimigas.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -19204,7 +19216,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você aumenta a mobilidade de uma criatura voluntária que você toca, permitindo que ela se mova facilmente através das formações inimigas."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -19216,7 +19228,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "controle"
+      ]
     },
     {
       "id": "falar-com-os-mortos",
@@ -19758,7 +19772,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "342",
+      "descricao": "Você borrifa partículas douradas em um cone de 4,5 metros, cobrindo todas as criaturas e objetos naquela área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -19789,7 +19803,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "342"
+        "efeito": "Você borrifa partículas douradas em um cone de 4,5 metros, cobrindo todas as criaturas e objetos naquela área."
       },
       "area": {
         "forma": "nenhuma",
@@ -19801,7 +19815,9 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "área"
+      ]
     },
     {
       "id": "idiomas",
@@ -20014,7 +20030,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Vocé pronuncia palavras abomináveis, convocando demônios do caos do abismo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -20045,7 +20061,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Vocé pronuncia palavras abomináveis, convocando demônios do caos do abismo."
       },
       "area": {
         "forma": "nenhuma",
@@ -20057,9 +20073,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-feerico",
@@ -20077,7 +20091,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -20108,7 +20122,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -20120,9 +20134,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-morto-vivo",
@@ -20138,7 +20150,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -20169,7 +20181,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -20181,9 +20193,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-prole-sombria",
@@ -20199,7 +20209,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -20230,7 +20240,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -20242,9 +20252,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "lentidao",
@@ -20401,7 +20409,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Escolha uma criatura que você possa ver dentro do alcance que esteja segurando uma arma para fazer um teste de resistência de Sabedoria.",
+      "descricao": "Faixas profanas de energia negra prendem uma criatura à sua arma.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -20432,7 +20440,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Escolha uma criatura que você possa ver dentro do alcance que esteja segurando uma arma para fazer um teste de resistência de Sabedoria."
+        "efeito": "Faixas profanas de energia negra prendem uma criatura à sua arma."
       },
       "area": {
         "forma": "nenhuma",
@@ -20916,7 +20924,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "Você convoca o espírito dos mortos, que flutuam ao seu redor pela duração da magia.",
+      "descricao": "Dano de necrótico (1d8) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -20947,7 +20955,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Você convoca o espírito dos mortos, que flutuam ao seu redor pela duração da magia."
+        "efeito": "Dano de necrótico (1d8) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -20959,7 +20967,10 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": []
+      "tags": [
+        "necrótico",
+        "área"
+      ]
     },
     {
       "id": "muralha-de-agua",
@@ -20976,7 +20987,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -21007,7 +21018,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -21020,7 +21031,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "controle"
       ]
     },
     {
@@ -21301,7 +21312,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (3d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -21332,7 +21343,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (3d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -21345,7 +21356,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -21622,7 +21633,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você toca um objeto minúsculo não mágico que não está ligado a outro objeto ou a uma superfície e não está sendo carregado por outra criatura.",
       "conjuracao": {
         "valor": 1,
         "unidade": "minuto",
@@ -21653,7 +21664,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você toca um objeto minúsculo não mágico que não está ligado a outro objeto ou a uma superfície e não está sendo carregado por outra criatura."
       },
       "area": {
         "forma": "nenhuma",
@@ -21665,9 +21676,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "piscar",
@@ -21812,7 +21821,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de frio (3d8) em alvo; pode deixar o alvo impedido.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -21843,7 +21852,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de frio (3d8) em alvo; pode deixar o alvo impedido."
       },
       "area": {
         "forma": "nenhuma",
@@ -21856,7 +21865,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "frio"
       ]
     },
     {
@@ -21932,13 +21941,13 @@
     {
       "id": "relampago",
       "nome": "Relâmpago",
-      "nivel": 3,
+      "nivel": 0,
       "escola": "Evocação",
       "origem": "PHB · Valda",
       "classes": [
-        "Mago",
-        "Feiticeiro",
         "Bruxo",
+        "Feiticeiro",
+        "Mago",
         "Mago de Guerra",
         "Necromante"
       ],
@@ -21952,11 +21961,11 @@
         "gatilho": ""
       },
       "alcance": {
-        "tipo": "pessoal",
-        "distancia": 0,
+        "tipo": "distancia",
+        "distancia": 1.52,
         "unidade": "m"
       },
-      "alvo": "Criaturas e/ou objetos na área",
+      "alvo": "",
       "duracao": {
         "tipo": "instantanea",
         "valor": 0,
@@ -21967,33 +21976,30 @@
         "verbal": true,
         "somatico": true,
         "material": true,
-        "materialTexto": "",
-        "custo": "",
-        "consumido": false
+        "materialTexto": "dois pedaços de fio de cobre"
       },
       "resolucao": {
-        "tipo": "salvaguarda",
-        "atributo": "Destreza",
+        "tipo": "efeito",
+        "atributo": "",
         "ataque": "",
-        "dano": "8d6",
-        "tipoDano": "elétrico",
+        "dano": "",
+        "tipoDano": "",
         "cura": "",
-        "efeito": "Dano de elétrico (8d6) em área (linha); pode incendiar objetos."
+        "efeito": "Dano de elétrico (1d6) em alvo."
       },
       "area": {
-        "forma": "linha",
-        "origem": "conjurador",
+        "forma": "nenhuma",
+        "origem": "ponto",
         "raio": 0,
-        "comprimento": 30,
-        "largura": 1.5,
+        "comprimento": 0,
+        "largura": 0,
         "altura": 0,
         "unidade": "m"
       },
       "escalonamento": "",
-      "descricao": "Dano de elétrico (8d6) em área (linha); pode incendiar objetos.",
+      "descricao": "Dano de elétrico (1d6) em alvo.",
       "tags": [
-        "elétrico",
-        "área"
+        "elétrico"
       ],
       "fontes": [
         "PHB",
@@ -22284,7 +22290,7 @@
         "Bruxa"
       ],
       "ritual": false,
-      "descricao": "353",
+      "descricao": "Você e pelo menos três criaturas voluntárias dão as mãos em um momento de meditação para conjurar um espírito da vida após a morte para responder às suas perguntas.",
       "conjuracao": {
         "valor": 10,
         "unidade": "minuto",
@@ -22315,7 +22321,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "353"
+        "efeito": "Você e pelo menos três criaturas voluntárias dão as mãos em um momento de meditação para conjurar um espírito da vida após a morte para responder às suas perguntas."
       },
       "area": {
         "forma": "nenhuma",
@@ -22344,7 +22350,7 @@
         "Mártir"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você lança um bastão no chão, que se contorce e se transforma em uma cobra constritora gigante sob seu controle, que age por sua própria contagem de iniciativa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -22375,7 +22381,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você lança um bastão no chão, que se contorce e se transforma em uma cobra constritora gigante sob seu controle, que age por sua própria contagem de iniciativa."
       },
       "area": {
         "forma": "nenhuma",
@@ -22388,7 +22394,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "controle"
       ]
     },
     {
@@ -22600,7 +22606,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (4d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -22631,7 +22637,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (4d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -22644,7 +22650,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -23974,7 +23980,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "minuto",
@@ -24005,7 +24011,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -24017,9 +24023,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "enfeiticar-monstro",
@@ -24785,7 +24789,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Controle de posicionamento ou deslocamento.",
       "conjuracao": {
         "valor": 1,
         "unidade": "bonus",
@@ -24816,7 +24820,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Controle de posicionamento ou deslocamento."
       },
       "area": {
         "forma": "nenhuma",
@@ -24829,7 +24833,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "controle"
       ]
     },
     {
@@ -25039,7 +25043,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -25070,7 +25074,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -25082,9 +25086,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-construto",
@@ -25100,7 +25102,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de fogo (1d10) em alvo; pode deixar o alvo amedrontado.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -25131,7 +25133,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de fogo (1d10) em alvo; pode deixar o alvo amedrontado."
       },
       "area": {
         "forma": "nenhuma",
@@ -25144,7 +25146,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "fogo"
       ]
     },
     {
@@ -25161,7 +25163,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você pronuncia palavras abomináveis,,convocando um demônio do caos <io füísmo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -25192,7 +25194,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você pronuncia palavras abomináveis,,convocando um demônio do caos <io füísmo."
       },
       "area": {
         "forma": "nenhuma",
@@ -25204,9 +25206,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-elemental",
@@ -25223,7 +25223,7 @@
         "Patrulheiro"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -25254,7 +25254,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -25266,9 +25266,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "localizar-criatura",
@@ -26269,15 +26267,15 @@
         "Druida"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Efeito de transmutação de 4º nível.",
       "conjuracao": {
         "valor": 1,
-        "unidade": "minuto",
+        "unidade": "acao",
         "gatilho": ""
       },
       "alcance": {
         "tipo": "distancia",
-        "distancia": 9.14,
+        "distancia": 0,
         "unidade": "m"
       },
       "alvo": "",
@@ -26288,10 +26286,10 @@
         "concentracao": false
       },
       "componentes": {
-        "verbal": true,
-        "somatico": true,
-        "material": true,
-        "materialTexto": "um pequeno sino de servo"
+        "verbal": false,
+        "somatico": false,
+        "material": false,
+        "materialTexto": ""
       },
       "resolucao": {
         "tipo": "efeito",
@@ -26300,7 +26298,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Efeito de transmutação de 4º nível."
       },
       "area": {
         "forma": "nenhuma",
@@ -26312,9 +26310,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "sombra-de-transtorno",
@@ -26724,7 +26720,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Amaldiçoa o alvo com podridão de múmia, impedindo cura e reduzindo seu máximo de pontos de vida ao longo do tempo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -26755,7 +26751,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Amaldiçoa o alvo com podridão de múmia, impedindo cura e reduzindo seu máximo de pontos de vida ao longo do tempo."
       },
       "area": {
         "forma": "nenhuma",
@@ -26768,7 +26764,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "cura",
+        "controle"
       ]
     },
     {
@@ -27234,7 +27231,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "minuto",
@@ -27265,7 +27262,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -27277,9 +27274,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "circulo-de-poder",
@@ -28749,7 +28744,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de necrótico (2d8) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -28780,7 +28775,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de necrótico (2d8) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -28793,7 +28788,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "necrótico"
       ]
     },
     {
@@ -28933,7 +28928,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -28964,7 +28959,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -28976,9 +28971,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "fonte-brincante",
@@ -29188,7 +29181,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de fogo (7d6) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -29219,7 +29212,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de fogo (7d6) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -29232,7 +29225,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "fogo",
+        "área"
       ]
     },
     {
@@ -29249,7 +29243,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você envia fitas de energia negativa a uma criatura que você pode ver dentro do alcance.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -29280,7 +29274,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você envia fitas de energia negativa a uma criatura que você pode ver dentro do alcance."
       },
       "area": {
         "forma": "nenhuma",
@@ -29292,9 +29286,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "invocar-celestial",
@@ -29310,7 +29302,7 @@
         "Paladino"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -29341,7 +29333,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -29353,9 +29345,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "ira-da-natureza",
@@ -31081,7 +31071,7 @@
         "Druida"
       ],
       "ritual": false,
-      "descricao": "Invocação de criatura ou entidade para auxiliar o conjurador.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 10,
         "unidade": "minuto",
@@ -31112,7 +31102,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Invocação de criatura ou entidade para auxiliar o conjurador."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -31658,7 +31648,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Ao recitar um encantamento intrincado, você se corta com uma adaga incrustada de joias, levando 2d4 de dano de perfuração que não pode ser reduzido de forma alguma.",
       "conjuracao": {
         "valor": 1,
         "unidade": "hora",
@@ -31689,7 +31679,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Ao recitar um encantamento intrincado, você se corta com uma adaga incrustada de joias, levando 2d4 de dano de perfuração que não pode ser reduzido de forma alguma."
       },
       "area": {
         "forma": "nenhuma",
@@ -31701,9 +31691,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "criar-mortos-vivos",
@@ -32364,7 +32352,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de frio (10d8) em área.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -32395,7 +32383,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de frio (10d8) em área."
       },
       "area": {
         "forma": "nenhuma",
@@ -32408,7 +32396,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "frio",
+        "área"
       ]
     },
     {
@@ -32547,7 +32536,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Aprisiona a alma de um humanoide recém-morto para usá-la em cura, informação e outros efeitos limitados.",
       "conjuracao": {
         "valor": 1,
         "unidade": "reacao",
@@ -32578,7 +32567,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Aprisiona a alma de um humanoide recém-morto para usá-la em cura, informação e outros efeitos limitados."
       },
       "area": {
         "forma": "nenhuma",
@@ -32591,7 +32580,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "força"
       ]
     },
     {
@@ -32809,7 +32798,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Invocação de criatura ou espírito aliado para auxiliar o conjurador.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -32840,7 +32829,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Invocação de criatura ou espírito aliado para auxiliar o conjurador."
       },
       "area": {
         "forma": "nenhuma",
@@ -32852,9 +32841,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "jogo-do-destino",
@@ -32931,7 +32918,7 @@
         "Bruxa"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Amaldiçoa um alvo, impondo desvantagens severas ou impedindo que ele recupere pontos de vida.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -32962,7 +32949,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Amaldiçoa um alvo, impondo desvantagens severas ou impedindo que ele recupere pontos de vida."
       },
       "area": {
         "forma": "nenhuma",
@@ -32975,7 +32962,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "cura",
+        "controle"
       ]
     },
     {
@@ -33504,7 +33492,7 @@
         "Druida"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de força (6d6) em área; pode deixar o alvo impedido.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -33535,7 +33523,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de força (6d6) em área; pode deixar o alvo impedido."
       },
       "area": {
         "forma": "nenhuma",
@@ -33548,7 +33536,8 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "força",
+        "área"
       ]
     },
     {
@@ -34081,7 +34070,7 @@
         "Necromante"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -34112,7 +34101,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -34124,9 +34113,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "sugestao-em-massa",
@@ -34274,7 +34261,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você se dota de resistência e proeza marcial alimentada por magia.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -34305,7 +34292,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você se dota de resistência e proeza marcial alimentada por magia."
       },
       "area": {
         "forma": "nenhuma",
@@ -34317,9 +34304,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "visao-da-verdade",
@@ -35178,7 +35163,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Controle e debilitação: causa dor incapacitante em um alvo com 100 PV ou menos, limitando movimento e impondo desvantagens.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -35209,7 +35194,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Controle e debilitação: causa dor incapacitante em um alvo com 100 PV ou menos, limitando movimento e impondo desvantagens."
       },
       "area": {
         "forma": "nenhuma",
@@ -35222,7 +35207,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "controle"
       ]
     },
     {
@@ -35303,7 +35288,7 @@
         "Druida"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Dano de psíquico (6d10) em alvo.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -35334,7 +35319,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Dano de psíquico (6d10) em alvo."
       },
       "area": {
         "forma": "nenhuma",
@@ -35347,7 +35332,7 @@
       },
       "escalonamento": "",
       "tags": [
-        "cura"
+        "psíquico"
       ]
     },
     {
@@ -36089,7 +36074,7 @@
         "Clérigo"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Cria um templo mágico consagrado que oferece abrigo, proteção e restrições contra criaturas escolhidas.",
       "conjuracao": {
         "valor": 1,
         "unidade": "hora",
@@ -36120,7 +36105,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Cria um templo mágico consagrado que oferece abrigo, proteção e restrições contra criaturas escolhidas."
       },
       "area": {
         "forma": "nenhuma",
@@ -37063,7 +37048,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Proteção defensiva, concedendo resistência ou outro benefício de defesa.",
       "conjuracao": {
         "valor": 1,
         "unidade": "minuto",
@@ -37094,7 +37079,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Proteção defensiva, concedendo resistência ou outro benefício de defesa."
       },
       "area": {
         "forma": "nenhuma",
@@ -37106,9 +37091,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "gotico-glorioso-de-gahoul",
@@ -38543,7 +38526,7 @@
         "Mago"
       ],
       "ritual": false,
-      "descricao": "Cura e recuperação de pontos de vida.",
+      "descricao": "Você transforma até dez criaturas de sua escolha que você pode ver dentro do alcance.",
       "conjuracao": {
         "valor": 1,
         "unidade": "acao",
@@ -38574,7 +38557,7 @@
         "dano": "",
         "tipoDano": "",
         "cura": "",
-        "efeito": "Cura e recuperação de pontos de vida."
+        "efeito": "Você transforma até dez criaturas de sua escolha que você pode ver dentro do alcance."
       },
       "area": {
         "forma": "nenhuma",
@@ -38586,9 +38569,7 @@
         "unidade": "m"
       },
       "escalonamento": "",
-      "tags": [
-        "cura"
-      ]
+      "tags": []
     },
     {
       "id": "metamorfose-verdadeira",
@@ -39398,7 +39379,8 @@
         "toque-chocante",
         "trair",
         "truque-de-cartas",
-        "zombaria-viciosa"
+        "zombaria-viciosa",
+        "relampago"
       ],
       "1": [
         "absorver-elementos",
@@ -39673,7 +39655,6 @@
         "polibraquia",
         "prisao-de-garra-de-gelo",
         "protecao-contra-energia",
-        "relampago",
         "remover-maldicao",
         "respirar-na-agua",
         "revivificar",
