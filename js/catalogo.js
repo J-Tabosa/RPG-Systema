@@ -6,6 +6,7 @@
 
   const scriptUrl = document.currentScript?.src || window.location.href;
   const itemUrl = new URL('../data/itens.json', scriptUrl).href;
+  const itemSupplementUrl = new URL('../data/itens-suplementos.json', scriptUrl).href;
   const spellUrl = new URL('../data/magias.json', scriptUrl).href;
 
   const BASE_SCHOOLS = [
@@ -88,8 +89,12 @@
   }
 
   async function getItens() {
-    const [base, custom] = await Promise.all([readBase(itemUrl, 'items'), Promise.resolve(readLocal(ITEM_KEY))]);
-    return mergeCatalog(base, custom);
+    const [base, supplements, custom] = await Promise.all([
+      readBase(itemUrl, 'items'),
+      readBase(itemSupplementUrl, 'items'),
+      Promise.resolve(readLocal(ITEM_KEY))
+    ]);
+    return mergeCatalog([...base, ...supplements], custom);
   }
 
   async function getMagias() {
