@@ -92,6 +92,7 @@ async function carregarItens() {
     ITENS = itens;
     CATEGORIAS = categorias;
     preencherCategorias();
+    preencherFontes();
     atualizarEstatisticas();
     filtrarItens();
   } catch (error) {
@@ -147,10 +148,24 @@ function preencherCategorias() {
 }
 
 
+function preencherFontes() {
+  const select = document.getElementById('sourceFilter');
+  if (!select) return;
+  const atual = select.value || 'todos';
+  const fontes = [...new Set(ITENS.map(item => item.origem).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  select.innerHTML = '<option value="todos">Todas</option>' + fontes.map(fonte =>
+    `<option value="${escaparHTML(fonte)}">${escaparHTML(fonte)}</option>`
+  ).join('');
+  if ([...select.options].some(option => option.value === atual)) select.value = atual;
+}
+
+
 function filtrarItens() {
   const busca = normalizarTexto(document.getElementById('itemSearch')?.value || '');
   const categoria = document.getElementById('categoryFilter')?.value || 'todos';
   const raridade = document.getElementById('rarityFilter')?.value || 'todos';
+  const fonte = document.getElementById('sourceFilter')?.value || 'todos';
 
   const filtrados = ITENS.filter(item => {
     const texto = normalizarTexto([
@@ -161,7 +176,8 @@ function filtrarItens() {
     const okCat = categoria === 'todos' || item.categoria === categoria;
     const itemRarity = item.raridade || 'sem-raridade';
     const okRare = raridade === 'todos' || itemRarity === raridade;
-    return okBusca && okCat && okRare;
+    const okFonte = fonte === 'todos' || item.origem === fonte;
+    return okBusca && okCat && okRare && okFonte;
   });
 
   renderizarItens(filtrados);
@@ -170,6 +186,7 @@ function filtrarItens() {
   if (busca) filtros.push(`busca: “${busca}”`);
   if (categoria !== 'todos') filtros.push(CATEGORY_LABELS[categoria]);
   if (raridade !== 'todos') filtros.push(raridade === 'sem-raridade' ? 'sem raridade' : RARITY_LABELS[raridade]);
+  if (fonte !== 'todos') filtros.push(fonte);
   document.getElementById('activeFilterText').textContent = filtros.length ? filtros.join(' · ') : 'Exibindo todo o acervo';
 }
 
@@ -177,6 +194,8 @@ function limparFiltros() {
   document.getElementById('itemSearch').value = '';
   document.getElementById('categoryFilter').value = 'todos';
   document.getElementById('rarityFilter').value = 'todos';
+  const sourceFilter = document.getElementById('sourceFilter');
+  if (sourceFilter) sourceFilter.value = 'todos';
   filtrarItens();
 }
 
