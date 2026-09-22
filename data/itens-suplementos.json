@@ -1,0 +1,4375 @@
+[
+  {
+    "id": "azagaia",
+    "nome": "Azagaia",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "5 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo / 9/36 m",
+      "propriedades": [
+        "Arremesso (9/36 m)"
+      ]
+    }
+  },
+  {
+    "id": "bordao",
+    "nome": "Bordão",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "2 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano concussão.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d8)"
+      ]
+    }
+  },
+  {
+    "id": "clava-grande",
+    "nome": "Clava Grande",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 5,
+    "custo": "2 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d8 de dano concussão.",
+    "tags": [
+      "pesada",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "foice-curta",
+    "nome": "Foice Curta",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "1 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "lanca",
+    "nome": "Lança",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "1 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "arremesso",
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo / 6/18 m",
+      "propriedades": [
+        "Arremesso (6/18 m)",
+        "Versátil (1d8)"
+      ]
+    }
+  },
+  {
+    "id": "maca",
+    "nome": "Maça",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano concussão.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "machadinha",
+    "nome": "Machadinha",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano cortante.",
+    "tags": [
+      "leve",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo / 6/18 m",
+      "propriedades": [
+        "Leve",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "martelo-leve",
+    "nome": "Martelo Leve",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "2 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "leve",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo / 6/18 m",
+      "propriedades": [
+        "Leve",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "porrete",
+    "nome": "Porrete",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "1 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "besta-leve",
+    "nome": "Besta Leve",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2.5,
+    "custo": "25 PO",
+    "descricao": "Arma arma à distância simples com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "munição",
+      "recarga",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "24/96 m",
+      "propriedades": [
+        "Munição",
+        "Recarga",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "dardo",
+    "nome": "Dardo",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.1,
+    "custo": "5 PC",
+    "descricao": "Arma arma à distância simples com perfil de 1d4 de dano perfurante.",
+    "tags": [
+      "acuidade",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "alcance": "6/18 m",
+      "propriedades": [
+        "Acuidade",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "funda",
+    "nome": "Funda",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância simples",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0,
+    "custo": "1 PP",
+    "descricao": "Arma arma à distância simples com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "munição"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "9/36 m",
+      "propriedades": [
+        "Munição"
+      ]
+    }
+  },
+  {
+    "id": "alabarda",
+    "nome": "Alabarda",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3,
+    "custo": "20 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "pesada",
+      "alcance",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Alcance",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "cimitarra",
+    "nome": "Cimitarra",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "25 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d6 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "chicote",
+    "nome": "Chicote",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "2 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "alcance"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Alcance"
+      ]
+    }
+  },
+  {
+    "id": "espada-grande",
+    "nome": "Espada Grande",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3,
+    "custo": "50 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 2d6 de dano cortante.",
+    "tags": [
+      "pesada",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "2d6",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "glaive",
+    "nome": "Glaive",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3,
+    "custo": "20 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "pesada",
+      "alcance",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Alcance",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "lanca-de-montaria",
+    "nome": "Lança de Montaria",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3,
+    "custo": "10 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d12 de dano perfurante.",
+    "tags": [
+      "alcance",
+      "especial"
+    ],
+    "mecanica": {
+      "dano": "1d12",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Alcance",
+        "Especial"
+      ]
+    }
+  },
+  {
+    "id": "lanca-longa",
+    "nome": "Lança Longa",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 4,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d10 de dano perfurante.",
+    "tags": [
+      "pesada",
+      "alcance",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Alcance",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "maca-estrela",
+    "nome": "Maça Estrela",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "15 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "machado-grande",
+    "nome": "Machado Grande",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3.5,
+    "custo": "30 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d12 de dano cortante.",
+    "tags": [
+      "pesada",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d12",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "machado-de-batalha",
+    "nome": "Machado de Batalha",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "10 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d10)"
+      ]
+    }
+  },
+  {
+    "id": "malho",
+    "nome": "Malho",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 5,
+    "custo": "10 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 2d6 de dano concussão.",
+    "tags": [
+      "pesada",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "2d6",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "mangual",
+    "nome": "Mangual",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "10 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano concussão.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "martelo-de-guerra",
+    "nome": "Martelo de Guerra",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "15 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano concussão.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d10)"
+      ]
+    }
+  },
+  {
+    "id": "picareta-de-guerra",
+    "nome": "Picareta de Guerra",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "rapieira",
+    "nome": "Rapieira",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "25 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "acuidade"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade"
+      ]
+    }
+  },
+  {
+    "id": "tridente",
+    "nome": "Tridente",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "arremesso",
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo / 6/18 m",
+      "propriedades": [
+        "Arremesso (6/18 m)",
+        "Versátil (1d8)"
+      ]
+    }
+  },
+  {
+    "id": "besta-de-mao",
+    "nome": "Besta de Mão",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "75 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "munição",
+      "leve",
+      "recarga"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "9/36 m",
+      "propriedades": [
+        "Munição",
+        "Leve",
+        "Recarga"
+      ]
+    }
+  },
+  {
+    "id": "besta-pesada",
+    "nome": "Besta Pesada",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 4.5,
+    "custo": "50 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d10 de dano perfurante.",
+    "tags": [
+      "munição",
+      "pesada",
+      "recarga",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "perfurante",
+      "alcance": "30/120 m",
+      "propriedades": [
+        "Munição",
+        "Pesada",
+        "Recarga",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "rede",
+    "nome": "Rede",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "1 PO",
+    "descricao": "Arma arma à distância marcial com perfil de — de dano —.",
+    "tags": [
+      "especial",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "—",
+      "tipoDano": "—",
+      "alcance": "1,5/4,5 m",
+      "propriedades": [
+        "Especial",
+        "Arremesso (1,5/4,5 m)"
+      ]
+    }
+  },
+  {
+    "id": "zarabatana",
+    "nome": "Zarabatana",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "10 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1 de dano perfurante.",
+    "tags": [
+      "munição",
+      "recarga"
+    ],
+    "mecanica": {
+      "dano": "1",
+      "tipoDano": "perfurante",
+      "alcance": "7,5/30 m",
+      "propriedades": [
+        "Munição",
+        "Recarga"
+      ]
+    }
+  },
+  {
+    "id": "acolchoada",
+    "nome": "Acolchoada",
+    "categoria": "armadura",
+    "subcategoria": "Armadura leve",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 4,
+    "custo": "5 PO",
+    "descricao": "Proteção armadura leve com CA base 11.",
+    "tags": [
+      "leve",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 11,
+      "bonusDestreza": true,
+      "limiteDestreza": null,
+      "forcaMinima": null,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "gibao-de-peles",
+    "nome": "Gibão de Peles",
+    "categoria": "armadura",
+    "subcategoria": "Armadura média",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 6,
+    "custo": "10 PO",
+    "descricao": "Proteção armadura média com CA base 12.",
+    "tags": [
+      "média"
+    ],
+    "mecanica": {
+      "caBase": 12,
+      "bonusDestreza": true,
+      "limiteDestreza": 2,
+      "forcaMinima": null,
+      "desvantagemFurtividade": false
+    }
+  },
+  {
+    "id": "peitoral",
+    "nome": "Peitoral",
+    "categoria": "armadura",
+    "subcategoria": "Armadura média",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 10,
+    "custo": "400 PO",
+    "descricao": "Proteção armadura média com CA base 14.",
+    "tags": [
+      "média"
+    ],
+    "mecanica": {
+      "caBase": 14,
+      "bonusDestreza": true,
+      "limiteDestreza": 2,
+      "forcaMinima": null,
+      "desvantagemFurtividade": false
+    }
+  },
+  {
+    "id": "meia-armadura",
+    "nome": "Meia-Armadura",
+    "categoria": "armadura",
+    "subcategoria": "Armadura média",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 20,
+    "custo": "750 PO",
+    "descricao": "Proteção armadura média com CA base 15.",
+    "tags": [
+      "média",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 15,
+      "bonusDestreza": true,
+      "limiteDestreza": 2,
+      "forcaMinima": null,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "cota-de-aneis",
+    "nome": "Cota de Anéis",
+    "categoria": "armadura",
+    "subcategoria": "Armadura pesada",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 20,
+    "custo": "30 PO",
+    "descricao": "Proteção armadura pesada com CA base 14.",
+    "tags": [
+      "pesada",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 14,
+      "bonusDestreza": false,
+      "limiteDestreza": 0,
+      "forcaMinima": null,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "cota-de-talas",
+    "nome": "Cota de Talas",
+    "categoria": "armadura",
+    "subcategoria": "Armadura pesada",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 30,
+    "custo": "200 PO",
+    "descricao": "Proteção armadura pesada com CA base 17.",
+    "tags": [
+      "pesada",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 17,
+      "bonusDestreza": false,
+      "limiteDestreza": 0,
+      "forcaMinima": 15,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "placas",
+    "nome": "Placas",
+    "categoria": "armadura",
+    "subcategoria": "Armadura pesada",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 32.5,
+    "custo": "1.500 PO",
+    "descricao": "Proteção armadura pesada com CA base 18.",
+    "tags": [
+      "pesada",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 18,
+      "bonusDestreza": false,
+      "limiteDestreza": 0,
+      "forcaMinima": 15,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "escudo",
+    "nome": "Escudo",
+    "categoria": "armadura",
+    "subcategoria": "Escudo",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 3,
+    "custo": "10 PO",
+    "descricao": "Escudo de madeira ou metal empunhado com uma mão para aumentar a defesa.",
+    "tags": [
+      "escudo",
+      "defesa"
+    ],
+    "mecanica": {
+      "bonusCA": 2,
+      "caBase": null,
+      "bonusDestreza": false,
+      "limiteDestreza": null,
+      "forcaMinima": null,
+      "desvantagemFurtividade": false
+    }
+  },
+  {
+    "id": "agua-benta-frasco",
+    "nome": "Água Benta (frasco)",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível sagrado",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "25 PO",
+    "descricao": "Pode ser arremessada; contra corruptores ou mortos-vivos causa 2d6 de dano radiante.",
+    "tags": [
+      "sagrado",
+      "arremesso"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "dano": "2d6",
+      "tipoDano": "radiante",
+      "alcance": "6 m",
+      "efeito": "Pode ser arremessada; contra corruptores ou mortos-vivos causa 2d6 de dano radiante."
+    }
+  },
+  {
+    "id": "algemas",
+    "nome": "Algemas",
+    "categoria": "utilizavel",
+    "subcategoria": "Ferramenta",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "2 PO",
+    "descricao": "Prende uma criatura Pequena ou Média; escapar ou quebrar exige testes difíceis.",
+    "tags": [
+      "contenção"
+    ],
+    "mecanica": {
+      "efeito": "Prende uma criatura Pequena ou Média; escapar ou quebrar exige testes difíceis."
+    }
+  },
+  {
+    "id": "aljava",
+    "nome": "Aljava",
+    "categoria": "utilizavel",
+    "subcategoria": "Recipiente",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "1 PO",
+    "descricao": "Armazena até 20 flechas.",
+    "tags": [
+      "munição"
+    ],
+    "mecanica": {
+      "capacidade": "20 flechas",
+      "efeito": "Armazena até 20 flechas."
+    }
+  },
+  {
+    "id": "ariete-portatil",
+    "nome": "Aríete Portátil",
+    "categoria": "utilizavel",
+    "subcategoria": "Ferramenta",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 17.5,
+    "custo": "4 PO",
+    "descricao": "Ajuda a arrombar portas, concedendo vantagem quando outra criatura auxilia.",
+    "tags": [
+      "força"
+    ],
+    "mecanica": {
+      "bonus": "+4 em testes apropriados de Força",
+      "efeito": "Ajuda a arrombar portas, concedendo vantagem quando outra criatura auxilia."
+    }
+  },
+  {
+    "id": "armadilha-de-caca",
+    "nome": "Armadilha de Caça",
+    "categoria": "utilizavel",
+    "subcategoria": "Armadilha",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 12.5,
+    "custo": "5 PO",
+    "descricao": "Armadilha de pressão que pode ferir e limitar o movimento de quem a aciona.",
+    "tags": [
+      "armadilha"
+    ],
+    "mecanica": {
+      "cd": 13,
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "efeito": "Armadilha de pressão que pode ferir e limitar o movimento de quem a aciona."
+    }
+  },
+  {
+    "id": "arpeu",
+    "nome": "Arpéu",
+    "categoria": "utilizavel",
+    "subcategoria": "Exploração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2,
+    "custo": "2 PO",
+    "descricao": "Gancho metálico usado com cordas para escalada, travessia e ancoragem.",
+    "tags": [
+      "exploração"
+    ],
+    "mecanica": {
+      "efeito": "Gancho metálico usado com cordas para escalada, travessia e ancoragem."
+    }
+  },
+  {
+    "id": "balanca-de-mercador",
+    "nome": "Balança de Mercador",
+    "categoria": "utilizavel",
+    "subcategoria": "Ferramenta",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "5 PO",
+    "descricao": "Permite pesar pequenos objetos e mercadorias com precisão.",
+    "tags": [
+      "comércio"
+    ],
+    "mecanica": {
+      "efeito": "Permite pesar pequenos objetos e mercadorias com precisão."
+    }
+  },
+  {
+    "id": "bolsa-de-componentes",
+    "nome": "Bolsa de Componentes",
+    "categoria": "utilizavel",
+    "subcategoria": "Foco de conjuração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "25 PO",
+    "descricao": "Bolsa organizada para componentes materiais de magia que não tenham custo específico.",
+    "tags": [
+      "magia"
+    ],
+    "mecanica": {
+      "efeito": "Bolsa organizada para componentes materiais de magia que não tenham custo específico."
+    }
+  },
+  {
+    "id": "corda-de-seda-15-m",
+    "nome": "Corda de Seda (15 m)",
+    "categoria": "utilizavel",
+    "subcategoria": "Exploração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 2.5,
+    "custo": "10 PO",
+    "descricao": "Corda leve e resistente para escalada, amarração e travessias.",
+    "tags": [
+      "exploração"
+    ],
+    "mecanica": {
+      "comprimentoM": 15,
+      "efeito": "Corda leve e resistente para escalada, amarração e travessias."
+    }
+  },
+  {
+    "id": "corrente-3-m",
+    "nome": "Corrente (3 m)",
+    "categoria": "utilizavel",
+    "subcategoria": "Exploração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 5,
+    "custo": "5 PO",
+    "descricao": "Corrente resistente, útil para prender, puxar ou improvisar mecanismos.",
+    "tags": [
+      "contenção"
+    ],
+    "mecanica": {
+      "pv": 10,
+      "cdQuebrar": 20,
+      "efeito": "Corrente resistente, útil para prender, puxar ou improvisar mecanismos."
+    }
+  },
+  {
+    "id": "esferas-de-metal-1-000",
+    "nome": "Esferas de Metal (1.000)",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível tático",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "1 PO",
+    "descricao": "Espalhadas no chão, podem derrubar criaturas que atravessem a área sem cautela.",
+    "tags": [
+      "controle",
+      "chão"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "cd": 10,
+      "area": "quadrado de 3 m",
+      "efeito": "Espalhadas no chão, podem derrubar criaturas que atravessem a área sem cautela."
+    }
+  },
+  {
+    "id": "estrepes-20",
+    "nome": "Estrepes (20)",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível tático",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "1 PO",
+    "descricao": "Espalhados em uma pequena área, podem ferir e reduzir o deslocamento de quem pisa neles.",
+    "tags": [
+      "controle",
+      "chão"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "cd": 15,
+      "dano": "1",
+      "tipoDano": "perfurante",
+      "efeito": "Espalhados em uma pequena área, podem ferir e reduzir o deslocamento de quem pisa neles."
+    }
+  },
+  {
+    "id": "fogo-alquimico-frasco",
+    "nome": "Fogo Alquímico (frasco)",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível alquímico",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "50 PO",
+    "descricao": "Líquido inflamável adesivo que continua queimando até ser apagado.",
+    "tags": [
+      "fogo",
+      "arremesso"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "dano": "1d4 por turno",
+      "tipoDano": "fogo",
+      "alcance": "6 m",
+      "efeito": "Líquido inflamável adesivo que continua queimando até ser apagado."
+    }
+  },
+  {
+    "id": "grimorio",
+    "nome": "Grimório",
+    "categoria": "utilizavel",
+    "subcategoria": "Equipamento de conjuração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1.5,
+    "custo": "50 PO",
+    "descricao": "Volume encadernado preparado para registrar e organizar magias de mago.",
+    "tags": [
+      "mago",
+      "magia"
+    ],
+    "mecanica": {
+      "efeito": "Volume encadernado preparado para registrar e organizar magias de mago."
+    }
+  },
+  {
+    "id": "kit-de-escalada",
+    "nome": "Kit de Escalada",
+    "categoria": "utilizavel",
+    "subcategoria": "Exploração",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 6,
+    "custo": "25 PO",
+    "descricao": "Conjunto de pítons, botas, luvas e cinto para criar pontos de ancoragem durante escaladas.",
+    "tags": [
+      "escalada"
+    ],
+    "mecanica": {
+      "efeito": "Conjunto de pítons, botas, luvas e cinto para criar pontos de ancoragem durante escaladas."
+    }
+  },
+  {
+    "id": "kit-de-refeicao",
+    "nome": "Kit de Refeição",
+    "categoria": "utilizavel",
+    "subcategoria": "Acampamento",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "2 PP",
+    "descricao": "Conjunto compacto com recipiente, copo e talheres para refeições em viagem.",
+    "tags": [
+      "viagem"
+    ],
+    "mecanica": {
+      "efeito": "Conjunto compacto com recipiente, copo e talheres para refeições em viagem."
+    }
+  },
+  {
+    "id": "lampada",
+    "nome": "Lâmpada",
+    "categoria": "utilizavel",
+    "subcategoria": "Fonte de luz",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "5 PP",
+    "descricao": "Queima óleo por até 6 horas e ilumina uma área próxima.",
+    "tags": [
+      "luz"
+    ],
+    "mecanica": {
+      "duracao": "6 horas",
+      "efeito": "Queima óleo por até 6 horas e ilumina uma área próxima."
+    }
+  },
+  {
+    "id": "lanterna-coberta",
+    "nome": "Lanterna Coberta",
+    "categoria": "utilizavel",
+    "subcategoria": "Fonte de luz",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "5 PO",
+    "descricao": "Lanterna de óleo cuja cobertura permite reduzir rapidamente a quantidade de luz emitida.",
+    "tags": [
+      "luz"
+    ],
+    "mecanica": {
+      "duracao": "6 horas",
+      "efeito": "Lanterna de óleo cuja cobertura permite reduzir rapidamente a quantidade de luz emitida."
+    }
+  },
+  {
+    "id": "lanterna-furta-fogo",
+    "nome": "Lanterna Furta-Fogo",
+    "categoria": "utilizavel",
+    "subcategoria": "Fonte de luz",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "10 PO",
+    "descricao": "Lanterna direcionada que projeta um cone de luz a longa distância.",
+    "tags": [
+      "luz"
+    ],
+    "mecanica": {
+      "duracao": "6 horas",
+      "efeito": "Lanterna direcionada que projeta um cone de luz a longa distância."
+    }
+  },
+  {
+    "id": "lente-de-aumento",
+    "nome": "Lente de Aumento",
+    "categoria": "utilizavel",
+    "subcategoria": "Ferramenta",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0,
+    "custo": "100 PO",
+    "descricao": "Ajuda a inspecionar detalhes minúsculos e pode concentrar luz solar para iniciar fogo.",
+    "tags": [
+      "investigação"
+    ],
+    "mecanica": {
+      "efeito": "Ajuda a inspecionar detalhes minúsculos e pode concentrar luz solar para iniciar fogo."
+    }
+  },
+  {
+    "id": "luneta",
+    "nome": "Luneta",
+    "categoria": "utilizavel",
+    "subcategoria": "Ferramenta",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.5,
+    "custo": "1.000 PO",
+    "descricao": "Amplia visualmente objetos distantes.",
+    "tags": [
+      "observação"
+    ],
+    "mecanica": {
+      "efeito": "Amplia visualmente objetos distantes."
+    }
+  },
+  {
+    "id": "pocao-de-cura",
+    "nome": "Poção de Cura",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível mágico",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0.25,
+    "custo": "50 PO",
+    "descricao": "Poção básica que restaura pontos de vida ao ser bebida ou administrada.",
+    "tags": [
+      "cura"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "cura": "2d4+2",
+      "efeito": "Poção básica que restaura pontos de vida ao ser bebida ou administrada."
+    }
+  },
+  {
+    "id": "racoes-de-viagem-1-dia",
+    "nome": "Rações de Viagem (1 dia)",
+    "categoria": "utilizavel",
+    "subcategoria": "Provisão",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 1,
+    "custo": "5 PP",
+    "descricao": "Comida seca e durável suficiente para um dia de viagem.",
+    "tags": [
+      "viagem",
+      "comida"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "efeito": "Comida seca e durável suficiente para um dia de viagem."
+    }
+  },
+  {
+    "id": "tenda-para-duas-pessoas",
+    "nome": "Tenda para Duas Pessoas",
+    "categoria": "utilizavel",
+    "subcategoria": "Acampamento",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 10,
+    "custo": "2 PO",
+    "descricao": "Abrigo portátil para duas pessoas.",
+    "tags": [
+      "descanso",
+      "viagem"
+    ],
+    "mecanica": {
+      "efeito": "Abrigo portátil para duas pessoas."
+    }
+  },
+  {
+    "id": "veneno-basico-frasco",
+    "nome": "Veneno Básico (frasco)",
+    "categoria": "utilizavel",
+    "subcategoria": "Consumível",
+    "origem": "D&D 5e — Livro do Jogador (PHB)",
+    "pesoKg": 0,
+    "custo": "100 PO",
+    "descricao": "Pode revestir uma arma ou munição para adicionar dano venenoso por tempo limitado.",
+    "tags": [
+      "veneno"
+    ],
+    "mecanica": {
+      "usos": 1,
+      "tipoDano": "veneno",
+      "efeito": "Pode revestir uma arma ou munição para adicionar dano venenoso por tempo limitado."
+    }
+  },
+  {
+    "id": "amuleto-do-fragmento-negro",
+    "nome": "Amuleto do Fragmento Negro",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Funciona como foco de bruxo e permite tentar conjurar um truque de bruxo desconhecido uma vez por descanso longo.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "bruxo",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Funciona como foco de bruxo e permite tentar conjurar um truque de bruxo desconhecido uma vez por descanso longo."
+    }
+  },
+  {
+    "id": "amuleto-relogio",
+    "nome": "Amuleto Relógio",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Uma vez por dia, pode substituir a rolagem de d20 de um ataque por um resultado 10 antes dos modificadores.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "precisão"
+    ],
+    "mecanica": {
+      "efeito": "Uma vez por dia, pode substituir a rolagem de d20 de um ataque por um resultado 10 antes dos modificadores."
+    }
+  },
+  {
+    "id": "armadura-ardente",
+    "nome": "Armadura Ardente",
+    "categoria": "magico",
+    "subcategoria": "Armadura",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "A armadura solta fumaça inofensiva, sem alterar sua proteção.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "A armadura solta fumaça inofensiva, sem alterar sua proteção."
+    }
+  },
+  {
+    "id": "armadura-brilhante",
+    "nome": "Armadura Brilhante",
+    "categoria": "magico",
+    "subcategoria": "Armadura",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "A armadura mantém aparência limpa e polida por magia.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "A armadura mantém aparência limpa e polida por magia."
+    }
+  },
+  {
+    "id": "armadura-da-libertacao",
+    "nome": "Armadura da Libertação",
+    "categoria": "magico",
+    "subcategoria": "Armadura",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode ser removida muito mais rapidamente do que uma armadura comum.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "utilidade"
+    ],
+    "mecanica": {
+      "efeito": "Pode ser removida muito mais rapidamente do que uma armadura comum."
+    }
+  },
+  {
+    "id": "bengala-do-veterano",
+    "nome": "Bengala do Veterano",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode se transformar em uma espada longa uma única vez.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "transformação"
+    ],
+    "mecanica": {
+      "efeito": "Pode se transformar em uma espada longa uma única vez."
+    }
+  },
+  {
+    "id": "bolsa-conveniente-de-especiarias-de-heward",
+    "nome": "Bolsa Conveniente de Especiarias de Heward",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Contém pequenas porções de temperos mágicos capazes de melhorar refeições.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "comida"
+    ],
+    "mecanica": {
+      "efeito": "Contém pequenas porções de temperos mágicos capazes de melhorar refeições."
+    }
+  },
+  {
+    "id": "boneca-falante",
+    "nome": "Boneca Falante",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode armazenar frases curtas e pronunciá-las quando condições escolhidas forem atendidas.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "mensagem"
+    ],
+    "mecanica": {
+      "efeito": "Pode armazenar frases curtas e pronunciá-las quando condições escolhidas forem atendidas."
+    }
+  },
+  {
+    "id": "botas-de-pegadas-falsas",
+    "nome": "Botas de Pegadas Falsas",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "As pegadas do usuário podem parecer pertencer a outro tipo de humanoide.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "rastreio"
+    ],
+    "mecanica": {
+      "efeito": "As pegadas do usuário podem parecer pertencer a outro tipo de humanoide."
+    }
+  },
+  {
+    "id": "cachimbo-dos-monstros-de-fumaca",
+    "nome": "Cachimbo dos Monstros de Fumaça",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "A fumaça expelida forma pequenas criaturas ou monstros visuais inofensivos.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "A fumaça expelida forma pequenas criaturas ou monstros visuais inofensivos."
+    }
+  },
+  {
+    "id": "cadeado-da-enganacao",
+    "nome": "Cadeado da Enganação",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Cadeado mágico especialmente difícil de manipular sem a chave correta.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "segurança"
+    ],
+    "mecanica": {
+      "efeito": "Cadeado mágico especialmente difícil de manipular sem a chave correta."
+    }
+  },
+  {
+    "id": "cajado-canoro",
+    "nome": "Cajado Canoro",
+    "categoria": "magico",
+    "subcategoria": "Cajado",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Produz sons de pássaros e outros chamados naturais.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "som"
+    ],
+    "mecanica": {
+      "efeito": "Produz sons de pássaros e outros chamados naturais."
+    }
+  },
+  {
+    "id": "cajado-da-ornamentacao",
+    "nome": "Cajado da Ornamentação",
+    "categoria": "magico",
+    "subcategoria": "Cajado",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Mantém pequenos objetos suspensos e ornamentais próximos à ponta.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "Mantém pequenos objetos suspensos e ornamentais próximos à ponta."
+    }
+  },
+  {
+    "id": "cajado-das-flores",
+    "nome": "Cajado das Flores",
+    "categoria": "magico",
+    "subcategoria": "Cajado",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode fazer brotar flores inofensivas a partir do cajado.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "natureza"
+    ],
+    "mecanica": {
+      "efeito": "Pode fazer brotar flores inofensivas a partir do cajado."
+    }
+  },
+  {
+    "id": "caneca-da-sobriedade",
+    "nome": "Caneca da Sobriedade",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Permite beber álcool sem ficar embriagado.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "social"
+    ],
+    "mecanica": {
+      "efeito": "Permite beber álcool sem ficar embriagado."
+    }
+  },
+  {
+    "id": "capa-da-ondulacao",
+    "nome": "Capa da Ondulação",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode ondular dramaticamente sob comando, mesmo sem vento.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "Pode ondular dramaticamente sob comando, mesmo sem vento."
+    }
+  },
+  {
+    "id": "capa-de-muitas-modas",
+    "nome": "Capa de Muitas Modas",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode alterar cor, estilo e aparência geral sem mudar sua função.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "disfarce"
+    ],
+    "mecanica": {
+      "efeito": "Pode alterar cor, estilo e aparência geral sem mudar sua função."
+    }
+  },
+  {
+    "id": "chapeu-da-feiticaria",
+    "nome": "Chapéu da Feitiçaria",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Serve como foco de mago e permite tentar conjurar um truque de mago desconhecido uma vez por descanso longo.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "mago",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Serve como foco de mago e permite tentar conjurar um truque de mago desconhecido uma vez por descanso longo."
+    }
+  },
+  {
+    "id": "chapeu-dos-vermes",
+    "nome": "Chapéu dos Vermes",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode produzir pequenos animais ou vermes temporários e inofensivos.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "criatura"
+    ],
+    "mecanica": {
+      "efeito": "Pode produzir pequenos animais ou vermes temporários e inofensivos."
+    }
+  },
+  {
+    "id": "chave-misteriosa",
+    "nome": "Chave Misteriosa",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Tem uma pequena chance de abrir uma fechadura em que seja inserida; se funcionar, desaparece.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "fechadura"
+    ],
+    "mecanica": {
+      "efeito": "Tem uma pequena chance de abrir uma fechadura em que seja inserida; se funcionar, desaparece."
+    }
+  },
+  {
+    "id": "chifre-do-alarme-silencioso",
+    "nome": "Chifre do Alarme Silencioso",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Envia um alerta audível apenas para uma criatura escolhida a grande distância.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "alarme"
+    ],
+    "mecanica": {
+      "efeito": "Envia um alerta audível apenas para uma criatura escolhida a grande distância."
+    }
+  },
+  {
+    "id": "corda-do-reparo",
+    "nome": "Corda do Reparo",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pedaços cortados da corda podem se unir novamente quando as extremidades são encostadas.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "reparo"
+    ],
+    "mecanica": {
+      "efeito": "Pedaços cortados da corda podem se unir novamente quando as extremidades são encostadas."
+    }
+  },
+  {
+    "id": "dado-do-charlatao",
+    "nome": "Dado do Charlatão",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "O usuário pode controlar o resultado mostrado pelo dado.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "jogo",
+      "trapaça"
+    ],
+    "mecanica": {
+      "efeito": "O usuário pode controlar o resultado mostrado pelo dado."
+    }
+  },
+  {
+    "id": "elmo-do-horror",
+    "nome": "Elmo do Horror",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Faz os olhos do usuário brilharem de modo ameaçador.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "Faz os olhos do usuário brilharem de modo ameaçador."
+    }
+  },
+  {
+    "id": "escudo-da-expressao",
+    "nome": "Escudo da Expressão",
+    "categoria": "magico",
+    "subcategoria": "Armadura",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "O rosto decorativo do escudo pode mudar de expressão sob comando.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "O rosto decorativo do escudo pode mudar de expressão sob comando."
+    }
+  },
+  {
+    "id": "esfera-da-direcao",
+    "nome": "Esfera da Direção",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Indica continuamente a direção do norte enquanto estiver no mesmo plano apropriado.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "navegação"
+    ],
+    "mecanica": {
+      "efeito": "Indica continuamente a direção do norte enquanto estiver no mesmo plano apropriado."
+    }
+  },
+  {
+    "id": "esfera-do-tempo",
+    "nome": "Esfera do Tempo",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Permite saber aproximadamente a hora do dia.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "tempo"
+    ],
+    "mecanica": {
+      "efeito": "Permite saber aproximadamente a hora do dia."
+    }
+  },
+  {
+    "id": "espada-lunar",
+    "nome": "Espada Lunar",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "A lâmina emite luz quando desembainhada.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "luz"
+    ],
+    "mecanica": {
+      "efeito": "A lâmina emite luz quando desembainhada."
+    }
+  },
+  {
+    "id": "flecha-inquebravel",
+    "nome": "Flecha Inquebrável",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "A flecha resiste a ser quebrada por meios normais.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "munição"
+    ],
+    "mecanica": {
+      "efeito": "A flecha resiste a ser quebrada por meios normais."
+    }
+  },
+  {
+    "id": "gota-de-nutricao",
+    "nome": "Gota de Nutrição",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Uma pequena gota fornece sustento equivalente a uma refeição.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "comida"
+    ],
+    "mecanica": {
+      "efeito": "Uma pequena gota fornece sustento equivalente a uma refeição."
+    }
+  },
+  {
+    "id": "gota-de-refrescancia",
+    "nome": "Gota de Refrescância",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Transforma uma pequena quantidade de líquido em água potável e agradável.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "água"
+    ],
+    "mecanica": {
+      "efeito": "Transforma uma pequena quantidade de líquido em água potável e agradável."
+    }
+  },
+  {
+    "id": "grimorio-duradouro",
+    "nome": "Grimório Duradouro",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Um grimório protegido contra desgaste, fogo e água comuns.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "mago",
+      "livro"
+    ],
+    "mecanica": {
+      "efeito": "Um grimório protegido contra desgaste, fogo e água comuns."
+    }
+  },
+  {
+    "id": "instrumento-da-escrita",
+    "nome": "Instrumento da Escrita",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Enquanto é tocado, pode produzir escrita mágica ligada à performance.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "música",
+      "escrita"
+    ],
+    "mecanica": {
+      "efeito": "Enquanto é tocado, pode produzir escrita mágica ligada à performance."
+    }
+  },
+  {
+    "id": "instrumento-de-ilusoes",
+    "nome": "Instrumento de Ilusões",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Cria ilusões visuais inofensivas ao redor do músico durante a apresentação.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "música",
+      "ilusão"
+    ],
+    "mecanica": {
+      "efeito": "Cria ilusões visuais inofensivas ao redor do músico durante a apresentação."
+    }
+  },
+  {
+    "id": "mastro-da-diminuicao",
+    "nome": "Mastro da Diminuição",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode alternar entre um bastão curto e um mastro longo.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "exploração"
+    ],
+    "mecanica": {
+      "efeito": "Pode alternar entre um bastão curto e um mastro longo."
+    }
+  },
+  {
+    "id": "mastro-da-pescaria",
+    "nome": "Mastro da Pescaria",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Transforma-se em uma vara de pesca funcional sob comando.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "pescaria"
+    ],
+    "mecanica": {
+      "efeito": "Transforma-se em uma vara de pesca funcional sob comando."
+    }
+  },
+  {
+    "id": "municao-colossal",
+    "nome": "Munição Colossal",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Munição que pode derrubar um alvo atingido caso ele falhe em resistir ao impacto.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "munição",
+      "controle"
+    ],
+    "mecanica": {
+      "efeito": "Munição que pode derrubar um alvo atingido caso ele falhe em resistir ao impacto."
+    }
+  },
+  {
+    "id": "olho-de-ersatz",
+    "nome": "Olho de Ersatz",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Substitui um olho perdido e passa a funcionar como um olho normal.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "prótese"
+    ],
+    "mecanica": {
+      "efeito": "Substitui um olho perdido e passa a funcionar como um olho normal."
+    }
+  },
+  {
+    "id": "perfume-do-encantamento",
+    "nome": "Perfume do Encantamento",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Por um período curto, melhora a capacidade social do usuário contra criaturas suscetíveis.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "social",
+      "encantamento"
+    ],
+    "mecanica": {
+      "efeito": "Por um período curto, melhora a capacidade social do usuário contra criaturas suscetíveis."
+    }
+  },
+  {
+    "id": "roupas-do-remendo",
+    "nome": "Roupas do Remendo",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Rasgos e danos superficiais nas roupas se consertam sozinhos.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "reparo"
+    ],
+    "mecanica": {
+      "efeito": "Rasgos e danos superficiais nas roupas se consertam sozinhos."
+    }
+  },
+  {
+    "id": "rubi-do-mago-da-guerra",
+    "nome": "Rubi do Mago da Guerra",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode ser preso a uma arma para que ela também funcione como foco de conjuração.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "foco",
+      "conjurador"
+    ],
+    "mecanica": {
+      "efeito": "Pode ser preso a uma arma para que ela também funcione como foco de conjuração."
+    }
+  },
+  {
+    "id": "trombeta-da-audicao",
+    "nome": "Trombeta da Audição",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Ajuda uma criatura com dificuldade auditiva a ouvir normalmente.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "audição"
+    ],
+    "mecanica": {
+      "efeito": "Ajuda uma criatura com dificuldade auditiva a ouvir normalmente."
+    }
+  },
+  {
+    "id": "varinha-carrancuda",
+    "nome": "Varinha Carrancuda",
+    "categoria": "magico",
+    "subcategoria": "Varinha",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode fazer uma criatura assumir uma expressão carrancuda por um curto período.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "Pode fazer uma criatura assumir uma expressão carrancuda por um curto período."
+    }
+  },
+  {
+    "id": "varinha-da-pirotecnia",
+    "nome": "Varinha da Pirotecnia",
+    "categoria": "magico",
+    "subcategoria": "Varinha",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Produz pequenos efeitos pirotécnicos inofensivos de luz e som.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "luz",
+      "som"
+    ],
+    "mecanica": {
+      "efeito": "Produz pequenos efeitos pirotécnicos inofensivos de luz e som."
+    }
+  },
+  {
+    "id": "varinha-da-regencia",
+    "nome": "Varinha da Regência",
+    "categoria": "magico",
+    "subcategoria": "Varinha",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Produz música de acompanhamento como se uma pequena orquestra estivesse tocando.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "música"
+    ],
+    "mecanica": {
+      "efeito": "Produz música de acompanhamento como se uma pequena orquestra estivesse tocando."
+    }
+  },
+  {
+    "id": "varinha-sorridente",
+    "nome": "Varinha Sorridente",
+    "categoria": "magico",
+    "subcategoria": "Varinha",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode fazer uma criatura assumir um sorriso exagerado por um curto período.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "cosmético"
+    ],
+    "mecanica": {
+      "efeito": "Pode fazer uma criatura assumir um sorriso exagerado por um curto período."
+    }
+  },
+  {
+    "id": "vaso-do-despertar",
+    "nome": "Vaso do Despertar",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Após manter um arbusto por tempo suficiente, pode transformá-lo em um arbusto desperto.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "natureza"
+    ],
+    "mecanica": {
+      "efeito": "Após manter um arbusto por tempo suficiente, pode transformá-lo em um arbusto desperto."
+    }
+  },
+  {
+    "id": "vela-das-profundezas",
+    "nome": "Vela das Profundezas",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Xanathar's Guide to Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Continua queimando mesmo submersa em água.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "luz",
+      "água"
+    ],
+    "mecanica": {
+      "efeito": "Continua queimando mesmo submersa em água."
+    }
+  },
+  {
+    "id": "tatuagem-do-iluminador",
+    "nome": "Tatuagem do Iluminador",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Permite usar a própria pele como fonte de escrita mágica e produzir inscrições com facilidade.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "tatuagem"
+    ],
+    "mecanica": {
+      "efeito": "Permite usar a própria pele como fonte de escrita mágica e produzir inscrições com facilidade."
+    }
+  },
+  {
+    "id": "tatuagem-mascarada",
+    "nome": "Tatuagem Mascarada",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode alterar sua aparência magicamente por um período limitado.",
+    "raridade": "comum",
+    "sintonizacao": true,
+    "tags": [
+      "comum",
+      "tatuagem",
+      "disfarce"
+    ],
+    "mecanica": {
+      "efeito": "Pode alterar sua aparência magicamente por um período limitado."
+    }
+  },
+  {
+    "id": "membro-protetico",
+    "nome": "Membro Protético",
+    "categoria": "magico",
+    "subcategoria": "Prótese mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Substitui um braço, mão, perna ou pé perdido e funciona como o membro original.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "prótese"
+    ],
+    "mecanica": {
+      "efeito": "Substitui um braço, mão, perna ou pé perdido e funciona como o membro original."
+    }
+  },
+  {
+    "id": "tatuagem-feitico",
+    "nome": "Tatuagem Feitiço",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Armazena uma magia para uma única conjuração; a tatuagem desaparece após o uso.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "tatuagem",
+      "magia"
+    ],
+    "mecanica": {
+      "efeito": "Armazena uma magia para uma única conjuração; a tatuagem desaparece após o uso."
+    }
+  },
+  {
+    "id": "ferramenta-multifuncional-1",
+    "nome": "Ferramenta Multifuncional +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Ferramenta de artífice que muda de forma e melhora ataques e CD de magias de artífice.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "artífice",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Ferramenta de artífice que muda de forma e melhora ataques e CD de magias de artífice."
+    }
+  },
+  {
+    "id": "amuleto-do-devoto-1",
+    "nome": "Amuleto do Devoto +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Foco sagrado que melhora ataques e CD de magias e auxilia o uso de Canalizar Divindade.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "clérigo",
+      "paladino",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Foco sagrado que melhora ataques e CD de magias e auxilia o uso de Canalizar Divindade."
+    }
+  },
+  {
+    "id": "grimorio-arcano-1",
+    "nome": "Grimório Arcano +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Grimório e foco de mago que melhora ataques e CD de magias e reforça a Recuperação Arcana.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "mago",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Grimório e foco de mago que melhora ataques e CD de magias e reforça a Recuperação Arcana."
+    }
+  },
+  {
+    "id": "tatuagem-barreira",
+    "nome": "Tatuagem Barreira",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Concede uma forma de proteção equivalente a uma armadura sem exigir que o usuário vista uma.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "tatuagem",
+      "defesa"
+    ],
+    "mecanica": {
+      "efeito": "Concede uma forma de proteção equivalente a uma armadura sem exigir que o usuário vista uma."
+    }
+  },
+  {
+    "id": "frasco-de-sangue-1",
+    "nome": "Frasco de Sangue +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Foco de feiticeiro que melhora magias e pode ajudar a recuperar pontos de feitiçaria.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "feiticeiro",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Foco de feiticeiro que melhora magias e pode ajudar a recuperar pontos de feitiçaria."
+    }
+  },
+  {
+    "id": "tatuagem-de-aperto-em-espiral",
+    "nome": "Tatuagem de Aperto em Espiral",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Projeta tentáculos de tinta que podem agarrar e ferir uma criatura próxima.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "tatuagem",
+      "controle"
+    ],
+    "mecanica": {
+      "efeito": "Projeta tentáculos de tinta que podem agarrar e ferir uma criatura próxima."
+    }
+  },
+  {
+    "id": "tatuagem-garra-mistica",
+    "nome": "Tatuagem Garra Mística",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Torna ataques desarmados mágicos e permite ampliar temporariamente o alcance com energia arcana.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "tatuagem",
+      "combate"
+    ],
+    "mecanica": {
+      "efeito": "Torna ataques desarmados mágicos e permite ampliar temporariamente o alcance com energia arcana."
+    }
+  },
+  {
+    "id": "fragmento-de-feywild",
+    "nome": "Fragmento de Feywild",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Fragmento feérico que reage ao uso de Metamagia e pode produzir efeitos imprevisíveis.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "feiticeiro",
+      "feywild"
+    ],
+    "mecanica": {
+      "efeito": "Fragmento feérico que reage ao uso de Metamagia e pode produzir efeitos imprevisíveis."
+    }
+  },
+  {
+    "id": "emblema-do-guardiao",
+    "nome": "Emblema do Guardião",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode transformar um acerto crítico próximo em um acerto normal algumas vezes por dia.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "proteção"
+    ],
+    "mecanica": {
+      "efeito": "Pode transformar um acerto crítico próximo em um acerto normal algumas vezes por dia."
+    }
+  },
+  {
+    "id": "foice-da-lua-1",
+    "nome": "Foice da Lua +1",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Foice sagrada de druida ou patrulheiro que melhora magias e reforça algumas curas.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "druida",
+      "patrulheiro",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Foice sagrada de druida ou patrulheiro que melhora magias e reforça algumas curas."
+    }
+  },
+  {
+    "id": "manto-da-natureza",
+    "nome": "Manto da Natureza",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Funciona como foco para druida ou patrulheiro e facilita desaparecer em meio ao ambiente natural.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "druida",
+      "patrulheiro"
+    ],
+    "mecanica": {
+      "efeito": "Funciona como foco para druida ou patrulheiro e facilita desaparecer em meio ao ambiente natural."
+    }
+  },
+  {
+    "id": "tambor-fabricante-de-ritmo-1",
+    "nome": "Tambor Fabricante de Ritmo +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Foco de bardo que melhora magias e pode ajudar a recuperar Inspiração de Bardo.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "bardo",
+      "foco"
+    ],
+    "mecanica": {
+      "efeito": "Foco de bardo que melhora magias e pode ajudar a recuperar Inspiração de Bardo."
+    }
+  },
+  {
+    "id": "compendio-alquimico",
+    "nome": "Compêndio Alquímico",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Livro arcano voltado a transmutação e alquimia, com magias temáticas e uma transformação material especial.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Livro arcano voltado a transmutação e alquimia, com magias temáticas e uma transformação material especial."
+    }
+  },
+  {
+    "id": "fragmento-astral",
+    "nome": "Fragmento Astral",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Fragmento planar que permite reposicionamento imediato quando o usuário aplica Metamagia.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "feiticeiro",
+      "astral"
+    ],
+    "mecanica": {
+      "efeito": "Fragmento planar que permite reposicionamento imediato quando o usuário aplica Metamagia."
+    }
+  },
+  {
+    "id": "arquivo-de-astromancia",
+    "nome": "Arquivo de Astromancia",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Coleção arcana de adivinhação e observação cósmica com recursos próprios para um mago.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Coleção arcana de adivinhação e observação cósmica com recursos próprios para um mago."
+    }
+  },
+  {
+    "id": "atlas-de-infinitos-horizontes",
+    "nome": "Atlas de Infinitos Horizontes",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Grimório de conjuração e viagem planar que pode ajudar seu portador a escapar de um ataque.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Grimório de conjuração e viagem planar que pode ajudar seu portador a escapar de um ataque."
+    }
+  },
+  {
+    "id": "fulminante",
+    "nome": "Fulminante",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Tratado arcano dedicado à evocação e à amplificação de efeitos destrutivos.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Tratado arcano dedicado à evocação e à amplificação de efeitos destrutivos."
+    }
+  },
+  {
+    "id": "manual-do-tecelao-do-coracao",
+    "nome": "Manual do Tecelão do Coração",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Livro dedicado a encantamentos e manipulação emocional.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Livro dedicado a encantamentos e manipulação emocional."
+    }
+  },
+  {
+    "id": "livro-da-alma-e-carne",
+    "nome": "Livro da Alma e Carne",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Tomo de necromancia ligado a energia vital, morte e transformação corporal.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório",
+      "necromancia"
+    ],
+    "mecanica": {
+      "efeito": "Tomo de necromancia ligado a energia vital, morte e transformação corporal."
+    }
+  },
+  {
+    "id": "codex-do-invocador-de-planos",
+    "nome": "Códex do Invocador de Planos",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Tomo voltado à convocação e interação com criaturas extraplanares.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório"
+    ],
+    "mecanica": {
+      "efeito": "Tomo voltado à convocação e interação com criaturas extraplanares."
+    }
+  },
+  {
+    "id": "versos-protetores",
+    "nome": "Versos Protetores",
+    "categoria": "magico",
+    "subcategoria": "Grimório mágico",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Coleção de fórmulas de abjuração com proteção adicional contra ameaças mágicas.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mago",
+      "grimório",
+      "abjuração"
+    ],
+    "mecanica": {
+      "efeito": "Coleção de fórmulas de abjuração com proteção adicional contra ameaças mágicas."
+    }
+  },
+  {
+    "id": "tatuagem-da-marca-de-shadowfell",
+    "nome": "Tatuagem da Marca de Shadowfell",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Concede adaptação às sombras e uma reação defensiva contra dano.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "tatuagem",
+      "shadowfell"
+    ],
+    "mecanica": {
+      "efeito": "Concede adaptação às sombras e uma reação defensiva contra dano."
+    }
+  },
+  {
+    "id": "tatuagem-da-absorcao",
+    "nome": "Tatuagem da Absorção",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Concede resistência a um tipo de dano e pode absorver parte de uma fonte desse dano.",
+    "raridade": "muito-raro",
+    "sintonizacao": true,
+    "tags": [
+      "muito-raro",
+      "tatuagem",
+      "resistência"
+    ],
+    "mecanica": {
+      "efeito": "Concede resistência a um tipo de dano e pode absorver parte de uma fonte desse dano."
+    }
+  },
+  {
+    "id": "tatuagem-da-etapa-fantasma",
+    "nome": "Tatuagem da Etapa Fantasma",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Permite assumir brevemente uma forma espectral capaz de atravessar obstáculos e resistir a dano físico.",
+    "raridade": "muito-raro",
+    "sintonizacao": true,
+    "tags": [
+      "muito-raro",
+      "tatuagem",
+      "movimento"
+    ],
+    "mecanica": {
+      "efeito": "Permite assumir brevemente uma forma espectral capaz de atravessar obstáculos e resistir a dano físico."
+    }
+  },
+  {
+    "id": "tatuagem-de-furia-de-sangue",
+    "nome": "Tatuagem de Fúria de Sangue",
+    "categoria": "magico",
+    "subcategoria": "Tatuagem mágica",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Armazena cargas usadas para causar dano necrótico adicional, recuperar vida e contra-atacar inimigos.",
+    "raridade": "lendario",
+    "sintonizacao": true,
+    "tags": [
+      "lendario",
+      "tatuagem",
+      "combate"
+    ],
+    "mecanica": {
+      "efeito": "Armazena cargas usadas para causar dano necrótico adicional, recuperar vida e contra-atacar inimigos."
+    }
+  },
+  {
+    "id": "caldeirao-do-renascimento",
+    "nome": "Caldeirão do Renascimento",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "D&D 5e — Tasha's Cauldron of Everything",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Caldeirão mágico de druida que auxilia na preparação de poções e pode restaurar a vida em circunstâncias específicas.",
+    "raridade": "muito-raro",
+    "sintonizacao": true,
+    "tags": [
+      "muito-raro",
+      "druida",
+      "cura"
+    ],
+    "mecanica": {
+      "efeito": "Caldeirão mágico de druida que auxilia na preparação de poções e pode restaurar a vida em circunstâncias específicas."
+    }
+  },
+  {
+    "id": "cestus",
+    "nome": "Cestus",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "punho",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Punho",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "manopla-de-garra",
+    "nome": "Manopla de Garra",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "punho",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Punho",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "anzol",
+    "nome": "Anzol",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.4,
+    "custo": "1 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d8)"
+      ]
+    }
+  },
+  {
+    "id": "mao-de-gancho",
+    "nome": "Mão de Gancho",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "25 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano perfurante.",
+    "tags": [
+      "acuidade",
+      "leve",
+      "especial"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve",
+        "Especial"
+      ]
+    }
+  },
+  {
+    "id": "kama",
+    "nome": "Kama",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "1 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "facao",
+    "nome": "Facão",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.8,
+    "custo": "5 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano cortante.",
+    "tags": [
+      "especial"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Especial"
+      ]
+    }
+  },
+  {
+    "id": "picareta",
+    "nome": "Picareta",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 4.5,
+    "custo": "5 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "punhal-de-perfuracao",
+    "nome": "Punhal de Perfuração",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano perfurante.",
+    "tags": [
+      "punho",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Punho",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "sai",
+    "nome": "Sai",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "2 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano perfurante.",
+    "tags": [
+      "acuidade",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "escorpiao-em-uma-vara",
+    "nome": "Escorpião em uma Vara",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.25,
+    "custo": "1 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d6 de dano veneno.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "veneno",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "pa-de-combate",
+    "nome": "Pá de Combate",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.25,
+    "custo": "2 PO",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "tonfa",
+    "nome": "Tonfa",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "1 PP",
+    "descricao": "Arma arma corpo a corpo simples com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "baioneta",
+    "nome": "Baioneta",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "2 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d4 de dano perfurante.",
+    "tags": [
+      "acuidade",
+      "leve",
+      "especial"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve",
+        "Especial"
+      ]
+    }
+  },
+  {
+    "id": "mastro",
+    "nome": "Mastro",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.7,
+    "custo": "15 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "alcance",
+      "especial",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Alcance",
+        "Especial",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "cutelo",
+    "nome": "Cutelo",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "30 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "acuidade"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade"
+      ]
+    }
+  },
+  {
+    "id": "estoc",
+    "nome": "Estoc",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.4,
+    "custo": "15 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d10)"
+      ]
+    }
+  },
+  {
+    "id": "arpao",
+    "nome": "Arpão",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.8,
+    "custo": "5 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "especial",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Especial",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "katana",
+    "nome": "Katana",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.4,
+    "custo": "50 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Versátil (1d10)"
+      ]
+    }
+  },
+  {
+    "id": "khopesh",
+    "nome": "Khopesh",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.8,
+    "custo": "25 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d6 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "leve",
+      "viagem"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve",
+        "Viagem"
+      ]
+    }
+  },
+  {
+    "id": "naginata",
+    "nome": "Naginata",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.25,
+    "custo": "50 PO",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "pesada",
+      "alcance",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Alcance",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "nunchaku",
+    "nome": "Nunchaku",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "5 PP",
+    "descricao": "Arma arma corpo a corpo marcial com perfil de 1d6 de dano concussão.",
+    "tags": [
+      "acuidade",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "lamina-do-assassino",
+    "nome": "Lâmina do Assassino",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "75 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "ocultável",
+      "elegante",
+      "acuidade",
+      "leve"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Ocultável",
+        "Elegante",
+        "Acuidade",
+        "Leve"
+      ]
+    }
+  },
+  {
+    "id": "espada-bastarda",
+    "nome": "Espada Bastarda",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 3.6,
+    "custo": "65 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Versátil (1d12)"
+      ]
+    }
+  },
+  {
+    "id": "boomeraxe",
+    "nome": "Boomeraxe",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.25,
+    "custo": "80 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "leve",
+      "retornando",
+      "arremesso",
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Leve",
+        "Retornando",
+        "Arremesso (6/18 m)",
+        "Versátil (1d10)"
+      ]
+    }
+  },
+  {
+    "id": "chicote-de-corrente",
+    "nome": "Chicote de Corrente",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 3.2,
+    "custo": "55 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d8 de dano concussão.",
+    "tags": [
+      "acuidade",
+      "alcance"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Alcance"
+      ]
+    }
+  },
+  {
+    "id": "dervixe",
+    "nome": "Dervixe",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.7,
+    "custo": "175 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d8 de dano cortante.",
+    "tags": [
+      "duplo",
+      "acuidade"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Duplo",
+        "Acuidade"
+      ]
+    }
+  },
+  {
+    "id": "mangual-terrivel",
+    "nome": "Mangual Terrível",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 3.2,
+    "custo": "60 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano concussão.",
+    "tags": [],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "concussão",
+      "alcance": "corpo a corpo",
+      "propriedades": []
+    }
+  },
+  {
+    "id": "espada-dupla",
+    "nome": "Espada Dupla",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.7,
+    "custo": "165 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "duplo",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Duplo",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "anao-waraxe",
+    "nome": "Anão Waraxe",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 9,
+    "custo": "100 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 2d8 de dano cortante.",
+    "tags": [
+      "pesado",
+      "superpesado",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "2d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesado",
+        "Superpesado",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "folha-elfica",
+    "nome": "Folha Élfica",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.8,
+    "custo": "75 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "acuidade",
+      "defesa"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Defesa"
+      ]
+    }
+  },
+  {
+    "id": "grande-lanca",
+    "nome": "Grande Lança",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 11.3,
+    "custo": "55 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d12 de dano perfurante.",
+    "tags": [
+      "pesada",
+      "alcance",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d12",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Alcance",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "foice-sombria",
+    "nome": "Foice Sombria",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 2.7,
+    "custo": "65 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "versátil"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Versátil (1d12)"
+      ]
+    }
+  },
+  {
+    "id": "espada-gancho",
+    "nome": "Espada Gancho",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 1.4,
+    "custo": "60 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d10 de dano cortante.",
+    "tags": [
+      "elegante",
+      "acuidade",
+      "leve",
+      "viagem"
+    ],
+    "mecanica": {
+      "dano": "1d10",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Elegante",
+        "Acuidade",
+        "Leve",
+        "Viagem"
+      ]
+    }
+  },
+  {
+    "id": "corrente-com-pontas",
+    "nome": "Corrente com Pontas",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 6.8,
+    "custo": "60 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "duplo",
+      "alcance",
+      "viagem",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Duplo",
+        "Alcance",
+        "Viagem",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "zweihander",
+    "nome": "Zweihander",
+    "categoria": "arma",
+    "subcategoria": "Arma corpo a corpo exótica",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 7.2,
+    "custo": "80 PO",
+    "descricao": "Arma arma corpo a corpo exótica com perfil de 2d8 de dano cortante.",
+    "tags": [
+      "pesada",
+      "superpesado",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "2d8",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Pesada",
+        "Superpesado",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "bolas",
+    "nome": "Bolas",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.9,
+    "custo": "3 PO",
+    "descricao": "Arma arma à distância simples com perfil de — de dano —.",
+    "tags": [
+      "especial",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "—",
+      "tipoDano": "—",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Especial",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "shuriken",
+    "nome": "Shuriken",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância simples",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.1,
+    "custo": "5 PC",
+    "descricao": "Arma arma à distância simples com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "corpo a corpo",
+      "propriedades": [
+        "Acuidade",
+        "Arremesso (6/18 m)"
+      ]
+    }
+  },
+  {
+    "id": "atlatl",
+    "nome": "Atlatl",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "5 PP",
+    "descricao": "Arma arma à distância marcial com perfil de 1d6 de dano perfurante.",
+    "tags": [
+      "munição"
+    ],
+    "mecanica": {
+      "dano": "1d6",
+      "tipoDano": "perfurante",
+      "alcance": "9/36 m",
+      "propriedades": [
+        "Munição"
+      ]
+    }
+  },
+  {
+    "id": "bumerangue",
+    "nome": "Bumerangue",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.1,
+    "custo": "2 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d4 de dano concussão.",
+    "tags": [
+      "leve",
+      "retornando",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "concussão",
+      "alcance": "18/54 m",
+      "propriedades": [
+        "Leve",
+        "Retornando",
+        "Arremesso"
+      ]
+    }
+  },
+  {
+    "id": "chakram",
+    "nome": "Chakram",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "2 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "leve",
+      "retornando",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "6/18 m",
+      "propriedades": [
+        "Acuidade",
+        "Leve",
+        "Retornando",
+        "Arremesso"
+      ]
+    }
+  },
+  {
+    "id": "besta-repetidora",
+    "nome": "Besta Repetidora",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 9,
+    "custo": "75 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d8 de dano perfurante.",
+    "tags": [
+      "munição",
+      "pesada",
+      "recarga",
+      "duas mãos"
+    ],
+    "mecanica": {
+      "dano": "1d8",
+      "tipoDano": "perfurante",
+      "alcance": "30/120 m",
+      "propriedades": [
+        "Munição",
+        "Pesada",
+        "Recarga (5)",
+        "Duas mãos"
+      ]
+    }
+  },
+  {
+    "id": "adaga-de-arremesso",
+    "nome": "Adaga de Arremesso",
+    "categoria": "arma",
+    "subcategoria": "Arma à distância marcial",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0.45,
+    "custo": "2 PO",
+    "descricao": "Arma arma à distância marcial com perfil de 1d4 de dano cortante.",
+    "tags": [
+      "acuidade",
+      "leve",
+      "arremesso"
+    ],
+    "mecanica": {
+      "dano": "1d4",
+      "tipoDano": "cortante",
+      "alcance": "18/54 m",
+      "propriedades": [
+        "Acuidade",
+        "Leve",
+        "Arremesso"
+      ]
+    }
+  },
+  {
+    "id": "armadura-brigandina",
+    "nome": "Armadura Brigandina",
+    "categoria": "armadura",
+    "subcategoria": "Armadura leve",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 9,
+    "custo": "95 PO",
+    "descricao": "Proteção armadura leve com CA base 13.",
+    "tags": [
+      "leve"
+    ],
+    "mecanica": {
+      "caBase": 13,
+      "bonusDestreza": true,
+      "limiteDestreza": null,
+      "forcaMinima": null,
+      "desvantagemFurtividade": false
+    }
+  },
+  {
+    "id": "placa-em-faixas",
+    "nome": "Placa em Faixas",
+    "categoria": "armadura",
+    "subcategoria": "Armadura média",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 11.3,
+    "custo": "450 PO",
+    "descricao": "Proteção armadura média com CA base 15.",
+    "tags": [
+      "média"
+    ],
+    "mecanica": {
+      "caBase": 15,
+      "bonusDestreza": true,
+      "limiteDestreza": 2,
+      "forcaMinima": null,
+      "desvantagemFurtividade": false
+    }
+  },
+  {
+    "id": "prato-de-heroi",
+    "nome": "Prato de Herói",
+    "categoria": "armadura",
+    "subcategoria": "Armadura média",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 20.4,
+    "custo": "800 PO",
+    "descricao": "Proteção armadura média com CA base 16.",
+    "tags": [
+      "média",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 16,
+      "bonusDestreza": true,
+      "limiteDestreza": 2,
+      "forcaMinima": null,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "armadura-lamelar",
+    "nome": "Armadura Lamelar",
+    "categoria": "armadura",
+    "subcategoria": "Armadura pesada",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 29.5,
+    "custo": "125 PO",
+    "descricao": "Proteção armadura pesada com CA base 17.",
+    "tags": [
+      "pesada",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 17,
+      "bonusDestreza": false,
+      "limiteDestreza": 0,
+      "forcaMinima": 13,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "placa-de-montanha",
+    "nome": "Placa de Montanha",
+    "categoria": "armadura",
+    "subcategoria": "Armadura pesada",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 34,
+    "custo": "2.000 PO",
+    "descricao": "Proteção armadura pesada com CA base 19.",
+    "tags": [
+      "pesada",
+      "furtividade"
+    ],
+    "mecanica": {
+      "caBase": 19,
+      "bonusDestreza": false,
+      "limiteDestreza": 0,
+      "forcaMinima": 15,
+      "desvantagemFurtividade": true
+    }
+  },
+  {
+    "id": "polimento-adamantino",
+    "nome": "Polimento Adamantino",
+    "categoria": "magico",
+    "subcategoria": "Poção",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Aplicado a armas naturais, concede bônus de +1 em ataque e dano por várias horas e faz os ataques contarem como adamantinos.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "poção",
+      "arma natural"
+    ],
+    "mecanica": {
+      "efeito": "Aplicado a armas naturais, concede bônus de +1 em ataque e dano por várias horas e faz os ataques contarem como adamantinos."
+    }
+  },
+  {
+    "id": "anestesico-alquimico",
+    "nome": "Anestésico Alquímico",
+    "categoria": "magico",
+    "subcategoria": "Poção",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Seringa com doses que suprimem dor; também pode manter uma criatura voluntária ou inconsciente sedada por um período.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "alquimia"
+    ],
+    "mecanica": {
+      "efeito": "Seringa com doses que suprimem dor; também pode manter uma criatura voluntária ou inconsciente sedada por um período."
+    }
+  },
+  {
+    "id": "sino-antimagia",
+    "nome": "Sino Antimagia",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Permanece silencioso normalmente e toca quando sua magia é suprimida ou interrompida por um efeito antimagia.",
+    "raridade": "comum",
+    "sintonizacao": false,
+    "tags": [
+      "comum",
+      "detecção"
+    ],
+    "mecanica": {
+      "efeito": "Permanece silencioso normalmente e toca quando sua magia é suprimida ou interrompida por um efeito antimagia."
+    }
+  },
+  {
+    "id": "ankh-de-anubis",
+    "nome": "Ankh de Anúbis",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Enquanto o portador estiver gravemente ferido, melhora sua eficácia e interage com dano recebido para alimentar recursos de mártir.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "mártir"
+    ],
+    "mecanica": {
+      "efeito": "Enquanto o portador estiver gravemente ferido, melhora sua eficácia e interage com dano recebido para alimentar recursos de mártir."
+    }
+  },
+  {
+    "id": "aqua-fortis",
+    "nome": "Aqua Fortis",
+    "categoria": "magico",
+    "subcategoria": "Poção",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Ácido mágico extremamente corrosivo, capaz de danificar criaturas e degradar armas, armaduras e escudos não mágicos.",
+    "raridade": "raro",
+    "sintonizacao": false,
+    "tags": [
+      "raro",
+      "ácido"
+    ],
+    "mecanica": {
+      "efeito": "Ácido mágico extremamente corrosivo, capaz de danificar criaturas e degradar armas, armaduras e escudos não mágicos."
+    }
+  },
+  {
+    "id": "flecha-de-cola",
+    "nome": "Flecha de Cola",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Ao acertar ou atingir uma superfície, espalha cola endurecida que pode imobilizar uma criatura até que ela se liberte.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "flecha",
+      "controle"
+    ],
+    "mecanica": {
+      "efeito": "Ao acertar ou atingir uma superfície, espalha cola endurecida que pode imobilizar uma criatura até que ela se liberte."
+    }
+  },
+  {
+    "id": "flecha-de-teletransporte",
+    "nome": "Flecha de Teletransporte",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Disparada contra um espaço desocupado, teletransporta imediatamente o arqueiro para o ponto atingido.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "flecha",
+      "teleporte"
+    ],
+    "mecanica": {
+      "efeito": "Disparada contra um espaço desocupado, teletransporta imediatamente o arqueiro para o ponto atingido."
+    }
+  },
+  {
+    "id": "flecha-de-explosoes",
+    "nome": "Flecha de Explosões",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Explode no impacto e causa uma grande rajada de dano de fogo em área.",
+    "raridade": "muito-raro",
+    "sintonizacao": false,
+    "tags": [
+      "muito-raro",
+      "flecha",
+      "fogo",
+      "área"
+    ],
+    "mecanica": {
+      "efeito": "Explode no impacto e causa uma grande rajada de dano de fogo em área."
+    }
+  },
+  {
+    "id": "lentes-de-aura",
+    "nome": "Lentes de Aura",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Conjunto de lentes coloridas que evidencia efeitos mágicos de escolas específicas.",
+    "raridade": "raro",
+    "sintonizacao": false,
+    "tags": [
+      "raro",
+      "detecção",
+      "magia"
+    ],
+    "mecanica": {
+      "efeito": "Conjunto de lentes coloridas que evidencia efeitos mágicos de escolas específicas."
+    }
+  },
+  {
+    "id": "saco-de-alegria",
+    "nome": "Saco de Alegria",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Pode produzir presentes personalizados de valor limitado algumas vezes por dia.",
+    "raridade": "lendario",
+    "sintonizacao": false,
+    "tags": [
+      "lendario",
+      "utilidade"
+    ],
+    "mecanica": {
+      "efeito": "Pode produzir presentes personalizados de valor limitado algumas vezes por dia."
+    }
+  },
+  {
+    "id": "cama-de-descanso",
+    "nome": "Cama de Descanso",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Dormir nela durante um descanso longo remove exaustão e recupera todos os Dados de Vida gastos.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "descanso"
+    ],
+    "mecanica": {
+      "efeito": "Dormir nela durante um descanso longo remove exaustão e recupera todos os Dados de Vida gastos."
+    }
+  },
+  {
+    "id": "sinos-de-devido-alarme",
+    "nome": "Sinos de Devido Alarme",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Trio de sinos que pode delimitar uma área e reproduzir um efeito semelhante a alarme.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "alarme"
+    ],
+    "mecanica": {
+      "efeito": "Trio de sinos que pode delimitar uma área e reproduzir um efeito semelhante a alarme."
+    }
+  },
+  {
+    "id": "venda-da-verdadeira-escuridao",
+    "nome": "Venda da Verdadeira Escuridão",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Concede percepção às cegas de curto alcance, mas carrega uma maldição que pode cegar o usuário.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "visão",
+      "maldição"
+    ],
+    "mecanica": {
+      "efeito": "Concede percepção às cegas de curto alcance, mas carrega uma maldição que pode cegar o usuário."
+    }
+  },
+  {
+    "id": "bokken-de-bonze",
+    "nome": "Bokken de Bonze",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Katana mágica de madeira que causa dano contundente e pode produzir rajadas de vento ou ondas sonoras.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "katana",
+      "som"
+    ],
+    "mecanica": {
+      "efeito": "Katana mágica de madeira que causa dano contundente e pode produzir rajadas de vento ou ondas sonoras."
+    }
+  },
+  {
+    "id": "luvas-de-briga-1",
+    "nome": "Luvas de Briga +1",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Concede proficiência com armas improvisadas e bônus em ataques e dano realizados com elas.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "combate"
+    ],
+    "mecanica": {
+      "efeito": "Concede proficiência com armas improvisadas e bônus em ataques e dano realizados com elas."
+    }
+  },
+  {
+    "id": "juntas-ardentes",
+    "nome": "Juntas Ardentes",
+    "categoria": "magico",
+    "subcategoria": "Arma",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Manoplas mágicas que transformam ataques desarmados em golpes de fogo intensos.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "desarmado",
+      "fogo"
+    ],
+    "mecanica": {
+      "efeito": "Manoplas mágicas que transformam ataques desarmados em golpes de fogo intensos."
+    }
+  },
+  {
+    "id": "botas-da-lebre",
+    "nome": "Botas da Lebre",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Aumentam drasticamente o movimento ao Correr, mas possuem uma maldição severa associada.",
+    "raridade": "raro",
+    "sintonizacao": true,
+    "tags": [
+      "raro",
+      "movimento",
+      "maldição"
+    ],
+    "mecanica": {
+      "efeito": "Aumentam drasticamente o movimento ao Correr, mas possuem uma maldição severa associada."
+    }
+  },
+  {
+    "id": "bengala-da-juventude",
+    "nome": "Bengala da Juventude",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Evita as fragilidades comuns da velhice e protege contra envelhecimento mágico.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "idade"
+    ],
+    "mecanica": {
+      "efeito": "Evita as fragilidades comuns da velhice e protege contra envelhecimento mágico."
+    }
+  },
+  {
+    "id": "comida-de-camaleao",
+    "nome": "Comida de Camaleão",
+    "categoria": "magico",
+    "subcategoria": "Poção",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Camufla a pele do usuário com o ambiente, concedendo vantagem para evitar ser visto por cerca de uma hora.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "furtividade"
+    ],
+    "mecanica": {
+      "efeito": "Camufla a pele do usuário com o ambiente, concedendo vantagem para evitar ser visto por cerca de uma hora."
+    }
+  },
+  {
+    "id": "botas-da-trilha",
+    "nome": "Botas da Trilha",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Impedem rastros normais e permitem marchar por mais tempo antes de sofrer exaustão.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "viagem",
+      "rastreio"
+    ],
+    "mecanica": {
+      "efeito": "Impedem rastros normais e permitem marchar por mais tempo antes de sofrer exaustão."
+    }
+  },
+  {
+    "id": "bobina-de-armazenamento-de-forca",
+    "nome": "Bobina de Armazenamento de Força",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Armazena energia de golpes particularmente precisos e permite gastá-la para aumentar ataques corpo a corpo futuros.",
+    "raridade": "incomum",
+    "sintonizacao": true,
+    "tags": [
+      "incomum",
+      "combate",
+      "cargas"
+    ],
+    "mecanica": {
+      "efeito": "Armazena energia de golpes particularmente precisos e permite gastá-la para aumentar ataques corpo a corpo futuros."
+    }
+  },
+  {
+    "id": "cura-tudo",
+    "nome": "Cura-Tudo",
+    "categoria": "magico",
+    "subcategoria": "Poção",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Possui várias doses capazes de curar doenças, encerrar envenenamento e conceder breve proteção contra veneno.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "cura",
+      "veneno"
+    ],
+    "mecanica": {
+      "efeito": "Possui várias doses capazes de curar doenças, encerrar envenenamento e conceder breve proteção contra veneno."
+    }
+  },
+  {
+    "id": "vara-radiestesia",
+    "nome": "Vara Radiestesia",
+    "categoria": "magico",
+    "subcategoria": "Item maravilhoso",
+    "origem": "Valda's Spire of Secrets",
+    "pesoKg": 0,
+    "custo": "—",
+    "descricao": "Possui cargas usadas para apontar na direção da maior fonte de água em uma grande região.",
+    "raridade": "incomum",
+    "sintonizacao": false,
+    "tags": [
+      "incomum",
+      "água",
+      "exploração"
+    ],
+    "mecanica": {
+      "efeito": "Possui cargas usadas para apontar na direção da maior fonte de água em uma grande região."
+    }
+  }
+]
