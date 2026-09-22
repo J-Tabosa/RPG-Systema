@@ -5,54 +5,18 @@
     "instrucoes": {
       "adicionar_manualmente": "Adicione um novo objeto no array correspondente seguindo o mesmo formato dos existentes. O campo 'id' deve ser único dentro do array.",
       "campos_obrigatorios": {
-        "racas": [
-          "id",
-          "nome",
-          "desc",
-          "tracoRacial",
-          "velocidade",
-          "visaoNoturna",
-          "subcategoria"
-        ],
-        "classes": [
-          "id",
-          "nome",
-          "desc",
-          "dadoVida",
-          "atribPrincipal",
-          "profArmadura",
-          "salvaguardas",
-          "recurso"
-        ],
-        "profissoes": [
-          "id",
-          "nome",
-          "desc",
-          "pericias",
-          "equipamento",
-          "contatos"
-        ],
-        "personalidades": [
-          "id",
-          "nome",
-          "tracos",
-          "ideais",
-          "vinculos",
-          "defeitos"
-        ],
-        "estilos": [
-          "id",
-          "nome",
-          "desc",
-          "pontosForts",
-          "dicas"
-        ],
+        "racas": ["id", "nome", "desc", "tracoRacial", "velocidade", "tamanho", "visaoNoturna", "subcategoria"],
+        "classes": ["id", "nome", "desc", "dadoVida", "atribPrincipal", "profArmadura", "salvaguardas", "recurso"],
+        "profissoes": ["id", "nome", "desc", "pericias", "equipamento", "contatos"],
+        "personalidades": ["id", "nome", "tracos", "ideais", "vinculos", "defeitos"],
+        "estilos": ["id", "nome", "desc", "pontosForts", "dicas"],
         "nomes": "objeto com arrays: masculinos[], femininos[], sobrenomes[]",
         "fisicos": "array de strings descrevendo aparência",
         "maneirismos": "array de strings descrevendo comportamentos"
       }
     }
   },
+
   "racas": [
     {
       "id": "anao",
@@ -60,59 +24,59 @@
       "desc": "Robustos e tradicionais habitantes das profundezas e montanhas, conhecidos por sua resiliência e físico entroncado.",
       "tracoRacial": "Deslocamento Reduzido: Possui passadas mais curtas, porém seu movimento não é reduzido pelo uso de armaduras pesadas.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "alien",
       "nome": "Alien",
       "desc": "Uma criatura enigmática de origem desconhecida com incríveis poderes psíquicos naturais.",
       "tracoRacial": "Devorador de Mentes: Capaz de ler pensamentos superficiais e projetar rajadas mentais que atordoam seus oponentes.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "aracnideo",
       "nome": "Aracnídeo",
       "desc": "Híbrido que mistura traços humanoides e aracnídeos, adaptável a ambientes verticais.",
       "tracoRacial": "Fisiologia Aracnídea: Pode se manifestar como um ser meio aranha ou no estilo centauro (torso humano sobre corpo de aranha). Escala superfícies com facilidade.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "insetos",
-      "tamanho": "Médio"
+      "subcategoria": "insetos"
     },
     {
       "id": "aviano",
       "nome": "Aviano",
       "desc": "Povo exótico com anatomia inteiramente baseada em aves, donos de uma postura altiva.",
       "tracoRacial": "Anatomia de Ave: Composto por pessoas com cabeças de aves, pés e penas, mas que não possuem a capacidade de voar.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "boneca",
       "nome": "Boneca",
       "desc": "Um ser artificial elegante feito de porcelana, madeira e cordas mágicas, emanando uma aura mística.",
       "tracoRacial": "Estilo Constructo: Corpo artificial similar à Ranni de Elden Ring; não precisa respirar ou comer e possui membros extras espirituais sutis.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "constructos",
-      "tamanho": "Pequeno"
+      "subcategoria": "constructos"
     },
     {
       "id": "centauro",
       "nome": "Centauro",
       "desc": "Orgulhosos e velozes, combinam o torso de um guerreiro com a base de um quadrúpede da floresta.",
       "tracoRacial": "Corpo Quadrúpede: Possui o corpo inferior com cascos de renas, cervos ou cavalos, garantindo grande velocidade em planícies.",
-      "velocidade": 12,
+      "velocidade": 12.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "chibi",
@@ -120,9 +84,9 @@
       "desc": "Pequenas e excêntricas criaturas transbordando energia, carisma e genialidade tecnológica ou mágica.",
       "tracoRacial": "Estilo Yordle: Tamanho diminuto, sorte inexplicável e uma facilidade inata para sumir de vista quando convém.",
       "velocidade": 7.5,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Pequeno"
+      "subcategoria": "geral"
     },
     {
       "id": "cristalino",
@@ -130,29 +94,29 @@
       "desc": "Criaturas rígidas compostas inteiramente por minerais translúcidos e geometria perfeita.",
       "tracoRacial": "Constituição de Cristal: Inspirados nos cristalianos de Elden Ring; possuem uma carapaça que reduz drasticamente ataques de corte, mas que racha sob forte impacto.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "constructos",
-      "tamanho": "Médio"
+      "subcategoria": "constructos"
     },
     {
       "id": "driade",
       "nome": "Dríade",
       "desc": "Espíritos livres personificados na forma de belas plantas e flores humanoides, guardiãs da natureza.",
       "tracoRacial": "Simbiose Arbórea: Pode se mesclar à vegetação e conjurar pequenas magias de controle de vinhas e plantas.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "elfo",
       "nome": "Elfo",
       "desc": "Seres graciosos de vida longa, conectados profundamente com as correntes de magia do mundo.",
       "tracoRacial": "Sentidos Aguçados: Percepção aguçada e imunidade natural a efeitos que induzam o sono através de magia.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "elefantino",
@@ -160,69 +124,69 @@
       "desc": "Grandes e pacíficos colossos nômades dotados de imensa sabedoria e memória implacável.",
       "tracoRacial": "Físico Paquiderme: Sendo meio elefante, possui uma força física devastadora, pele grossa protetora e uma tromba funcional.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "ent",
       "nome": "Ent",
       "desc": "Árvores sêniores que despertaram para a consciência coletiva, guardando as memórias do mundo.",
       "tracoRacial": "Corpo de Madeira: Feito de casca de árvore rígida, vulnerável ao fogo mas extremamente resistente a ataques físicos comuns.",
-      "velocidade": 6,
+      "velocidade": 6.0,
+      "tamanho": "Grande",
       "visaoNoturna": false,
-      "subcategoria": "constructos",
-      "tamanho": "Grande"
+      "subcategoria": "constructos"
     },
     {
       "id": "escorpiano",
       "nome": "Escorpiano",
       "desc": "Predadores temíveis criados sob o sol escaldante dos desertos áridos.",
       "tracoRacial": "Fisiologia do Escorpião: Pode ter apenas cauda e garras ou uma estrutura completa de centauro (torso sobre corpo de escorpião). Desfere ataques venenosos.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "insetos",
-      "tamanho": "Médio"
+      "subcategoria": "insetos"
     },
     {
       "id": "espectro",
       "nome": "Espectro",
       "desc": "Uma alma penada incorpórea que vaga pelo campo de batalha assombrando seus inimigos.",
       "tracoRacial": "Fantasma Real: Funciona exatamente como o fantasma real do Clash Royale; move-se atravessando paredes e obstáculos sólidos, porém sem capacidade de voar.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "mortos-vivos",
-      "tamanho": "Médio"
+      "subcategoria": "mortos-vivos"
     },
     {
       "id": "esqueleto",
       "nome": "Esqueleto",
       "desc": "Ossos reanimados desprovidos de carne que marcham sob o comando da necromancia.",
       "tracoRacial": "Estrutura Óssea: Pode usar qualquer outra raça desta lista como base visual do seu corpo. Possui duas vezes mais fraqueza (dano dobrado) a dano concussivo.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "mortos-vivos",
-      "tamanho": "Médio"
+      "subcategoria": "mortos-vivos"
     },
     {
       "id": "elemental",
       "nome": "Elemental",
       "desc": "Seres compostos pela pura energia de uma força da natureza primordial.",
       "tracoRacial": "Afinidade Elemental: Possui resistência total ao tipo de dano do elemento escolhido no momento da criação (Fogo, Gelo, Raio ou Ácido).",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "fada",
       "nome": "Fada",
       "desc": "Criaturas feéricas minúsculas e brincalhonas dotadas de asas brilhantes e magia ilusória.",
       "tracoRacial": "Asas Feéricas: Capaz de flutuar e voar a baixas altitudes e conjurar truques luminosos e de distração.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Pequeno"
+      "subcategoria": "geral"
     },
     {
       "id": "gargula",
@@ -230,9 +194,9 @@
       "desc": "Criaturas grotescas feitas de pedra viva esculpida, criadas originalmente para vigiar masmorras e telhados.",
       "tracoRacial": "Forma Estática: Torna-se completamente indistinguível de uma estátua de pedra comum quando está parado.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "constructos",
-      "tamanho": "Médio"
+      "subcategoria": "constructos"
     },
     {
       "id": "gigante",
@@ -240,9 +204,9 @@
       "desc": "Seres de escala colossal cuja mera passagem faz tremer os chãos das estradas.",
       "tracoRacial": " Linhagem de Titã: Permite escolher o seu tipo (Fogo, Gelo, Tempestade, Colina) definindo imunidades e bônus estéticos específicos.",
       "velocidade": 10.5,
+      "tamanho": "Grande",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Grande"
+      "subcategoria": "geral"
     },
     {
       "id": "gnomo",
@@ -250,9 +214,9 @@
       "desc": "Pequenos inventores entusiasmados, peritos em engenharia mecânica de bolso e pirotecnia.",
       "tracoRacial": "Mente Meticulosa: Vantagem em testes para desarmar armadilhas e decifrar engrenagens complexas.",
       "velocidade": 7.5,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Pequeno"
+      "subcategoria": "geral"
     },
     {
       "id": "golem",
@@ -260,89 +224,89 @@
       "desc": "Massas maciças de argila, ferro ou rocha animadas por runas cravadas em seu núcleo.",
       "tracoRacial": "Corpo Inanimado: Imunidade a sangramentos, venenos e cansaço físico comum.",
       "velocidade": 7.5,
+      "tamanho": "Grande",
       "visaoNoturna": false,
-      "subcategoria": "constructos",
-      "tamanho": "Grande"
+      "subcategoria": "constructos"
     },
     {
       "id": "goblin",
       "nome": "Goblin",
       "desc": "Pequenos e astutos sobreviventes focados em traquitanas, furtos e táticas de emboscada.",
       "tracoRacial": "Malícia Ágil: Pode realizar testes de fuga ou se esconder utilizando ações bônus rápidas.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Pequeno"
+      "subcategoria": "geral"
     },
     {
       "id": "harpia",
       "nome": "Harpia",
       "desc": "Predadores aéreos majestosos que misturam beleza humana com a crueza das aves de rapina.",
       "tracoRacial": "Asas Funcionais: Possui asas no lugar das mãos, pés de pássaro com garras afiadas, corpo e cabeça humanos e total capacidade de voar.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "humano",
       "nome": "Humano",
       "desc": "A raça mais versátil e espalhada pelo mundo, capaz de se adaptar a qualquer ofício.",
       "tracoRacial": "Espírito Adaptável: Ganha uma perícia extra e pontos de atributo flexíveis à escolha do jogador.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "insetoide",
       "nome": "Insetoide",
       "desc": "Criaturas de carapaça brilhante e comportamento focado na mentalidade de colmeia.",
       "tracoRacial": "Quitinose: Mistura características físicas marcantes de formiga, besouro ou centopeia. Garante armadura natural extra.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "insetos",
-      "tamanho": "Médio"
+      "subcategoria": "insetos"
     },
     {
       "id": "kobold",
       "nome": "Kobold",
       "desc": "Pequenos répteis covardes que compensam a falta de tamanho com táticas cruéis de matilha e armadilhas.",
       "tracoRacial": "Táticas de Bando: Garante bônus em jogadas de ataque se houver um aliado a menos de 1.5m do alvo.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Pequeno"
+      "subcategoria": "geral"
     },
     {
       "id": "lamia",
       "nome": "Lâmia",
       "desc": "Seres sedutores que habitam ruínas antigas e oásis isolados no deserto.",
       "tracoRacial": "Anatomia Ofídica: Possui a parte superior inteiramente humanoide e a inferior composta por uma longa cauda de serpente.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "minotauro",
       "nome": "Minotauro",
       "desc": "Poderosos guerreiros de chifres maciços e determinação implacável em labirintos.",
       "tracoRacial": "Investida de Chifres: Pode usar seus chifres como armas naturais devastadoras ao correr em linha reta.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-besta-canino",
       "nome": "Homem Besta (Canino)",
       "desc": "Humanoides lupinos focados na honra e nos sentidos apurados do bando.",
       "tracoRacial": "Linhagem Canina: Voltado para lobos, cães e chacais. Possui faro aguçado vantajoso para rastreamento.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-besta-vulpino",
@@ -350,9 +314,9 @@
       "desc": "Criaturas astutas e ágeis que preferem ludibriar seus alvos antes de atacar.",
       "tracoRacial": "Linhagem Vulpina: Voltado para raposas. Garante bônus nativos em Furtividade e lábia.",
       "velocidade": 10.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-besta-felino",
@@ -360,19 +324,19 @@
       "desc": "Predadores velozes dotados de garras retráteis e reflexos assustadoramente rápidos.",
       "tracoRacial": "Linhagem Felina: Cobre tigres, gatos, panteras, leopardos e leões. Garante saltos ampliados e visão perfeita no escuro.",
       "velocidade": 10.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-urso",
       "nome": "Homem Urso",
       "desc": "Guerreiros corpulentos e isolados dotados de uma resistência física formidável.",
       "tracoRacial": "Músculos Ursulinos: Adiciona bônus de dano baseado em força e resistência extra a ferimentos de impacto.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-coelho",
@@ -380,29 +344,29 @@
       "desc": "Seres hiperativos dotados de uma audição espetacular e pernas propulsoras.",
       "tracoRacial": "Audição de Alerta: Não pode ser surpreendido se estiver acordado e pula o triplo da distância normal.",
       "velocidade": 10.5,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-lagarto",
       "nome": "Homem Lagarto",
       "desc": "Répteis de sangue frio adaptados a pântanos perigosos e templos esquecidos.",
       "tracoRacial": "Pele Escamosa: Cobre linhagens de crocodilianos e yuan-tis. Confere uma armadura natural rígida e dentes afiados.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-peixe",
       "nome": "Homem Peixe",
       "desc": "Os donos soberanos das profundezas dos oceanos e arquipélagos isolados.",
       "tracoRacial": "Fisiologia Marítima: Engloba tritões, sereias, kuotoas ou criaturas estilo One Piece (como tubarões e polvos). Respira debaixo d'água e nada velozmente.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "homem-tartaruga",
@@ -410,49 +374,49 @@
       "desc": "Sábios eremitas que carregam sua própria fortaleza acoplada às costas.",
       "tracoRacial": "Casco Protetor: Pode recolher o próprio corpo para dentro do casco rígido para dobrar sua defesa física temporariamente.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "meio-anjo",
       "nome": "Meio Anjo",
       "desc": "Seres abençoados tocados pelas esferas superiores de luz e ordem cósmica.",
       "tracoRacial": "Benção Radiante: Possui duas vezes mais resistência (metade do dano sofrido) contra fontes de dano radiante e emite luz.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "meio-demonio",
       "nome": "Meio Demônio",
       "desc": "Indivíduos marcados por chifres, caudas e heranças ligadas aos planos inferiores.",
       "tracoRacial": "Herança Infernal: Sendo tieflings ou meio diabos, possuem resistência a fogo e dominam truques de intimidação e taumaturgia.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "meio-dragao",
       "nome": "Meio Dragão",
       "desc": "Orgulhosos guerreiros de pele escamosa que cospem a fúria dos elementos.",
       "tracoRacial": "Sopro do Draconato: Desenvolvido para os draconatos tradicionais; permite desferir um sopro elemental em cone baseado em sua cor correspondente.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "metamorfo",
       "nome": "Metamorfo",
       "desc": "Indivíduos misteriosos que não possuem um rosto fixo, mesclando-se na sociedade com perfeição.",
       "tracoRacial": "Mimetismo Facial: Capaz de alterar sua voz, feições e tamanho para emular qualquer raça de tamanho similar.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "miconide",
@@ -460,9 +424,9 @@
       "desc": "Pacíficos cogumelos ambulantes nativos de cavernas úmidas e escuras.",
       "tracoRacial": "Esporos Comunicativos: Pode emitir uma nuvem de esporos capaz de estabelecer telepatia temporária com seres vivos próximos.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "mumia",
@@ -470,49 +434,49 @@
       "desc": "Cadáveres preservados por faixas rituais de embalsamamento de impérios ancestrais.",
       "tracoRacial": "Maldição da Tumba: Seus ataques físicos podem transmitir uma podridão enfraquecedora. Vulnerável ao elemento Fogo.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "mortos-vivos",
-      "tamanho": "Médio"
+      "subcategoria": "mortos-vivos"
     },
     {
       "id": "orc",
       "nome": "Orc",
       "desc": "Povo imponente movido por adrenalina e força de vontade inabalável em situações críticas.",
       "tracoRacial": "Fúria Implacável: Quando seus pontos de vida chegam a 0, ele se mantém de pé com 1 ponto de vida (1x por descanso).",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "povo-anfibio",
       "nome": "Povo Anfíbio",
       "desc": "Pequenos sapos e salamandras caçadoras nativas de charcos e pântanos úmidos.",
       "tracoRacial": "Pele Viscosa: Vantagem em testes para escapar de agarrões ou cordas e capacidade de respirar na água.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "robo",
       "nome": "Robô",
       "desc": "Unidades mecânicas computadorizadas avançadas construídas de ligas metálicas.",
       "tracoRacial": "Processador Lógico: Imunidade a magias de controle mental ou ilusões de natureza estritamente biológica.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "constructos",
-      "tamanho": "Médio"
+      "subcategoria": "constructos"
     },
     {
       "id": "roedor",
       "nome": "Roedor",
       "desc": "Pequenos camundongos e ratazanas urbanas especialistas em se espremer por cantos escuros.",
       "tracoRacial": "Evasão Murina: Capaz de atravessar espaços estreitos milimétricos sem perder velocidade de combate.",
-      "velocidade": 9,
+      "velocidade": 9.0,
+      "tamanho": "Pequeno",
       "visaoNoturna": true,
-      "subcategoria": "meio-animais",
-      "tamanho": "Pequeno"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "satiro",
@@ -520,9 +484,9 @@
       "desc": "Humanoides de pernas caprinas, amantes das artes, folguedos e canções da floresta.",
       "tracoRacial": "Festa Perene: Proficiência nativa com instrumentos musicais e bônus contra encantamentos mentais.",
       "velocidade": 10.5,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "meio-animais",
-      "tamanho": "Médio"
+      "subcategoria": "meio-animais"
     },
     {
       "id": "slime",
@@ -530,9 +494,9 @@
       "desc": "Massa gelatinosa senciente e maleável que desliza devagar pelas masmorras.",
       "tracoRacial": "Maleabilidade Amorfa: Corpo inteiramente gelatinoso; imune a golpes de esmagamento e capaz de dissolver itens simples com ácido corporal.",
       "velocidade": 7.5,
+      "tamanho": "Médio",
       "visaoNoturna": false,
-      "subcategoria": "geral",
-      "tamanho": "Médio"
+      "subcategoria": "geral"
     },
     {
       "id": "vampiro",
@@ -540,992 +504,854 @@
       "desc": "Predadores nobres da noite, amaldiçoados com a sede eterna de fluidos vitais.",
       "tracoRacial": "Dreno de Sangue: Regenera pequenos pontos de vida ao morder alvos caídos. Sofre penalidades graves sob a luz solar.",
       "velocidade": 10.5,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "mortos-vivos",
-      "tamanho": "Médio"
+      "subcategoria": "mortos-vivos"
     },
     {
       "id": "zumbi",
       "nome": "Zumbi",
       "desc": "Corpos reanimados em adiantado estado de decomposição que ignoram a dor corporal.",
       "tracoRacial": "Resiliência Pútrida: Reduz todo e qualquer dano recebido em uma taxa fixa devido à ausência de órgãos vitais funcionais.",
-      "velocidade": 6,
+      "velocidade": 6.0,
+      "tamanho": "Médio",
       "visaoNoturna": true,
-      "subcategoria": "mortos-vivos",
-      "tamanho": "Médio"
+      "subcategoria": "mortos-vivos"
     }
   ],
+
   "classes": [
     {
-      "id": "algoz",
-      "nome": "Algoz",
-      "desc": "Guerreiro sombrio focado em espalhar medo e debilidades.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR e CAR",
-      "profArmadura": "Todas",
-      "salvaguardas": "FOR e CAR",
-      "recurso": "Aura de Pavor"
-    },
-    {
-      "id": "alquimista",
-      "nome": "Alquimista",
-      "desc": "Cientista místico que bombardeia inimigos com poções.",
-      "dadoVida": 8,
-      "atribPrincipal": "INT",
-      "profArmadura": "Leves",
-      "salvaguardas": "INT e DES",
-      "recurso": "Elixires Instáveis"
-    },
-    {
-      "id": "andarilho_vazio",
-      "nome": "Andarilho do Vazio",
-      "desc": "Guerreiro que teleporta curtas distâncias rasgando o espaço.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e SAB",
-      "recurso": "Fenda Curta"
-    },
-    {
-      "id": "arqueiro",
-      "nome": "Arqueiro",
-      "desc": "Especialista em longa distância, capaz de acertar alvos com precisão mortal.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e SAB",
-      "recurso": "Tiro Certeiro"
-    },
-    {
-      "id": "artesao",
-      "nome": "Artesão",
-      "desc": "Artesão habilidoso que cria itens únicos e poderosos.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Leves",
-      "salvaguardas": "INT e DES",
-      "recurso": "Criatividade Infinita"
-    },
-    {
-      "id": "artifice",
-      "nome": "Artífice",
-      "desc": "Um engenheiro de armas e mecanismos geralmente mágicos.",
-      "dadoVida": 8,
-      "atribPrincipal": "INT",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Criação Mágica"
-    },
-    {
-      "id": "astrologo",
-      "nome": "Astrólogo",
-      "desc": "Conjurador que lê o destino nas estrelas e cartas cósmicas.",
-      "dadoVida": 6,
-      "atribPrincipal": "SAB ou INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Leitura do Cosmos"
-    },
-    {
-      "id": "barbaro",
-      "nome": "Bárbaro",
-      "desc": "Combatente furioso que usa a raiva como escudo.",
-      "dadoVida": 12,
-      "atribPrincipal": "FOR",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Fúria"
-    },
-    {
-      "id": "bardo",
-      "nome": "Bardo",
-      "desc": "Artista que tece magia através de canções e palavras.",
-      "dadoVida": 8,
-      "atribPrincipal": "CAR",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e CAR",
-      "recurso": "Inspiração de Bardo"
-    },
-    {
-      "id": "bruxo",
-      "nome": "Bruxo",
-      "desc": "Conjurador que barganhou sua alma com uma entidade cósmica.",
-      "dadoVida": 8,
-      "atribPrincipal": "CAR",
-      "profArmadura": "Leves",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Invocações Místicas"
-    },
-    {
-      "id": "caçador_recompensas",
-      "nome": "Caçador de Recompensas",
-      "desc": "Especialista em capturar alvos vivos usando redes e armadilhas.",
-      "dadoVida": 10,
-      "atribPrincipal": "DES e SAB",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "FOR e DES",
-      "recurso": "Marca de Captura"
-    },
-    {
-      "id": "cavaleiro",
-      "nome": "Cavaleiro",
-      "desc": "Guerreiro montado que domina a arte da cavalaria.",
-      "dadoVida": 12,
-      "atribPrincipal": "FOR",
-      "profArmadura": "Todas e Escudos Pesados",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Montaria Aprimorada"
-    },
-    {
-      "id": "cavaleiro_runico",
-      "nome": "Cavaleiro Rúnico",
-      "desc": "Guerreiro que grava runas em seus equipamentos.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR e INT",
-      "profArmadura": "Todas",
-      "salvaguardas": "CON e INT",
-      "recurso": "Ativação de Runas"
-    },
-    {
-      "id": "clerigo",
-      "nome": "Clérigo",
-      "desc": "Canalizador das preces e milagres divinos.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Médias e Escudos",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Canalizar Divindade"
-    },
-    {
-      "id": "cronomante",
-      "nome": "Cronomante",
-      "desc": "Manipulador do tempo, capaz de acelerar ou desacelerar o turno.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Dilação Temporal"
-    },
-    {
-      "id": "dancarino_laminas",
-      "nome": "Dançarino das Lâminas",
-      "desc": "Combatente ágil que transforma esquivas em arte letal.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Nenhuma ou Leves",
-      "salvaguardas": "DES e CAR",
-      "recurso": "Passo Gracioso"
-    },
-    {
-      "id": "domador",
-      "nome": "Domador de Feras",
-      "desc": "Combatente que luta em perfeita sintonia com um monstro aliado.",
-      "dadoVida": 10,
-      "atribPrincipal": "DES e SAB",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "FOR e DES",
-      "recurso": "Comando de Matilha"
-    },
-    {
-      "id": "druida",
-      "nome": "Druida",
-      "desc": "Guardião espiritual das forças brutas da natureza.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Leves e Médias (não metálicas)",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Forma Selvagem"
-    },
-    {
-      "id": "elementalista",
-      "nome": "Elementalista",
-      "desc": "Conjurador que manipula os elementos da natureza.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "CON e SAB",
-      "recurso": "Resistência Elemental"
-    },
-    {
-      "id": "espadachim_arcano",
-      "nome": "Espadachim Arcano",
-      "desc": "Mestre que infunde feitiços diretamente em sua lâmina.",
-      "dadoVida": 8,
-      "atribPrincipal": "FOR/DES e INT",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "CON e INT",
-      "recurso": "Golpe Conjurado"
-    },
-    {
-      "id": "exorcista",
-      "nome": "Exorcista",
-      "desc": "Especialista em caçar demônios, fantasmas e purificar locais.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Selo de Purificação"
-    },
-    {
-      "id": "feiticeiro",
-      "nome": "Feiticeiro",
-      "desc": "Conjurador com magia inata correndo no sangue.",
-      "dadoVida": 6,
-      "atribPrincipal": "CAR",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "CON e CAR",
-      "recurso": "Pontos de Feitiçaria"
-    },
-    {
-      "id": "geomante",
-      "nome": "Geomante",
-      "desc": "Conjurador que manipula a terra, rochas e cristais do solo.",
-      "dadoVida": 10,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "FOR e SAB",
-      "recurso": "Pulsar Terreno"
-    },
-    {
-      "id": "guerreiro",
-      "nome": "Guerreiro",
-      "desc": "Mestre de armas e armaduras versátil.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR ou DES",
-      "profArmadura": "Todas",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Ação Surpreendente"
-    },
-    {
-      "id": "ilusionista",
-      "nome": "Ilusionista",
-      "desc": "Mago focado em enganar os sentidos e criar falsas realidades.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "DES e INT",
-      "recurso": "Fantasmagoria"
-    },
-    {
-      "id": "inquisidor",
-      "nome": "Inquisidor",
-      "desc": "Caçador de heresias especializado em quebrar magias.",
-      "dadoVida": 10,
-      "atribPrincipal": "SAB e FOR",
-      "profArmadura": "Todas",
-      "salvaguardas": "SAB e INT",
-      "recurso": "Chama Anuladora"
-    },
-    {
-      "id": "invocador",
-      "nome": "Invocador",
-      "desc": "Conjurador focado em trazer monstros de outros planos de existência.",
-      "dadoVida": 6,
-      "atribPrincipal": "CAR ou INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e CAR",
-      "recurso": "Pacto de Invocação"
-    },
-    {
-      "id": "ladino",
-      "nome": "Ladino",
-      "desc": "Mestre do improviso, furtividade e precisão.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e INT",
-      "recurso": "Ataque Furtivo"
-    },
-    {
-      "id": "lamina_maldita",
-      "nome": "Lâmina Maldita",
-      "desc": "Combatente que empunha uma arma senciente sedenta de sangue.",
-      "dadoVida": 10,
-      "atribPrincipal": "DES e CAR",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "DES e CAR",
-      "recurso": "Sede da Lâmina"
-    },
-    {
-      "id": "mago",
-      "nome": "Mago",
-      "desc": "Estudioso da magia arcana acadêmica.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e SAB",
-      "recurso": "Recuperação Arcana"
-    },
-    {
-      "id": "marionetista",
-      "nome": "Marionetista",
-      "desc": "Tático que controla bonecos armados à distância por fios mágicos.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT ou DES",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "DES e INT",
-      "recurso": "Fios de Alma"
-    },
-    {
-      "id": "mecanomante",
-      "nome": "Mecanomante",
-      "desc": "Engenheiro que constrói torres e autômatos de batalha.",
-      "dadoVida": 8,
-      "atribPrincipal": "INT",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "INT e DES",
-      "recurso": "Engenhocas Prontas"
-    },
-    {
-      "id": "medico_peste",
-      "nome": "Médico da Peste",
-      "desc": "Curandeiro sombrio que usa gases e toxinas para curar ou matar.",
-      "dadoVida": 8,
-      "atribPrincipal": "INT ou SAB",
-      "profArmadura": "Leves",
-      "salvaguardas": "CON e SAB",
-      "recurso": "Vapor Sanador"
-    },
-    {
-      "id": "monge",
-      "nome": "Monge",
-      "desc": "Mestre das artes marciais que ataca com os punhos nus.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES e SAB",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "FOR e DES",
-      "recurso": "Pontos de Ki"
-    },
-    {
-      "id": "necromante",
-      "nome": "Necromante",
-      "desc": "Mago focado em manipular a morte e reanimar os caídos.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e CON",
-      "recurso": "Ceifa Sombria"
-    },
-    {
-      "id": "ninja",
-      "nome": "Ninja",
-      "desc": "Agente das sombras focado em infiltração e jutsus letais.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES e INT",
-      "profArmadura": "Nenhuma ou Leves",
-      "salvaguardas": "DES e SAB",
-      "recurso": "Técnicas de Ki/Ninjutsu"
-    },
-    {
-      "id": "paladino",
-      "nome": "Paladino",
-      "desc": "Guerreiro sagrado movido por um juramento rígido.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR e CAR",
-      "profArmadura": "Todas",
-      "salvaguardas": "SAB e CAR",
-      "recurso": "Imposição de Mãos"
-    },
-    {
-      "id": "pirata",
-      "nome": "Pirata",
-      "desc": "Combatente sujo que usa truques, ganchos e agilidade no convés.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES e CAR",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e CON",
-      "recurso": "Ginga Marítima"
-    },
-    {
-      "id": "pistoleiro",
-      "nome": "Pistoleiro",
-      "desc": "Atirador rápido que confia no metal e na pólvora.",
-      "dadoVida": 8,
-      "atribPrincipal": "DES",
-      "profArmadura": "Leves",
-      "salvaguardas": "DES e CAR",
-      "recurso": "Pontos de Bravura"
-    },
-    {
-      "id": "psionico",
-      "nome": "Psiónico",
-      "desc": "Guerreiro mental que dobra a física com o poder do cérebro.",
-      "dadoVida": 6,
-      "atribPrincipal": "INT",
-      "profArmadura": "Nenhuma",
-      "salvaguardas": "INT e CAR",
-      "recurso": "Energia Psíquica"
-    },
-    {
-      "id": "pugilista",
-      "nome": "Pugilista",
-      "desc": "Lutador de rua brutal focado em ganchos e resiliência pura.",
-      "dadoVida": 12,
-      "atribPrincipal": "FOR e CON",
-      "profArmadura": "Nenhuma ou Leves",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Contragolpe de Sangue"
-    },
-    {
-      "id": "ranger",
-      "nome": "Patrulheiro",
-      "desc": "Caçador e rastreador implacável de fronteiras.",
-      "dadoVida": 10,
-      "atribPrincipal": "DES e SAB",
-      "profArmadura": "Leves e Médias",
-      "salvaguardas": "FOR e DES",
-      "recurso": "Inimigo Favorito"
-    },
-    {
-      "id": "samurai",
-      "nome": "Samurai",
-      "desc": "Guerreiro disciplinado com foco inabalável em um único golpe.",
-      "dadoVida": 10,
-      "atribPrincipal": "FOR ou DES",
-      "profArmadura": "Todas",
-      "salvaguardas": "FOR e SAB",
-      "recurso": "Espírito de Luta"
-    },
-    {
-      "id": "vanguardista",
-      "nome": "Vanguardista",
-      "desc": "Especialista em muralhas portando escudos colossais duplos.",
-      "dadoVida": 12,
-      "atribPrincipal": "FOR e CON",
-      "profArmadura": "Todas e Escudos Pesados",
-      "salvaguardas": "FOR e CON",
-      "recurso": "Muralha Inquebrável"
-    },
-    {
-      "id": "xama",
-      "nome": "Xamã",
-      "desc": "Conjurador que barganha e canaliza espíritos ancestrais.",
-      "dadoVida": 8,
-      "atribPrincipal": "SAB",
-      "profArmadura": "Leves",
-      "salvaguardas": "SAB e CON",
-      "recurso": "Totens Espirituais"
-    }
+    "id": "algoz",
+    "nome": "Algoz",
+    "desc": "Guerreiro sombrio focado em espalhar medo e debilidades.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e CAR",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e CAR",
+    "recurso": "Aura de Pavor"
+  },
+  {
+    "id": "alquimista",
+    "nome": "Alquimista",
+    "desc": "Cientista místico que bombardeia inimigos com poções.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves",
+    "salvaguardas": "INT e DES",
+    "recurso": "Elixires Instáveis"
+  },
+  {
+    "id": "andarilho_vazio",
+    "nome": "Andarilho do Vazio",
+    "desc": "Guerreiro que teleporta curtas distâncias rasgando o espaço.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Fenda Curta"
+  },
+  {
+    "id": "arqueiro",
+    "nome": "Arqueiro",
+    "desc": "Especialista em longa distância, capaz de acertar alvos com precisão mortal.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Tiro Certeiro"
+  },
+  {
+    "id": "artesao",
+    "nome": "Artesão",
+    "desc": "Artesão habilidoso que cria itens únicos e poderosos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves",
+    "salvaguardas": "INT e DES",
+    "recurso": "Criatividade Infinita"
+  },
+  {
+    "id": "artifice",
+    "nome": "Artífice",
+    "desc": "Um engenheiro de armas e mecanismos geralmente mágicos.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Criação Mágica"
+  },
+  {
+    "id": "astrologo",
+    "nome": "Astrólogo",
+    "desc": "Conjurador que lê o destino nas estrelas e cartas cósmicas.",
+    "dadoVida": 6,
+    "atribPrincipal": "SAB ou INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Leitura do Cosmos"
+  },
+  {
+    "id": "barbaro",
+    "nome": "Bárbaro",
+    "desc": "Combatente furioso que usa a raiva como escudo.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Fúria"
+  },
+  {
+    "id": "bardo",
+    "nome": "Bardo",
+    "desc": "Artista que tece magia através de canções e palavras.",
+    "dadoVida": 8,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Inspiração de Bardo"
+  },
+  {
+    "id": "bruxo",
+    "nome": "Bruxo",
+    "desc": "Conjurador que barganhou sua alma com uma entidade cósmica.",
+    "dadoVida": 8,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Invocações Místicas"
+  },
+  {
+    "id": "caçador_recompensas",
+    "nome": "Caçador de Recompensas",
+    "desc": "Especialista em capturar alvos vivos usando redes e armadilhas.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Marca de Captura"
+  },
+  {
+    "id": "cavaleiro",
+    "nome": "Cavaleiro",
+    "desc": "Guerreiro montado que domina a arte da cavalaria.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR",
+    "profArmadura": "Todas e Escudos Pesados",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Montaria Aprimorada"
+  },
+  {
+    "id": "cavaleiro_runico",
+    "nome": "Cavaleiro Rúnico",
+    "desc": "Guerreiro que grava runas em seus equipamentos.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e INT",
+    "profArmadura": "Todas",
+    "salvaguardas": "CON e INT",
+    "recurso": "Ativação de Runas"
+  },
+  {
+    "id": "clerigo",
+    "nome": "Clérigo",
+    "desc": "Canalizador das preces e milagres divinos.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Médias e Escudos",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Canalizar Divindade"
+  },
+  {
+    "id": "cronomante",
+    "nome": "Cronomante",
+    "desc": "Manipulador do tempo, capaz de acelerar ou desacelerar o turno.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Dilação Temporal"
+  },
+  {
+    "id": "dancarino_laminas",
+    "nome": "Dançarino das Lâminas",
+    "desc": "Combatente ágil que transforma esquivas em arte letal.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Passo Gracioso"
+  },
+  {
+    "id": "domador",
+    "nome": "Domador de Feras",
+    "desc": "Combatente que luta em perfeita sintonia com um monstro aliado.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Comando de Matilha"
+  },
+  {
+    "id": "druida",
+    "nome": "Druida",
+    "desc": "Guardião espiritual das forças brutas da natureza.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias (não metálicas)",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Forma Selvagem"
+  },
+  {
+    "id": "elementalista",
+    "nome": "Elementalista",
+    "desc": "Conjurador que manipula os elementos da natureza.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "CON e SAB",
+    "recurso": "Resistência Elemental"
+  },
+  {
+    "id": "espadachim_arcano",
+    "nome": "Espadachim Arcano",
+    "desc": "Mestre que infunde feitiços diretamente em sua lâmina.",
+    "dadoVida": 8,
+    "atribPrincipal": "FOR/DES e INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "CON e INT",
+    "recurso": "Golpe Conjurado"
+  },
+  {
+    "id": "exorcista",
+    "nome": "Exorcista",
+    "desc": "Especialista em caçar demônios, fantasmas e purificar locais.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Selo de Purificação"
+  },
+  {
+    "id": "feiticeiro",
+    "nome": "Feiticeiro",
+    "desc": "Conjurador com magia inata correndo no sangue.",
+    "dadoVida": 6,
+    "atribPrincipal": "CAR",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "CON e CAR",
+    "recurso": "Pontos de Feitiçaria"
+  },
+  {
+    "id": "geomante",
+    "nome": "Geomante",
+    "desc": "Conjurador que manipula a terra, rochas e cristais do solo.",
+    "dadoVida": 10,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e SAB",
+    "recurso": "Pulsar Terreno"
+  },
+  {
+    "id": "guerreiro",
+    "nome": "Guerreiro",
+    "desc": "Mestre de armas e armaduras versátil.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR ou DES",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Ação Surpreendente"
+  },
+  {
+    "id": "ilusionista",
+    "nome": "Ilusionista",
+    "desc": "Mago focado em enganar os sentidos e criar falsas realidades.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "DES e INT",
+    "recurso": "Fantasmagoria"
+  },
+  {
+    "id": "inquisidor",
+    "nome": "Inquisidor",
+    "desc": "Caçador de heresias especializado em quebrar magias.",
+    "dadoVida": 10,
+    "atribPrincipal": "SAB e FOR",
+    "profArmadura": "Todas",
+    "salvaguardas": "SAB e INT",
+    "recurso": "Chama Anuladora"
+  },
+  {
+    "id": "invocador",
+    "nome": "Invocador",
+    "desc": "Conjurador focado em trazer monstros de outros planos de existência.",
+    "dadoVida": 6,
+    "atribPrincipal": "CAR ou INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CAR",
+    "recurso": "Pacto de Invocação"
+  },
+  {
+    "id": "ladino",
+    "nome": "Ladino",
+    "desc": "Mestre do improviso, furtividade e precisão.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e INT",
+    "recurso": "Ataque Furtivo"
+  },
+  {
+    "id": "lamina_maldita",
+    "nome": "Lâmina Maldita",
+    "desc": "Combatente que empunha uma arma senciente sedenta de sangue.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e CAR",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Sede da Lâmina"
+  },
+  {
+    "id": "mago",
+    "nome": "Mago",
+    "desc": "Estudioso da magia arcana acadêmica.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e SAB",
+    "recurso": "Recuperação Arcana"
+  },
+  {
+    "id": "marionetista",
+    "nome": "Marionetista",
+    "desc": "Tático que controla bonecos armados à distância por fios mágicos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT ou DES",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "DES e INT",
+    "recurso": "Fios de Alma"
+  },
+  {
+    "id": "mecanomante",
+    "nome": "Mecanomante",
+    "desc": "Engenheiro que constrói torres e autômatos de batalha.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "INT e DES",
+    "recurso": "Engenhocas Prontas"
+  },
+  {
+    "id": "medico_peste",
+    "nome": "Médico da Peste",
+    "desc": "Curandeiro sombrio que usa gases e toxinas para curar ou matar.",
+    "dadoVida": 8,
+    "atribPrincipal": "INT ou SAB",
+    "profArmadura": "Leves",
+    "salvaguardas": "CON e SAB",
+    "recurso": "Vapor Sanador"
+  },
+  {
+    "id": "monge",
+    "nome": "Monge",
+    "desc": "Mestre das artes marciais que ataca com os punhos nus.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Pontos de Ki"
+  },
+  {
+    "id": "necromante",
+    "nome": "Necromante",
+    "desc": "Mago focado em manipular a morte e reanimar os caídos.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CON",
+    "recurso": "Ceifa Sombria"
+  },
+  {
+    "id": "ninja",
+    "nome": "Ninja",
+    "desc": "Agente das sombras focado em infiltração e jutsus letais.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e INT",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "DES e SAB",
+    "recurso": "Técnicas de Ki/Ninjutsu"
+  },
+  {
+    "id": "paladino",
+    "nome": "Paladino",
+    "desc": "Guerreiro sagrado movido por um juramento rígido.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR e CAR",
+    "profArmadura": "Todas",
+    "salvaguardas": "SAB e CAR",
+    "recurso": "Imposição de Mãos"
+  },
+  {
+    "id": "pirata",
+    "nome": "Pirata",
+    "desc": "Combatente sujo que usa truques, ganchos e agilidade no convés.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES e CAR",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CON",
+    "recurso": "Ginga Marítima"
+  },
+  {
+    "id": "pistoleiro",
+    "nome": "Pistoleiro",
+    "desc": "Atirador rápido que confia no metal e na pólvora.",
+    "dadoVida": 8,
+    "atribPrincipal": "DES",
+    "profArmadura": "Leves",
+    "salvaguardas": "DES e CAR",
+    "recurso": "Pontos de Bravura"
+  },
+  {
+    "id": "psionico",
+    "nome": "Psiónico",
+    "desc": "Guerreiro mental que dobra a física com o poder do cérebro.",
+    "dadoVida": 6,
+    "atribPrincipal": "INT",
+    "profArmadura": "Nenhuma",
+    "salvaguardas": "INT e CAR",
+    "recurso": "Energia Psíquica"
+  },
+  {
+    "id": "pugilista",
+    "nome": "Pugilista",
+    "desc": "Lutador de rua brutal focado em ganchos e resiliência pura.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR e CON",
+    "profArmadura": "Nenhuma ou Leves",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Contragolpe de Sangue"
+  },
+  {
+    "id": "ranger",
+    "nome": "Patrulheiro",
+    "desc": "Caçador e rastreador implacável de fronteiras.",
+    "dadoVida": 10,
+    "atribPrincipal": "DES e SAB",
+    "profArmadura": "Leves e Médias",
+    "salvaguardas": "FOR e DES",
+    "recurso": "Inimigo Favorito"
+  },
+  {
+    "id": "samurai",
+    "nome": "Samurai",
+    "desc": "Guerreiro disciplinado com foco inabalável em um único golpe.",
+    "dadoVida": 10,
+    "atribPrincipal": "FOR ou DES",
+    "profArmadura": "Todas",
+    "salvaguardas": "FOR e SAB",
+    "recurso": "Espírito de Luta"
+  },
+  {
+    "id": "vanguardista",
+    "nome": "Vanguardista",
+    "desc": "Especialista em muralhas portando escudos colossais duplos.",
+    "dadoVida": 12,
+    "atribPrincipal": "FOR e CON",
+    "profArmadura": "Todas e Escudos Pesados",
+    "salvaguardas": "FOR e CON",
+    "recurso": "Muralha Inquebrável"
+  },
+  {
+    "id": "xama",
+    "nome": "Xamã",
+    "desc": "Conjurador que barganha e canaliza espíritos ancestrais.",
+    "dadoVida": 8,
+    "atribPrincipal": "SAB",
+    "profArmadura": "Leves",
+    "salvaguardas": "SAB e CON",
+    "recurso": "Totens Espirituais"
+  }
   ],
+
   "profissoes": [
     {
-      "id": "adestrador",
-      "nome": "Adestrador",
-      "desc": "Treinava feras de caça ou cães de guarda para a nobreza.",
-      "pericias": [
-        "Adestramento",
-        "Intimidação"
-      ],
-      "equipamento": "Coleira reforçada, petiscos secos",
-      "contatos": "Canis reais e caçadores"
-    },
-    {
-      "id": "alfaiate",
-      "nome": "Alfaiate",
-      "desc": "Costura desde as roupas de camponeses até os mantos de magos.",
-      "pericias": [
-        "Prestidigitação",
-        "Persuasão"
-      ],
-      "equipamento": "Kit de costura, fita métrica",
-      "contatos": "Comerciantes de tecido"
-    },
-    {
-      "id": "alquimista_sarjeta",
-      "nome": "Alquimista de Sarjeta",
-      "desc": "Fabricava narcóticos ilegais ou venenos em porões escuros.",
-      "pericias": [
-        "Enganação",
-        "Medicina"
-      ],
-      "equipamento": "Alambique quebrado, frascos escuros",
-      "contatos": "Barões do crime subterrâneo"
-    },
-    {
-      "id": "amaldicoado",
-      "nome": "Amaldiçoado",
-      "desc": "Nasceu sob uma estrela sombria que atrai pequenos azares.",
-      "pericias": [
-        "Arcanismo",
-        "Intimidação"
-      ],
-      "equipamento": "Amuleto quebrado, sal de proteção",
-      "contatos": "Bruxas e exorcistas"
-    },
-    {
-      "id": "amnesico",
-      "nome": "Amnésico (Histórico)",
-      "desc": "Acordou sem memórias in uma vala, com apenas instintos nas mãos.",
-      "pericias": [
-        "Percepção",
-        "Sobrevivência"
-      ],
-      "equipamento": "Pingente sem foto, diário em branco",
-      "contatos": "Nenhum (passado apagado)"
-    },
-    {
-      "id": "artista",
-      "nome": "Artista de Rua",
-      "desc": "Ganhava moedas atraindo plateias em praças públicas.",
-      "pericias": [
-        "Performance",
-        "Furtividade"
-      ],
-      "equipamento": "Tinta corporal prateada, um instrumento musical, caneca",
-      "contatos": "Artistas urbanos"
-    },
-    {
-      "id": "bardo_errante",
-      "nome": "Bardo Errante",
-      "desc": "Viaja coletando e espalhando fofocas.",
-      "pericias": [
-        "Performance",
-        "Persuasão"
-      ],
-      "equipamento": "Instrumento musical",
-      "contatos": "Estalajadeiros"
-    },
-    {
-      "id": "bobo",
-      "nome": "Bobo da Corte",
-      "desc": "O único autorizado a zombar do rei sem perder a cabeça.",
-      "pericias": [
-        "Performance",
-        "Enganação"
-      ],
-      "equipamento": "Guizos, maquiagem teatral",
-      "contatos": "Bobos da corte e criados"
-    },
-    {
-      "id": "caçador_tesouros",
-      "nome": "Caçador de Tesouros",
-      "desc": "Explorador de ruínas antigas atrás de relíquias douradas.",
-      "pericias": [
-        "Investigação",
-        "Arcanismo"
-      ],
-      "equipamento": "Pé de cabra, pergaminho de mapa antigo",
-      "contatos": "Arqueólogos e contrabandistas"
-    },
-    {
-      "id": "carpinteiro",
-      "nome": "Carpinteiro",
-      "desc": "Especialista em erguer estruturas de madeira e móveis.",
-      "pericias": [
-        "Atletismo",
-        "Investigação"
-      ],
-      "equipamento": "Serrote, caixa de pregos",
-      "contatos": "Construtores civis"
-    },
-    {
-      "id": "carrasco",
-      "nome": "Carrasco",
-      "desc": "A lei final; aquele que empunhava o machado nas execuções públicas.",
-      "pericias": [
-        "Intimidação",
-        "Medicina"
-      ],
-      "equipamento": "Capuz preto, afiador de lâminas",
-      "contatos": "Juízes e carrascos reais"
-    },
-    {
-      "id": "cartografo",
-      "nome": "Cartógrafo",
-      "desc": "Viajou o world desenhando linhas e fronteiras em pergaminhos.",
-      "pericias": [
-        "História",
-        "Percepção"
-      ],
-      "equipamento": "Tubo de pergaminhos, compasso",
-      "contatos": "Exploradores e generais"
-    },
-    {
-      "id": "colecionador",
-      "nome": "Colecionador de Insetos",
-      "desc": "Passou a vida catalogando besouros, borboletas e venenos.",
-      "pericias": [
-        "Natureza",
-        "Investigação"
-      ],
-      "equipamento": "Rede de insetos, potes de vidro",
-      "contatos": "Naturalistas e museus"
-    },
-    {
-      "id": "contrabandista",
-      "nome": "Contrabandista",
-      "desc": "Especialista em passar mercadorias proibidas pelas fronteiras.",
-      "pericias": [
-        "Enganação",
-        "Furtividade"
-      ],
-      "equipamento": "Fundo falso de baú, suborno pronto",
-      "contatos": "Marinheiros e guardas corruptos"
-    },
-    {
-      "id": "cozinheiro",
-      "nome": "Cozinheiro",
-      "desc": "Preparou banquetes extravagantes para palácios ou tavernas imundas.",
-      "pericias": [
-        "História",
-        "Prestidigitação"
-      ],
-      "equipamento": "Faca de chef, temperos exóticos",
-      "contatos": "Mordomos e fornecedores de comida"
-    },
-    {
-      "id": "coveiro",
-      "nome": "Coveiro",
-      "desc": "Enterrou segredos e corpos, acostumado com o silêncio da morte.",
-      "pericias": [
-        "Intuição",
-        "Religião"
-      ],
-      "equipamento": "Pá gasta, lanterna de óleo",
-      "contatos": "Necromantes e clérigos funerários"
-    },
-    {
-      "id": "criminoso",
-      "nome": "Criminoso",
-      "desc": "Sobreviveu agindo à margem das leis.",
-      "pericias": [
-        "Furtividade",
-        "Enganação"
-      ],
-      "equipamento": "Ferramentas de ladrão",
-      "contatos": "Receptadores"
-    },
-    {
-      "id": "cruzado",
-      "nome": "Cruzado (Histórico)",
-      "desc": "Marchou em uma guerra santa que fracassou miseravelmente.",
-      "pericias": [
-        "Religião",
-        "Atletismo"
-      ],
-      "equipamento": "Estandarte rasgado, símbolo sagrado",
-      "contatos": "Ordens religiosas caídas"
-    },
-    {
-      "id": "desbravador",
-      "nome": "Desbravador de Florestas",
-      "desc": "Abria trilhas à força de machado em matas fechadas e selvagens.",
-      "pericias": [
-        "Sobrevivência",
-        "Atletismo"
-      ],
-      "equipamento": "Machete, pederneira grande",
-      "contatos": "Lenhadores e colonos"
-    },
-    {
-      "id": "doente",
-      "nome": "Doente Crônico (Histórico)",
-      "desc": "Sobreviveu a uma praga terrível que deixou marcas permanentes.",
-      "pericias": [
-        "Medicina",
-        "Sobrevivência"
-      ],
-      "equipamento": "Frasco de tônico, bandagens limpas",
-      "contatos": "Médicos e curandeiros de sarjeta"
-    },
-    {
-      "id": "engenheiro",
-      "nome": "Engenheiro de Cerco",
-      "desc": "Projetava catapultas e arietes para derrubar muralhas inimigas.",
-      "pericias": [
-        "Investigação",
-        "História"
-      ],
-      "equipamento": "Giz, trena de couro, esquemas",
-      "contatos": "Arsenais do exército"
-    },
-    {
-      "id": "eremita",
-      "nome": "Eremita (Histórico)",
-      "desc": "Viveu isolado em uma caverna por anos conversando com o vento.",
-      "pericias": [
-        "Religião",
-        "Natureza"
-      ],
-      "equipamento": "Manto de trapos, ervas secas",
-      "contatos": "Nenhum (vida eremita)"
-    },
-    {
-      "id": "erudito",
-      "nome": "Erudito",
-      "desc": "Dedicou a vida ao estudo acadêmico.",
-      "pericias": [
-        "Arcanismo",
-        "História"
-      ],
-      "equipamento": "Tinta, pena, diário",
-      "contatos": "Bibliotecários"
-    },
-    {
-      "id": "escravo_fugitivo",
-      "nome": "Escravo Fugitivo (Histórico)",
-      "desc": "Quebrou os grilhões e vive fugindo dos caçadores de escravos.",
-      "pericias": [
-        "Furtividade",
-        "Atletismo"
-      ],
-      "equipamento": "Grilhão partido, mapa de rotas seguras",
-      "contatos": "Abolicionistas e fugitivos"
-    },
-    {
-      "id": "exilado",
-      "nome": "Exilado Político (Histórico)",
-      "desc": "Banido de sua terra natal sob pena de morte caso retorne.",
-      "pericias": [
-        "Enganação",
-        "História"
-      ],
-      "equipamento": "Decreto de banimento, disfarce simples",
-      "contatos": "Rebeldes e contrabandistas de fronteira"
-    },
-    {
-      "id": "fazendeiro",
-      "nome": "Fazendeiro",
-      "desc": "Trabalhou a terra de sol a sol plantando o sustento.",
-      "pericias": [
-        "Natureza",
-        "Adestramento"
-      ],
-      "equipamento": "Foice curta, saco de sementes",
-      "contatos": "Cooperativas agrárias"
-    },
-    {
-      "id": "ferreiro",
-      "nome": "Ferreiro",
-      "desc": "Molda o metal em armas e ferramentas úteis.",
-      "pericias": [
-        "Atletismo",
-        "Percepção"
-      ],
-      "equipamento": "Martelo de viagem",
-      "contatos": "Mineradores"
-    },
-    {
-      "id": "falsificador",
-      "nome": "Falsificador",
-      "desc": "Imitava assinaturas reais e criava sinetes falsos perfeitos.",
-      "pericias": [
-        "Prestidigitação",
-        "Enganação"
-      ],
-      "equipamento": "Lente, ceras coloridas, tintas",
-      "contatos": "Criminosos de colarinho branco"
-    },
-    {
-      "id": "gladiador",
-      "nome": "Gladiador",
-      "desc": "Lutou em arenas sob os aplausos e sangue da multidão.",
-      "pericias": [
-        "Atletismo",
-        "Performance"
-      ],
-      "equipamento": "Tridente decorativo, óleo corporal",
-      "contatos": "Donos de arena e apostadores"
-    },
-    {
-      "id": "guarda",
-      "nome": "Guarda da Cidade",
-      "desc": "Manteve a ordem nas patrulhas urbanas.",
-      "pericias": [
-        "Percepção",
-        "Intimização"
-      ],
-      "equipamento": "Apito, algemas",
-      "contatos": "Informantes locais"
-    },
-    {
-      "id": "herborista",
-      "nome": "Herborista",
-      "desc": "Coleta plantas para fazer poções e chás.",
-      "pericias": [
-        "Medicina",
-        "Natureza"
-      ],
-      "equipamento": "Kit de herborismo",
-      "contatos": "Apotecários"
-    },
-    {
-      "id": "investigador",
-      "nome": "Detetive / Investigador",
-      "desc": "Contratado para resolver crimes que a guarda prefere ignorar.",
-      "pericias": [
-        "Investigação",
-        "Intuição"
-      ],
-      "equipamento": "Lupa de bolso, bloco de notas",
-      "contatos": "Informantes e legistas"
-    },
-    {
-      "id": "marinheiro",
-      "nome": "Marinheiro",
-      "desc": "Trabalhou enfrentando os perigos do alto mar.",
-      "pericias": [
-        "Atletismo",
-        "Percepção"
-      ],
-      "equipamento": "Corda de 15m, bússola",
-      "contatos": "Capitães de navio"
-    },
-    {
-      "id": "mensageiro",
-      "nome": "Mensageiro",
-      "desc": "Corria milhas entregando cartas urgentes por estradas perigosas.",
-      "pericias": [
-        "Atletismo",
-        "Percepção"
-      ],
-      "equipamento": "Bolsa de couro selada, botas reforçadas",
-      "contatos": "Mestres de postos de cavalos"
-    },
-    {
-      "id": "mercador",
-      "nome": "Mercador",
-      "desc": "Compra, vende e negocia em feiras.",
-      "pericias": [
-        "Persuasão",
-        "História"
-      ],
-      "equipamento": "Balança, 5 moedas de ouro",
-      "contatos": "Guildas de comércio"
-    },
-    {
-      "id": "minerador",
-      "nome": "Minerador",
-      "desc": "Trabalhou na escuridão das minas extraindo carvão e joias.",
-      "pericias": [
-        "Atletismo",
-        "Percepção"
-      ],
-      "equipamento": "Picareta, vela de cabeça",
-      "contatos": "Guildas de mineração"
-    },
-    {
-      "id": "nobre",
-      "nome": "Nobre (Histórico)",
-      "desc": "Nascido em berço de ouro, acostumado com etiqueta e privilégios.",
-      "pericias": [
-        "Persuasão",
-        "História"
-      ],
-      "equipamento": "Roupas finas, anel de sinete familiar",
-      "contatos": "Aristocratas e nobreza local"
-    },
-    {
-      "id": "orfao_rua",
-      "nome": "Órfão de Rua",
-      "desc": "Cresceu em becos revirando lixo e fugindo de guardas.",
-      "pericias": [
-        "Furtividade",
-        "Prestidigitação"
-      ],
-      "equipamento": "Pequena faca, mapa de esconderijos",
-      "contatos": "Crianças de rua e mendigos"
-    },
-    {
-      "id": "pastor",
-      "nome": "Pastor de Ovelhas",
-      "desc": "Passou noites acordado defendendo o rebanho contra lobos.",
-      "pericias": [
-        "Adestramento",
-        "Percepção"
-      ],
-      "equipamento": "Cajado longo, apito de pastor",
-      "contatos": "Comerciantes de lã"
-    },
-    {
-      "id": "pescador",
-      "nome": "Pescador",
-      "desc": "Conhece as marés e as melhores histórias de pescador da região.",
-      "pericias": [
-        "Natureza",
-        "Sobrevivência"
-      ],
-      "equipamento": "Vara de pesca, rede remendada",
-      "contatos": "Mercado de peixes local"
-    },
-    {
-      "id": "professor",
-      "nome": "Tutor / Professor",
-      "desc": "Ensinou crianças ricas mimadas a ler, escrever e calcular.",
-      "pericias": [
-        "História",
-        "Persuasão"
-      ],
-      "equipamento": "Palmatória, livro de caligrafia",
-      "contatos": "Famílias ricas e intelectuais"
-    },
-    {
-      "id": "rebelde",
-      "nome": "Rebelde (Histórico)",
-      "desc": "Lutou clandestinamente para derrubar o tirano local.",
-      "pericias": [
-        "Furtividade",
-        "Intimidação"
-      ],
-      "equipamento": "Panfleto revolucionário, máscara",
-      "contatos": "Células rebeldes ativas"
-    },
-    {
-      "id": "renascido",
-      "nome": "Renascido (Histórico)",
-      "desc": "Morreu uma vez, mas voltou à vida por motivos misteriosos.",
-      "pericias": [
-        "Arcanismo",
-        "Intuição"
-      ],
-      "equipamento": "Moeda fúnebre, estilhaço do próprio caixão",
-      "contatos": "Coveiros e cultistas do além"
-    },
-    {
-      "id": "soldado",
-      "nome": "Soldado",
-      "desc": "Veterano disciplinado de infantaria militar.",
-      "pericias": [
-        "Atletismo",
-        "Intimidação"
-      ],
-      "equipamento": "Insígnia, dados viciados",
-      "contatos": "Ex-comandantes"
-    },
-    {
-      "id": "teologo",
-      "nome": "Teólogo",
-      "desc": "Estudou a hierarquia dos deuses e os dogmas das igrejas.",
-      "pericias": [
-        "Religião",
-        "História"
-      ],
-      "equipamento": "Escritura sagrada comentada",
-      "contatos": "Sumos sacerdotes"
-    },
-    {
-      "id": "vendedora_ervas",
-      "nome": "Curandeira",
-      "desc": "Trouxe vidas ao mundo e tratou de resfriados em vilas isoladas.",
-      "pericias": [
-        "Medicina",
-        "Intuição"
-      ],
-      "equipamento": "Ervas secas, tesoura de parto",
-      "contatos": "Mães de vilarejos"
-    },
-    {
-      "id": "veterano_guerra",
-      "nome": "Veterano de Guerra (Histórico)",
-      "desc": "Carrega o estresse pós-traumático e as glórias de batalhas passadas.",
-      "pericias": [
-        "Intimidação",
-        "Sobrevivência"
-      ],
-      "equipamento": "Medalha militar manchada, cantil",
-      "contatos": "Oficiais aposentados"
-    }
+    "id": "adestrador",
+    "nome": "Adestrador",
+    "desc": "Treinava feras de caça ou cães de guarda para a nobreza.",
+    "pericias": ["Adestramento", "Intimidação"],
+    "equipamento": "Coleira reforçada, petiscos secos",
+    "contatos": "Canis reais e caçadores"
+  },
+  {
+    "id": "alfaiate",
+    "nome": "Alfaiate",
+    "desc": "Costura desde as roupas de camponeses até os mantos de magos.",
+    "pericias": ["Prestidigitação", "Persuasão"],
+    "equipamento": "Kit de costura, fita métrica",
+    "contatos": "Comerciantes de tecido"
+  },
+  {
+    "id": "alquimista_sarjeta",
+    "nome": "Alquimista de Sarjeta",
+    "desc": "Fabricava narcóticos ilegais ou venenos em porões escuros.",
+    "pericias": ["Enganação", "Medicina"],
+    "equipamento": "Alambique quebrado, frascos escuros",
+    "contatos": "Barões do crime subterrâneo"
+  },
+  {
+    "id": "amaldicoado",
+    "nome": "Amaldiçoado",
+    "desc": "Nasceu sob uma estrela sombria que atrai pequenos azares.",
+    "pericias": ["Arcanismo", "Intimidação"],
+    "equipamento": "Amuleto quebrado, sal de proteção",
+    "contatos": "Bruxas e exorcistas"
+  },
+  {
+    "id": "amnesico",
+    "nome": "Amnésico (Histórico)",
+    "desc": "Acordou sem memórias in uma vala, com apenas instintos nas mãos.",
+    "pericias": ["Percepção", "Sobrevivência"],
+    "equipamento": "Pingente sem foto, diário em branco",
+    "contatos": "Nenhum (passado apagado)"
+  },
+  {
+    "id": "artista",
+    "nome": "Artista de Rua",
+    "desc": "Ganhava moedas atraindo plateias em praças públicas.",
+    "pericias": ["Performance", "Furtividade"],
+    "equipamento": "Tinta corporal prateada, um instrumento musical, caneca",
+    "contatos": "Artistas urbanos"
+  },
+  {
+    "id": "bardo_errante",
+    "nome": "Bardo Errante",
+    "desc": "Viaja coletando e espalhando fofocas.",
+    "pericias": ["Performance", "Persuasão"],
+    "equipamento": "Instrumento musical",
+    "contatos": "Estalajadeiros"
+  },
+  {
+    "id": "bobo",
+    "nome": "Bobo da Corte",
+    "desc": "O único autorizado a zombar do rei sem perder a cabeça.",
+    "pericias": ["Performance", "Enganação"],
+    "equipamento": "Guizos, maquiagem teatral",
+    "contatos": "Bobos da corte e criados"
+  },
+  {
+    "id": "caçador_tesouros",
+    "nome": "Caçador de Tesouros",
+    "desc": "Explorador de ruínas antigas atrás de relíquias douradas.",
+    "pericias": ["Investigação", "Arcanismo"],
+    "equipamento": "Pé de cabra, pergaminho de mapa antigo",
+    "contatos": "Arqueólogos e contrabandistas"
+  },
+  {
+    "id": "carpinteiro",
+    "nome": "Carpinteiro",
+    "desc": "Especialista em erguer estruturas de madeira e móveis.",
+    "pericias": ["Atletismo", "Investigação"],
+    "equipamento": "Serrote, caixa de pregos",
+    "contatos": "Construtores civis"
+  },
+  {
+    "id": "carrasco",
+    "nome": "Carrasco",
+    "desc": "A lei final; aquele que empunhava o machado nas execuções públicas.",
+    "pericias": ["Intimidação", "Medicina"],
+    "equipamento": "Capuz preto, afiador de lâminas",
+    "contatos": "Juízes e carrascos reais"
+  },
+  {
+    "id": "cartografo",
+    "nome": "Cartógrafo",
+    "desc": "Viajou o world desenhando linhas e fronteiras em pergaminhos.",
+    "pericias": ["História", "Percepção"],
+    "equipamento": "Tubo de pergaminhos, compasso",
+    "contatos": "Exploradores e generais"
+  },
+  {
+    "id": "colecionador",
+    "nome": "Colecionador de Insetos",
+    "desc": "Passou a vida catalogando besouros, borboletas e venenos.",
+    "pericias": ["Natureza", "Investigação"],
+    "equipamento": "Rede de insetos, potes de vidro",
+    "contatos": "Naturalistas e museus"
+  },
+  {
+    "id": "contrabandista",
+    "nome": "Contrabandista",
+    "desc": "Especialista em passar mercadorias proibidas pelas fronteiras.",
+    "pericias": ["Enganação", "Furtividade"],
+    "equipamento": "Fundo falso de baú, suborno pronto",
+    "contatos": "Marinheiros e guardas corruptos"
+  },
+  {
+    "id": "cozinheiro",
+    "nome": "Cozinheiro",
+    "desc": "Preparou banquetes extravagantes para palácios ou tavernas imundas.",
+    "pericias": ["História", "Prestidigitação"],
+    "equipamento": "Faca de chef, temperos exóticos",
+    "contatos": "Mordomos e fornecedores de comida"
+  },
+  {
+    "id": "coveiro",
+    "nome": "Coveiro",
+    "desc": "Enterrou segredos e corpos, acostumado com o silêncio da morte.",
+    "pericias": ["Intuição", "Religião"],
+    "equipamento": "Pá gasta, lanterna de óleo",
+    "contatos": "Necromantes e clérigos funerários"
+  },
+  {
+    "id": "criminoso",
+    "nome": "Criminoso",
+    "desc": "Sobreviveu agindo à margem das leis.",
+    "pericias": ["Furtividade", "Enganação"],
+    "equipamento": "Ferramentas de ladrão",
+    "contatos": "Receptadores"
+  },
+  {
+    "id": "cruzado",
+    "nome": "Cruzado (Histórico)",
+    "desc": "Marchou em uma guerra santa que fracassou miseravelmente.",
+    "pericias": ["Religião", "Atletismo"],
+    "equipamento": "Estandarte rasgado, símbolo sagrado",
+    "contatos": "Ordens religiosas caídas"
+  },
+  {
+    "id": "desbravador",
+    "nome": "Desbravador de Florestas",
+    "desc": "Abria trilhas à força de machado em matas fechadas e selvagens.",
+    "pericias": ["Sobrevivência", "Atletismo"],
+    "equipamento": "Machete, pederneira grande",
+    "contatos": "Lenhadores e colonos"
+  },
+  {
+    "id": "doente",
+    "nome": "Doente Crônico (Histórico)",
+    "desc": "Sobreviveu a uma praga terrível que deixou marcas permanentes.",
+    "pericias": ["Medicina", "Sobrevivência"],
+    "equipamento": "Frasco de tônico, bandagens limpas",
+    "contatos": "Médicos e curandeiros de sarjeta"
+  },
+  {
+    "id": "engenheiro",
+    "nome": "Engenheiro de Cerco",
+    "desc": "Projetava catapultas e arietes para derrubar muralhas inimigas.",
+    "pericias": ["Investigação", "História"],
+    "equipamento": "Giz, trena de couro, esquemas",
+    "contatos": "Arsenais do exército"
+  },
+  {
+    "id": "eremita",
+    "nome": "Eremita (Histórico)",
+    "desc": "Viveu isolado em uma caverna por anos conversando com o vento.",
+    "pericias": ["Religião", "Natureza"],
+    "equipamento": "Manto de trapos, ervas secas",
+    "contatos": "Nenhum (vida eremita)"
+  },
+  {
+    "id": "erudito",
+    "nome": "Erudito",
+    "desc": "Dedicou a vida ao estudo acadêmico.",
+    "pericias": ["Arcanismo", "História"],
+    "equipamento": "Tinta, pena, diário",
+    "contatos": "Bibliotecários"
+  },
+  {
+    "id": "escravo_fugitivo",
+    "nome": "Escravo Fugitivo (Histórico)",
+    "desc": "Quebrou os grilhões e vive fugindo dos caçadores de escravos.",
+    "pericias": ["Furtividade", "Atletismo"],
+    "equipamento": "Grilhão partido, mapa de rotas seguras",
+    "contatos": "Abolicionistas e fugitivos"
+  },
+  {
+    "id": "exilado",
+    "nome": "Exilado Político (Histórico)",
+    "desc": "Banido de sua terra natal sob pena de morte caso retorne.",
+    "pericias": ["Enganação", "História"],
+    "equipamento": "Decreto de banimento, disfarce simples",
+    "contatos": "Rebeldes e contrabandistas de fronteira"
+  },
+  {
+    "id": "fazendeiro",
+    "nome": "Fazendeiro",
+    "desc": "Trabalhou a terra de sol a sol plantando o sustento.",
+    "pericias": ["Natureza", "Adestramento"],
+    "equipamento": "Foice curta, saco de sementes",
+    "contatos": "Cooperativas agrárias"
+  },
+  {
+    "id": "ferreiro",
+    "nome": "Ferreiro",
+    "desc": "Molda o metal em armas e ferramentas úteis.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Martelo de viagem",
+    "contatos": "Mineradores"
+  },
+  {
+    "id": "falsificador",
+    "nome": "Falsificador",
+    "desc": "Imitava assinaturas reais e criava sinetes falsos perfeitos.",
+    "pericias": ["Prestidigitação", "Enganação"],
+    "equipamento": "Lente, ceras coloridas, tintas",
+    "contatos": "Criminosos de colarinho branco"
+  },
+  {
+    "id": "gladiador",
+    "nome": "Gladiador",
+    "desc": "Lutou em arenas sob os aplausos e sangue da multidão.",
+    "pericias": ["Atletismo", "Performance"],
+    "equipamento": "Tridente decorativo, óleo corporal",
+    "contatos": "Donos de arena e apostadores"
+  },
+  {
+    "id": "guarda",
+    "nome": "Guarda da Cidade",
+    "desc": "Manteve a ordem nas patrulhas urbanas.",
+    "pericias": ["Percepção", "Intimização"],
+    "equipamento": "Apito, algemas",
+    "contatos": "Informantes locais"
+  },
+  {
+    "id": "herborista",
+    "nome": "Herborista",
+    "desc": "Coleta plantas para fazer poções e chás.",
+    "pericias": ["Medicina", "Natureza"],
+    "equipamento": "Kit de herborismo",
+    "contatos": "Apotecários"
+  },
+  {
+    "id": "investigador",
+    "nome": "Detetive / Investigador",
+    "desc": "Contratado para resolver crimes que a guarda prefere ignorar.",
+    "pericias": ["Investigação", "Intuição"],
+    "equipamento": "Lupa de bolso, bloco de notas",
+    "contatos": "Informantes e legistas"
+  },
+  {
+    "id": "marinheiro",
+    "nome": "Marinheiro",
+    "desc": "Trabalhou enfrentando os perigos do alto mar.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Corda de 15m, bússola",
+    "contatos": "Capitães de navio"
+  },
+  {
+    "id": "mensageiro",
+    "nome": "Mensageiro",
+    "desc": "Corria milhas entregando cartas urgentes por estradas perigosas.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Bolsa de couro selada, botas reforçadas",
+    "contatos": "Mestres de postos de cavalos"
+  },
+  {
+    "id": "mercador",
+    "nome": "Mercador",
+    "desc": "Compra, vende e negocia em feiras.",
+    "pericias": ["Persuasão", "História"],
+    "equipamento": "Balança, 5 moedas de ouro",
+    "contatos": "Guildas de comércio"
+  },
+  {
+    "id": "minerador",
+    "nome": "Minerador",
+    "desc": "Trabalhou na escuridão das minas extraindo carvão e joias.",
+    "pericias": ["Atletismo", "Percepção"],
+    "equipamento": "Picareta, vela de cabeça",
+    "contatos": "Guildas de mineração"
+  },
+  {
+    "id": "nobre",
+    "nome": "Nobre (Histórico)",
+    "desc": "Nascido em berço de ouro, acostumado com etiqueta e privilégios.",
+    "pericias": ["Persuasão", "História"],
+    "equipamento": "Roupas finas, anel de sinete familiar",
+    "contatos": "Aristocratas e nobreza local"
+  },
+  {
+    "id": "orfao_rua",
+    "nome": "Órfão de Rua",
+    "desc": "Cresceu em becos revirando lixo e fugindo de guardas.",
+    "pericias": ["Furtividade", "Prestidigitação"],
+    "equipamento": "Pequena faca, mapa de esconderijos",
+    "contatos": "Crianças de rua e mendigos"
+  },
+  {
+    "id": "pastor",
+    "nome": "Pastor de Ovelhas",
+    "desc": "Passou noites acordado defendendo o rebanho contra lobos.",
+    "pericias": ["Adestramento", "Percepção"],
+    "equipamento": "Cajado longo, apito de pastor",
+    "contatos": "Comerciantes de lã"
+  },
+  {
+    "id": "pescador",
+    "nome": "Pescador",
+    "desc": "Conhece as marés e as melhores histórias de pescador da região.",
+    "pericias": ["Natureza", "Sobrevivência"],
+    "equipamento": "Vara de pesca, rede remendada",
+    "contatos": "Mercado de peixes local"
+  },
+  {
+    "id": "professor",
+    "nome": "Tutor / Professor",
+    "desc": "Ensinou crianças ricas mimadas a ler, escrever e calcular.",
+    "pericias": ["História", "Persuasão"],
+    "equipamento": "Palmatória, livro de caligrafia",
+    "contatos": "Famílias ricas e intelectuais"
+  },
+  {
+    "id": "rebelde",
+    "nome": "Rebelde (Histórico)",
+    "desc": "Lutou clandestinamente para derrubar o tirano local.",
+    "pericias": ["Furtividade", "Intimidação"],
+    "equipamento": "Panfleto revolucionário, máscara",
+    "contatos": "Células rebeldes ativas"
+  },
+  {
+    "id": "renascido",
+    "nome": "Renascido (Histórico)",
+    "desc": "Morreu uma vez, mas voltou à vida por motivos misteriosos.",
+    "pericias": ["Arcanismo", "Intuição"],
+    "equipamento": "Moeda fúnebre, estilhaço do próprio caixão",
+    "contatos": "Coveiros e cultistas do além"
+  },
+  {
+    "id": "soldado",
+    "nome": "Soldado",
+    "desc": "Veterano disciplinado de infantaria militar.",
+    "pericias": ["Atletismo", "Intimidação"],
+    "equipamento": "Insígnia, dados viciados",
+    "contatos": "Ex-comandantes"
+  },
+  {
+    "id": "teologo",
+    "nome": "Teólogo",
+    "desc": "Estudou a hierarquia dos deuses e os dogmas das igrejas.",
+    "pericias": ["Religião", "História"],
+    "equipamento": "Escritura sagrada comentada",
+    "contatos": "Sumos sacerdotes"
+  },
+  {
+    "id": "vendedora_ervas",
+    "nome": "Curandeira",
+    "desc": "Trouxe vidas ao mundo e tratou de resfriados em vilas isoladas.",
+    "pericias": ["Medicina", "Intuição"],
+    "equipamento": "Ervas secas, tesoura de parto",
+    "contatos": "Mães de vilarejos"
+  },
+  {
+    "id": "veterano_guerra",
+    "nome": "Veterano de Guerra (Histórico)",
+    "desc": "Carrega o estresse pós-traumático e as glórias de batalhas passadas.",
+    "pericias": ["Intimidação", "Sobrevivência"],
+    "equipamento": "Medalha militar manchada, cantil",
+    "contatos": "Oficiais aposentados"
+  }
   ],
+
   "personalidades": [
     {
       "id": "corajoso",
@@ -1534,15 +1360,9 @@
         "Nunca recuo diante de um desafio, não importa as chances.",
         "Prefiro agir e errar a ficar parado calculando infinitamente."
       ],
-      "ideais": [
-        "Liberdade — ninguém deveria viver sob o jugo do medo ou da opressão."
-      ],
-      "vinculos": [
-        "Juro proteger os fracos que não podem se defender sozinhos."
-      ],
-      "defeitos": [
-        "Sou temerário e frequentemente coloco meus aliados em perigo desnecessário."
-      ]
+      "ideais": ["Liberdade — ninguém deveria viver sob o jugo do medo ou da opressão."],
+      "vinculos": ["Juro proteger os fracos que não podem se defender sozinhos."],
+      "defeitos": ["Sou temerário e frequentemente coloco meus aliados em perigo desnecessário."]
     },
     {
       "id": "astuto",
@@ -1551,15 +1371,9 @@
         "Raramente digo o que realmente penso — informação é poder.",
         "Estudo as pessoas durante dias antes de decidir confiar nelas."
       ],
-      "ideais": [
-        "Conhecimento — a informação certa no momento certo vale mais que qualquer espada."
-      ],
-      "vinculos": [
-        "Há segredos sobre meu passado que protegeria com minha própria vida."
-      ],
-      "defeitos": [
-        "Desconfio até dos meus aliados mais próximos em momentos críticos."
-      ]
+      "ideais": ["Conhecimento — a informação certa no momento certo vale mais que qualquer espada."],
+      "vinculos": ["Há segredos sobre meu passado que protegeria com minha própria vida."],
+      "defeitos": ["Desconfio até dos meus aliados mais próximos em momentos críticos."]
     },
     {
       "id": "leal",
@@ -1568,15 +1382,9 @@
         "Dou minha palavra apenas quando posso cumpri-la integralmente.",
         "A honra não é apenas um conceito — é a base de toda interação civilizada."
       ],
-      "ideais": [
-        "Honra — um ser sem palavra não é nada, independente de seu poder."
-      ],
-      "vinculos": [
-        "Minha lealdade à minha ordem ou causa está acima de qualquer interesse pessoal."
-      ],
-      "defeitos": [
-        "Sou inflexível com as regras mesmo quando elas causam sofrimento evitável."
-      ]
+      "ideais": ["Honra — um ser sem palavra não é nada, independente de seu poder."],
+      "vinculos": ["Minha lealdade à minha ordem ou causa está acima de qualquer interesse pessoal."],
+      "defeitos": ["Sou inflexível com as regras mesmo quando elas causam sofrimento evitável."]
     },
     {
       "id": "curioso",
@@ -1585,15 +1393,9 @@
         "Faço perguntas constantemente, mesmo quando são inconvenientes ou perigosas.",
         "Coleciono objetos e informações inusitados onde quer que vá."
       ],
-      "ideais": [
-        "Conhecimento — o mundo é um livro e quero ler absolutamente todas as páginas."
-      ],
-      "vinculos": [
-        "Busco uma resposta para uma pergunta específica que assombra minha mente há anos."
-      ],
-      "defeitos": [
-        "Minha curiosidade frequentemente me arrasta para encrencas que não precisava buscar."
-      ]
+      "ideais": ["Conhecimento — o mundo é um livro e quero ler absolutamente todas as páginas."],
+      "vinculos": ["Busco uma resposta para uma pergunta específica que assombra minha mente há anos."],
+      "defeitos": ["Minha curiosidade frequentemente me arrasta para encrencas que não precisava buscar."]
     },
     {
       "id": "sombrio",
@@ -1602,15 +1404,9 @@
         "Raramente sorrio e enxergo problemas potenciais em tudo ao redor.",
         "Carrego um peso invisível que nunca parece diminuir, não importa o que aconteça."
       ],
-      "ideais": [
-        "Redenção — busco expiar erros do passado que nunca me abandonam."
-      ],
-      "vinculos": [
-        "As memórias de quem perdi me assombram toda noite sem exceção."
-      ],
-      "defeitos": [
-        "Tenho enorme dificuldade em aceitar ajuda ou mostrar qualquer vulnerabilidade."
-      ]
+      "ideais": ["Redenção — busco expiar erros do passado que nunca me abandonam."],
+      "vinculos": ["As memórias de quem perdi me assombram toda noite sem exceção."],
+      "defeitos": ["Tenho enorme dificuldade em aceitar ajuda ou mostrar qualquer vulnerabilidade."]
     },
     {
       "id": "carismatico",
@@ -1619,15 +1415,9 @@
         "Entro em qualquer sala e imediatamente começo a conhecer absolutamente todos.",
         "Tenho um talento natural para contar histórias que prendem a atenção de qualquer plateia."
       ],
-      "ideais": [
-        "Beleza — a arte, as histórias e a conexão elevam o espírito de toda criatura."
-      ],
-      "vinculos": [
-        "Carrego as histórias e tradições da minha terra natal para onde quer que eu vá."
-      ],
-      "defeitos": [
-        "Tenho dificuldade séria em ser sério quando a situação exige gravidade."
-      ]
+      "ideais": ["Beleza — a arte, as histórias e a conexão elevam o espírito de toda criatura."],
+      "vinculos": ["Carrego as histórias e tradições da minha terra natal para onde quer que eu vá."],
+      "defeitos": ["Tenho dificuldade séria em ser sério quando a situação exige gravidade."]
     },
     {
       "id": "protetor",
@@ -1636,15 +1426,9 @@
         "Me coloco entre os vulneráveis e o perigo sem sequer hesitar por um segundo.",
         "Sinto a dor dos outros quase como se fosse a minha própria."
       ],
-      "ideais": [
-        "Proteção — os fortes existem para um único propósito: proteger os que não podem."
-      ],
-      "vinculos": [
-        "Há alguém específico no mundo que protegeria com minha própria vida sem questionar."
-      ],
-      "defeitos": [
-        "Assumo responsabilidade por todos ao meu redor, o que me exaure completamente."
-      ]
+      "ideais": ["Proteção — os fortes existem para um único propósito: proteger os que não podem."],
+      "vinculos": ["Há alguém específico no mundo que protegeria com minha própria vida sem questionar."],
+      "defeitos": ["Assumo responsabilidade por todos ao meu redor, o que me exaure completamente."]
     },
     {
       "id": "ambicioso",
@@ -1653,15 +1437,9 @@
         "Sempre estou de olho em como qualquer situação pode me beneficiar a longo prazo.",
         "Estabeleço metas elevadas e faço o que for necessário para alcançá-las."
       ],
-      "ideais": [
-        "Poder — o mundo pertence aos que têm coragem de trabalhar para tomá-lo."
-      ],
-      "vinculos": [
-        "Preciso provar para minha família que não sou o fracasso que eles sempre acreditaram."
-      ],
-      "defeitos": [
-        "Piso em quem preciso pisar para chegar onde preciso chegar, sem remorso excessivo."
-      ]
+      "ideais": ["Poder — o mundo pertence aos que têm coragem de trabalhar para tomá-lo."],
+      "vinculos": ["Preciso provar para minha família que não sou o fracasso que eles sempre acreditaram."],
+      "defeitos": ["Piso em quem preciso pisar para chegar onde preciso chegar, sem remorso excessivo."]
     },
     {
       "id": "filosofo",
@@ -1670,15 +1448,9 @@
         "Questiono tudo — especialmente as coisas que as pessoas aceitam como óbvias.",
         "Antes de agir, preciso entender o porquê profundo da situação."
       ],
-      "ideais": [
-        "Verdade — prefiro uma verdade amarga a uma mentira confortável qualquer dia."
-      ],
-      "vinculos": [
-        "Sigo o ensinamento de um mentor que moldou tudo o que sou e penso."
-      ],
-      "defeitos": [
-        "Me perco em contemplação quando a ação imediata seria a resposta correta."
-      ]
+      "ideais": ["Verdade — prefiro uma verdade amarga a uma mentira confortável qualquer dia."],
+      "vinculos": ["Sigo o ensinamento de um mentor que moldou tudo o que sou e penso."],
+      "defeitos": ["Me perco em contemplação quando a ação imediata seria a resposta correta."]
     },
     {
       "id": "pragmatico",
@@ -1687,225 +1459,96 @@
         "O que funciona é o que importa — teoria sem aplicação é apenas vaidade intelectual.",
         "Resolvo problemas com o que tenho disponível, não com o que gostaria de ter."
       ],
-      "ideais": [
-        "Eficiência — o melhor caminho é sempre o que chega ao resultado com menos desperdício."
-      ],
-      "vinculos": [
-        "Meu grupo é minha única família real — faria qualquer coisa por eles."
-      ],
-      "defeitos": [
-        "Descarto aspectos emocionais de situações que muitas vezes são completamente relevantes."
-      ]
+      "ideais": ["Eficiência — o melhor caminho é sempre o que chega ao resultado com menos desperdício."],
+      "vinculos": ["Meu grupo é minha única família real — faria qualquer coisa por eles."],
+      "defeitos": ["Descarto aspectos emocionais de situações que muitas vezes são completamente relevantes."]
     }
   ],
+
   "estilos": [
     {
       "id": "tank",
       "nome": "Tanque / Protetor",
       "desc": "Foca em absorver dano e proteger aliados, posicionando-se sempre na linha de frente para atrair atenção dos inimigos mais perigosos.",
-      "pontosForts": [
-        "Alta resistência e HP elevado",
-        "Controle de posicionamento",
-        "Proteger aliados vulneráveis"
-      ],
+      "pontosForts": ["Alta resistência e HP elevado", "Controle de posicionamento", "Proteger aliados vulneráveis"],
       "dicas": "Posicione-se sempre entre os inimigos e os aliados mais frágeis. Use ações de Proteger e interposição. Sua morte é a derrota do grupo."
     },
     {
       "id": "dps",
       "nome": "Atacante / DPS",
       "desc": "Maximiza dano por turno para eliminar ameaças rapidamente. Cada ação é calculada para derrubar alvos antes que respondam.",
-      "pontosForts": [
-        "Dano por turno elevado",
-        "Eliminar alvos prioritários",
-        "Ritmo e pressão de combate"
-      ],
+      "pontosForts": ["Dano por turno elevado", "Eliminar alvos prioritários", "Ritmo e pressão de combate"],
       "dicas": "Identifique o inimigo mais perigoso e concentre-se nele até cair. Coordene com o tank para não ser focado."
     },
     {
       "id": "suporte",
       "nome": "Suporte / Cura",
       "desc": "Mantém o grupo funcional com curas estratégicas, bônus táticos e remoção de condições negativas no momento certo.",
-      "pontosForts": [
-        "Sustentabilidade do grupo",
-        "Bônus para aliados",
-        "Remoção de condições debilitantes"
-      ],
+      "pontosForts": ["Sustentabilidade do grupo", "Bônus para aliados", "Remoção de condições debilitantes"],
       "dicas": "Priorize manter aliados de pé em vez de curar depois. Concentração em buffs vale mais que cura reativa na maioria dos casos."
     },
     {
       "id": "controle",
       "nome": "Controle / Utility",
       "desc": "Restringe movimentos inimigos e manipula o campo de batalha com habilidades e magia, mudando as regras do confronto.",
-      "pontosForts": [
-        "Controle de posicionamento inimigo",
-        "Versatilidade situacional",
-        "Pensamento estratégico de longo prazo"
-      ],
+      "pontosForts": ["Controle de posicionamento inimigo", "Versatilidade situacional", "Pensamento estratégico de longo prazo"],
       "dicas": "Feitiços de área e restrição valem mais que dano direto. Pense dois turnos à frente e nunca desperdice concentração."
     },
     {
       "id": "furtivo",
       "nome": "Furtivo / Assassino",
       "desc": "Opera nas sombras, elimina alvos antes que percebam sua presença e desaparece antes que qualquer resposta seja possível.",
-      "pontosForts": [
-        "Dano massivo em emboscadas",
-        "Mobilidade e reposicionamento",
-        "Exploração e coleta de informação"
-      ],
+      "pontosForts": ["Dano massivo em emboscadas", "Mobilidade e reposicionamento", "Exploração e coleta de informação"],
       "dicas": "Faça emboscadas, posicione-se com vantagem antes do combate. Evite confronto direto prolongado — não foi feito para isso."
     },
     {
       "id": "diplomatico",
       "nome": "Diplomático / Social",
       "desc": "Resolve conflitos com palavras, informações estratégicas e conexões, evitando combate sempre que uma alternativa inteligente existe.",
-      "pontosForts": [
-        "Negociação e persuasão",
-        "Coleta estratégica de informação",
-        "Evitar conflitos desnecessários"
-      ],
+      "pontosForts": ["Negociação e persuasão", "Coleta estratégica de informação", "Evitar conflitos desnecessários"],
       "dicas": "Sempre busque um ângulo de negociação antes do combate. Informação sobre o inimigo elimina mais problemas que qualquer espada."
     },
     {
       "id": "explorador",
       "nome": "Explorador / Scout",
       "desc": "Especialista em terreno desconhecido, rastreamento e descoberta de segredos do ambiente antes que o grupo entre em perigo.",
-      "pontosForts": [
-        "Rastreamento e exploração",
-        "Detecção de armadilhas e emboscadas",
-        "Conhecimento de terreno e rotas"
-      ],
+      "pontosForts": ["Rastreamento e exploração", "Detecção de armadilhas e emboscadas", "Conhecimento de terreno e rotas"],
       "dicas": "Vá à frente do grupo, mas mantenha distância segura de retorno. Relate antes de agir — sua função é informação, não combate solo."
     },
     {
       "id": "arcano",
       "nome": "Arcano / Lançador",
       "desc": "Domina magias poderosas que mudam o rumo de batalhas inteiras com um único feitiço bem posicionado no momento certo.",
-      "pontosForts": [
-        "Magias de alto impacto",
-        "Flexibilidade de resposta",
-        "Dano e controle à distância segura"
-      ],
+      "pontosForts": ["Magias de alto impacto", "Flexibilidade de resposta", "Dano e controle à distância segura"],
       "dicas": "Gerencie seus espaços de magia com disciplina. Reserve o melhor para o momento decisivo — uma magia de alto nível vale mais que três medianas."
     }
   ],
+
   "nomes": {
     "masculinos": [
-      "Aldric",
-      "Brennan",
-      "Caius",
-      "Doran",
-      "Elric",
-      "Fabian",
-      "Gavril",
-      "Hadrian",
-      "Ilvar",
-      "Jorin",
-      "Keldorn",
-      "Lorcan",
-      "Maeris",
-      "Navar",
-      "Osric",
-      "Peryn",
-      "Qarim",
-      "Rhaen",
-      "Sevar",
-      "Torin",
-      "Ulvic",
-      "Varyn",
-      "Waldric",
-      "Xareth",
-      "Yorin",
-      "Zephyn",
-      "Aldus",
-      "Beren",
-      "Corvyn",
-      "Daven",
-      "Edran",
-      "Fenrir",
-      "Goram",
-      "Hector",
-      "Ivor",
-      "Jaran",
-      "Kylan",
-      "Leoric",
-      "Miran",
-      "Nolan"
+      "Aldric", "Brennan", "Caius", "Doran", "Elric", "Fabian", "Gavril", "Hadrian",
+      "Ilvar", "Jorin", "Keldorn", "Lorcan", "Maeris", "Navar", "Osric", "Peryn",
+      "Qarim", "Rhaen", "Sevar", "Torin", "Ulvic", "Varyn", "Waldric", "Xareth",
+      "Yorin", "Zephyn", "Aldus", "Beren", "Corvyn", "Daven", "Edran", "Fenrir",
+      "Goram", "Hector", "Ivor", "Jaran", "Kylan", "Leoric", "Miran", "Nolan"
     ],
     "femininos": [
-      "Aelith",
-      "Brynn",
-      "Caera",
-      "Dwyn",
-      "Elowen",
-      "Fayra",
-      "Gaelindra",
-      "Halia",
-      "Ilenne",
-      "Jorvyn",
-      "Kira",
-      "Lyriel",
-      "Myra",
-      "Naela",
-      "Oryn",
-      "Petra",
-      "Quen",
-      "Rhaella",
-      "Seren",
-      "Thyra",
-      "Ulysse",
-      "Vanya",
-      "Wylla",
-      "Xyla",
-      "Ysolde",
-      "Zara",
-      "Aria",
-      "Brielle",
-      "Cyndra",
-      "Daena",
-      "Eryn",
-      "Fiora",
-      "Gwynn",
-      "Hera",
-      "Iriel",
-      "Jessa",
-      "Kyra",
-      "Lena",
-      "Mira",
-      "Nessa"
+      "Aelith", "Brynn", "Caera", "Dwyn", "Elowen", "Fayra", "Gaelindra", "Halia",
+      "Ilenne", "Jorvyn", "Kira", "Lyriel", "Myra", "Naela", "Oryn", "Petra",
+      "Quen", "Rhaella", "Seren", "Thyra", "Ulysse", "Vanya", "Wylla", "Xyla",
+      "Ysolde", "Zara", "Aria", "Brielle", "Cyndra", "Daena", "Eryn", "Fiora",
+      "Gwynn", "Hera", "Iriel", "Jessa", "Kyra", "Lena", "Mira", "Nessa"
     ],
     "sobrenomes": [
-      "Pedraforte",
-      "Velasombra",
-      "Marcaferro",
-      "Luaprateada",
-      "Fervormont",
-      "Coraçãoselvagem",
-      "Espinheiro",
-      "Cinzanegra",
-      "Olhodeguia",
-      "Ferrocalor",
-      "Ventoveloz",
-      "Tormentanegra",
-      "Almadobosque",
-      "Guardião",
-      "Lareira",
-      "Braçodaço",
-      "Caminhosverde",
-      "Espadatremula",
-      "Fogoeterno",
-      "Garracorvo",
-      "Hastasombria",
-      "Ivornamorte",
-      "Jornalonga",
-      "Karvosteel",
-      "Lâminafresca",
-      "Morteverde",
-      "Névoanegra",
-      "Olhosfrios",
-      "Pedratroante",
-      "Raizancestral"
+      "Pedraforte", "Velasombra", "Marcaferro", "Luaprateada", "Fervormont",
+      "Coraçãoselvagem", "Espinheiro", "Cinzanegra", "Olhodeguia", "Ferrocalor",
+      "Ventoveloz", "Tormentanegra", "Almadobosque", "Guardião", "Lareira",
+      "Braçodaço", "Caminhosverde", "Espadatremula", "Fogoeterno", "Garracorvo",
+      "Hastasombria", "Ivornamorte", "Jornalonga", "Karvosteel", "Lâminafresca",
+      "Morteverde", "Névoanegra", "Olhosfrios", "Pedratroante", "Raizancestral"
     ]
   },
+
   "fisicos": [
     "Estatura imponente com ombros largos que preenchem qualquer entrada",
     "Baixo mas de presença marcante que ninguém ousa ignorar",
@@ -1926,6 +1569,7 @@
     "Uma marca de nascença incomum em formato de símbolo no pescoço",
     "Porte atlético que contrasta com uma expressão perpetuamente entediada"
   ],
+
   "maneirismos": [
     "Sempre esfrega o amuleto ao pescoço quando fica nervoso ou pensativo",
     "Fala de si mesmo na terceira pessoa nos momentos de maior intensidade emocional",
