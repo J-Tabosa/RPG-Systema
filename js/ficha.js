@@ -396,7 +396,8 @@ const SIZE_CARRY_MULTIPLIERS = {
 
 function getRaceRecord(f) {
   if (!f?.race || !DB?.racas) return null;
-  return DB.racas.find((r) => r.nome === f.race) || null;
+  const races = getFilteredCat("racas", f.presetId);
+  return [...races].reverse().find((r) => r.nome === f.race) || null;
 }
 function getRaceSize(f) {
   return getRaceRecord(f)?.tamanho || "Médio";
