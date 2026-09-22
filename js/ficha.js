@@ -668,7 +668,7 @@ async function renderEditor() {
               <label>Raça</label>
               <select onchange="setRace(this.value)" style="padding: 6px 10px;">
                 <option value="">Selecione uma Raça...</option>
-                ${racasPermitidas.map((x) => `<option value="${x.nome}" ${f.race === x.nome ? "selected" : ""}>${x.nome}</option>`).join("")}
+                ${racasPermitidas.map((x) => `<option value="${x.nome}" ${f.race === x.nome ? "selected" : ""}>${x.nome} — ${x.tamanho || "Médio"}</option>`).join("")}
               </select>
             </div>
             <div class="form-field" style="margin:0">
