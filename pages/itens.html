@@ -46,7 +46,7 @@
       <div class="hero-copy">
         <div class="eyebrow"><i class="ti ti-books"></i> Acervo do Sistema</div>
         <h2>Glossário Geral de Itens</h2>
-        <p>Cadastre e consulte qualquer objeto utilizado na mesa. A base inicial traz exemplos de D&amp;D 5e e pode ser ampliada sem alterar o código. Os registros também podem ser importados diretamente para a ficha do personagem.</p>
+        <p>Consulte armas, armaduras, equipamentos, consumíveis e itens mágicos do Livro do Jogador, Xanathar, Tasha e Valda, além dos registros personalizados da mesa. Tudo pode ser importado diretamente para a ficha do personagem.</p>
       </div>
 
       <div class="hero-stats" aria-label="Resumo do glossário">
@@ -71,6 +71,13 @@
           <option value="equipamento">Equipamentos</option>
           <option value="utilizavel">Utilizáveis</option>
           <option value="magico">Itens mágicos</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sourceFilter">Fonte</label>
+        <select id="sourceFilter" onchange="filtrarItens()">
+          <option value="todos">Todas</option>
         </select>
       </div>
 
