@@ -384,6 +384,44 @@ function skillBonus(f, s) {
   if (s.prof === 1) return base + Math.floor(pb / 2);
   return base + pb;
 }
+
+const SIZE_CARRY_MULTIPLIERS = {
+  "Miúdo": 0.5,
+  "Pequeno": 1,
+  "Médio": 1,
+  "Grande": 2,
+  "Enorme": 4,
+  "Imenso": 8
+};
+
+function getRaceRecord(f) {
+  if (!f?.race || !DB?.racas) return null;
+  return DB.racas.find((r) => r.nome === f.race) || null;
+}
+function getRaceSize(f) {
+  return getRaceRecord(f)?.tamanho || "Médio";
+}
+function getEquipmentWeight(f) {
+  return (f?.equipment || []).reduce((total, item) => {
+    const weight = Number(item.weight) || 0;
+    const qty = Math.max(1, Number(item.qty) || 1);
+    return total + weight * qty;
+  }, 0);
+}
+function getCarryData(f) {
+  const strength = Math.max(0, Number(getAttrVal(f, "for")) || 0);
+  const size = getRaceSize(f);
+  const sizeMultiplier = SIZE_CARRY_MULTIPLIERS[size] || 1;
+  const extraMultiplier = Math.max(0.25, Number(f?.carryMultiplier ?? 1) || 1);
+  const bonusKg = Number(f?.carryBonusKg ?? 0) || 0;
+  const capacity = Math.max(0, strength * 7.5 * sizeMultiplier * extraMultiplier + bonusKg);
+  const current = getEquipmentWeight(f);
+  const remaining = capacity - current;
+  const pushDragLift = capacity * 2;
+  const percent = capacity > 0 ? Math.min(100, (current / capacity) * 100) : 0;
+  const status = current > capacity ? "over" : percent >= 80 ? "warn" : "ok";
+  return { strength, size, sizeMultiplier, extraMultiplier, bonusKg, capacity, current, remaining, pushDragLift, percent, status };
+}
 function getFicha() { return fichas.find((f) => f.id === activeId); }
 function upd(fn) {
   const f = getFicha();
@@ -461,6 +499,8 @@ function newFichaObj(name = "Novo Personagem", presetId = "default") {
     spells: [],
     habilidades: [],
     equipment: [],
+    carryMultiplier: 1,
+    carryBonusKg: 0,
     traits: "",
     ideals: "",
     bonds: "",
@@ -625,7 +665,7 @@ async function renderEditor() {
             </div>
             <div class="form-field" style="margin:0">
               <label>Raça</label>
-              <select onchange="setField('race',this.value)" style="padding: 6px 10px;">
+              <select onchange="setRace(this.value)" style="padding: 6px 10px;">
                 <option value="">Selecione uma Raça...</option>
                 ${racasPermitidas.map((x) => `<option value="${x.nome}" ${f.race === x.nome ? "selected" : ""}>${x.nome}</option>`).join("")}
               </select>
@@ -862,15 +902,64 @@ async function renderEditor() {
       <button class="btn xs print-hidden" onclick="editEquip(${i})"><i class="ti ti-edit"></i></button>
     </div>`).join("");
 
+  const carry = getCarryData(f);
+  const carryRemainingLabel = carry.remaining >= 0 ? "Disponível" : "Excesso";
+  const carryRemainingValue = Math.abs(carry.remaining).toFixed(1);
+
   sectionMap["equipamento"] = `
     <div class="sec">
       <div class="sec-head">
         <div class="sec-title"><i class="ti ti-backpack sec-icon"></i><h2>Equipamentos &amp; Itens</h2></div>
-        <div style="display:flex;align-items:center;gap:8px">
-          ${f.equipment.length ? `<span style="font-size:11px;color:var(--muted)">${f.equipment.reduce((a, e) => a + (e.weight || 0) * (e.qty || 1), 0).toFixed(1)}kg</span>` : ""}
-          <button class="btn xs primary" onclick="openAddEquip()"><i class="ti ti-plus"></i> Adicionar Item</button>
+        <button class="btn xs primary" onclick="openAddEquip()"><i class="ti ti-plus"></i> Adicionar Item</button>
+      </div>
+
+      <div class="carry-panel ${carry.status}">
+        <div class="carry-summary">
+          <div class="carry-stat">
+            <span>Carregando</span>
+            <strong>${carry.current.toFixed(1)} kg</strong>
+          </div>
+          <div class="carry-stat">
+            <span>Capacidade</span>
+            <strong>${carry.capacity.toFixed(1)} kg</strong>
+          </div>
+          <div class="carry-stat ${carry.remaining < 0 ? "danger" : ""}">
+            <span>${carryRemainingLabel}</span>
+            <strong>${carryRemainingValue} kg</strong>
+          </div>
+          <div class="carry-stat">
+            <span>Tamanho</span>
+            <strong>${carry.size} ×${carry.sizeMultiplier}</strong>
+          </div>
+        </div>
+
+        <div class="carry-progress" title="${carry.percent.toFixed(0)}% da capacidade utilizada">
+          <span style="width:${carry.percent}%"></span>
+        </div>
+
+        <div class="carry-detail-row">
+          <div class="carry-formula">
+            <i class="ti ti-calculator"></i>
+            FOR ${carry.strength} × 7,5 kg × tamanho ${carry.sizeMultiplier} × mod. ${carry.extraMultiplier}
+            ${carry.bonusKg ? ` + ${carry.bonusKg} kg` : ""} = <strong>${carry.capacity.toFixed(1)} kg</strong>
+          </div>
+          <div class="carry-lift" title="Regra de empurrar, arrastar ou levantar">
+            <i class="ti ti-barbell"></i> Puxar / erguer: <strong>${carry.pushDragLift.toFixed(1)} kg</strong>
+          </div>
+        </div>
+
+        <div class="carry-settings print-hidden">
+          <div class="form-field">
+            <label>Multiplicador extra</label>
+            <input type="number" min="0.25" step="0.25" value="${carry.extraMultiplier}" onchange="setCarryConfig('carryMultiplier',this.value)" title="Use, por exemplo, ×2 para habilidades que dobram a capacidade de carga.">
+          </div>
+          <div class="form-field">
+            <label>Bônus fixo de carga (kg)</label>
+            <input type="number" step="0.5" value="${carry.bonusKg}" onchange="setCarryConfig('carryBonusKg',this.value)" title="Adiciona ou remove uma quantidade fixa em kg da capacidade final.">
+          </div>
         </div>
       </div>
+
       ${equipHtml || '<div style="color:var(--muted);font-size:13px;font-style:italic">Nenhum item ainda.</div>'}
     </div>`;
 
@@ -1053,7 +1142,26 @@ async function removeFullBody() {
 
 // ── SETTERS E MÉTODOS DE ATRIBUTOS, PERÍCIAS E COMBATE ────────────────────────
 function setField(k, v) { upd((f) => { f[k] = v; }); }
-function setAttr(id, v) { upd((f) => { const a = f.attrs.find((x) => x.id === id); if (a) a.val = parseInt(v) || 10; }); }
+function setRace(value) {
+  setField("race", value);
+  renderSidebar();
+  renderEditor();
+}
+function setCarryConfig(key, value) {
+  const parsed = Number(value);
+  upd((f) => {
+    if (key === "carryMultiplier") f.carryMultiplier = Number.isFinite(parsed) && parsed >= 0.25 ? parsed : 1;
+    if (key === "carryBonusKg") f.carryBonusKg = Number.isFinite(parsed) ? parsed : 0;
+  });
+  renderEditor();
+}
+function setAttr(id, v) {
+  upd((f) => {
+    const a = f.attrs.find((x) => x.id === id);
+    if (a) a.val = parseInt(v) || 10;
+  });
+  if (id === "for") renderEditor();
+}
 function removeAttr(id) {
   const f = getFicha(); if (!f) return;
   const a = f.attrs.find((x) => x.id === id);
