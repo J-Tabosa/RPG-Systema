@@ -72,6 +72,10 @@ const FORMS_CONFIG = {
     {key:'desc', label:'Resumo / Descrição', type:'textarea', req:true},
     {key:'tracoRacial', label:'Habilidade / Traço Racial', type:'textarea', req:true},
     {key:'velocidade', label:'Velocidade (m)', type:'number', req:true, def:9},
+    {key:'tamanho', label:'Tamanho', type:'select', req:true, def:'Médio', options:[
+      {v:'Miúdo',l:'Miúdo'},{v:'Pequeno',l:'Pequeno'},{v:'Médio',l:'Médio'},
+      {v:'Grande',l:'Grande'},{v:'Enorme',l:'Enorme'},{v:'Imenso',l:'Imenso'}
+    ]},
     {key:'visaoNoturna', label:'Possui Visão Noturna?', type:'select', options:[{v:'false',l:'Não'},{v:'true',l:'Sim'}]},
     {key:'subcategoria', label:'Subcategoria / Tipo', type:'text', req:true, def:'geral'}
   ],
@@ -415,6 +419,7 @@ function renderizarItens(){
               <span class="item-title">${item.nome}</span>
               <span class="src-badge ${badgeClass}">${badgeLabel}</span>
               ${item.subcategoria ? `<span class="src-badge subcat">${item.subcategoria}</span>` : ''}
+              ${item.tamanho ? `<span class="src-badge subcat"><i class="ti ti-ruler-2"></i> ${item.tamanho}</span>` : ''}
             </div>
             <div class="item-summary" title="${item.desc || ''}">${item.desc || 'Sem descrição cadastrada.'}</div>
           </div>
@@ -492,7 +497,7 @@ function alterarCamposForm(cat){
         <div class="mini-field" style="margin-top:5px">
           <label>${f.label}</label>
           <select id="fld_${f.key}">
-            ${f.options.map(o => `<option value="${o.v}">${o.l}</option>`).join('')}
+            ${f.options.map(o => `<option value="${o.v}" ${String(f.def ?? '') === String(o.v) ? 'selected' : ''}>${o.l}</option>`).join('')}
           </select>
         </div>`;
     }
@@ -533,6 +538,7 @@ function carregarItemParaEdicao(cat, id){
     }
     
     if(f.type === 'select') {
+      if (f.key === 'tamanho' && (val === undefined || val === null || val === '')) val = 'Médio';
       el.value = String(val);
     } else {
       el.value = (val !== undefined) ? val : '';
