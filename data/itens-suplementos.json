@@ -900,14 +900,15 @@
   {
     "id": "algemas",
     "nome": "Algemas",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Ferramenta",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 2,
     "custo": "2 PO",
     "descricao": "Prende uma criatura Pequena ou Média; escapar ou quebrar exige testes difíceis.",
     "tags": [
-      "contenção"
+      "contenção",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Prende uma criatura Pequena ou Média; escapar ou quebrar exige testes difíceis."
@@ -916,14 +917,15 @@
   {
     "id": "aljava",
     "nome": "Aljava",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Recipiente",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 0.5,
     "custo": "1 PO",
     "descricao": "Armazena até 20 flechas.",
     "tags": [
-      "munição"
+      "munição",
+      "equipamento"
     ],
     "mecanica": {
       "capacidade": "20 flechas",
@@ -933,14 +935,15 @@
   {
     "id": "ariete-portatil",
     "nome": "Aríete Portátil",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Ferramenta",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 17.5,
     "custo": "4 PO",
     "descricao": "Ajuda a arrombar portas, concedendo vantagem quando outra criatura auxilia.",
     "tags": [
-      "força"
+      "força",
+      "equipamento"
     ],
     "mecanica": {
       "bonus": "+4 em testes apropriados de Força",
@@ -950,14 +953,15 @@
   {
     "id": "armadilha-de-caca",
     "nome": "Armadilha de Caça",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Armadilha",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 12.5,
     "custo": "5 PO",
     "descricao": "Armadilha de pressão que pode ferir e limitar o movimento de quem a aciona.",
     "tags": [
-      "armadilha"
+      "armadilha",
+      "equipamento"
     ],
     "mecanica": {
       "cd": 13,
@@ -969,14 +973,15 @@
   {
     "id": "arpeu",
     "nome": "Arpéu",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Exploração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 2,
     "custo": "2 PO",
     "descricao": "Gancho metálico usado com cordas para escalada, travessia e ancoragem.",
     "tags": [
-      "exploração"
+      "exploração",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Gancho metálico usado com cordas para escalada, travessia e ancoragem."
@@ -985,14 +990,15 @@
   {
     "id": "balanca-de-mercador",
     "nome": "Balança de Mercador",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Ferramenta",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 1.5,
     "custo": "5 PO",
     "descricao": "Permite pesar pequenos objetos e mercadorias com precisão.",
     "tags": [
-      "comércio"
+      "comércio",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Permite pesar pequenos objetos e mercadorias com precisão."
@@ -1001,14 +1007,15 @@
   {
     "id": "bolsa-de-componentes",
     "nome": "Bolsa de Componentes",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Foco de conjuração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 1,
     "custo": "25 PO",
     "descricao": "Bolsa organizada para componentes materiais de magia que não tenham custo específico.",
     "tags": [
-      "magia"
+      "magia",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Bolsa organizada para componentes materiais de magia que não tenham custo específico."
@@ -1017,14 +1024,15 @@
   {
     "id": "corda-de-seda-15-m",
     "nome": "Corda de Seda (15 m)",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Exploração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 2.5,
     "custo": "10 PO",
     "descricao": "Corda leve e resistente para escalada, amarração e travessias.",
     "tags": [
-      "exploração"
+      "exploração",
+      "equipamento"
     ],
     "mecanica": {
       "comprimentoM": 15,
@@ -1034,14 +1042,15 @@
   {
     "id": "corrente-3-m",
     "nome": "Corrente (3 m)",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Exploração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 5,
     "custo": "5 PO",
     "descricao": "Corrente resistente, útil para prender, puxar ou improvisar mecanismos.",
     "tags": [
-      "contenção"
+      "contenção",
+      "equipamento"
     ],
     "mecanica": {
       "pv": 10,
@@ -1114,7 +1123,7 @@
   {
     "id": "grimorio",
     "nome": "Grimório",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Equipamento de conjuração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 1.5,
@@ -1122,7 +1131,8 @@
     "descricao": "Volume encadernado preparado para registrar e organizar magias de mago.",
     "tags": [
       "mago",
-      "magia"
+      "magia",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Volume encadernado preparado para registrar e organizar magias de mago."
@@ -1131,14 +1141,15 @@
   {
     "id": "kit-de-escalada",
     "nome": "Kit de Escalada",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Exploração",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 6,
     "custo": "25 PO",
     "descricao": "Conjunto de pítons, botas, luvas e cinto para criar pontos de ancoragem durante escaladas.",
     "tags": [
-      "escalada"
+      "escalada",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Conjunto de pítons, botas, luvas e cinto para criar pontos de ancoragem durante escaladas."
@@ -1147,14 +1158,15 @@
   {
     "id": "kit-de-refeicao",
     "nome": "Kit de Refeição",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Acampamento",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 0.5,
     "custo": "2 PP",
     "descricao": "Conjunto compacto com recipiente, copo e talheres para refeições em viagem.",
     "tags": [
-      "viagem"
+      "viagem",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Conjunto compacto com recipiente, copo e talheres para refeições em viagem."
@@ -1163,14 +1175,15 @@
   {
     "id": "lampada",
     "nome": "Lâmpada",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Fonte de luz",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 0.5,
     "custo": "5 PP",
     "descricao": "Queima óleo por até 6 horas e ilumina uma área próxima.",
     "tags": [
-      "luz"
+      "luz",
+      "equipamento"
     ],
     "mecanica": {
       "duracao": "6 horas",
@@ -1180,14 +1193,15 @@
   {
     "id": "lanterna-coberta",
     "nome": "Lanterna Coberta",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Fonte de luz",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 1,
     "custo": "5 PO",
     "descricao": "Lanterna de óleo cuja cobertura permite reduzir rapidamente a quantidade de luz emitida.",
     "tags": [
-      "luz"
+      "luz",
+      "equipamento"
     ],
     "mecanica": {
       "duracao": "6 horas",
@@ -1197,14 +1211,15 @@
   {
     "id": "lanterna-furta-fogo",
     "nome": "Lanterna Furta-Fogo",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Fonte de luz",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 1,
     "custo": "10 PO",
     "descricao": "Lanterna direcionada que projeta um cone de luz a longa distância.",
     "tags": [
-      "luz"
+      "luz",
+      "equipamento"
     ],
     "mecanica": {
       "duracao": "6 horas",
@@ -1214,14 +1229,15 @@
   {
     "id": "lente-de-aumento",
     "nome": "Lente de Aumento",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Ferramenta",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 0,
     "custo": "100 PO",
     "descricao": "Ajuda a inspecionar detalhes minúsculos e pode concentrar luz solar para iniciar fogo.",
     "tags": [
-      "investigação"
+      "investigação",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Ajuda a inspecionar detalhes minúsculos e pode concentrar luz solar para iniciar fogo."
@@ -1230,14 +1246,15 @@
   {
     "id": "luneta",
     "nome": "Luneta",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Ferramenta",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 0.5,
     "custo": "1.000 PO",
     "descricao": "Amplia visualmente objetos distantes.",
     "tags": [
-      "observação"
+      "observação",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Amplia visualmente objetos distantes."
@@ -1282,7 +1299,7 @@
   {
     "id": "tenda-para-duas-pessoas",
     "nome": "Tenda para Duas Pessoas",
-    "categoria": "utilizavel",
+    "categoria": "equipamento",
     "subcategoria": "Acampamento",
     "origem": "D&D 5e — Livro do Jogador (PHB)",
     "pesoKg": 10,
@@ -1290,7 +1307,8 @@
     "descricao": "Abrigo portátil para duas pessoas.",
     "tags": [
       "descanso",
-      "viagem"
+      "viagem",
+      "equipamento"
     ],
     "mecanica": {
       "efeito": "Abrigo portátil para duas pessoas."
