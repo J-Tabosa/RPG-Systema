@@ -72,7 +72,7 @@ const FORMS_CONFIG = {
     {key:'desc', label:'Resumo / Descrição', type:'textarea', req:true},
     {key:'tracoRacial', label:'Habilidade / Traço Racial', type:'textarea', req:true},
     {key:'velocidade', label:'Velocidade (m)', type:'number', req:true, def:9},
-    {key:'tamanho', label:'Tamanho', type:'select', req:true, options:[
+    {key:'tamanho', label:'Tamanho', type:'select', req:true, def:'Médio', options:[
       {v:'Miúdo',l:'Miúdo'},{v:'Pequeno',l:'Pequeno'},{v:'Médio',l:'Médio'},
       {v:'Grande',l:'Grande'},{v:'Enorme',l:'Enorme'},{v:'Imenso',l:'Imenso'}
     ]},
@@ -497,7 +497,7 @@ function alterarCamposForm(cat){
         <div class="mini-field" style="margin-top:5px">
           <label>${f.label}</label>
           <select id="fld_${f.key}">
-            ${f.options.map(o => `<option value="${o.v}">${o.l}</option>`).join('')}
+            ${f.options.map(o => `<option value="${o.v}" ${String(f.def ?? '') === String(o.v) ? 'selected' : ''}>${o.l}</option>`).join('')}
           </select>
         </div>`;
     }
