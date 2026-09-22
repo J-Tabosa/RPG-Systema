@@ -1,0 +1,116 @@
+.carry-panel{
+  margin:0 0 12px;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  background:linear-gradient(180deg,var(--card2),var(--card));
+}
+
+.carry-summary{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+}
+
+.carry-stat{
+  min-width:0;
+  padding:7px 8px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  background:var(--surface);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.carry-stat span{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.75px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.carry-stat strong{
+  font-size:13px;
+  color:var(--text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.carry-stat.danger strong{color:var(--red2)}
+
+.carry-progress{
+  height:7px;
+  margin:9px 0 8px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--surface);
+}
+
+.carry-progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:width .2s ease;
+}
+
+.carry-panel.warn .carry-progress span{background:#d89a45}
+.carry-panel.over{
+  border-color:var(--red2);
+  background:linear-gradient(180deg,rgba(180,55,55,.08),var(--card));
+}
+.carry-panel.over .carry-progress span{background:var(--red2)}
+
+.carry-detail-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px 12px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.35;
+}
+
+.carry-formula,
+.carry-lift{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.carry-formula i,
+.carry-lift i{color:var(--gold);font-size:14px}
+.carry-detail-row strong{color:var(--text)}
+
+.carry-settings{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,180px));
+  gap:8px;
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px dashed var(--border);
+}
+
+.carry-settings .form-field{margin:0}
+.carry-settings .form-field label{font-size:8px}
+.carry-settings input{padding:5px 7px;font-size:11px}
+
+@media(max-width:760px){
+  .carry-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .carry-settings{grid-template-columns:1fr 1fr;max-width:none}
+  .carry-detail-row{align-items:flex-start;flex-direction:column}
+}
+
+@media(max-width:420px){
+  .carry-settings{grid-template-columns:1fr}
+}
+
+@media print{
+  .carry-panel{break-inside:avoid}
+  .carry-settings{display:none!important}
+}
