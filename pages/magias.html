@@ -84,6 +84,20 @@
   </article>
 </div>
 
+<div class="modal-overlay spell-sheet-overlay" id="spellSheetModal" style="display:none" onclick="fecharSeletorFichaNoFundo(event)">
+  <section class="modal spell-sheet-modal" role="dialog" aria-modal="true" aria-labelledby="spellSheetModalTitle">
+    <div class="catalog-editor-head spell-sheet-head">
+      <div>
+        <div class="eyebrow"><i class="ti ti-scroll"></i> Grimório do personagem</div>
+        <h3 id="spellSheetModalTitle">Adicionar magia à ficha</h3>
+        <p id="spellSheetModalSubtitle">Escolha uma ficha para receber esta magia.</p>
+      </div>
+      <button class="modal-close static" onclick="fecharSeletorFicha()" aria-label="Fechar seletor de ficha"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="spell-sheet-list" id="spellSheetList"></div>
+  </section>
+</div>
+
 <div class="modal-overlay" id="spellEditorModal" style="display:none" onclick="fecharEditorNoFundo(event)">
   <div class="modal catalog-editor-modal spell-editor-modal">
     <div class="catalog-editor-head">

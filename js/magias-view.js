@@ -21,7 +21,7 @@
 
     return `
       <article class="spell-list-row" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button"
-        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
+        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
         <div class="spell-list-visual" aria-hidden="true">
           <i class="ti ${schoolIcon(magia.escola)}"></i>
           <span>${Number(magia.nivel)}</span>
@@ -60,7 +60,7 @@
           <span>${escaparHTML(magia.origem || '—')}</span>
         </div>
 
-        <div class="spell-list-arrow"><i class="ti ti-chevron-right"></i></div>
+        <button class="spell-list-add" type="button" onclick="event.stopPropagation();abrirSeletorFicha('${escaparHTML(magia.id)}')" onkeydown="event.stopPropagation()" title="Adicionar ${escaparHTML(magia.nome)} a uma ficha" aria-label="Adicionar ${escaparHTML(magia.nome)} a uma ficha"><i class="ti ti-bookmark-plus"></i></button>
       </article>
     `;
   }

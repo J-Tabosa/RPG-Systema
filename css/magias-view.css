@@ -23,7 +23,7 @@
 .spell-list-row{
   position:relative;
   display:grid;
-  grid-template-columns:60px minmax(240px,1.65fr) minmax(120px,.65fr) minmax(150px,.85fr) minmax(150px,.9fr) minmax(130px,.72fr) 20px;
+  grid-template-columns:60px minmax(240px,1.65fr) minmax(120px,.65fr) minmax(150px,.85fr) minmax(150px,.9fr) minmax(130px,.72fr) 36px;
   gap:12px;
   align-items:center;
   min-height:94px;
@@ -128,12 +128,11 @@
   overflow:hidden;
   text-overflow:ellipsis;
 }
-.spell-list-arrow{color:var(--muted);font-size:17px;transition:transform .12s ease,color .12s ease}
-.spell-list-row:hover .spell-list-arrow{transform:translateX(2px);color:var(--gold)}
+.spell-list-add{width:34px;height:34px;padding:0;font-size:15px}
 
 @media(max-width:1120px){
   .spell-list-row{
-    grid-template-columns:56px minmax(230px,1.6fr) minmax(115px,.65fr) minmax(145px,.85fr) minmax(145px,.85fr) 20px;
+    grid-template-columns:56px minmax(230px,1.6fr) minmax(115px,.65fr) minmax(145px,.85fr) minmax(145px,.85fr) 36px;
   }
   .spell-list-source{display:none}
 }
@@ -143,7 +142,7 @@
   .spell-view-toggle .btn span{display:none}
   .spell-view-toggle .btn{width:34px;height:30px;padding:0}
   .spell-list-row{
-    grid-template-columns:52px minmax(0,1fr) 18px;
+    grid-template-columns:52px minmax(0,1fr) 36px;
     gap:9px;
     min-height:82px;
     padding:10px;
@@ -151,7 +150,7 @@
   .spell-list-visual{width:46px;height:46px}
   .spell-list-visual i{font-size:24px}
   .spell-list-main{grid-column:2}
-  .spell-list-arrow{grid-column:3;grid-row:1}
+  .spell-list-add{grid-column:3;grid-row:1}
   .spell-list-col{display:none}
   .spell-list-main p{-webkit-line-clamp:1}
   .spell-list-title{gap:5px}

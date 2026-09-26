@@ -3,6 +3,8 @@ let ESCOLAS = [];
 let magiaEditandoId = null;
 let magiaEditandoBase = false;
 let dark = localStorage.getItem('rpg_theme') !== 'light';
+const FICHAS_STORAGE_KEY = 'rpg_fichas_v1';
+let magiaParaAdicionarId = null;
 
 const SCHOOL_COLORS = {
   'Abjuração': '#6f8fb3', 'Adivinhação': '#c6a15b', 'Conjuração': '#65a67a', 'Encantamento': '#c978b9',
@@ -42,6 +44,139 @@ function schoolColor(escola) {
 }
 function schoolIcon(escola) {
   return ESCOLAS.find(e => e.label === escola)?.icon || 'ti-wand';
+}
+
+function mostrarToast(mensagem) {
+  const anterior = document.querySelector('.toast.spell-toast');
+  if (anterior) anterior.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast spell-toast';
+  toast.setAttribute('role', 'status');
+  toast.textContent = mensagem;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2800);
+}
+
+function carregarFichasDoGlossario() {
+  try {
+    const fichas = JSON.parse(localStorage.getItem(FICHAS_STORAGE_KEY) || '[]');
+    return Array.isArray(fichas) ? fichas.filter(ficha => ficha && ficha.id) : [];
+  } catch (error) {
+    console.error('Não foi possível carregar as fichas:', error);
+    return [];
+  }
+}
+
+function magiaJaEstaNaFicha(ficha, magia) {
+  const nome = normalizarTexto(magia.nome);
+  return (ficha.spells || []).some(registro =>
+    (registro.catalogId && registro.catalogId === magia.id) ||
+    normalizarTexto(registro.name || registro.nome) === nome
+  );
+}
+
+function magiaParaFormatoDaFicha(magia) {
+  const descricao = magia.descricaoCompleta || magia.descricao || '';
+  const escalonamento = magia.escalonamento
+    ? `${descricao ? `${descricao}\n\n` : ''}Em níveis superiores: ${magia.escalonamento}`
+    : descricao;
+  return {
+    catalogId: magia.id,
+    name: magia.nome,
+    level: Math.max(0, Math.min(9, Number(magia.nivel) || 0)),
+    school: magia.escola || '',
+    cast: RPGCatalogo.formatCasting(magia.conjuracao),
+    range: RPGCatalogo.formatRange(magia.alcance),
+    aoe: RPGCatalogo.formatArea(magia.area),
+    duration: RPGCatalogo.formatDuration(magia.duracao),
+    desc: escalonamento,
+    source: (magia.fontes || []).join(' · ') || magia.origem || '',
+    classes: [...(magia.classes || [])]
+  };
+}
+
+function renderizarSeletorFicha() {
+  const magia = MAGIAS.find(registro => registro.id === magiaParaAdicionarId);
+  const lista = document.getElementById('spellSheetList');
+  const subtitulo = document.getElementById('spellSheetModalSubtitle');
+  if (!magia || !lista || !subtitulo) return;
+
+  subtitulo.innerHTML = `Escolha onde adicionar <strong>${escaparHTML(magia.nome)}</strong>.`;
+  const fichas = carregarFichasDoGlossario();
+  if (!fichas.length) {
+    lista.innerHTML = `
+      <div class="spell-sheet-empty">
+        <i class="ti ti-scroll-off"></i>
+        <strong>Nenhuma ficha encontrada</strong>
+        <p>Crie uma ficha de personagem antes de adicionar magias.</p>
+        <a class="btn primary" href="ficha.html"><i class="ti ti-plus"></i> Criar ficha</a>
+      </div>`;
+    return;
+  }
+
+  lista.innerHTML = fichas.map(ficha => {
+    const duplicada = magiaJaEstaNaFicha(ficha, magia);
+    const tipo = ficha.type === 'player' ? 'Jogador' : 'NPC';
+    const detalhes = [ficha.class || ficha.classe, ficha.level ? `Nível ${ficha.level}` : '', tipo].filter(Boolean).join(' · ');
+    return `
+      <article class="spell-sheet-option ${duplicada ? 'already-added' : ''}">
+        <div class="spell-sheet-avatar"><i class="ti ${ficha.type === 'player' ? 'ti-user' : 'ti-masks-theater'}"></i></div>
+        <div class="spell-sheet-info">
+          <strong>${escaparHTML(ficha.name || 'Ficha sem nome')}</strong>
+          <span>${escaparHTML(detalhes)}</span>
+        </div>
+        <button class="btn ${duplicada ? '' : 'primary'}" ${duplicada ? 'disabled' : ''}
+          onclick="adicionarMagiaAFicha('${escaparHTML(ficha.id)}')">
+          <i class="ti ${duplicada ? 'ti-check' : 'ti-plus'}"></i> ${duplicada ? 'Já adicionada' : 'Adicionar'}
+        </button>
+      </article>`;
+  }).join('');
+}
+
+function abrirSeletorFicha(id) {
+  if (!MAGIAS.some(magia => magia.id === id)) return;
+  magiaParaAdicionarId = id;
+  renderizarSeletorFicha();
+  document.getElementById('spellSheetModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function adicionarMagiaAFicha(fichaId) {
+  const magia = MAGIAS.find(registro => registro.id === magiaParaAdicionarId);
+  const fichas = carregarFichasDoGlossario();
+  const ficha = fichas.find(registro => registro.id === fichaId);
+  if (!magia || !ficha) {
+    mostrarToast('Não foi possível localizar a magia ou a ficha.');
+    return;
+  }
+  if (magiaJaEstaNaFicha(ficha, magia)) {
+    renderizarSeletorFicha();
+    mostrarToast('Esta magia já está nessa ficha.');
+    return;
+  }
+
+  if (!Array.isArray(ficha.spells)) ficha.spells = [];
+  ficha.spells.push(magiaParaFormatoDaFicha(magia));
+  ficha.spells.sort((a, b) => (Number(a.level) || 0) - (Number(b.level) || 0) ||
+    String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
+  try {
+    localStorage.setItem(FICHAS_STORAGE_KEY, JSON.stringify(fichas));
+    renderizarSeletorFicha();
+    mostrarToast(`${magia.nome} adicionada à ficha ${ficha.name || 'selecionada'}!`);
+  } catch (error) {
+    console.error('Não foi possível salvar a magia na ficha:', error);
+    mostrarToast('Não foi possível salvar a magia na ficha.');
+  }
+}
+
+function fecharSeletorFicha() {
+  document.getElementById('spellSheetModal').style.display = 'none';
+  magiaParaAdicionarId = null;
+  if (document.getElementById('spellModal').style.display !== 'flex') document.body.style.overflow = '';
+}
+
+function fecharSeletorFichaNoFundo(event) {
+  if (event.target.id === 'spellSheetModal') fecharSeletorFicha();
 }
 
 async function carregarMagias() {
@@ -206,7 +341,7 @@ function renderizarMagias(lista) {
         ? '<span class="catalog-origin custom">Personalizada</span>'
         : `<span class="catalog-origin">${escaparHTML(sourceLabel)}</span>`;
     return `
-      <article class="spell-card" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
+      <article class="spell-card" style="--spell-color:${cor}" onclick="abrirDetalhes('${escaparHTML(magia.id)}')" tabindex="0" role="button" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();abrirDetalhes('${escaparHTML(magia.id)}')}">
         <div class="spell-card-head">
           <div class="spell-level-icon">${Number(magia.nivel)}</div>
           <div class="spell-card-title"><h3>${escaparHTML(magia.nome)}</h3><p>${escaparHTML(nivelLabel(magia.nivel))} · ${escaparHTML(magia.escola || 'Sem escola')}</p></div>
@@ -223,7 +358,7 @@ function renderizarMagias(lista) {
           <div class="item-tags">${concentration}${ritual}${(magia.tags || []).slice(0, 3).map(tag => `<span class="item-tag">${escaparHTML(tag)}</span>`).join('')}</div>
           <div class="spell-card-footer">
             <span class="spell-area-badge ${magia.area?.forma === 'nenhuma' ? 'spell-no-area' : ''}"><i class="ti ti-ruler-measure"></i>${escaparHTML(area)}</span>
-            <span class="item-card-link">Ver magia <i class="ti ti-arrow-right"></i></span>
+            <button class="spell-add-shortcut" type="button" onclick="event.stopPropagation();abrirSeletorFicha('${escaparHTML(magia.id)}')" onkeydown="event.stopPropagation()" title="Adicionar ${escaparHTML(magia.nome)} a uma ficha" aria-label="Adicionar ${escaparHTML(magia.nome)} a uma ficha"><i class="ti ti-bookmark-plus"></i> Adicionar à ficha</button>
           </div>
         </div>
       </article>`;
@@ -281,6 +416,7 @@ function abrirDetalhes(id) {
       ${magia.escalonamento ? `<section class="detail-section"><h3><i class="ti ti-trending-up"></i> Em níveis superiores</h3><p>${escaparHTML(magia.escalonamento)}</p></section>` : ''}
       <section class="detail-section"><h3><i class="ti ti-info-circle"></i> Origem e classes</h3><p><strong>${escaparHTML((magia.fontes || []).join(' · ') || magia.origem || '—')}</strong><br>${escaparHTML((magia.classes || []).join(', ') || 'Classes não especificadas')}</p></section>
       <div class="catalog-detail-actions no-print">
+        <button class="btn primary spell-detail-add" onclick="abrirSeletorFicha('${escaparHTML(magia.id)}')"><i class="ti ti-bookmark-plus"></i> Adicionar à ficha</button>
         <button class="btn" onclick="editarMagia('${escaparHTML(magia.id)}')"><i class="ti ti-edit"></i> Editar</button>
         ${magia.baseOverride
           ? `<button class="btn danger" onclick="excluirMagia('${escaparHTML(magia.id)}')"><i class="ti ti-restore"></i> Restaurar original</button>`
@@ -502,7 +638,8 @@ document.addEventListener('input', event => {
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
-    if (document.getElementById('spellEditorModal')?.style.display !== 'none') fecharEditorMagia();
+    if (document.getElementById('spellSheetModal')?.style.display !== 'none') fecharSeletorFicha();
+    else if (document.getElementById('spellEditorModal')?.style.display !== 'none') fecharEditorMagia();
     else if (document.getElementById('spellModal')?.style.display !== 'none') fecharDetalhes();
   }
 });
