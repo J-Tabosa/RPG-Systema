@@ -48,6 +48,150 @@ body.light .modal h3 {
   overflow-wrap: anywhere; /* Quebra palavras longas ou links se necessário */
 }
 
+/* ── EDITOR DE TEXTO DA CAMPANHA ───────────────────────────────────────────── */
+.campaign-editor-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  position: sticky;
+  top: 4px;
+  z-index: 5;
+}
+
+.editor-tool-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+  border-right: 1px solid var(--border);
+}
+
+.editor-tool-group:last-child { border-right: 0; padding-right: 0; }
+.editor-tool-selects { align-items: flex-end; flex-wrap: wrap; }
+
+.editor-tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: var(--muted);
+  font-family: "Cinzel", serif;
+  font-size: 7px;
+  letter-spacing: .65px;
+  text-transform: uppercase;
+}
+
+.editor-tool-field select {
+  min-width: 92px;
+  height: 30px;
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--text);
+  font-family: "Crimson Text", serif;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.editor-tool-field select:focus { outline: none; border-color: var(--gold); }
+
+.editor-tool-btn,
+.editor-color-tool {
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  transition: .15s ease;
+}
+
+.editor-tool-btn:hover,
+.editor-color-tool:hover { border-color: var(--gold); color: var(--gold); }
+.editor-color-tool { position: relative; overflow: hidden; }
+.editor-color-tool i { pointer-events: none; font-size: 17px; }
+.editor-color-tool input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.campaign-editor-paste-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -5px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.campaign-rich-editor {
+  flex: 1;
+  min-height: 420px;
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--bg);
+  color: inherit;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.campaign-rich-editor:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(200, 168, 107, .08);
+}
+
+.campaign-rich-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.campaign-rich-editor h1,
+.campaign-rich-editor h2,
+.campaign-rich-editor h3,
+.campaign-rich-editor h4 {
+  font-family: "Cinzel", serif;
+  color: var(--gold2);
+  line-height: 1.25;
+  margin: 1em 0 .45em;
+}
+.campaign-rich-editor h1 { font-size: 30px; }
+.campaign-rich-editor h2 { font-size: 24px; }
+.campaign-rich-editor h3 { font-size: 19px; }
+.campaign-rich-editor h4 { font-size: 17px; }
+.campaign-rich-editor p { margin: 0 0 .8em; }
+.campaign-rich-editor ul,
+.campaign-rich-editor ol { margin: .6em 0 .9em; padding-left: 1.7em; }
+.campaign-rich-editor blockquote {
+  margin: .8em 0;
+  padding: 8px 14px;
+  border-left: 3px solid var(--gold);
+  background: var(--surface);
+  color: var(--muted);
+  font-style: italic;
+}
+.campaign-rich-editor table { width: 100%; border-collapse: collapse; margin: .8em 0; }
+.campaign-rich-editor th,
+.campaign-rich-editor td { padding: 7px 9px; border: 1px solid var(--border); text-align: left; }
+.campaign-rich-editor th { background: var(--surface); color: var(--gold2); }
+
 /* ── COMPORTAMENTO DO MENU HAMBÚRGUER (DESKTOP E MOBILE) ────────────────────── */
 .mob-menu-btn {
   display: flex !important;
@@ -112,6 +256,12 @@ body.light .modal h3 {
     border-left: none;
     border-radius: 0;
   }
+
+  .campaign-editor-toolbar { position: static; align-items: stretch; }
+  .editor-tool-group { border-right: 0; padding-right: 0; }
+  .editor-tool-selects { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .editor-tool-field select { width: 100%; min-width: 0; }
+  .campaign-rich-editor { min-height: 360px; padding: 14px; }
 }
 
 /* ── ESTILIZAÇÃO DAS LISTAS DE SELEÇÃO DE JOGADORES E MONSTROS ──────────────── */

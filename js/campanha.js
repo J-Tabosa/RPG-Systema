@@ -931,16 +931,91 @@ function renderWorkspaceSessao(c) {
       </div>
 
       <!-- BARRA DE FERRAMENTAS DO EDITOR ENRIQUECIDO -->
-      <div style="display:flex; align-items:center; gap:8px; background:var(--surface); padding:6px 10px; border-radius:4px; border:1px solid var(--border);">
-        <label style="font-size:12px; color:var(--muted); margin:0;">Cor do Texto Selecionado:</label>
-        <input type="color" id="editorColorPicker" value="#c8a86b" onchange="aplicarCorTexto(this.value)" style="border:none; background:transparent; width:28px; height:28px; cursor:pointer;">
-        <button class="btn xs" onclick="execCmd('bold')"><b>B</b></button>
-        <button class="btn xs" onclick="execCmd('italic')"><i>I</i></button>
-        <button class="btn xs" onclick="execCmd('underline')"><u>U</u></button>
+      <div class="campaign-editor-toolbar" onmousedown="salvarSelecaoEditor()">
+        <div class="editor-tool-group editor-tool-selects">
+          <label class="editor-tool-field">
+            <span>Estilo</span>
+            <select aria-label="Estilo do parágrafo" onchange="aplicarFormatoBloco(this.value); this.selectedIndex=0">
+              <option value="">Escolher</option>
+              <option value="p">Texto normal</option>
+              <option value="h1">Título</option>
+              <option value="h2">Subtítulo</option>
+              <option value="h3">Seção</option>
+              <option value="blockquote">Citação</option>
+            </select>
+          </label>
+          <label class="editor-tool-field">
+            <span>Tamanho</span>
+            <select aria-label="Tamanho da fonte" onchange="aplicarTamanhoFonte(this.value); this.selectedIndex=0">
+              <option value="">Fonte</option>
+              <option value="12px">12 px</option>
+              <option value="14px">14 px</option>
+              <option value="16px">16 px</option>
+              <option value="18px">18 px</option>
+              <option value="20px">20 px</option>
+              <option value="24px">24 px</option>
+              <option value="28px">28 px</option>
+              <option value="32px">32 px</option>
+              <option value="40px">40 px</option>
+            </select>
+          </label>
+          <label class="editor-tool-field">
+            <span>Entre letras</span>
+            <select aria-label="Espaçamento entre letras" onchange="aplicarEspacamentoLetras(this.value); this.selectedIndex=0">
+              <option value="">Padrão</option>
+              <option value="0px">0 px</option>
+              <option value="0.5px">0,5 px</option>
+              <option value="1px">1 px</option>
+              <option value="1.5px">1,5 px</option>
+              <option value="2px">2 px</option>
+              <option value="3px">3 px</option>
+            </select>
+          </label>
+          <label class="editor-tool-field">
+            <span>Entre linhas</span>
+            <select aria-label="Espaçamento entre linhas" onchange="aplicarEspacamentoLinhas(this.value); this.selectedIndex=0">
+              <option value="">Padrão</option>
+              <option value="1">Simples</option>
+              <option value="1.25">1,25</option>
+              <option value="1.5">1,5</option>
+              <option value="1.75">1,75</option>
+              <option value="2">Duplo</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="editor-tool-group" aria-label="Formatação do texto">
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('bold')" title="Negrito"><b>B</b></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('italic')" title="Itálico"><i>I</i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('underline')" title="Sublinhado"><u>U</u></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('strikeThrough')" title="Tachado"><s>S</s></button>
+        </div>
+
+        <div class="editor-tool-group" aria-label="Cores do texto">
+          <label class="editor-color-tool" title="Cor do texto selecionado">
+            <i class="ti ti-letter-a"></i>
+            <input type="color" id="editorColorPicker" value="#c8a86b" aria-label="Cor do texto selecionado" oninput="aplicarCorTexto(this.value)">
+          </label>
+          <label class="editor-color-tool" title="Marca-texto">
+            <i class="ti ti-highlight"></i>
+            <input type="color" id="editorHighlightPicker" value="#755f20" aria-label="Cor de destaque do texto" oninput="aplicarDestaqueTexto(this.value)">
+          </label>
+        </div>
+
+        <div class="editor-tool-group" aria-label="Alinhamento e listas">
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('justifyLeft')" title="Alinhar à esquerda"><i class="ti ti-align-left"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('justifyCenter')" title="Centralizar"><i class="ti ti-align-center"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('justifyRight')" title="Alinhar à direita"><i class="ti ti-align-right"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('justifyFull')" title="Justificar"><i class="ti ti-align-justified"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('insertUnorderedList')" title="Lista com marcadores"><i class="ti ti-list"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="execCmd('insertOrderedList')" title="Lista numerada"><i class="ti ti-list-numbers"></i></button>
+          <button type="button" class="editor-tool-btn" onmousedown="event.preventDefault();salvarSelecaoEditor()" onclick="limparFormatacaoEditor()" title="Limpar formatação"><i class="ti ti-clear-formatting"></i></button>
+        </div>
       </div>
+      <div class="campaign-editor-paste-hint"><i class="ti ti-clipboard-text"></i> Textos colados são normalizados para manter títulos, listas e ênfases sem trazer fontes ou espaçamentos externos.</div>
 
       <!-- ÁREA DE TEXTO ENRIQUECIDO EXPANDIDA -->
-      <div id="richTextEditor" contenteditable="true" oninput="atualizarDadosSessao()" style="flex:1; min-height:420px; overflow-y:auto; border:1px solid var(--border); padding:16px; border-radius:4px; background:var(--bg); color:inherit; outline:none; font-size:16px; line-height:1.6;">
+      <div id="richTextEditor" class="campaign-rich-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Escreva a história desta sessão..." oninput="atualizarDadosSessao()" onpaste="tratarColagemEditor(event)" onmouseup="salvarSelecaoEditor()" onkeyup="salvarSelecaoEditor()" onfocus="salvarSelecaoEditor()">
         ${s.texto || ""}
       </div>
     </div>`;
@@ -985,13 +1060,254 @@ function excluirSessao(id) {
   }
 }
 
+let selecaoEditorSalva = null;
+
+function getRichTextEditor() {
+  return document.getElementById("richTextEditor");
+}
+
+function selecaoPertenceAoEditor(range, editor = getRichTextEditor()) {
+  return Boolean(editor && range && editor.contains(range.commonAncestorContainer));
+}
+
+function selecaoSobrepoeNode(range, node) {
+  const nodeRange = document.createRange();
+  nodeRange.selectNodeContents(node);
+  return range.compareBoundaryPoints(Range.END_TO_START, nodeRange) < 0
+    && range.compareBoundaryPoints(Range.START_TO_END, nodeRange) > 0;
+}
+
+function salvarSelecaoEditor() {
+  const editor = getRichTextEditor();
+  const selecao = window.getSelection();
+  if (!editor || !selecao || !selecao.rangeCount) return;
+  const range = selecao.getRangeAt(0);
+  if (selecaoPertenceAoEditor(range, editor)) selecaoEditorSalva = range.cloneRange();
+}
+
+function restaurarSelecaoEditor() {
+  const editor = getRichTextEditor();
+  if (!editor) return null;
+  editor.focus({ preventScroll: true });
+  if (!selecaoEditorSalva || !selecaoPertenceAoEditor(selecaoEditorSalva, editor)) return null;
+  const selecao = window.getSelection();
+  selecao.removeAllRanges();
+  selecao.addRange(selecaoEditorSalva);
+  return selecaoEditorSalva;
+}
+
 function execCmd(command, value = null) {
-  document.execCommand(command, false, value);
+  restaurarSelecaoEditor();
+  document.execCommand("styleWithCSS", false, true);
+  const aplicado = document.execCommand(command, false, value);
+  salvarSelecaoEditor();
+  atualizarDadosSessao();
+  return aplicado;
+}
+
+function aplicarFormatoBloco(tag) {
+  if (!tag) return;
+  const editor = getRichTextEditor();
+  const range = restaurarSelecaoEditor();
+  if (!editor || !range) return;
+
+  const seletorBloco = "p,div,h1,h2,h3,h4,blockquote,pre";
+  const blocos = new Set();
+  const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (!node.textContent.trim()) continue;
+    try {
+      if (selecaoSobrepoeNode(range, node)) {
+        const bloco = node.parentElement.closest(seletorBloco);
+        if (bloco && editor.contains(bloco)) blocos.add(bloco);
+      }
+    } catch (error) {}
+  }
+
+  if (!blocos.size) {
+    const origem = range.startContainer.nodeType === Node.TEXT_NODE
+      ? range.startContainer.parentElement
+      : range.startContainer;
+    const bloco = origem?.closest?.(seletorBloco);
+    if (bloco && editor.contains(bloco)) blocos.add(bloco);
+  }
+
+  if (!blocos.size) {
+    toast("Posicione o cursor em um parágrafo para aplicar este estilo.");
+    return;
+  }
+
+  const blocosFormatados = [...blocos].map((bloco) => {
+    if (bloco.tagName.toLowerCase() === tag) return bloco;
+    const novoBloco = document.createElement(tag);
+    novoBloco.style.cssText = bloco.style.cssText;
+    while (bloco.firstChild) novoBloco.appendChild(bloco.firstChild);
+    bloco.replaceWith(novoBloco);
+    return novoBloco;
+  });
+
+  const novaSelecao = document.createRange();
+  novaSelecao.setStart(blocosFormatados[0], 0);
+  const ultimoBloco = blocosFormatados[blocosFormatados.length - 1];
+  novaSelecao.setEnd(ultimoBloco, ultimoBloco.childNodes.length);
+  const selecao = window.getSelection();
+  selecao.removeAllRanges();
+  selecao.addRange(novaSelecao);
+  selecaoEditorSalva = novaSelecao.cloneRange();
   atualizarDadosSessao();
 }
 
 function aplicarCorTexto(color) {
   execCmd("foreColor", color);
+}
+
+function aplicarDestaqueTexto(color) {
+  restaurarSelecaoEditor();
+  document.execCommand("styleWithCSS", false, true);
+  if (!document.execCommand("hiliteColor", false, color)) {
+    document.execCommand("backColor", false, color);
+  }
+  salvarSelecaoEditor();
+  atualizarDadosSessao();
+}
+
+function aplicarEstiloInline(cssProperty, value) {
+  const editor = getRichTextEditor();
+  const range = restaurarSelecaoEditor();
+  if (!editor || !range || range.collapsed) {
+    toast("Selecione um trecho do texto para aplicar esta formatação.");
+    return;
+  }
+
+  const marcador = `rpg-editor-${Date.now()}`;
+  document.execCommand("styleWithCSS", false, false);
+  document.execCommand("fontName", false, marcador);
+  document.execCommand("styleWithCSS", false, true);
+
+  const marcados = editor.querySelectorAll(`font[face="${marcador}"], span[style*="${marcador}"]`);
+  marcados.forEach((elemento) => {
+    const span = document.createElement("span");
+    span.style.setProperty(cssProperty, value);
+    while (elemento.firstChild) span.appendChild(elemento.firstChild);
+    elemento.replaceWith(span);
+  });
+
+  salvarSelecaoEditor();
+  atualizarDadosSessao();
+}
+
+function aplicarTamanhoFonte(value) {
+  if (value) aplicarEstiloInline("font-size", value);
+}
+
+function aplicarEspacamentoLetras(value) {
+  if (value) aplicarEstiloInline("letter-spacing", value);
+}
+
+function aplicarEspacamentoLinhas(value) {
+  if (!value) return;
+  const editor = getRichTextEditor();
+  const range = restaurarSelecaoEditor();
+  if (!editor || !range) return;
+  const seletorBloco = "p,div,h1,h2,h3,h4,li,blockquote,pre";
+  const blocos = new Set();
+  const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (!node.textContent.trim()) continue;
+    try {
+      if (selecaoSobrepoeNode(range, node)) {
+        const bloco = node.parentElement.closest(seletorBloco);
+        if (bloco && editor.contains(bloco)) blocos.add(bloco);
+      }
+    } catch (error) {}
+  }
+  if (!blocos.size) {
+    const origem = range.startContainer.nodeType === Node.TEXT_NODE
+      ? range.startContainer.parentElement
+      : range.startContainer;
+    const bloco = origem?.closest?.(seletorBloco);
+    if (bloco && editor.contains(bloco)) blocos.add(bloco);
+  }
+  blocos.forEach((bloco) => bloco.style.lineHeight = value);
+  salvarSelecaoEditor();
+  atualizarDadosSessao();
+}
+
+function limparFormatacaoEditor() {
+  execCmd("removeFormat");
+}
+
+function limparHTMLColado(html) {
+  const documento = new DOMParser().parseFromString(html, "text/html");
+  const tagsPermitidas = new Set([
+    "P", "DIV", "BR", "H1", "H2", "H3", "H4", "UL", "OL", "LI",
+    "BLOCKQUOTE", "STRONG", "B", "EM", "I", "U", "S", "CODE", "PRE",
+    "HR", "TABLE", "THEAD", "TBODY", "TR", "TH", "TD"
+  ]);
+  const tagsBloqueadas = new Set(["SCRIPT", "STYLE", "LINK", "META", "IMG", "SVG", "IFRAME", "OBJECT", "EMBED"]);
+
+  function limparNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) return document.createTextNode(node.textContent);
+    if (node.nodeType !== Node.ELEMENT_NODE || tagsBloqueadas.has(node.tagName)) return null;
+    const fragmento = document.createDocumentFragment();
+    [...node.childNodes].forEach((filho) => {
+      const limpo = limparNode(filho);
+      if (limpo) fragmento.appendChild(limpo);
+    });
+    if (!tagsPermitidas.has(node.tagName)) return fragmento;
+    const tag = node.tagName === "DIV" ? "p" : node.tagName.toLowerCase();
+    const elemento = document.createElement(tag);
+    elemento.appendChild(fragmento);
+    return elemento;
+  }
+
+  const container = document.createElement("div");
+  [...documento.body.childNodes].forEach((node) => {
+    const limpo = limparNode(node);
+    if (limpo) container.appendChild(limpo);
+  });
+  return container.innerHTML;
+}
+
+function textoPlanoParaHTML(texto) {
+  const escapar = (valor) => String(valor)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+  return texto.replace(/\r\n?/g, "\n").split(/\n{2,}/)
+    .map((bloco) => `<p>${escapar(bloco).replaceAll("\n", "<br>") || "<br>"}</p>`)
+    .join("");
+}
+
+function inserirHTMLNaSelecao(html) {
+  const editor = getRichTextEditor();
+  const selecao = window.getSelection();
+  if (!editor || !selecao || !selecao.rangeCount) return;
+  const range = selecao.getRangeAt(0);
+  if (!selecaoPertenceAoEditor(range, editor)) return;
+  range.deleteContents();
+  const fragmento = range.createContextualFragment(html);
+  const ultimo = fragmento.lastChild;
+  range.insertNode(fragmento);
+  if (ultimo) {
+    range.setStartAfter(ultimo);
+    range.collapse(true);
+    selecao.removeAllRanges();
+    selecao.addRange(range);
+  }
+}
+
+function tratarColagemEditor(event) {
+  event.preventDefault();
+  const html = event.clipboardData?.getData("text/html") || "";
+  const texto = event.clipboardData?.getData("text/plain") || "";
+  const conteudo = html ? limparHTMLColado(html) : textoPlanoParaHTML(texto);
+  inserirHTMLNaSelecao(conteudo);
+  salvarSelecaoEditor();
+  atualizarDadosSessao();
+  toast("Texto colado com a formatação normalizada.");
 }
 
 function atualizarDadosSessao() {
