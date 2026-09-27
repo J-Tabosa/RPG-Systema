@@ -1,0 +1,1153 @@
+{
+  "_meta": {
+    "nome": "Bestiário — Capítulo 05: A Estrada das Pradarias",
+    "sistema_destino": "D&D 5e / RPG-Systema",
+    "quantidade": 9,
+    "observacao": "Importe este arquivo no Bestiário antes da campanha para que a lateral de Ameaças da Sessão reconheça os IDs vinculados."
+  },
+  "monstros": [
+    {
+      "id": "m_planicies_ankheg",
+      "name": "Ankheg",
+      "tamanho": "Grande",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "3",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 2,
+      "xp": 700,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 17
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 11
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 15
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 1
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 13
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 6
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 15
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 0
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "9m, escavação 6m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 52
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 52
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_ankheg_01",
+          "name": "Sentido Sísmico",
+          "level": "trait",
+          "desc": "Enquanto estiver em contato com o chão, o ankheg detecta vibrações e criaturas em contato com a mesma superfície em um raio de 18 m.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_ankheg_02",
+          "name": "Predador Escavador",
+          "level": "trait",
+          "desc": "O ankheg atravessa solo natural escavando sem deixar um túnel estável. Costuma iniciar o encontro oculto sob a terra e escolher alvos isolados.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_ankheg_03",
+          "name": "Mordida Ácida",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +5 para atingir, alcance 1,5 m. Dano: 10 (2d6+3) perfurante + 3 (1d6) ácido. Uma criatura Grande ou menor atingida deve vencer Atletismo ou Acrobacia CD 13 ou fica Agarrada. O ankheg só mantém uma criatura agarrada por vez.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_ankheg_04",
+          "name": "Jato de Ácido (Recarga 5–6)",
+          "level": "action",
+          "desc": "Linha de 9 m por 1,5 m. Salvaguarda de Destreza CD 13. Falha: 14 (4d6) de dano ácido. Sucesso: metade.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Quitina resistente e glândula de ácido aproveitável por alquimistas.",
+      "notes": "Baseado no Ankheg do Monster Manual I de D&D 3.5, criatura de planícies quentes, CR 3. Conversão homebrew para D&D 5e, ND 3. No Capítulo 05, use 2 se os personagens insistirem em cortar caminho por solo fofo ou repetirem uma falha de navegação.",
+      "backstory": "Monstruosidade insetoide que escava sob campos e pradarias, guiando-se pelas vibrações das presas."
+    },
+    {
+      "id": "m_planicies_rinoceronte",
+      "name": "Rinoceronte",
+      "tamanho": "Grande",
+      "race": "Besta",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "3",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 2,
+      "xp": 700,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 21
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 8
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 16
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 2
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 12
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 6
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 14
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": -1
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "12m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 68
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 68
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_rino_01",
+          "name": "Temperamento Territorial",
+          "level": "trait",
+          "desc": "O rinoceronte não persegue criaturas que abandonem sua área ou se afastem de seu filhote. Se provocado, prioriza a ameaça mais próxima.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_rino_02",
+          "name": "Investida Poderosa",
+          "level": "trait",
+          "desc": "Se mover pelo menos 6 m em linha reta e atingir com Chifrada no mesmo turno, causa +9 (2d8) perfurante. O alvo Grande ou menor faz FOR CD 15; em falha, cai no chão.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_rino_03",
+          "name": "Chifrada",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +7 para atingir, alcance 1,5 m. Dano: 14 (2d8+5) perfurante.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Chifre, couro espesso e carne.",
+      "notes": "Baseado no Rinoceronte do Monster Manual I de D&D 3.5, CR 4, planícies quentes. Conversão ND 3. No capítulo é um encontro ambiental: 1 adulto e um filhote narrativo.",
+      "backstory": "Um grande herbívoro territorial. Normalmente prefere intimidar e afastar intrusos a lutar até a morte."
+    },
+    {
+      "id": "m_planicies_leao_atroz",
+      "name": "Leão Atroz",
+      "tamanho": "Grande",
+      "race": "Besta",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "4",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 2,
+      "xp": 1100,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 20
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 15
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 16
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 3
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 14
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 8
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 14
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 2
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "15m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 95
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 95
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_leao_01",
+          "name": "Faro Aguçado",
+          "level": "trait",
+          "desc": "O leão tem vantagem em testes de Sabedoria (Percepção) baseados em olfato.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_leao_02",
+          "name": "Caçador de Matilha",
+          "level": "trait",
+          "desc": "O leão tem vantagem em uma jogada de ataque contra uma criatura se ao menos um aliado do leão estiver a até 1,5 m do alvo e não estiver incapacitado.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_leao_03",
+          "name": "Bote",
+          "level": "trait",
+          "desc": "Se mover pelo menos 6 m em linha reta e atingir uma criatura Grande ou menor com Garra, o alvo faz FOR CD 15. Em falha, cai no chão. Se cair, o leão pode usar Mordida contra ele como ação bônus.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_leao_04",
+          "name": "Ataques Múltiplos",
+          "level": "action",
+          "desc": "O leão realiza um ataque de Mordida e um de Garra.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_leao_05",
+          "name": "Mordida",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +7 para atingir, alcance 1,5 m. Dano: 10 (1d10+5) perfurante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_leao_06",
+          "name": "Garra",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +7 para atingir, alcance 1,5 m. Dano: 12 (2d6+5) cortante.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Pele, dentes e garras aproveitáveis.",
+      "notes": "Baseado no Dire Lion do Monster Manual I de D&D 3.5, CR 5, planícies quentes. Conversão ND 4. No Capítulo 05, use 2 como o combate principal entre o capim alto.",
+      "backstory": "Felinos enormes adaptados às pradarias. Caçam em coordenação, aproximando-se quase invisíveis entre o capim."
+    },
+    {
+      "id": "m_planicies_draco_emboscada",
+      "name": "Draco de Emboscada",
+      "tamanho": "Médio",
+      "race": "Dragão",
+      "alignment": "Neutro e Mau",
+      "class": "Monstro",
+      "level": "5",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 3,
+      "xp": 1800,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 16
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 16
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 18
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 7
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 12
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 9
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 16
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 3
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "12m, voo 12m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 90
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 90
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_draco_01",
+          "name": "Táticas de Matilha",
+          "level": "trait",
+          "desc": "O draco tem vantagem em ataques contra uma criatura se um aliado estiver a até 1,5 m dela e não estiver incapacitado.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_02",
+          "name": "Elo Telepático",
+          "level": "trait",
+          "desc": "Dracos do mesmo bando compartilham imagens simples, emoções e posição de presas a até 18 m.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_03",
+          "name": "Caçador do Capim Alto",
+          "level": "trait",
+          "desc": "O draco tem vantagem em testes de Destreza (Furtividade) em capim alto, ravinas ou entre rochas baixas.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_04",
+          "name": "Ataques Múltiplos",
+          "level": "action",
+          "desc": "O draco realiza um ataque de Mordida Venenosa e um de Garra.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_05",
+          "name": "Mordida Venenosa",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +6 para atingir, alcance 1,5 m. Dano: 8 (1d10+3) perfurante + 7 (2d6) veneno.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_06",
+          "name": "Garra",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +6 para atingir, alcance 1,5 m. Dano: 7 (1d8+3) cortante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_draco_07",
+          "name": "Sopro Tóxico (Recarga 5–6)",
+          "level": "action",
+          "desc": "Cone de 6 m. CON CD 15. Falha: 21 (6d6) veneno e Envenenado até o fim do próximo turno do draco. Sucesso: metade e não fica Envenenado.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Escamas e bolsa de veneno.",
+      "notes": "Baseado no Ambush Drake do Monster Manual III de D&D 3.5, CR 5, planícies temperadas. Conversão ND 5. Use 1; para 5–6 aventureiros descansados, use 2.",
+      "backstory": "Predador dracônico de pradaria, inteligente o bastante para usar vegetação, elevações e rasantes como cobertura."
+    },
+    {
+      "id": "m_planicies_bulette",
+      "name": "Bulette",
+      "tamanho": "Enorme",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "6",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 3,
+      "xp": 2300,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 22
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 14
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 20
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 2
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 13
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 6
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 17
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 2
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "12m, escavação 12m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 125
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 125
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_bulette_01",
+          "name": "Sentido Sísmico",
+          "level": "trait",
+          "desc": "Enquanto em contato com o solo, a bulette percebe vibrações em um raio de 18 m.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_bulette_02",
+          "name": "Tubarão da Terra",
+          "level": "trait",
+          "desc": "A bulette escava por solo natural. Quando se aproxima sob o chão, rachaduras, pedras saltando e tremores podem denunciar sua trajetória a critério do mestre.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_bulette_03",
+          "name": "Mordida",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +9 para atingir, alcance 1,5 m. Dano: 28 (4d10+6) perfurante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_bulette_04",
+          "name": "Salto Devastador (Recarga 5–6)",
+          "level": "action",
+          "desc": "A bulette salta até 9 m e desaba em um ponto. Criaturas a até 1,5 m fazem DES CD 16. Falha: 20 (4d6+6) concussão e Caído. Sucesso: metade e não cai.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Carapaça pesada e dentes.",
+      "notes": "Baseado na Bulette do Monster Manual I de D&D 3.5, CR 7. Conversão ND 6. No Capítulo 05 é encontro de reserva para desvios longos, terreno de solo profundo ou necessidade de elevar a tensão.",
+      "backstory": "Predador subterrâneo apelidado de tubarão da terra, atraído por passos pesados e animais de carga."
+    },
+    {
+      "id": "m_planicies_chuul_rio",
+      "name": "Chuul do Rio",
+      "tamanho": "Grande",
+      "race": "Aberração",
+      "alignment": "Caótico e Mau",
+      "class": "Monstro",
+      "level": "6",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 3,
+      "xp": 2300,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 19
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 12
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 18
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 10
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 14
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 5
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 16
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 1
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "9m, natação 12m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 115
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 115
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_chuul_01",
+          "name": "Anfíbio",
+          "level": "trait",
+          "desc": "O chuul respira ar e água.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_chuul_02",
+          "name": "Camuflagem Fluvial",
+          "level": "trait",
+          "desc": "O chuul tem vantagem em Furtividade quando está total ou parcialmente submerso em água turva, vegetação aquática ou lama.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_chuul_03",
+          "name": "Caçador da Margem",
+          "level": "trait",
+          "desc": "Uma criatura agarrada pelo chuul tem deslocamento 0. Se estiver a até 1,5 m da água, o chuul prioriza arrastá-la para o rio.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_chuul_04",
+          "name": "Ataques Múltiplos",
+          "level": "action",
+          "desc": "O chuul realiza dois ataques de Pinça.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_chuul_05",
+          "name": "Pinça",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +7 para atingir, alcance 3 m. Dano: 11 (2d6+4) concussão. Uma criatura Grande ou menor atingida fica Agarrada, escapar CD 15. Cada pinça pode agarrar um alvo.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_chuul_06",
+          "name": "Tentáculos Paralíticos",
+          "level": "action",
+          "desc": "Uma criatura agarrada faz CON CD 15. Em falha, fica Paralisada até o fim do próximo turno do chuul. Repete a salvaguarda no fim de seu turno.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Carapaça e glândulas paralíticas.",
+      "notes": "Baseado no Chuul do Monster Manual I de D&D 3.5, CR 7, adaptado de pântanos temperados para rios de água doce e várzeas. Conversão ND 6. No Capítulo 05, use 1 durante a pescaria se o grupo acumular falhas ou entrar em águas profundas.",
+      "backstory": "Uma população de chuuls adaptou-se a remansos profundos de rios, caçando animais e viajantes a partir da margem."
+    },
+    {
+      "id": "m_planicies_tusk_terror",
+      "name": "Terror de Presas",
+      "tamanho": "Médio",
+      "race": "Monstruosidade",
+      "alignment": "Caótico e Neutro",
+      "class": "Monstro",
+      "level": "8",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 3,
+      "xp": 3900,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 16
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 20
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 18
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 11
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 14
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 9
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 17
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 5
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "24m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 138
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 138
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_tusk_01",
+          "name": "Predador Móvel",
+          "level": "trait",
+          "desc": "Depois que realiza um ataque corpo a corpo contra uma criatura, essa criatura não pode fazer ataques de oportunidade contra o Terror de Presas pelo restante do turno.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_02",
+          "name": "Passada Implacável",
+          "level": "trait",
+          "desc": "Terreno difícil não mágico não custa movimento adicional. O Terror tem vantagem em salvaguardas contra efeitos que reduzam seu deslocamento ou o deixem Restrito.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_03",
+          "name": "Investida Serrilhada",
+          "level": "trait",
+          "desc": "Se mover ao menos 9 m em linha reta e atingir com Presas, causa +13 (3d8) perfurante. Uma criatura Grande ou menor faz FOR CD 16; em falha, cai no chão.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_04",
+          "name": "Ataques Múltiplos",
+          "level": "action",
+          "desc": "O Terror realiza um ataque de Presas e dois ataques de Garra.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_05",
+          "name": "Presas",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +8 para atingir, alcance 1,5 m. Dano: 12 (2d8+3) perfurante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_06",
+          "name": "Garra",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +8 para atingir, alcance 1,5 m. Dano: 7 (1d8+3) cortante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_tusk_07",
+          "name": "Salto de Retirada",
+          "level": "reaction",
+          "desc": "Quando uma criatura erra um ataque corpo a corpo contra o Terror, ele pode mover até 12 m sem provocar ataque de oportunidade dessa criatura.",
+          "uses": 3,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Presas, garras e couro resistente.",
+      "notes": "Baseado no Tusk Terror do Monster Manual V de D&D 3.5, CR 8. Conversão ND 8. Prefere terreno com obstáculos, colinas, platôs quebrados e vegetação. No Capítulo 05, use 1 enfrentando um Tricerátopo; foge se perder aproximadamente metade dos PV.",
+      "backstory": "Predador inteligente de aspecto suíno, conhecido pela velocidade absurda, ataques de passagem e capacidade de cansar presas muito maiores."
+    },
+    {
+      "id": "m_planicies_triceratopo",
+      "name": "Tricerátopo",
+      "tamanho": "Enorme",
+      "race": "Besta",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "7",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 3,
+      "xp": 2900,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 24
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 9
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 20
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 2
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 12
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 7
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 16
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": -1
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "12m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 150
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 150
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_trike_01",
+          "name": "Investida",
+          "level": "trait",
+          "desc": "Se mover ao menos 6 m em linha reta e atingir com Chifrada, causa +13 (3d8) perfurante. Uma criatura Enorme ou menor faz FOR CD 17; em falha, cai no chão.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_trike_02",
+          "name": "Massa Imparável",
+          "level": "trait",
+          "desc": "O tricerátopo tem vantagem em testes e salvaguardas para resistir a ser empurrado ou derrubado.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_trike_03",
+          "name": "Chifrada",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +10 para atingir, alcance 3 m. Dano: 25 (4d8+7) perfurante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_trike_04",
+          "name": "Atropelar (Recarga 5–6)",
+          "level": "action",
+          "desc": "Move até seu deslocamento em linha reta atravessando espaços de criaturas Grandes ou menores. Na primeira passagem, cada criatura faz DES CD 17. Falha: 29 (4d10+7) concussão e Caído. Sucesso: metade e não cai.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Chifres, couro espesso e carne.",
+      "notes": "Baseado no Triceratops do Monster Manual I de D&D 3.5, CR 9, planícies temperadas. Conversão ND 7. No Capítulo 05, use 1 adulto; o filhote e a manada são elementos narrativos.",
+      "backstory": "Herbívoro colossal das pradarias. Um adulto protegendo um filhote torna-se uma muralha viva contra qualquer predador."
+    },
+    {
+      "id": "m_planicies_cocatriz",
+      "name": "Cocatriz da Pradaria",
+      "tamanho": "Pequeno",
+      "race": "Monstruosidade",
+      "alignment": "Sem Alinhamento",
+      "class": "Monstro",
+      "level": "2",
+      "background": "Ameaça",
+      "type": "monster",
+      "folder": "base",
+      "profBonus": 2,
+      "xp": 450,
+      "colors": {},
+      "attrs": [
+        {
+          "id": "for_0",
+          "label": "Força",
+          "abr": "FOR",
+          "val": 6
+        },
+        {
+          "id": "des_1",
+          "label": "Destreza",
+          "abr": "DES",
+          "val": 15
+        },
+        {
+          "id": "con_2",
+          "label": "Constituição",
+          "abr": "CON",
+          "val": 12
+        },
+        {
+          "id": "int_3",
+          "label": "Inteligência",
+          "abr": "INT",
+          "val": 2
+        },
+        {
+          "id": "sab_4",
+          "label": "Sabedoria",
+          "abr": "SAB",
+          "val": 13
+        },
+        {
+          "id": "car_5",
+          "label": "Carisma",
+          "abr": "CAR",
+          "val": 5
+        }
+      ],
+      "skills": [],
+      "combat": [
+        {
+          "id": "ca",
+          "label": "CA",
+          "val": 13
+        },
+        {
+          "id": "init",
+          "label": "Iniciativa",
+          "val": 2
+        },
+        {
+          "id": "vel",
+          "label": "Velocidade",
+          "val": "6m, voo 18m"
+        },
+        {
+          "id": "hpmax",
+          "label": "HP Máx",
+          "val": 36
+        },
+        {
+          "id": "hpcur",
+          "label": "HP Atual",
+          "val": 36
+        }
+      ],
+      "habilidades": [
+        {
+          "id": "h_cocatriz_01",
+          "name": "Camuflagem no Capim",
+          "level": "trait",
+          "desc": "A cocatriz tem vantagem em testes de Destreza (Furtividade) enquanto estiver entre capim alto, arbustos baixos ou vegetação semelhante.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_cocatriz_02",
+          "name": "Voo Irregular",
+          "level": "trait",
+          "desc": "A cocatriz voa em arrancadas curtas e imprevisíveis. Ataques de oportunidade feitos contra ela enquanto estiver voando têm desvantagem.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_cocatriz_03",
+          "name": "Bicada Petrificante",
+          "level": "action",
+          "desc": "Ataque corpo a corpo: +4 para atingir, alcance 1,5 m. Dano: 5 (1d6+2) perfurante. O alvo faz CON CD 13. Em falha, começa a se petrificar e fica Restrito. No final do próximo turno, repete a salvaguarda. Sucesso encerra o efeito; nova falha o deixa Petrificado por 1 hora.",
+          "uses": 0,
+          "usesSpent": 0
+        },
+        {
+          "id": "h_cocatriz_04",
+          "name": "Rasante do Bando",
+          "level": "action",
+          "desc": "Se a cocatriz voar ao menos 6 m em linha reta antes de Bicada Petrificante, recebe +2 no ataque. Depois do ataque, pode mover até 3 m sem provocar ataque de oportunidade do alvo atingido.",
+          "uses": 0,
+          "usesSpent": 0
+        }
+      ],
+      "equipment": [],
+      "traits": "Penas rígidas, esporões e pequenas glândulas mineralizantes.",
+      "notes": "Baseada na Cockatrice do Monster Manual I de D&D 3.5, CR 3, planícies temperadas. Conversão homebrew ND 2. No Capítulo 05, use 3 como consequência de uma rota errada.",
+      "backstory": "Criatura híbrida semelhante a um galo deformado com asas de morcego e cauda reptiliana. Pequenos animais petrificados costumam denunciar seus ninhos."
+    }
+  ]
+}
