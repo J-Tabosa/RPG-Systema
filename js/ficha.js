@@ -496,6 +496,7 @@ function newFichaObj(name = "Novo Personagem", presetId = "default") {
     attrs: JSON.parse(JSON.stringify(DEF_ATTRS)),
     skills: JSON.parse(JSON.stringify(DEF_SKILLS)),
     combat: JSON.parse(JSON.stringify(DEF_COMBAT)),
+    moedas: { bronze: 0, prata: 0, ouro: 0 },
     spellSlots: JSON.parse(JSON.stringify(DEF_SLOTS)),
     spells: [],
     habilidades: [],
@@ -726,6 +727,29 @@ async function renderEditor() {
             <input class="combat-val-input" type="number" value="${cs.val}" onchange="setCombat('${cs.id}',this.value)">
           </div>`).join("")}
         <div class="add-card" style="min-height:64px" onclick="openAddCombat()"><i class="ti ti-plus"></i></div>
+      </div>
+
+      <div class="currency-block">
+        <div class="currency-title"><i class="ti ti-coins"></i> Moedas</div>
+        <div class="currency-grid">
+          <label class="currency-card bronze">
+            <span class="currency-icon"><i class="ti ti-coin"></i></span>
+            <span class="currency-copy"><small>Bronze</small><strong>BR</strong></span>
+            <input type="number" min="0" step="1" value="${Math.max(0, Number(f.moedas?.bronze) || 0)}" onchange="setCurrency('bronze',this.value)">
+          </label>
+
+          <label class="currency-card prata">
+            <span class="currency-icon"><i class="ti ti-coin"></i></span>
+            <span class="currency-copy"><small>Prata</small><strong>PP</strong></span>
+            <input type="number" min="0" step="1" value="${Math.max(0, Number(f.moedas?.prata) || 0)}" onchange="setCurrency('prata',this.value)">
+          </label>
+
+          <label class="currency-card ouro">
+            <span class="currency-icon"><i class="ti ti-coin"></i></span>
+            <span class="currency-copy"><small>Ouro</small><strong>PO</strong></span>
+            <input type="number" min="0" step="1" value="${Math.max(0, Number(f.moedas?.ouro) || 0)}" onchange="setCurrency('ouro',this.value)">
+          </label>
+        </div>
       </div>
     </div>`;
 
@@ -1240,6 +1264,15 @@ function setCombat(id, v) {
   upd((f) => {
     const s = f.combat.find((x) => x.id === id);
     if (s) s.val = parseInt(v) || 0;
+  });
+}
+function setCurrency(tipo, valor) {
+  const permitidas = ["bronze", "prata", "ouro"];
+  if (!permitidas.includes(tipo)) return;
+  const numero = Math.max(0, parseInt(valor) || 0);
+  upd((f) => {
+    if (!f.moedas) f.moedas = { bronze: 0, prata: 0, ouro: 0 };
+    f.moedas[tipo] = numero;
   });
 }
 function removeCombat(id) {
