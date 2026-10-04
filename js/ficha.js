@@ -734,7 +734,7 @@ async function renderEditor() {
         <div class="currency-grid">
           <label class="currency-card bronze">
             <span class="currency-icon"><i class="ti ti-coin"></i></span>
-            <span class="currency-copy"><small>Bronze</small><strong>BR</strong></span>
+            <span class="currency-copy"><small>Bronze</small><strong>PB</strong></span>
             <input type="number" min="0" step="1" value="${Math.max(0, Number(f.moedas?.bronze) || 0)}" onchange="setCurrency('bronze',this.value)">
           </label>
 
